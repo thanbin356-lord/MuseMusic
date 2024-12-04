@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MuseMusic</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css"
+        integrity="sha512-IJEbgDEF7OeKJRa0MY2PApnyJHRIsgzCveek4ec8VWQ+7KG3ZSKVNYa5xP/Gh0hVP0Mwb+gBsk+GwR3JQGhQNg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MuseMusic.styles.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header class="trang-ch-cha-ng-nhp">
+            <div class="overlap-wrapper">
+                <div class="overlap-3">
+                    <img class="rectangle-17" src="img/rectangle-21.png" />
+                    <div class="overlap-group-3">
+                        <img class="magnifying-glass" src="img/magnifying-glass-glass-search-magnifying.png" />
+                        <div class="text-wrapper-28">Tìm kiếm...</div>
+                    </div>
+                    <img class="hearts-symbol" src="img/hearts-symbol-entertainment-gaming-card-hearts-symbol.png" />
+                    <div class="text-wrapper-29">ĐĂNG NHẬP</div>
+                    <img class="shopping-cart" src="img/shopping-cart-2-shopping-cart-checkout.png" />
+                </div>
+            </div>
+        <div class="navbar-wrapper">
+            <div class="navbar">
+                <div class="text-wrapper-30">TRANG CHỦ</div>
+                <div class="text-wrapper-31">ĐẦU ĐĨA THAN</div>
+                <div class="text-wrapper-32">PHỤ KIỆN</div>
+                <div class="text-wrapper-33">VỀ CHÚNG TÔI</div>
+                <div class="text-wrapper-34">BLOG</div>
+                <div class="group-14">
+                    <div class="text-wrapper-30">ĐĨA THAN</div>
+                    <img class="vector-4" src="img/vector-2.svg" />
+                </div>
+            </div>
+        </div>
+    </header>
+    
+        <main>
+            @RenderBody()
+        </main>
+    
+    <footer class="trang-ch-cha-ng-nhp">
+        <div class="overlap">
+            <div class="group">
+                <div class="group-2">
+                    <img class="rectangle" src="img/rectangle-22.png" />
+                    <div class="group-3">
+                        <div class="text-wrapper">MUSE</div>
+                        <p class="p">Trải nhiệm âm nhạc của riêng bạn</p>
+                    </div>
+                </div>
+                <div class="text-wrapper-2">HAU-21CĐP2</div>
+                <div class="group-4">
+                    <div class="text-wrapper">THÔNG TIN</div>
+                    <div class="text-wrapper-3">Về chúng tôi</div>
+                    <div class="text-wrapper-4">Blog</div>
+                    <img class="vector" src="img/vector-3.svg" />
+                </div>
+                <div class="group-5">
+                    <div class="text-wrapper">TRỢ GIÚP</div>
+                    <div class="group-6">
+                        <div class="text-wrapper-5">Trang chủ</div>
+                        <div class="text-wrapper-6">Cửa hàng</div>
+                        <div class="text-wrapper-7">Liên hệ</div>
+                    </div>
+                    <img class="vector" src="img/vector-4.svg" />
+                </div>
+                <div class="group-7">
+                    <div class="text-wrapper">LIÊN HỆ</div>
+                    <img class="vector" src="img/vector-5.svg" />
+                    <div class="group-8">
+                        <div class="group-9">
+                            <p class="text-wrapper-8">P. Văn Quán, Hà Đông, Hà Nội</p>
+                            <img class="img" src="img/location-pin-3-navigation-map-maps-pin-gps-location.png" />
+                        </div>
+                        <div class="group-10">
+                            <div class="text-wrapper-9">phamtheanh3628@gmail.com</div>
+                            <img class="mail-send-envelope"
+                                src="img/mail-send-envelope-envelope-email-message-unopened-sealed-close.png" />
+                        </div>
+                        <div class="group-11">
+                            <div class="text-wrapper-8">0862 935 291</div>
+                            <img class="img" src="img/phone-android-phone-mobile-device-smartphone-iphone.png" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>
