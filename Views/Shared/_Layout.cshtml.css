@@ -115,7 +115,7 @@ header {
 }
 
 #header .header-main {
-  background: #121619 !important;
+  background: #161616 !important;
   color: #fff;
 }
 
@@ -142,7 +142,7 @@ div {
   min-height: 68px;
 }
 
-#header .header-top .container,
+#header .header-left .container,
 #header .header-main .container {
   position: relative;
   display: table;
@@ -190,6 +190,7 @@ div {
 
 .container {
   width: 100%;
+  height: 166px;
   padding-right: 10px;
   padding-left: 10px;
   margin-right: auto;
@@ -208,35 +209,205 @@ div {
 }
 
 /* test */
-.header-center .searchform{
-  position: absolute;
-  width: 650px;
-  height: 37px;
-  top: 64px;
-  left: 635px;
-  background-color: #f0f0f0;
-  border-radius: 30px;
-}
 
-#header .header-top .container>div,
+#header .header-left .container>div,
 #header .header-main .container>div {
   display: table-cell;
   position: relative;
   vertical-align: middle;
 }
+.header-left {
 
+  width: 100px;
+  height: 100px;
+}
+.header-left .logo {
+  text-align: center;
+  width: 60px;
+  height: 60px;
+  margin-right: auto;
+  margin-left: auto;
+}
+a .imglogo {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
 .header-center {
-  text-align: left;
+  /* text-align: center; */
   padding: 0;
   width: 650px;
   height: 37px;
+}
+.header-center .search-bar {
+  position: relative;
+  height: 30px;
+  max-width: 500px;
+  background: white;
+  margin: auto;
+  border-radius: 25px;
+  box-shadow: 0 5px 10px rgba(153, 152, 152, 0.3);
+  margin-right: 40px;
+}
+.search-bar input {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: 25px;
+  background: white;
+  outline: none;
+  border: none;
+  padding-left: 20px;
+  font-size: 12px;
+}
+.search-bar .icon {
+  position: absolute;
+  right: -2px;
+  top: 0;
+  width: 50px;
+  height: 100%;
+  color: black;
+  text-align: center;
+  line-height: 30px;
 }
 
 #header .header-main .header-right {
   padding-bottom: 0 !important;
 }
 
+
 .header-right {
   width: 405px;
-  padding-top: 10px ! IMPORTANT;
+  padding-top: 0px ! IMPORTANT;
+  /* padding-left: 20px; */
+  display: flex;
+  align-items: center;
+  gap: 3 rem;
+}
+.btn {
+  display: inline-block;
+  padding: 0.6rem 2rem;
+  color: #FFF;
+font-family: Inter;
+font-size: 15px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+cursor: pointer;
+}
+/* Giỏ hàng level max
+#mini-cart {
+  margin-left: 6px;
+  font-size: 18px !important;
+  top: -1px;
+}
+#mini-cart {
+  background: transparent;
+}
+#mini-cart {
+  line-height: 24px;
+}
+#mini-cart {
+  display: inline-block;
+  position: relative;
+  white-space: normal;
+  vertical-align: middle;
+  font-size: 18px;
+}
+#mini-cart .cart-head {
+  min-height: 38px;
+}
+#mini-cart .cart-head {
+  position: relative;
+  cursor: pointer;
+  margin-top: 0;
+  min-width: 44px;
+  min-height: 24px;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+} */
+.cart-icon-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Icon giỏ hàng */
+.cart-icon {
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* Dropdown (mục nhỏ) mặc định ẩn */
+.cart-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 293px;
+  height: 349px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+/* Hiển thị dropdown khi di chuột vào icon */
+.cart-icon-container:hover .cart-dropdown {
+  display: block;
+}
+ .text {
+  position: relative;
+} 
+h1 {
+  color: #000;
+text-align:left;
+font-family: Inter;
+font-size: 18px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+padding-left: 10px;
+}
+.horizontal-line {
+  border-top: 1px solid #000; /* Vẽ đường line ngang */
+  width: 100%; /* Đảm bảo đường line trải dài toàn bộ chiều ngang */
+  opacity: 0.3;
+  margin-top: 10px;
+}
+ h3 {
+  color: #000000;
+  font-family: Inter;
+  font-size: 10px;
+  font-weight: 10px;
+  text-align: center;
+  padding-top: 30px;
+}
+/* Cách hiển thị sản phẩm trong giỏ */
+.cart-items {
+  max-height: 150px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+/* Các nút trong giỏ hàng */
+.cart-actions button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  cursor: pointer;
+  border: 2px ;
+  font-size: 14px;
+  font-weight: 40px ;
+  border-radius: 5px;
+}
+.view-cart {
+background-color: white;
+border: 30px black;
+
+}
+
+.cart-actions button:hover {
+  background-color: #f3cd51;
 }
