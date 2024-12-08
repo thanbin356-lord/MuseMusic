@@ -11,12 +11,27 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MuseMusic.styles.css" asp-append-version="true" />
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="./favicon.png" />
+    <!-- Font Awesome -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Template  -->
+    <link href="css/templatemo_style.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <link href="css/templatemo_style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -25,34 +40,29 @@
             <div class="header-main">
                 <div class="container">
                     <div class="header-left">
-                        <h1 class="logo logo-transition">
+                        <h1 class="logo">
                             <a href="Index" title="MuseMusic - Better Music Experience" rel="home">
-                                <img class="img-responsive standard-logo retina-logo" src="/image/logo.png">
+                                <img class="imglogo" src="/image/logo.png">
                             </a>
                         </h1>
                     </div>
                     <div class="header-center">
-                        <form action="#" method="get" class="searchform">
-                            <div class="searchform-fields">
-                                <span class="text"><input name="s" type="text" value=""
-                                        placeholder="Tìm kiếm" autocomplete="off"></span>
-                                <input type="hidden" name="post_type" value="product">
-                                <span class="button-wrap">
-                                    <button class="btn btn-special" title="Search" type="submit"><i
-                                            class="fas fa-search"></i></button>
-                                    <div class="pull-left">
-                                        <div class="searchform-popup"><a class="search-toggle"><i
-                                                    class="fas fa-search"></i><span
-                                                    class="search-text">Search</span></a>
-                                        </div>
-                                    </div>
-                                </span>
-                            </div>
-                        </form>
+                        <div class="search-bar">
+                            <input type="text" placeholder="Tìm kiếm...">
+                            <label for="" class="icon">
+                                <i class="fas fa-search">
+
+                                </i>
+                            </label>
+                            </a>
+                        </div>
                     </div>
                     <div class="header-right">
-                        <div>
-                            <div class="teks-list colorgb-list">
+                        <div class="button">
+
+                            <button class="btn"> ĐĂNG NHẬP </button>
+                            @* Giỏ hàng level Max (dont xóa) *@
+                            @* <div class="teks-list colorgb-list">
                                 <div id="mini-cart" class="mini-cart minicart-arrow-alt">
                                     <div class="cart-head ">
                                         <span class="cart-icon"><i class="fas fa-shopping-cart"></i><span
@@ -88,28 +98,40 @@
                                             </div><!-- end product list -->
                                         </div>
                                     </div>
+                                </div> *@
+                                <div class="cart-icon-container">
+                                    <div class="cart-icon">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </div>
+                                    <div class="cart-dropdown">
+                                        <p class="text">
+                                        <h1>ITEM</h1>
+                                        <div class="horizontal-line"></div>
+                                        <h3>Chưa có sản phẩm trong giỏ</h3>
+                                        <div class="horizontal-line"></div>
+                                        </p>
+                                        <div id="cart-items" class="cart-items"></div>
+                                        <div class="cart-actions">
+                                            <button class="view-cart">Xem giỏ hàng</button>
+                                            <button class="checkout">Thanh toán</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="teks-user"><i class="far fa-user"></i>
-                                    <ul>
-                                        <li><a href="/wishlist/"><i class="fas fa-heart"></i> Wishlist</a></li>
-                                        <li><a href="/theo-doi-don-hang/"><i class="fa fa-shopping-basket"></i> Theo
-                                                dõi
-                                                đơn hàng</a></li>
-                                        <li><a href="/tai-khoan-cua-toi/edit-account/"><i class="fa fa-user-circle"></i>
-                                                Đăng nhập/Đăng ký</a></li>
-                                    </ul>
+                                <div class="whislist">
+                                    <i class="fa-solid fa-heart"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </header>
+    </header>
     </div>
 
     <main>
         @RenderBody()
     </main>
+
 
    <footer>
     <div class="container">
@@ -151,6 +173,13 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.singlePageNav.min.js"></script>
+    <script src="js/unslider.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+    <script src="js/templatemo_script.js"></script>
 </body>
 
 </html>
