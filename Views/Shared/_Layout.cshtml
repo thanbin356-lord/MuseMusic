@@ -19,38 +19,97 @@
 </head>
 
 <body>
-    <header class="trang-ch-cha-ng-nhp">
-            <div class="overlap-wrapper">
-                <div class="overlap-3">
-                    <img class="rectangle-17" src="img/rectangle-21.png" />
-                    <div class="overlap-group-3">
-                        <img class="magnifying-glass" src="img/magnifying-glass-glass-search-magnifying.png" />
-                        <div class="text-wrapper-28">Tìm kiếm...</div>
+    <div class="header-wrapper">
+        <header id="header" class="header-5 header-loaded">
+            <div class="header-main">
+                <div class="container">
+                    <div class="header-left">
+                        <h1 class="logo logo-transition">
+                            <a href="Index" title="MuseMusic - Better Music Experience" rel="home">
+                                <img class="img-responsive standard-logo retina-logo" src="/image/logo.png">
+                            </a>
+                        </h1>
                     </div>
-                    <img class="hearts-symbol" src="img/hearts-symbol-entertainment-gaming-card-hearts-symbol.png" />
-                    <div class="text-wrapper-29">ĐĂNG NHẬP</div>
-                    <img class="shopping-cart" src="img/shopping-cart-2-shopping-cart-checkout.png" />
+                    <div class="header-center">
+                        <form action="#" method="get" class="searchform">
+                            <div class="searchform-fields">
+                                <span class="text"><input name="s" type="text" value=""
+                                        placeholder="Tìm tên bài hát, album, nghệ sĩ..." autocomplete="off"></span>
+                                <input type="hidden" name="post_type" value="product">
+                                <span class="button-wrap">
+                                    <button class="btn btn-special" title="Search" type="submit"><i
+                                            class="fas fa-search"></i></button>
+                                    <div class="pull-left">
+                                        <div class="searchform-popup"><a class="search-toggle"><i
+                                                    class="fas fa-search"></i><span
+                                                    class="search-text">Search</span></a>
+                                        </div>
+                                    </div>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="header-right">
+                        <div>
+                            <div class="teks-list colorgb-list">
+                                <div id="mini-cart" class="mini-cart minicart-arrow-alt">
+                                    <div class="cart-head ">
+                                        <span class="cart-icon"><i class="fas fa-shopping-cart"></i><span
+                                                class="cart-items">0</span></span><span class="cart-items-text ">0
+                                            items</span>
+                                    </div>
+                                    <div class="cart-popup widget_shopping_cart">
+                                        <div class="widget_shopping_cart_content">
+                                            <div class="total-count"><span>0 ITEMS</span><a class="pull-right"
+                                                    href="#">Xem giỏ hàng</a></div>
+                                            <div class="scroll-wrapper cart_list product_list_widget scrollbar-inner"
+                                                style="position: relative;">
+                                                <ul class="cart_list product_list_widget scrollbar-inner scroll-content"
+                                                    style="height: auto; margin-bottom: 0px; margin-right: 0px; max-height: 0px;">
+
+                                                    <li class="woocommerce-mini-cart__empty-message empty">
+                                                        Chưa có sản phẩm trong giỏ hàng. </li>
+                                                </ul>
+                                                <div class="scroll-element scroll-x">
+                                                    <div class="scroll-element_outer">
+                                                        <div class="scroll-element_size"></div>
+                                                        <div class="scroll-element_track"></div>
+                                                        <div class="scroll-bar"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="scroll-element scroll-y">
+                                                    <div class="scroll-element_outer">
+                                                        <div class="scroll-element_size"></div>
+                                                        <div class="scroll-element_track"></div>
+                                                        <div class="scroll-bar"></div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- end product list -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="teks-user"><i class="far fa-user"></i>
+                                    <ul>
+                                        <li><a href="/wishlist/"><i class="fas fa-heart"></i> Wishlist</a></li>
+                                        <li><a href="/theo-doi-don-hang/"><i class="fa fa-shopping-basket"></i> Theo
+                                                dõi
+                                                đơn hàng</a></li>
+                                        <li><a href="/tai-khoan-cua-toi/edit-account/"><i class="fa fa-user-circle"></i>
+                                                Đăng nhập/Đăng ký</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        <div class="navbar-wrapper">
-            <div class="navbar">
-                <div class="text-wrapper-30">TRANG CHỦ</div>
-                <div class="text-wrapper-31">ĐẦU ĐĨA THAN</div>
-                <div class="text-wrapper-32">PHỤ KIỆN</div>
-                <div class="text-wrapper-33">VỀ CHÚNG TÔI</div>
-                <div class="text-wrapper-34">BLOG</div>
-                <div class="group-14">
-                    <div class="text-wrapper-30">ĐĨA THAN</div>
-                    <img class="vector-4" src="img/vector-2.svg" />
-                </div>
-            </div>
-        </div>
-    </header>
-    
-        <main>
-            @RenderBody()
-        </main>
-    
+        </header>
+    </div>
+
+    <main>
+        @RenderBody()
+    </main>
+
     <footer class="trang-ch-cha-ng-nhp">
         <div class="overlap">
             <div class="group">

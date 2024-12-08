@@ -28,3 +28,4 @@ E:\HomeWork\MuseMusic\obj\Debug\net8.0\refint\MuseMusic.dll
 E:\HomeWork\MuseMusic\obj\Debug\net8.0\MuseMusic.pdb
 E:\HomeWork\MuseMusic\obj\Debug\net8.0\MuseMusic.genruntimeconfig.cache
 E:\HomeWork\MuseMusic\obj\Debug\net8.0\ref\MuseMusic.dll
+E:\HomeWork\MuseMusic\obj\Debug\net8.0\MuseMusic.sourcelink.json
