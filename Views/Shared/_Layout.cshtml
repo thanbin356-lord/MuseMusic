@@ -16,6 +16,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"/>
 </head>
 
 <body>
@@ -34,7 +35,7 @@
                         <form action="#" method="get" class="searchform">
                             <div class="searchform-fields">
                                 <span class="text"><input name="s" type="text" value=""
-                                        placeholder="Tìm tên bài hát, album, nghệ sĩ..." autocomplete="off"></span>
+                                        placeholder="Tìm kiếm" autocomplete="off"></span>
                                 <input type="hidden" name="post_type" value="product">
                                 <span class="button-wrap">
                                     <button class="btn btn-special" title="Search" type="submit"><i
@@ -110,54 +111,42 @@
         @RenderBody()
     </main>
 
-    <footer class="trang-ch-cha-ng-nhp">
-        <div class="overlap">
-            <div class="group">
-                <div class="group-2">
-                    <img class="rectangle" src="img/rectangle-22.png" />
-                    <div class="group-3">
-                        <div class="text-wrapper">MUSE</div>
-                        <p class="p">Trải nhiệm âm nhạc của riêng bạn</p>
-                    </div>
-                </div>
-                <div class="text-wrapper-2">HAU-21CĐP2</div>
-                <div class="group-4">
-                    <div class="text-wrapper">THÔNG TIN</div>
-                    <div class="text-wrapper-3">Về chúng tôi</div>
-                    <div class="text-wrapper-4">Blog</div>
-                    <img class="vector" src="img/vector-3.svg" />
-                </div>
-                <div class="group-5">
-                    <div class="text-wrapper">TRỢ GIÚP</div>
-                    <div class="group-6">
-                        <div class="text-wrapper-5">Trang chủ</div>
-                        <div class="text-wrapper-6">Cửa hàng</div>
-                        <div class="text-wrapper-7">Liên hệ</div>
-                    </div>
-                    <img class="vector" src="img/vector-4.svg" />
-                </div>
-                <div class="group-7">
-                    <div class="text-wrapper">LIÊN HỆ</div>
-                    <img class="vector" src="img/vector-5.svg" />
-                    <div class="group-8">
-                        <div class="group-9">
-                            <p class="text-wrapper-8">P. Văn Quán, Hà Đông, Hà Nội</p>
-                            <img class="img" src="img/location-pin-3-navigation-map-maps-pin-gps-location.png" />
-                        </div>
-                        <div class="group-10">
-                            <div class="text-wrapper-9">phamtheanh3628@gmail.com</div>
-                            <img class="mail-send-envelope"
-                                src="img/mail-send-envelope-envelope-email-message-unopened-sealed-close.png" />
-                        </div>
-                        <div class="group-11">
-                            <div class="text-wrapper-8">0862 935 291</div>
-                            <img class="img" src="img/phone-android-phone-mobile-device-smartphone-iphone.png" />
-                        </div>
-                    </div>
-                </div>
-            </div>
+   <footer>
+    <div class="container">
+        <div class="footer-content">
+            <a href="Index" title="MuseMusic - Better Music Experience" rel="home">
+                <img class="img-responsive standard-logo retina-logo" src="/image/logo.png"></a>
+            <p>Trải nghiệm âm nhạc của riêng bạn</p>
+            <div class="bottom-bar">21CDP2 -- HAU</div>
         </div>
-    </footer>
+        <div class="footer-content">
+<p class="title">THÔNG TIN</p>
+<div class="line"></div>
+<ul class="list">
+    <li><a href="">Về chúng tôi</a></li>
+    <li><a href="">Blog</a></li>
+</ul>
+        </div>
+        <div class="footer-content">
+  <p class="title">TRỢ GIÚP</p>
+            <div class="line"></div>
+<ul class="list">
+   
+    <li><a href="">Trang chủ</a></li>
+    <li><a href="">Cửa hàng</a></li>
+    <li><a href="">Liên hệ</a></li>
+</ul>
+        </div>
+        <div class="footer-content">
+<p class="title">LIÊN HỆ</p>
+            <div class="line"></div>
+        <ul class="list">
+            <p> <i class="fa-solid fa-house"></i>   P. Văn Quán, Hà Đông, Hà Nội</p>
+            <p><i class="fa-solid fa-envelope"></i>   phamtheanh3628@gmail.com</p>
+            <p><i class="fa-solid fa-phone"></i>   0862 935 291</p>
+        </ul></div>
+    </div>
+   </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
