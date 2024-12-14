@@ -6,8 +6,10 @@ http://www.templatemo.com/tm-411-dragonfruit
 
 */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 body {
-    font-family: 'Century Gothic', sans-serif;
+    font-family: 'Inter', sans-serif;
 }
 .container-fluid {
     max-width: 1600px;
@@ -153,8 +155,8 @@ h1 {
     background: url('../images/templatemo_banner_slide_03.jpg');
     background-size: cover;
 }
-/*about our organization*/
-#templatemo_about {
+/* about our organization */
+/* #templatemo_about {
     background: #ffffff;
     float: left;
 }
@@ -233,9 +235,9 @@ h1 {
 }
 #templatemo_about .testimonial_top_bottom_spacer {
     padding-bottom: 80px;
-}
+} */
 /*events*/
-#templatemo_events {
+/* #templatemo_events {
     background: #6698b5;
     float: left;
     overflow: hidden;
@@ -274,9 +276,9 @@ h1 {
     padding: 20px 20px 20px 20px;
     font-size: 24px;
     line-height: 24px;
-}
+} */
 /*timeline*/
-#templatemo_timeline {
+/* #templatemo_timeline {
     background: #fff;
     float: left;
 }
@@ -362,9 +364,9 @@ h1 {
     font-size: 24px;
     padding-top: 3px;
     margin-top: 3px;
-}
+} */
 /*contact*/
-#templatemo_contact {
+/* #templatemo_contact {
     background: #6698b5;
     float: left;
 }
@@ -421,9 +423,9 @@ h1 {
 }
 #templatemo_contact button:hover {
     background: #f4f4f4;
-}
+} */
 /*templatemo_footer*/
-#templatemo_footer {
+/* #templatemo_footer {
     width: 100%;
     border-top: 2px solid #507f9a;
     height: 70px;
@@ -438,16 +440,346 @@ h1 {
 #templatemo_footer a {
     color: #fff;
     text-decoration: underline;
-}
+} */
 /*  Small devices (tablets, 768px and up)  */
-@media (max-width: 768px ) { 
-    #templatemo_about .pre_next {
-        font-size: 15px;
-    }
-    #templatemo_timeline .right_timer {
-        background-position: center center;
-    }
+
+/* phần khám phá */
+.container {
+    display: flex;
+    height: 300ph;
+    width: 100%; /* Chiều cao khối chính */
+    
+  }
+
+  .section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+    position: relative;
+  }
+  
+  /* Màu sắc cho từng bên */
+  .left {
+    background-color: #fdfbf7;
+    box-sizing: border-box
+  }
+  
+  .right {
+    background-color: #f4e9d8;
+    box-sizing: border-box
+  }
+  
+  .title {
+    font-size: 20px;
+    color: #333;
+    font-weight: bold;
+    margin: 0 0 10px; /* Cách tiêu đề khỏi các phần tử khác */
+    text-align: left; /* Căn chữ về bên trái */
+    width: 80%; /* Giới hạn chiều rộng của text */
+  }
+  
+  .subtitle {
+    font-size: 14px;
+    color: #666;
+    margin: 0 0 15px; /* Khoảng cách dưới subtitle */
+    text-align: left; /* Căn chữ về bên trái */
+    width: 80%; /* Giới hạn chiều rộng của text */
+  }
+  
+  .image-link {
+    display: block;
+  }
+  
+  .image {
+    max-width: 60%; /* Kích thước hình ảnh nhỏ hơn */
+    height: auto;
+    cursor: pointer; /* Thêm hiệu ứng con trỏ khi hover vào ảnh */
+  }
+
+/* phần danh sách đĩa trang chủ */
+
+
+
+h1 {
+    /* text-align: left; */
+    margin-right: 700px;
+    margin-bottom: 30px;
+    font-size: 40px;
+    font-weight: bolder;
+    text-transform: uppercase;
 }
+
+.product-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.product {
+    text-align: center;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.product img:hover {
+    transform: scale(1.05);
+}
+
+.product h2 {
+    font-size: 20px;
+    margin: 10px 0 5px 0;
+    font-weight: bold;
+}
+
+.product p {
+    font-size: 24px;
+    font-weight:bolder;
+    color: #000000;
+}
+
+.product .price {
+    font-family: Inter;
+    font-size: 24px;
+   font-weight: bolder;
+    margin: 10px 0;
+}
+
+.product .details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 120px; /* Ensures uniform height for details */
+}
+
+.product .buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.product .buttons span {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 12px;
+    /* border-radius: none; */
+    font-weight: bold;
+}
+
+.product .buttons .preorder {
+    background-color: #FFF9C4;
+    color: #D3A700;
+}
+
+.product .buttons .size {
+    background-color: #F2F4F8;
+    color: #676767;
+}
+
+.view-more {
+    text-align: center; 
+    margin-top: 30px;
+}
+
+.view-more button {
+    background-color: #fff;
+    color: #000;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 2px solid #000;
+    /* border-radius: 4px; */
+    cursor: pointer;
+}
+
+.view-more button:hover {
+    background-color: #f5f5f5;
+}
+/* Phần thể loại, nghệ sĩ */
+.categories {
+    text-align: center;
+    padding: 20px 20px;
+    background-color: #F6F2EC;
+    margin-top: 40px;
+}
+
+.categories h2 {
+    font-size: 40px;
+    font-family: Inter;
+    font-weight: bolder;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+.category-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Khoảng cách giữa các mục */
+    flex-wrap: wrap;
+}
+
+.category-item {
+    text-align: center;
+    width: 150px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.category-item img {
+    width: 100%;
+    display: block;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.category-item img:hover {
+    transform: scale(1.05); /* Phóng to khi hover */
+}
+
+.category-item p {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 0;
+    text-transform: uppercase;
+    margin: 0;
+    color: #000;
+    background-color: #EAD8BD; /* Màu vàng */
+    width: 100%; /* Chiều ngang bằng với ảnh */
+}
+.category-item2 {
+    text-align: center;
+    width: 230px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.category-item2 img {
+    width: 100%;
+    display: block;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.category-item2 img:hover {
+    transform: scale(1.05); /* Phóng to khi hover */
+}
+
+.category-item2 .ns {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px 0;
+    margin: 0;
+    color: #000;
+    background-color: #EAD8BD; /* Màu vàng */
+    width: 100%; /* Chiều ngang bằng với ảnh */
+}
+/* phần theo zõi */
+.follow-us {
+ 
+    margin-top: 50px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.follow-us p {
+    display: inline-block; 
+    padding-top: 2px; 
+    font-size: 20px;
+}
+
+.follow-us .social-icons a {
+    margin: 0 10px;
+    display: inline-block;
+    text-decoration: none;
+
+}
+
+.follow-us .social-icons img {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.follow-us .social-icons img:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+/* Phan cam ket */
+h4 {
+    margin-left: 400px;
+    font-family: Inter;
+    font-weight: bolder;
+    font-size: 40px;
+    /* line-height: 27px; */
+    color: #222329;
+    text-transform: uppercase;
+}
+.info-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Hai cột */
+    gap: 20px; /* Khoảng cách giữa các box */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.info-box {
+    display: flex;
+    align-items: center;
+    border: 2px solid #161616;
+    padding: 20px;
+    background-color: #fff;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    width: 550px;
+height: 123px;
+}
+
+.info-box:hover {
+    transform: scale(1.03); /* Hiệu ứng hover */
+    border-color: #333;
+}
+
+.info-icon {
+    width: 50px; /* Kích thước icon */
+    height: 50px;
+    margin-right: 20px;
+}
+
+.info-content h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-style: normal;
+    line-height: normal;
+    color: #161616;
+}
+
+.info-content p {
+    font-size: 20px;
+    color: #161616;
+    font-weight: 400;
+}
+
 /*  Medium devices (desktops, 992px and up)  */
 @media (max-width: 970px ) {
     #templatemo_timeline .right_timer {

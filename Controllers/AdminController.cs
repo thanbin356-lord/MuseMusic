@@ -1,34 +1,21 @@
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MuseMusic.Models;
-
 namespace MuseMusic.Controllers;
 
-public class HomeController : Controller
-{
+public class AdminController : Controller{
     private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
-    {
+    public AdminController(ILogger<HomeController> logger){
         _logger = logger;
     }
-
-    public IActionResult Index()
-    {
+    public IActionResult Login(){
         return View();
     }
-
-    public IActionResult Privacy()
-    {
+    public IActionResult Categories(){
         return View();
     }
-
-    public IActionResult BlogDetail()
-    {
-        return View();
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+      [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
