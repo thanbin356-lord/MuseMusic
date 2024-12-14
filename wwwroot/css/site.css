@@ -8,7 +8,11 @@ html {
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
@@ -20,4 +24,57 @@ html {
 body {
   margin-bottom: 60px;
 }
+
 /* Nguyễn Tài Thu */
+#main {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  background: #fff;
+  background-color: #ffffff;
+}
+.image {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.image .img {
+  position: absolute;
+  /* Use absolute positioning for better control */
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* Set width to 100% of the parent container */
+  height: auto;
+  /* Maintain aspect ratio */
+  object-fit: cover;
+  /* Scale and crop the image to fill the container */
+}
+
+.elementor-section {
+  position: relative;
+}
+
+.elementor-section .elementor-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-right: auto;
+  margin-left: auto;
+  position: relative;
+}
+.elementor-column-gap-default > .elementor-row {
+  margin-left: -10px;
+  margin-right: -10px;
+  width: calc(100% + 20px);
+}
+.elementor-row {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex
+;
+}
+
+/* test 2 */
