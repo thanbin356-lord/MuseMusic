@@ -11,22 +11,28 @@ http://www.templatemo.com/tm-411-dragonfruit
 body {
     font-family: 'Inter', sans-serif;
 }
+
 .container-fluid {
     max-width: 1600px;
 }
+
 .container_wapper {
     width: 100%;
     background: #c0c0c0;
 }
+
 .rcolor {
     background: #f00;
 }
+
 .gcolor {
     background: #0f0;
 }
+
 .bcolor {
     background: #00f;
 }
+
 h1 {
     margin-top: 60px;
     margin-bottom: 60px;
@@ -36,8 +42,9 @@ h1 {
 }
 
 .templatemo_logo a:hover {
-	text-decoration: none;
+    text-decoration: none;
 }
+
 /*menu*/
 #templatemo_mobile_menu {
     top: 0;
@@ -50,15 +57,18 @@ h1 {
     display: none;
     overflow: auto;
 }
+
 #templatemo_mobile_menu ul li a {
     text-align: left;
     background: #f15556;
     color: #000;
 }
+
 #templatemo_mobile_menu ul li:hover a {
     background: #c83233;
-	color: #fff;
+    color: #fff;
 }
+
 #templatemo_banner_menu {
     width: 100%;
     background: #f9f9f9;
@@ -68,10 +78,12 @@ h1 {
     top: 0;
     z-index: 5000;
 }
+
 #templatemo_banner_menu #logo_img {
     max-height: 90px;
-    float: left; 
+    float: left;
 }
+
 #templatemo_banner_menu #logo_text {
     font: normal normal normal 36px/1em 'Century Gothic', sans-serif;
     margin-top: 30px;
@@ -79,82 +91,97 @@ h1 {
     text-align: left;
     color: #e35354;
 }
+
 #templatemo_banner_menu #logo_text span {
     color: #9fb038;
 }
-#templatemo_banner_menu ul li a ,
+
+#templatemo_banner_menu ul li a,
 #templatemo_banner_menu ul li a:focus {
     padding-top: 35px;
     padding-bottom: 35px;
     font: normal normal normal 18px/23px 'Century Gothic', sans-serif;
     color: #000;
-    background: repeat-x url("../images/banner_bg.jpg") 0 -94px ;
+    background: repeat-x url("../images/banner_bg.jpg") 0 -94px;
     transition-duration: .5s;
 }
-#templatemo_banner_menu ul li a:hover ,
-#templatemo_banner_menu ul li a.current
-{
-    background-position: 0 0px ;
+
+#templatemo_banner_menu ul li a:hover,
+#templatemo_banner_menu ul li a.current {
+    background-position: 0 0px;
     background-color: #f15556;
     color: #ffffff;
 }
+
 #templatemo_banner_menu #mobile_menu {
     padding-top: 25px;
     font-size: 30px;
     float: right;
     color: #e35354;
 }
+
 /*banner slide*/
-.banner { 
+.banner {
     width: 100%;
     height: 500px;
-    position: relative; 
+    position: relative;
     overflow: hidden;
 }
-.banner ul { 
-    list-style: none; 
+
+.banner ul {
+    list-style: none;
     padding: 0;
 }
-.banner ul li { 
-    float: left; 
+
+.banner ul li {
+    float: left;
     height: 500px;
     width: 100%;
 }
+
 .banner div.slide_caption {
-	background: rgba(0, 0, 0, 0.0);
+    background: rgba(0, 0, 0, 0.0);
     max-width: 600px;
     margin: 120px auto auto auto;
 }
-.banner div.slide_caption h1 ,
+
+.banner div.slide_caption h1,
 .banner div.slide_caption p {
-    background: none ;
+    background: none;
     text-align: center;
     color: #fff;
     line-height: 2em;
     text-shadow: 1px 1px 5px rgba(150, 150, 150, 1);
 }
+
 .banner div.slide_caption a {
-	color: #FF6;
+    color: #FF6;
 }
+
 .banner div.slide_caption h1 {
     font-size: 32px;
     margin: 0;
 }
+
 .banner div.slide_caption p {
     font-size: 16px;
 }
+
 .templatemo_banner_slide_01 {
     background: url('/image/image.png');
     background-size: cover;
 }
+
 .templatemo_banner_slide_02 {
     background: url('../images/templatemo_banner_slide_02.jpg');
     background-size: cover;
 }
+
 .templatemo_banner_slide_03 {
     background: url('../images/templatemo_banner_slide_03.jpg');
     background-size: cover;
 }
+
 /* about our organization */
 /* #templatemo_about {
     background: #ffffff;
@@ -448,15 +475,16 @@ h1 {
     display: flex;
     height: 250px;
     max-width: none;
-    width: 100%; /* Chiều cao khối chính */
+    width: 100%;
+    /* Chiều cao khối chính */
     padding: 0%;
     align-items: center;
     justify-content: center;
     align-content: center;
-    
-  }
 
-  .section {
+}
+
+.section {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -465,46 +493,53 @@ h1 {
     padding-top: 20px;
     position: relative;
     width: 100%;
-  }
-  
-  /* Màu sắc cho từng bên */
-  .left {
+}
+
+/* Màu sắc cho từng bên */
+.left {
     background-color: #fdfbf7;
     box-sizing: border-box
+}
 
-  }
-  
-  .right {
+.right {
     background-color: #f4e9d8;
     box-sizing: border-box
-  }
-  
-  .title {
+}
+
+.title {
     font-size: 20px;
     color: #333;
     font-weight: bold;
-    margin: 0 0 10px; /* Cách tiêu đề khỏi các phần tử khác */
-    text-align: left; /* Căn chữ về bên trái */
-    width: 80%; /* Giới hạn chiều rộng của text */
-  }
-  
-  .subtitle {
+    margin: 0 0 10px;
+    /* Cách tiêu đề khỏi các phần tử khác */
+    text-align: left;
+    /* Căn chữ về bên trái */
+    width: 80%;
+    /* Giới hạn chiều rộng của text */
+}
+
+.subtitle {
     font-size: 14px;
     color: #666;
-    margin: 0 0 15px; /* Khoảng cách dưới subtitle */
-    text-align: left; /* Căn chữ về bên trái */
-    width: 80%; /* Giới hạn chiều rộng của text */
-  }
-  
-  .image-link {
+    margin: 0 0 15px;
+    /* Khoảng cách dưới subtitle */
+    text-align: left;
+    /* Căn chữ về bên trái */
+    width: 80%;
+    /* Giới hạn chiều rộng của text */
+}
+
+.image-link {
     display: block;
-  }
-  
-  .image {
-    max-width: 60%; /* Kích thước hình ảnh nhỏ hơn */
+}
+
+.image {
+    max-width: 60%;
+    /* Kích thước hình ảnh nhỏ hơn */
     height: auto;
-    cursor: pointer; /* Thêm hiệu ứng con trỏ khi hover vào ảnh */
-  }
+    cursor: pointer;
+    /* Thêm hiệu ứng con trỏ khi hover vào ảnh */
+}
 
 /* phần danh sách đĩa trang chủ */
 
@@ -556,14 +591,14 @@ h1 {
 
 .product p {
     font-size: 24px;
-    font-weight:bolder;
+    font-weight: bolder;
     color: #000000;
 }
 
 .product .price {
     font-family: Inter;
     font-size: 24px;
-   font-weight: bolder;
+    font-weight: bolder;
     margin: 10px 0;
 }
 
@@ -571,7 +606,8 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 120px; /* Ensures uniform height for details */
+    height: 120px;
+    /* Ensures uniform height for details */
 }
 
 .product .buttons {
@@ -599,7 +635,7 @@ h1 {
 }
 
 .view-more {
-    text-align: center; 
+    text-align: center;
     margin-top: 30px;
 }
 
@@ -617,6 +653,7 @@ h1 {
 .view-more button:hover {
     background-color: #f5f5f5;
 }
+
 /* Phần thể loại, nghệ sĩ */
 .categories {
     text-align: center;
@@ -636,7 +673,8 @@ h1 {
 .category-container {
     display: flex;
     justify-content: center;
-    gap: 20px; /* Khoảng cách giữa các mục */
+    gap: 20px;
+    /* Khoảng cách giữa các mục */
     flex-wrap: wrap;
 }
 
@@ -655,7 +693,8 @@ h1 {
 }
 
 .category-item img:hover {
-    transform: scale(1.05); /* Phóng to khi hover */
+    transform: scale(1.05);
+    /* Phóng to khi hover */
 }
 
 .category-item p {
@@ -665,9 +704,12 @@ h1 {
     text-transform: uppercase;
     margin: 0;
     color: #000;
-    background-color: #EAD8BD; /* Màu vàng */
-    width: 100%; /* Chiều ngang bằng với ảnh */
+    background-color: #EAD8BD;
+    /* Màu vàng */
+    width: 100%;
+    /* Chiều ngang bằng với ảnh */
 }
+
 .category-item2 {
     text-align: center;
     width: 230px;
@@ -683,7 +725,8 @@ h1 {
 }
 
 .category-item2 img:hover {
-    transform: scale(1.05); /* Phóng to khi hover */
+    transform: scale(1.05);
+    /* Phóng to khi hover */
 }
 
 .category-item2 .ns {
@@ -692,12 +735,15 @@ h1 {
     padding: 10px 0;
     margin: 0;
     color: #000;
-    background-color: #EAD8BD; /* Màu vàng */
-    width: 100%; /* Chiều ngang bằng với ảnh */
+    background-color: #EAD8BD;
+    /* Màu vàng */
+    width: 100%;
+    /* Chiều ngang bằng với ảnh */
 }
+
 /* phần theo zõi */
 .follow-us {
- 
+
     margin-top: 50px;
     font-size: 16px;
     font-family: Arial, sans-serif;
@@ -708,8 +754,8 @@ h1 {
 }
 
 .follow-us p {
-    display: inline-block; 
-    padding-top: 2px; 
+    display: inline-block;
+    padding-top: 2px;
     font-size: 20px;
 }
 
@@ -733,20 +779,39 @@ h1 {
 
 /* Phan cam ket */
 h4 {
-    margin-left: 400px;
+    /* margin-left: 400px;
     font-family: Inter;
     font-weight: bolder;
-    font-size: 40px;
+    font-size: 40px; */
     /* line-height: 27px; */
-    color: #222329;
+    /* color: #222329;
+    text-transform: uppercase; */
+
+    font-size: 40px;
+    font-family: Inter;
+    font-weight: bolder;
     text-transform: uppercase;
+    margin-bottom: 30px;
+
 }
+
 .info-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Hai cột */
-    gap: 20px; /* Khoảng cách giữa các box */
+    /* display: flex;
+    grid-template-columns: repeat(2, 1fr); Hai cột */
+    gap: 20px;
+    /* Khoảng cách giữa các box */
     max-width: 1200px;
     margin: 0 auto;
+    width: 100%;
+}
+
+.info-box-container {
+    display: flex !important;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 20px 0px;
 }
 
 .info-box {
@@ -758,16 +823,22 @@ h4 {
     transition: transform 0.3s ease;
     flex-shrink: 0;
     width: 550px;
-height: 123px;
+    height: 123px;
+}
+.info-box2 {
+padding: 2px;
+max-width: 553px;
 }
 
 .info-box:hover {
-    transform: scale(1.03); /* Hiệu ứng hover */
+    transform: scale(1.03);
+    /* Hiệu ứng hover */
     border-color: #333;
 }
 
 .info-icon {
-    width: 50px; /* Kích thước icon */
+    width: 50px;
+    /* Kích thước icon */
     height: 50px;
     margin-right: 20px;
 }
@@ -788,17 +859,19 @@ height: 123px;
 }
 
 /*  Medium devices (desktops, 992px and up)  */
-@media (max-width: 970px ) {
+@media (max-width: 970px) {
     #templatemo_timeline .right_timer {
         background-position: 100px 5px;
     }
+
     #templatemo_banner_menu #logo_text {
         font: normal normal normal 30px/1em 'Century Gothic', sans-serif;
     }
+
     #templatemo_timeline .container-fluid {
         background: url("../images/time_line_bg.jpg") repeat-y 28px 0;
     }
 }
+
 /*  Large devices (large desktops, 1200px and up)  */
-@media (min-width: 1200px ) {
-}
+@media (min-width: 1200px) {}
