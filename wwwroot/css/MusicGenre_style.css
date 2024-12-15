@@ -175,7 +175,7 @@ h2 {
     margin: 30px 0; /* Khoảng cách trên và dưới */
 }
 
-.container {
+.container-type {
     display: flex;
     flex-wrap: wrap; /* Xuống dòng khi không đủ chỗ */
     justify-content: space-between;

@@ -9,7 +9,9 @@
         integrity="sha512-IJEbgDEF7OeKJRa0MY2PApnyJHRIsgzCveek4ec8VWQ+7KG3ZSKVNYa5xP/Gh0hVP0Mwb+gBsk+GwR3JQGhQNg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/camera.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/templatemo.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MuseMusic.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Views/Shared/_Adminlayout.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/css/BlogDetail_style.css" asp-append-version="true"/>
@@ -44,7 +46,7 @@
                 <div class="container">
                     <div class="header-left">
                         <h1 class="logo">
-                            <a href="/Home/Index" title="MuseMusic - Better Music Experience">
+                            <a href="/" title="MuseMusic - Better Music Experience">
                                 <img class="imglogo" src="/image/logo.png">
                             </a>
                         </h1>
@@ -130,7 +132,7 @@
     </header>
     </div>
     @* Thanh navbar *@
-    <div class="navbar">
+    <div class="navbar-header">
         <ul>
             <li><a href="#">TRANG CHỦ</a></li>
             <li><a href="#">ĐĨA THAN <i class="fa-solid fa-chevron-down"></i></a>
@@ -147,7 +149,7 @@
             <li><a href="">ĐẦU ĐĨA</a></li>
             <li><a href="">PHỤ KIỆN</a></li>
             <li><a href="">ABOUT US</a></li>
-            <li><a href="">BLOG</a></li>
+            <li><a href="~/Home/BlogList">BLOG</a></li>
         </ul>
     </div>
 
