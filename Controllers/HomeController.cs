@@ -23,6 +23,21 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult BlogDetail()
+    {
+        return View();
+    }
+
+    public IActionResult BlogList()
+    {
+        return View();
+    }
+
+    public IActionResult MusicGenre()
+    {
+        return View();
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
