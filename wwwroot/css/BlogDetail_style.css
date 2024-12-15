@@ -91,35 +91,82 @@ body {
 }
 
 .blog-card {
-    flex: 1;
-    background: #f4f4f4;
-    border-radius: 5px;
-    text-align: center;
-    padding: 10px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    position: relative; /* Đặt vị trí tương đối cho container */
+    width: 100%; /* Chiều rộng 100% của thẻ div */
+    height: 250px; /* Chiều cao của ảnh (tùy chỉnh theo nhu cầu) */
+    overflow: hidden; /* Tránh tràn nội dung */
+    margin-bottom: 20px;
+}
+
+.blog-card:hover {
+    filter: brightness(70%);
+}
+
+.blog-card-half {
+    position: relative; /* Đặt vị trí tương đối cho container */
+    width: 100%; /* Chiều rộng 100% của thẻ div */
+    height: 400px; /* Chiều cao của ảnh (tùy chỉnh theo nhu cầu) */
+    overflow: hidden; /* Tránh tràn nội dung */
+    margin-bottom: 20px;
+}
+
+.blog-card-half:hover {
+    filter: brightness(70%);
 }
 
 .blog-card img {
     width: 100%;
-    height: 150px;
-    border-radius: 5px;
-    object-fit: cover;
+    height: 100%; 
+    object-fit: cover; 
+}
+
+.blog-card-half img {
+    width: 100%;
+    height: 100%; 
+    object-fit: cover; 
+}
+
+.blog-card img:hover{
+    
 }
 
 .blog-card-title {
-    font-size: 1rem;
-    font-weight: bold;
-    margin: 10px 0;
+    position: absolute; /* Đặt text nằm trên ảnh */
+    bottom: 5%; /* Vị trí chữ cách đáy 10% */
+    left: 5%; /* Căn giữa ngang */
+    transform: translateX(0%); /* Dịch chuyển chữ về giữa */
+    color: white !important; /* Màu chữ */
+    font-size: 18px; /* Kích thước chữ */
+    font-weight: bold; /* Chữ đậm */
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.7); /* Đổ bóng chữ */
+    text-align: left; /* Căn giữa chữ */
+
+}
+
+.transparent{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
 }
 
 .blog-card a {
     display: inline-block;
     text-decoration: none;
-    color: #007BFF;
+    color: #ffffff;
     font-weight: bold;
     margin-top: 10px;
 }
 
 .blog-card a:hover {
     text-decoration: underline;
+}
+
+.line {
+    width: 100%; /* Chiều dài của đường thẳng */
+    height: 2px; /* Độ dày của đường thẳng */
+    background-color: rgb(174, 174, 174); /* Màu của đường thẳng */
+    margin: 30px 0; /* Khoảng cách trên và dưới */
 }
