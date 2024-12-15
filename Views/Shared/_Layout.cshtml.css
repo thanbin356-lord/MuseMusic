@@ -319,6 +319,83 @@ a .imglogo {
   gap: 3 rem;
 }
 
+/* Navbar chính */
+.navbar {
+  background-color: #f4e9d8;
+  font-family: Inter;
+  font-weight: 650;
+  margin: 0;
+  border-radius: 0;
+  display: flex; /* Sử dụng flexbox */
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  padding: 10px 5%; /* Padding tự co giãn với chiều ngang */
+  box-sizing: border-box; /* Tính padding vào kích thước phần tử */
+}
+
+.navbar ul {
+  display: flex;
+  justify-content: center; /* Căn giữa nội dung trong navbar */
+  align-items: center; /* Căn giữa dọc */
+  margin: 0;
+  padding: 0;
+  list-style: none; /* Xóa dấu chấm danh sách */
+}
+.navbar ul li {
+  position: relative;
+  margin: 0 15px; /* Khoảng cách giữa các mục */
+}
+
+.navbar li a {
+  color: #000;
+  text-decoration: none;
+  display: block;
+  padding: 10px 20px; /* Padding tự co giãn trong mục */
+  transition: all 0.3s;
+}
+
+.navbar li a:hover {
+  color: #ffffff;
+  background-color: #f4e9d8; /* Hiệu ứng hover */
+  border-radius: 5px;
+}
+
+.dropdown-diathan{
+  display: none;
+}
+/* Dropdown Menu */
+.navbar li:hover .dropdown-diathan {
+  display: block; /* Ẩn mặc định */
+  position: absolute;
+  left: 0;
+  top: 100%; /* Xuất hiện ngay dưới mục chính */
+  background-color: #f4e9d8;
+  border: 1px solid #ddd;
+  min-width: 200px; /* Độ rộng của menu */
+  z-index: 9999; /* Hiển thị trên tất cả */
+}
+.dropdown-diathan ul{
+  display: block;
+  padding: 0px;
+}
+.dropdown-diathan li {
+  margin: 0; /* Xóa margin thừa */
+  padding: 10px;
+  list-style: none;
+}
+
+.dropdown-diathan a {
+  color: #fff;
+  padding: 10px;
+  display: block;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.dropdown-diathan a:hover {
+  background-color: #f4e9d8; /* Màu khi hover */
+}
+
 
 footer {
   max-height: 258px;
@@ -591,18 +668,25 @@ h3 {
   padding: 10px;
   margin-top: 5px;
   cursor: pointer;
-  border: 2px;
   font-size: 14px;
   font-weight: 40px;
   border-radius: 5px;
 }
 
 .view-cart {
-  background-color: white;
-  border: 30px black;
-
+  background-color: white; /* Nền trắng */
+  border: 2px solid black; /* Viền đen 2px (bạn có thể thay đổi độ dày) */
+  color: black; /* Màu chữ đen */
+  padding: 10px 20px; /* Tạo khoảng cách bên trong phần tử */
+  text-align: center; /* Căn giữa nội dung chữ */
+  display: inline-block; /* Để phần tử chỉ chiếm không gian nội dung */
+  font-size: 16px; /* Kích thước chữ */
+  border-radius: 5px; /* Bo tròn nhẹ các góc (nếu cần) */
+  text-decoration: none; /* Xóa gạch chân nếu là thẻ a */
 }
-
+.checkout{
+  background-color: #000;
+}
 .cart-actions button:hover {
   background-color: #f3cd51;
 }
