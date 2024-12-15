@@ -1,0 +1,55 @@
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<main>
+   
+     <video class="video-background" autoplay muted loop>
+        <source src="/image/mix.mp4" type="video/mp4">
+    </video>
+   <div class="login-container">
+        <div class="logo">
+            <img src="/image/muselogo.png" alt="Logo Muse">
+        </div>
+
+        <!-- Form đăng nhập -->
+        <div id="login-form">
+            <h1>Đăng nhập vào Muse</h1>
+            <form>
+                <label for="email">Email hoặc tên người dùng</label>
+                <input type="email" id="email" placeholder="Email" />
+
+                <label for="password">Mật khẩu</label>
+                <input type="password" id="password" placeholder="Mật khẩu" />
+
+                <button type="submit">Đăng nhập</button>
+
+                <a href="#">Quên mật khẩu?</a>
+                <a href="#" onclick="toggleForms()">Chưa có tài khoản? Đăng ký ngay</a>
+                <a href="#"> Đăng nhập với tư cách Admin</a>
+
+                <div class="social-login">
+                    <button class="facebook"><img src="/image/facebook-1--media-facebook-social.png" alt="Facebook">Tiếp tục với Facebook</button>
+                    <button class="google"><img src="/image/google--media-google-social.png" alt="Google">Tiếp tục với Google</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Form đăng ký -->
+        <div id="register-form" class="form-hidden">
+            <h1>Giai điệu của bạn, hành trình của chúng tôi – Đăng ký ngay</h1>
+            <form>
+                <label for="email">Email hoặc tên người dùng</label>
+                <input type="email" id="email" placeholder="Email" />
+
+                <button type="submit">Đăng ký</button>
+
+                <a href="#" onclick="toggleForms()">Đã có tài khoản? Đăng nhập</a>
+                <div class="line"></div>
+                <div class="social-login">
+                    <button class="facebook"><img src="/image/facebook-1--media-facebook-social.png" alt="Facebook">Tiếp tục với Facebook</button>
+                    <button class="google"><img src="/image/google--media-google-social.png" alt="Google">Tiếp tục với Google</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
