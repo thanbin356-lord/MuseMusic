@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="~/Views/Shared/_Adminlayout.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/css/BlogDetail_style.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/css/MusicGenre_style.css" asp-append-version="true"/>
-    
     <!-- Favicon-->
     <link rel="shortcut icon" href="./favicon.png" />
     <!-- Font Awesome -->
@@ -63,7 +62,6 @@
                     </div>
                     <div class="header-right">
                         <div class="button">
-
                             <button class="btn"> ĐĂNG NHẬP </button>
                             @* Giỏ hàng level Max (dont xóa) *@
                             @* <div class="teks-list colorgb-list">
@@ -131,6 +129,28 @@
     </div>
     </header>
     </div>
+    @* Thanh navbar *@
+    <div class="navbar">
+        <ul>
+            <li><a href="#">TRANG CHỦ</a></li>
+            <li><a href="#">ĐĨA THAN <i class="fa-solid fa-chevron-down"></i></a>
+                <div class="dropdown-diathan">
+                    <ul>                
+                        <li><a href="">TÌM KIẾM THEO THỂ LOẠI</a></li>
+                        <li><a href="">TÌM KIẾM THEO NGHỆ SĨ</a></li>
+                        <li><a href="">TÌM KIẾM THEO TÂM TRẠNG</a></li>
+                        <li><a href="">TÌM KIẾM THEO THỜI KỲ</a></li>
+                        <li><a href="">XEM TẤT CẢ</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li><a href="">ĐẦU ĐĨA</a></li>
+            <li><a href="">PHỤ KIỆN</a></li>
+            <li><a href="">ABOUT US</a></li>
+            <li><a href="">BLOG</a></li>
+        </ul>
+    </div>
+
 
     <main>
         @RenderBody()
@@ -139,10 +159,13 @@
 
     <footer>
         <div class="container">
-            <div class="footer-content">
+            <div class="footer-content-logo">
                 <a href="Index" title="MuseMusic - Better Music Experience" rel="home">
                     <img class="img-responsive standard-logo retina-logo" src="/image/logo.png"></a>
-                <p>Trải nghiệm âm nhạc của riêng bạn</p>
+                <a>
+                    <p class="title-logo">Muse</p>
+                    <p>Trải nghiệm âm nhạc của riêng bạn</p>
+                </a>
                 <div class="bottom-bar">21CDP2 -- HAU</div>
             </div>
             <div class="footer-content">
