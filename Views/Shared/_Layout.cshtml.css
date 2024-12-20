@@ -350,7 +350,7 @@ a .imglogo {
 }
 
 .navbar-header li a {
-  color: #000; /* Màu chữ */
+  color: #000 ; /* Màu chữ */
   text-decoration: none; /* Xóa gạch chân */
   display: block;
   padding: 10px 20px; /* Khoảng cách bên trong mục */
@@ -363,7 +363,6 @@ a .imglogo {
   border-radius: 5px;
 }
 
-/* Dropdown Menu */
 .dropdown-diathan {
   display: none; /* Ẩn mặc định */
   position: absolute;
@@ -373,33 +372,39 @@ a .imglogo {
   border: 1px solid #ddd;
   min-width: 200px; /* Chiều rộng của menu */
   z-index: 9999; /* Đảm bảo dropdown nằm trên các phần tử khác */
+  flex-direction: column; /* Sắp xếp theo chiều dọc */
 }
 
 .navbar-header li:hover .dropdown-diathan {
-  display: block; /* Hiển thị khi hover */
+  display: flex; /* Hiển thị khi hover */
 }
 
 .dropdown-diathan ul {
   margin: 0;
   padding: 0;
   list-style: none; /* Xóa dấu chấm */
+  flex-wrap: wrap;
 }
 
 .dropdown-diathan li {
   padding: 10px;
+  width: 100%; /* Đảm bảo mỗi mục con chiếm toàn bộ chiều ngang */
 }
 
 .dropdown-diathan a {
   color: #000;
   text-decoration: none;
   display: block;
+  width: 100%; /* Đảm bảo liên kết chiếm toàn bộ chiều ngang */
   transition: background 0.3s;
 }
 
 .dropdown-diathan a:hover {
   background-color: #ddd; /* Màu nền khi hover */
 }
-
+.navbar-header li:hover .dropdown-diathan {
+  display: block; /* Hiển thị theo khối */
+}
 
 footer {
   max-height: 258px;
