@@ -84,6 +84,16 @@ body {
     color: #333;
 }
 
+.customer-order-management .categories {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 20px;
+    align-items: stretch;
+    align-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
 /* Section content */
 .section-content {
     background-color: white;
@@ -179,6 +189,7 @@ body {
         text-align: center;
     }
 }
+
 /* Reset some default styling */
 * {
     margin: 0;
@@ -367,6 +378,7 @@ body {
         text-align: center;
     }
 }
+
 /* Reset some default styling */
 * {
     margin: 0;
