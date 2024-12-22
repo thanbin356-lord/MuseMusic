@@ -1,0 +1,331 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+.main-content {
+    margin: 0 auto;
+    /* max-width: 1200px; */
+    padding: 0;
+    background: url("/image/back.png") ;
+  height: 120rem;
+  
+
+}
+
+/* Header Section */
+.profile-header {
+    background: linear-gradient(to bottom, #555, #222);
+    /* text-align: center; */
+    color: white;
+    padding: 20px;
+  width: 100%;
+  height: 200px;
+  display: flex; 
+    align-items: center; 
+    justify-content: left;
+    padding-left: 45vh; 
+}
+
+.profile-header .profile-pic {
+    width: 150px; 
+    height: 150px;
+    border-radius: 50%; 
+    margin-right: 20px; 
+    object-fit: cover;
+}
+
+.profile-text {
+    text-align: left; 
+    margin-left: 40px;
+}
+
+.profile-text h1 {
+    font-size: 40px;
+    margin: 0 0 20px 0; /* Tạo khoảng cách giữa h1 và p */
+    font-weight: bolder;
+}
+
+.profile-text p {
+    font-size: 16px;
+    margin: 0;
+    display: block; 
+    word-wrap: break-word; 
+    white-space: normal; 
+    margin-bottom: 3px; 
+}
+/* Section Styling */
+.sections {
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Phần card section */
+.section-card {
+    background-color: #000; /* Nền đen */
+    border-radius: 30px; /* Bo góc */
+    padding: 20px;
+    width: 40%; /* Điều chỉnh chiều rộng */
+    margin: 20px auto; /* Căn giữa */
+    position: relative; /* Để đặt hình nền */
+    color: white;
+    overflow: hidden; /* Ẩn phần hình ảnh bị tràn */
+}
+
+/* Hình nền */
+.section-card::before {
+    content: "";
+    background: url("/image/bird.png") no-repeat center right;
+    /* opacity: 0.1; */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+}
+
+/* Header card */
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Khoảng cách giữa icon và chữ */
+    margin-bottom: 20px;
+    z-index: 1; /* Nổi lên trên hình nền */
+    position: relative;
+}
+
+.card-header .icon img {
+    width: 50px; /* Kích thước icon */
+    height: 50px;
+    object-fit: cover; /* Đảm bảo giữ tỷ lệ ảnh */
+}
+
+.card-header h2 {
+    font-size: 20px;
+    margin: 0;
+}
+
+/* Các nút hành động */
+.card-actions {
+    display: flex;
+    flex-direction: column; /* Xếp nút theo chiều dọc */
+    gap: 10px; /* Khoảng cách giữa các nút */
+    z-index: 1; /* Nổi lên trên hình nền */
+    position: relative;
+    width: 250px;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Khoảng cách giữa icon và text */
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 20px; /* Bo góc nút */
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.action-btn img {
+    width: 16px; /* Kích thước icon */
+    height: 16px;
+}
+
+.action-btn:hover {
+    background-color: #ccc; /* Màu nền khi hover */
+}
+
+.profile-edit-container {
+    width: 500px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    position: relative;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+
+.header-button {
+    background-color: #FFE9AD;
+    color: black;
+    /* border: none; */
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 50%;
+    width: 250px;
+    box-shadow: 2px 2px 5px rgb(0 0 0 / 70%);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.header-button:hover {
+    background-color: #ffdb66;
+}
+
+/* Form chỉnh sửa thông tin*/
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Căn giữa các thành phần trong form */
+    width: 100%; /* Đảm bảo căn giữa */
+    padding-top:30px
+}
+.profile-form label {
+    align-self: flex-start; /* Đưa label về bên trái */
+    width: 100%; /* Chiếm toàn bộ chiều rộng để thẳng hàng */
+    margin-left: 25%; /* Căn chỉnh label bên trái */
+    margin-bottom: 23px;
+    color: #000000;
+}
+
+.profile-form input {
+    padding: 10px;
+    border: 3px solid #000000;
+    border-radius: 20px;
+    outline: none;
+    margin-bottom: 23px;
+    width:50%
+    
+}
+
+.profile-form input:focus {
+    border-color: #818080;  
+}
+
+/* Buttons */
+.form-buttons {
+    display: flex;
+    justify-content: flex-end; /* Đẩy các nút về phía bên phải */
+    gap: 49px; /* Khoảng cách giữa các nút */
+    margin-top: 50px;
+    padding-left: 24%; /* Tạo khoảng cách từ nút đến viền bên phải */
+}
+
+/* Các nút */
+.delete-btn, .save-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 40px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 180px;
+}
+
+.delete-btn {
+    background-color: #ff6b6b;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #ff4c4c;
+}
+
+.save-btn {
+    background-color: #4caf50;
+    color: white;
+}
+
+.save-btn:hover {
+    background-color: #45a049;
+}
+/* Form lịch sử mua*/
+
+
+/* Table styles */
+.album-table-container {
+
+    max-width: 1300px;
+    margin: 0 auto; /* Căn giữa bảng */
+    overflow: hidden;
+    padding: 20px; /* Khoảng cách xung quanh bảng */
+}
+
+/* Table styles */
+.album-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.album-table thead {
+
+}
+
+.album-table th, .album-table td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.album-table th {
+    font-weight: bold;
+    color: #333;
+}
+
+.album-table tbody tr:hover {
+    background-color: #ffdb66;
+}
+
+/* Album info */
+.album-info {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.album-info img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.album-info div {
+    display: flex;
+    flex-direction: column;
+}
+
+.album-info p {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.album-info p strong {
+    font-size: 16px;
+    color: #333;
+     display: block; /* Đặt strong xuống dòng */
+    margin-top: 2px; /* Khoảng cách trên nếu cần */
+}
+
+/* Pagination */
+.pagination {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.pagination a {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
+    background-color: #f4f4f4;
+    font-size: 14px;
+}
+
+.pagination a:hover {
+    background-color: #ddd;
+}

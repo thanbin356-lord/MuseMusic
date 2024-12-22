@@ -22,6 +22,10 @@ public class HomeController : Controller
     {
         return View();
     }
+   public IActionResult Cus()
+    {
+        return View();
+    }
   
 
     public IActionResult BlogDetail()
@@ -35,6 +39,14 @@ public class HomeController : Controller
     }
 
     public IActionResult MusicGenre()
+    {
+        return View();
+    }
+       public IActionResult Editus()
+    {
+        return View();
+    }
+       public IActionResult History()
     {
         return View();
     }

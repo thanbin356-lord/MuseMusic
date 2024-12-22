@@ -6,17 +6,16 @@
      <video class="video-background" autoplay muted loop>
         <source src="/image/mix.mp4" type="video/mp4">
     </video>
-   <div class="login-container">
+   @* <div class="login-container">
     <div class="logo">
         <img src="/image/muselogo.png" alt="Logo Muse">
-    </div>
-    <h1>Giai điệu của bạn, hành trình của chúng tôi – Đăng ký ngay</h1>
+    </div> *@
+    @* <h1>Giai điệu của bạn, hành trình của chúng tôi – Đăng ký ngay</h1>
         <form class="login-form">
             <label for="email">Email hoặc tên người dùng</label>
             <input type="email" id="email" placeholder="Email" />
 
             <button type="submit">Đăng ký</button>
-
          
             <a href="/Login/Login">Đã có tài khoản? Đăng nhập</a>
             <div class="line"></div>
@@ -27,6 +26,23 @@
 
             <!-- Ảnh nằm trong form -->
 
-        </form>
+        </form> *@
+    <div class="login-container">
+    <div class="logo">
+        <img src="/image/muselogo.png" alt="Logo Muse">
     </div>
+    <div class="split-line"></div>
+        <form class="login-form">
+            <label for="password">Tạo mật khẩu</label>
+             <input type="email" id="email" placeholder="Mật khẩu mới" />
+  <label for="email">Mật khẩu phải có ít nhất</label>
+    <ul>
+        <li>1 chữ cái</li>
+        <li>1 chữ số or kí tự đặc biệt</li>
+        <li>10 ký tự</li>
+    </ul>
+            <button type="submit">Tiếp theo</button>
+        </form>
+    </div> 
+ 
 </main>
