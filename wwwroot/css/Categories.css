@@ -1,50 +1,106 @@
-.content{
-width: 80%; 
-margin: 20px auto;  
-max-width: 1200px;
-padding: 20px;
-
+.content {
+    width: 80%;
+    margin: 20px auto;
+    max-width: 1200px;
+    padding: 20px;
 }
 
-.content h1{
+.content h1 {
     width: 100%;
     justify-content: center;
     padding: 20px;
     display: flex;
     font-size: 32px;
     font-weight: bolder;
+    animation: fadeInUp 1s ease-in-out;
 }
 
-.quanlysanpham{
+.quanlysanpham,
+.quanlythongtin {
     padding: 10px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between; /* Căn đều khoảng cách giữa các ảnh */
+    align-items: flex-start; /* Canh trên cho tất cả các ảnh */
+    flex-wrap: wrap; /* Đảm bảo nội dung tự xuống hàng khi không đủ không gian */
+    gap: 20px; /* Khoảng cách cố định giữa các phần tử */
 }
 
-.line{
+.line {
     height: 2px;
     width: 100%;
     background-color: black;
 }
 
-.container-trangchu-admin{
-    padding: 25px;
+.container-trangchu-admin {
+    position: relative;
+    width: calc(33.33% - 20px); /* Chia đều 3 ảnh trong một hàng, trừ khoảng cách */
+    margin: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex-grow: 1; /* Đảm bảo các phần tử có kích thước đồng đều */
 }
 
-.quanlythongtin{
-    padding: 10px;
+.container-trangchu-admin img {
+    width: 100%;
+    height: auto; /* Đảm bảo giữ tỷ lệ ảnh */
+    transition: transform 0.3s ease;
+}
+
+.container-trangchu-admin img:hover {
+    transform: scale(1.1); /* Zoom ảnh khi hover */
+}
+
+.container-trangchu-admin .animated-title {
+    position: absolute;
+    bottom: -10px; /* Căn chữ sát cạnh dưới ảnh */
+    left: 0;
+    width: 100%; /* Vẫn giữ cho chữ phủ hết chiều rộng ảnh */
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    padding: 25px 0; /* Tăng padding trên dưới để background chữ rộng hơn */
+    background: rgba(0, 0, 0, 0.8); /* Nền đen mờ */
+    transition: background 0.3s ease, transform 0.3s ease;
+    z-index: 2;
+    box-sizing: border-box; /* Đảm bảo padding không ảnh hưởng kích thước */
+}
+
+.container-trangchu-admin:hover .animated-title {
+    background: rgba(0, 0, 0, 0.9); /* Tăng độ đậm khi hover */
+    transform: scale(1.05); /* Phóng to nhẹ chữ khi hover */
+}
+
+
+.container-trangchu-admin:hover {
+    transform: translateY(-5px); /* Hiệu ứng nổi khi hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.quanlyblog {
+    padding: 0%;
+    margin: 0%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.quanlyblog{
-    padding: 0%;
-    margin: 0%;
-}
-
-.quanlybaiviet{
+.quanlybaiviet {
     padding-top: 20px;
     margin: 0%;
+    width: 100%; /* Chiếm toàn bộ chiều ngang */
+    text-align: center; /* Canh giữa nội dung */
+}
+
+/* Animation xuất hiện chữ */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
