@@ -281,7 +281,7 @@
 .album-info {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 30px;
 }
 
 .album-info img {
@@ -299,11 +299,14 @@
     margin: 0;
     font-size: 18px;
     font-weight: bolder;
+    text-align: center;
 }
 
 .album-info p strong {
     font-size: 16px;
     color: #333;
+     display: block; /* Đặt strong xuống dòng */
+    margin-top: 2px; /* Khoảng cách trên nếu cần */
 }
 
 /* Pagination */
