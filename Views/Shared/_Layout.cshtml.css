@@ -383,6 +383,7 @@ a .imglogo {
   margin: 0;
   padding: 0;
   list-style: none; /* Xóa dấu chấm */
+  flex-wrap: wrap;
 }
 
 .dropdown-diathan li {

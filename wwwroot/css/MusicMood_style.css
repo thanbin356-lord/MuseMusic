@@ -1,0 +1,103 @@
+* {
+    font-family: Inter;
+}
+
+.img-top{
+    max-width: 100%;
+}
+
+.musicmood-container {
+    width: 80%;
+    max-width: 1100px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+}
+.mood-header {
+    margin-bottom: 30px;
+}
+
+.mood-item{
+    margin-bottom: 30px;
+}
+
+.musicmood_text h2{
+    font-weight: 1000;
+    font-size: 24px;
+}
+
+.musicmood-box-list{
+    display: flex;
+    flex-wrap: wrap; /* Cho phép các box xuống dòng nếu không đủ chỗ */
+    justify-content: center; /* Căn giữa các box theo chiều ngang */
+    gap: 20px; /* Khoảng cách giữa các box */
+    margin: 0 auto;
+}
+.musicmood-box-list h1{
+    text-align:center;
+    font-size: 10px;
+    font-weight: 1000;
+}
+
+.musicmood-box{
+    border: 2px solid black; /* Viền cho box */
+    width: 80px; /* Chiều rộng của box */
+    height: 50px; /* Chiều cao của box */
+    display: flex;
+    justify-content: center; /* Căn giữa chữ ngang */
+    align-items: center; /* Căn giữa chữ dọc */
+    font-weight: bold; /* Chữ đậm */
+    text-transform: uppercase; /* Chữ in hoa */
+    font-size: 14px;
+    color: #000000 !important;
+    transition: all 0.3s ease;
+}
+
+.musicmood-box:hover {
+    background-color: black; /* Màu nền thành đen */
+    color: white !important; /* Chữ thành trắng */
+    cursor: pointer; /* Biến con trỏ chuột thành bàn tay */
+  }
+
+.mood-header h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.musicmood-text{
+    align-items: baseline;
+    display: flex;
+    flex-wrap: wrap; /* Cho phép các box xuống dòng nếu không đủ chỗ */
+    justify-content: left; /* Căn giữa các box theo chiều ngang */
+    gap: 20px; /* Khoảng cách giữa các box */
+}
+
+.musicmood-img {
+    width: 300px; /* Chiều rộng cố định của div chứa */
+    height: 200px; /* Chiều cao cố định của div chứa */
+    overflow: hidden; /* Ẩn nội dung tràn */
+    position: relative; /* Đảm bảo vị trí tương đối để chứa ảnh */
+    transition: filter 0.3s ease; /* Hiệu ứng khi hover */
+}
+
+.musicmood-img img {
+    width: 100%; /* Ảnh vừa với chiều rộng div */
+    height: 100%; /* Ảnh vừa với chiều cao div */
+    object-fit: cover; /* Đảm bảo tỷ lệ ảnh không bị méo */
+    transition: transform 0.3s ease; /* Hiệu ứng phóng to mượt mà */
+}
+
+.musicmood-img:hover {
+    filter: brightness(70%);
+}
+
+.musicmood-img img:hover {
+    transform: scale(1.1); /* Phóng to ảnh 10% */
+}
+
+.line {
+    width: 100%; /* Chiều dài của đường thẳng */
+    height: 2px; /* Độ dày của đường thẳng */
+    background-color: rgb(174, 174, 174); /* Màu của đường thẳng */
+    margin: 50px 0; /* Khoảng cách trên và dưới */
+} 

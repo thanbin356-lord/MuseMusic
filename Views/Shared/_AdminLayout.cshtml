@@ -9,10 +9,14 @@
         integrity="sha512-IJEbgDEF7OeKJRa0MY2PApnyJHRIsgzCveek4ec8VWQ+7KG3ZSKVNYa5xP/Gh0hVP0Mwb+gBsk+GwR3JQGhQNg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/Categories.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/camera.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/templatemo.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MuseMusic.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Views/Shared/_Adminlayout.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Views/Shared/_Adminlayout.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/BlogDetail_style.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/MusicGenre_style.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/Categories.css" asp-append-version="true"/>
     <!-- Favicon-->
     <link rel="shortcut icon" href="./favicon.png" />
     <!-- Font Awesome -->
@@ -37,44 +41,94 @@
 </head>
 
 <body>
-    <div class="box">
-        <div class="group">
-            <div class="overlap">
-                <div class="rectangle"></div>
-                <div class="overlap-group-wrapper">
-                    <div class="overlap-group">
-                        <img class="vector" src="img/image.svg" />
-                        <img class="user-circle-single"
-                            src="img/user-circle-single-circle-geometric-human-person-single-user.png" />
-                        <div class="text-wrapper">Reno</div>
+    <div class="header-wrapper">
+        <header id="header" class="header-5 header-loaded">
+            <div class="header-main">
+                <div class="container">
+                    <div class="header-left">
+                        <h1 class="logo">
+                            <a href="/admin/categories" title="MuseMusic - Better Music Experience">
+                                <img class="imglogo" src="/image/logo.png">
+                            </a>
+                        </h1>
+                    </div>
+                    <div class="header-center">
+                        <div class="search-bar">
+                            <input type="text" placeholder="Tìm kiếm...">
+                            <label for="" class="icon">
+                                <i class="fas fa-search">
+
+                                </i>
+                            </label>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <div class="button">
+                        <a href="/Login/Login">   <button class="btn"> ĐĂNG NHẬP </button> </a>                       
+                            <div class="cart-icon-container">
+                                <div class="cart-icon">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </div>
+                                <div class="cart-dropdown">
+                                    <p class="text">
+                                    <h1>ITEM</h1>
+                                    <div class="horizontal-line"></div>
+                                    <h3>Chưa có sản phẩm trong giỏ</h3>
+                                    <div class="horizontal-line"></div>
+                                    </p>
+                                    <div id="cart-items" class="cart-items"></div>
+                                    <div class="cart-actions">
+                                        <button class="view-cart">Xem giỏ hàng</button>
+                                        <button class="checkout">Thanh toán</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="whislist">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <img class="img" src="img/rectangle-21.png" />
-                <div class="div"></div>
-                <div class="group-2">
-                    <div class="text-wrapper-2">Quản lý khách hàng</div>
-                    <div class="text-wrapper-3">Quản lý đơn hàng</div>
-                    <div class="text-wrapper-4">Quản lý bài viết</div>
-                    <div class="group-3">
-                        <div class="text-wrapper-5">Quản lý sản phẩm</div>
-                        <img class="vector-2" src="img/vector.svg" />
-                    </div>
-                </div>
-                <div class="text-wrapper-6">ADMINISTRATOR</div>
             </div>
-        </div>
     </div>
+    </header>
+    </div>
+    @* Thanh navbar *@
+    <div class="navbar-header">
+        <ul>
+            <li><a href="#">QUẢN LÍ SẢN PHẨM <i class="fa-solid fa-chevron-down"></i></a>
+                <div class="dropdown-diathan">
+                    <ul>                
+                        <li><a href="">TÌM KIẾM THEO THỂ LOẠI</a></li>
+                        <li><a href="">TÌM KIẾM THEO NGHỆ SĨ</a></li>
+                        <li><a href="">TÌM KIẾM THEO TÂM TRẠNG</a></li>
+                        <li><a href="">TÌM KIẾM THEO THỜI KỲ</a></li>
+                        <li><a href="">XEM TẤT CẢ</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li><a href="">QUẢN LÍ KHÁCH HÀNG</a></li>
+            <li><a href="">QUẢN LÍ ĐƠN HÀNG </a></li>
+            <li><a href="">QUẢN LÍ BÀI VIẾT</a></li>
+        </ul>
+    </div>
+
 
     <main>
         @RenderBody()
     </main>
 
+
     <footer>
         <div class="container">
-            <div class="footer-content">
+            <div class="footer-content-logo">
                 <a href="Index" title="MuseMusic - Better Music Experience" rel="home">
                     <img class="img-responsive standard-logo retina-logo" src="/image/logo.png"></a>
-                <p>Trải nghiệm âm nhạc của riêng bạn</p>
+                <a>
+                    <p class="title-logo">Muse</p>
+                    <p>Trải nghiệm âm nhạc của riêng bạn</p>
+                </a>
                 <div class="bottom-bar">21CDP2 -- HAU</div>
             </div>
             <div class="footer-content">
@@ -105,7 +159,6 @@
                 </ul>
             </div>
         </div>
-
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
