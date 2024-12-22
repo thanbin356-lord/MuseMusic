@@ -38,7 +38,40 @@ body {
     position: relative;
     overflow: hidden;
 }
+.line {
+    width: 100%; /* Chiều dài đường kẻ */
+    height: 1px; /* Độ dày đường kẻ */
+    background-color: rgb(255, 255, 255); /* Màu sắc đường kẻ */
+    margin: 20px auto; /* Canh giữa với khoảng cách */
+}
+ul {
+    list-style-type: none; /* Loại bỏ dấu mặc định của list */
+    text-align: left;
+    margin-left: -10px;
+}
 
+ul li {
+    position: relative;
+    margin: 3px 0; /* Khoảng cách giữa các dòng */
+    font-size: 10px;
+
+}
+
+ul li::before {
+    content: "○"; /* Biểu tượng vòng tròn */
+    position: absolute;
+    left: -20px; /* Đẩy biểu tượng sang trái */
+    font-size: 10px;
+    color: #fff; /* Màu biểu tượng trùng với màu chữ */
+}
+.split-line {
+    width: 100%; /* Chiều dài đường line */
+    height: 3px; /* Độ dày đường line */
+    background: linear-gradient(to right, #b3a9a9 50%, #f0f0f0 50%);
+    border-radius: 2.5px; /* Bo góc nếu cần */
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
 .logo img {
     width: 40px;
     margin-bottom: 10px;
