@@ -4,7 +4,8 @@
     margin: 0 auto;
     /* max-width: 1200px; */
     padding: 0;
-    background: url("/image/back.png");
+    background: url("/image/back.png") ;
+  height: 120rem;
   
 
 }
@@ -45,6 +46,10 @@
 .profile-text p {
     font-size: 16px;
     margin: 0;
+    display: block; 
+    word-wrap: break-word; 
+    white-space: normal; 
+    margin-bottom: 3px; 
 }
 /* Section Styling */
 .sections {
@@ -69,8 +74,8 @@
 /* Hình nền */
 .section-card::before {
     content: "";
-    background: url("/image/bird.png") no-repeat center center/cover;
-    opacity: 0.1;
+    background: url("/image/bird.png") no-repeat center right;
+    /* opacity: 0.1; */
     position: absolute;
     top: 0;
     left: 0;
@@ -132,6 +137,7 @@
 .action-btn:hover {
     background-color: #ccc; /* Màu nền khi hover */
 }
+
 .profile-edit-container {
     width: 500px;
     background-color: white;
@@ -145,64 +151,81 @@
 .header {
     text-align: center;
     margin-bottom: 20px;
+    margin-top: 30px;
 }
 
 .header-button {
-    background-color: #ffeb99;
+    background-color: #FFE9AD;
     color: black;
-    border: none;
-    border-radius: 10px;
+    /* border: none; */
+    border-radius: 8px;
     padding: 10px 20px;
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
+    margin-right: 50%;
+    width: 250px;
+    box-shadow: 2px 2px 5px rgb(0 0 0 / 70%);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .header-button:hover {
     background-color: #ffdb66;
 }
 
-/* Form */
+/* Form chỉnh sửa thông tin*/
 .profile-form {
     display: flex;
     flex-direction: column;
+    align-items: center; /* Căn giữa các thành phần trong form */
+    width: 100%; /* Đảm bảo căn giữa */
+    padding-top:30px
 }
-
 .profile-form label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    margin-top: 15px;
-    color: #333;
+    align-self: flex-start; /* Đưa label về bên trái */
+    width: 100%; /* Chiếm toàn bộ chiều rộng để thẳng hàng */
+    margin-left: 25%; /* Căn chỉnh label bên trái */
+    margin-bottom: 23px;
+    color: #000000;
 }
 
 .profile-form input {
     padding: 10px;
-    border: 2px solid #ddd;
+    border: 3px solid #000000;
     border-radius: 20px;
-    font-size: 16px;
     outline: none;
-    margin-bottom: 10px;
+    margin-bottom: 23px;
+    width:50%
+    
 }
 
 .profile-form input:focus {
-    border-color: #999;
+    border-color: #818080;  
 }
 
 /* Buttons */
 .form-buttons {
     display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+    justify-content: flex-end; /* Đẩy các nút về phía bên phải */
+    gap: 49px; /* Khoảng cách giữa các nút */
+    margin-top: 50px;
+    padding-left: 24%; /* Tạo khoảng cách từ nút đến viền bên phải */
+}
+
+/* Các nút */
+.delete-btn, .save-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 40px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 180px;
 }
 
 .delete-btn {
     background-color: #ff6b6b;
     color: white;
-    border: none;
-    border-radius: 20px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
 }
 
 .delete-btn:hover {
@@ -212,13 +235,94 @@
 .save-btn {
     background-color: #4caf50;
     color: white;
-    border: none;
-    border-radius: 20px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
 }
 
 .save-btn:hover {
     background-color: #45a049;
+}
+/* Form lịch sử mua*/
+
+
+/* Table styles */
+.album-table-container {
+
+    max-width: 1300px;
+    margin: 0 auto; /* Căn giữa bảng */
+    overflow: hidden;
+    padding: 20px; /* Khoảng cách xung quanh bảng */
+}
+
+/* Table styles */
+.album-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.album-table thead {
+
+}
+
+.album-table th, .album-table td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.album-table th {
+    font-weight: bold;
+    color: #333;
+}
+
+.album-table tbody tr:hover {
+    background-color: #ffdb66;
+}
+
+/* Album info */
+.album-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.album-info img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.album-info div {
+    display: flex;
+    flex-direction: column;
+}
+
+.album-info p {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bolder;
+}
+
+.album-info p strong {
+    font-size: 16px;
+    color: #333;
+}
+
+/* Pagination */
+.pagination {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.pagination a {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
+    background-color: #f4f4f4;
+    font-size: 14px;
+}
+
+.pagination a:hover {
+    background-color: #ddd;
 }

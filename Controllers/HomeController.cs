@@ -28,6 +28,29 @@ public class HomeController : Controller
     }
   
 
+    public IActionResult BlogDetail()
+    {
+        return View();
+    }
+
+    public IActionResult BlogList()
+    {
+        return View();
+    }
+
+    public IActionResult MusicGenre()
+    {
+        return View();
+    }
+       public IActionResult Editus()
+    {
+        return View();
+    }
+       public IActionResult History()
+    {
+        return View();
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
