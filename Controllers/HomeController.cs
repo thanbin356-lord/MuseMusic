@@ -59,7 +59,10 @@ public class HomeController : Controller
     public IActionResult AboutUs()
     {
         return View();
-    }    
+    } 
+    public IActionResult Vinyl(){
+        return View();
+    }   
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+.section-padding {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.vinyl-img-top{
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.vinyl-title{
+    justify-content: center;
+    text-align: center;
+    display: flex;
+}
+
+.vinyl-title h1{
+    margin-left: 30px;
+    display: flex;
+    border: none;
+    padding-top: 30px;
+    font-family: Inter;
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 38.73px;
+    text-align: center;
+}
+
+/*---------------------------------------
+  FILTER               
+-----------------------------------------*/
+
+.vinyl-filter{
+    display: inline-block;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #000000;
+}
+.vinyl-filter .single-filter{
+    border: 2px solid #000000;
+    padding: 10px 20px;
+    width: 100%;
+    margin-bottom: 20px;
+    transition: all 0.3s ease-out;
+
+}
+
+.vinyl-filter .single-filter h3{
+    color: #000000;
+    font-family: Inter;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 18.15px;
+    text-align: left;
+}
+
+.vinyl-filter .single-filter:hover{
+    transform: translateY(-10px);
+}
+
+/*---------------------------------------
+  FILTER DROPBOX               
+-----------------------------------------*/
+
+.filter-dropdown{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.single-filter-dropdown{
+    left: 70px;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.single-filter-dropdown h4{
+    font-family: Inter;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 18.15px;
+    text-align: left;
+    margin-right: 30px ;    
+
+}
+
+.single-filter-dropdown .filter-select{
+    border: 1px solid #CFCFCF;
+    background-color: #fff;
+    padding: 10px 20px;
+    width: auto;
+    height: 40px;
+    
+}
