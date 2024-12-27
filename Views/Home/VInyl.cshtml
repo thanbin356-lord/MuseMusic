@@ -1,6 +1,7 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model MuseMusic.Controllers.HomeController.VinylViewModel
 <main>
 
     <!-- Vinyl navbar -->
@@ -108,137 +109,21 @@
             </div>
     </section>
 
-    <!--  Product List -->
-
     <div class="product-container">
-        <div class="product">
-            <a href=""><img src="/images/product/product.png" alt=""></a>
-            <h2>Final Fantasy XIV Vinyl LP Box
-            </h2>
-            <p>Soken Masayoshi & Various Artists</p>
-            <p class="price">1.115.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-                <span class="size">M</span>
-            </div>
-        </div>
-
-        <div class="product">
-            <a href="#"><img src="/images/product/product-2.png" alt=""></a>
-            <h2>The Book</h2>
-            <p>Yoasobi</p>
-            <p class="price">899.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-                <span class="size">M</span>
-            </div>
-        </div>
-
-        <div class="product">
-            <a href="#"><img src="/images/product/product-3.png" alt="HELP EVER HURT NEVER"></a>
-            <h2>HELP EVER HURT NEVER</h2>
-            <p>Various</p>
-            <p class="price">1.115.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-                <span class="size">M</span>
-            </div>
-        </div>
-
-        <div class="product">
-            <a href="#"><img src="/images/product/product-4.png" alt="Atlus Sound Team"></a>
-            <h2>Persona 5 Royal (Original Soundtrack)</h2>
-            <p>Atlus Sound Team</p>
-            <p class="price">1.115.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-                <span class="size">M</span>
-            </div>
-        </div>
-
-        <div class="product">
-            <a href="#"><img src="/images/product/product-2.png" alt=""></a>
-            <h2>The Book</h2>
-            <p>Yoasobi</p>
-            <p class="price">899.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-                <span class="size">M</span>
-            </div>
-        </div>
-
-        <div class="product">
-            <a href="#"><img src="/images/product/product-4.png" alt="Atlus Sound Team"></a>
-            <h2>Persona 5 Royal (Original Soundtrack)</h2>
-            <p>Atlus Sound Team</p>
-            <p class="price">1.115.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-                <span class="size">M</span>
-            </div>
-        </div>
-
-        <div class="product">
-            <a href="#"><img src="/images/product/product-4.png" alt="Atlus Sound Team"></a>
-            <h2>Persona 5 Royal (Original Soundtrack)</h2>
-            <p>Atlus Sound Team</p>
-            <p class="price">1.115.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-                <span class="size">M</span>
-            </div>
-        </div>
-
-        <div class="product">
-            <a href="#"><img src="/images/product/product-2.png" alt=""></a>
-            <h2>The Book</h2>
-            <p>Yoasobi</p>
-            <p class="price">899.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-                <span class="size">M</span>
-            </div>
-        </div>
-        <div class="product">
-            <a href="#"><img src="/images/product/product-4.png" alt="Atlus Sound Team"></a>
-            <h2>Persona 5 Royal (Original Soundtrack)</h2>
-            <p>Atlus Sound Team</p>
-            <p class="price">1.115.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-                <span class="size">M</span>
-            </div>
-        </div>
-        <div class="product">
-            <a href="#"><img src="/images/product/product-3.png" alt="HELP EVER HURT NEVER"></a>
-            <h2>HELP EVER HURT NEVER</h2>
-            <p>Various</p>
-            <p class="price">1.115.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-                <span class="size">M</span>
-            </div>
-        </div>
-        <div class="product">
-            <a href="#"><img src="/images/product/product-3.png" alt="HELP EVER HURT NEVER"></a>
-            <h2>HELP EVER HURT NEVER</h2>
-            <p>Various</p>
-            <p class="price">1.115.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-                <span class="size">M</span>
-            </div>
-        </div>
-        <div class="product">
-            <a href=""><img src="/images/product/product.png" alt=""></a>
-            <h2>Final Fantasy XIV Vinyl LP Box
-            </h2>
-            <p>Soken Masayoshi & Various Artists</p>
-            <p class="price">1.115.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-                <span class="size">M</span>
-            </div>
-        </div>
+    <!--  Product List -->
+    @foreach (var product in Model.Products)
+    {
+            <div class="product">
+                <a href="/Home/VinylDetails?id=@product.ProductId"><img src="/images/product/product.png" alt="@product.ProductName"></a>
+                <h2>@product.ProductName
+                </h2>
+                <p>Soken Masayoshi & Various Artists</p>
+                <p class="price">@product.Price</p>
+                <div class="buttons">
+                    <span class="preorder">PREORDER</span>
+                    <span class="size">M</span>
+                </div>
+            </div>       
+    }
     </div>
 </main>
