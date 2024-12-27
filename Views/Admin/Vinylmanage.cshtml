@@ -1,0 +1,51 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<main class="content2">
+    <h1>QUẢN LÝ ĐĨA THAN</h1>
+    <div class="search-bar2">
+        <input type="text" placeholder="Tìm kiếm..." style="margin: 10px;width: 250px;
+height: 38px;border: 1px solid #000; padding: 10px; margin-left: -2px;">
+        <button class="god">Xóa sản phẩm</button>
+        <button class="deka">Thêm sản phẩm</button>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr class="table-dark">
+                <th>ID</th>
+                <th>Tên sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Ngày nhập</th>
+                <th>Nghệ sĩ</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align: center;"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="padding-right: 100px;"></td>
+                <td>
+                    <input type="checkbox">
+                    <button class="butt">...</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pagination">
+        <button class="page-btn active">1</button>
+        @* <button class="page-btn">2</button>
+    <button class="page-btn">3</button> *@
+        <span>...</span>
+        @* <button class="page-btn">201</button>
+    <button class="page-btn">202</button>
+    <button class="page-btn">203</button> *@
+        <button class="page-btn next">&gt;</button>
+    </div>
+    <div class="pagination2">
+        <span>HIỂN THỊ:</span>
+        <span class="page-item">01-12</span>
+    </div>
+</main>

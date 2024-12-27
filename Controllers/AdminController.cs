@@ -15,6 +15,30 @@ public class AdminController : Controller{
     public IActionResult Categories(){
         return View();
     }
+    public IActionResult Vinylmanage(){
+        return View();
+    }
+    public IActionResult Usermanage(){
+        return View();
+    }
+     public IActionResult Ordermanage(){
+        return View();
+    }
+     public IActionResult Blogmanage(){
+        return View();
+    }
+     public IActionResult Phukienmanage(){
+        return View();
+    }
+     public IActionResult Daudiamanage(){
+        return View();
+    }
+       public IActionResult Profile(){
+        return View();
+    }
+        public IActionResult Addvinyl(){
+        return View();
+    }
       [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

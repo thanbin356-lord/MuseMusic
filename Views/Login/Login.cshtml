@@ -21,7 +21,7 @@
                 <label for="password">Mật khẩu</label>
                 <input type="password" id="password" placeholder="Mật khẩu" />
 
-                <button type="submit">Đăng nhập</button>
+                <button type="submit" >Đăng nhập</button>
 
                 <a href="#"onclick ="toggleForms('reset-request-form')">Quên mật khẩu?</a>
                 <a href="#" onclick ="toggleForms('register-form')">Chưa có tài khoản? Đăng ký ngay</a>
@@ -29,7 +29,9 @@
 
                 <div class="social-login">
                     <button class="facebook"><img src="/image/facebook-1--media-facebook-social.png" alt="Facebook">Tiếp tục với Facebook</button>
-                    <button class="google"><img src="/image/google--media-google-social.png" alt="Google">Tiếp tục với Google</button>
+                    <button class="google"><img src="/image/google--media-google-social.png" alt="Google">
+                    <a class="i<3u" asp-controller="Login" asp-action="LoginGG"> Tiếp tục với Google</a>
+                    </button>
                 </div>
             </form>
         </div>
