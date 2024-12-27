@@ -14,13 +14,14 @@
     <link rel="stylesheet" href="~/css/bootstrap.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/camera.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/templatemo.css" asp-append-version="true" />
-
+    <link rel="stylesheet" href="~/css/Vinyl.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/vinyl-detail.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MuseMusic.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Views/Shared/_Adminlayout.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="~/css/BlogDetail_style.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="~/css/MusicGenre_style.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="~/css/MusicMood_style.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="~/css/MusicEra_style.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/Views/Shared/_Adminlayout.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/BlogDetail_style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/MusicGenre_style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/MusicMood_style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/AboutUs.css" asp-append-version="true" />
     <!-- Favicon-->
     <link rel="shortcut icon" href="./favicon.png" />
     <!-- Font Awesome -->
@@ -69,7 +70,7 @@
                     </div>
                     <div class="header-right">
                         <div class="button">
-                        <a href="/Login/Login">   <button class="btn"> ĐĂNG NHẬP </button> </a>
+                            <a href="/Login/Login"> <button class="btn"> ĐĂNG NHẬP </button> </a>
                             @* Giỏ hàng level Max (dont xóa) *@
                             @* <div class="teks-list colorgb-list">
                                 <div id="mini-cart" class="mini-cart minicart-arrow-alt">
@@ -139,11 +140,13 @@
     @* Thanh navbar *@
     <div class="navbar-header">
         <ul>
-            <li><a href="#">TRANG CHỦ</a></li>
-            <li><a href="#">ĐĨA THAN <i class="fa-solid fa-chevron-down"></i></a>
+            <li><a href="/">TRANG CHỦ</a></li>
+            <li><a href="/Home/Vinyl">ĐĨA THAN <i class="fa-solid fa-chevron-down"></i></a>
                 <div class="dropdown-diathan">
                     <ul>                
                         <li><a href="/Home/MusicGenre">TÌM KIẾM THEO THỂ LOẠI</a></li>
+                    <ul>
+                        <li><a href="/Home/MusiceGenre">TÌM KIẾM THEO THỂ LOẠI</a></li>
                         <li><a href="">TÌM KIẾM THEO NGHỆ SĨ</a></li>
                         <li><a href="/Home/MusicMood">TÌM KIẾM THEO TÂM TRẠNG</a></li>
                         <li><a href="">TÌM KIẾM THEO THỜI KỲ</a></li>

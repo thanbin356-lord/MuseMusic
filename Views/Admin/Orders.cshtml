@@ -1,0 +1,31 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@model MuseMusic.Controllers.AdminController.OrderViewModel
+
+<h1>Order List</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Admin</th>
+            <th>Date</th>
+            <th>Total</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model.Orders)
+        {
+            <tr>
+                <td>@order.OrderId</td>
+                <td>@order.CustomerName</td>
+                <td>@order.AdminName</td>
+                <td>@order.CreatedAt</td>
+                <td>@order.TotalPrice</td>
+                <td>@order.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>
