@@ -35,6 +35,7 @@ namespace MuseMusic.Models.Tables
         public virtual DbSet<OrderDetail> OrderDetails { get; set; } = null!;
         public virtual DbSet<Payment> Payments { get; set; } = null!;
         public virtual DbSet<Product> Products { get; set; } = null!;
+        public virtual DbSet<Recordplayer> Recordplayers { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Vinyl> Vinyls { get; set; } = null!;
 
@@ -550,6 +551,33 @@ namespace MuseMusic.Models.Tables
                     .HasForeignKey(d => d.AdminsellerId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("product_ibfk_1");
+            });
+
+            modelBuilder.Entity<Recordplayer>(entity =>
+            {
+                entity.ToTable("recordplayer");
+
+                entity.HasIndex(e => e.BrandId, "brand_id");
+
+                entity.HasIndex(e => e.ProductId, "product_id");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.BrandId).HasColumnName("brand_id");
+
+                entity.Property(e => e.ProductId).HasColumnName("product_id");
+
+                entity.HasOne(d => d.Brand)
+                    .WithMany(p => p.Recordplayers)
+                    .HasForeignKey(d => d.BrandId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("recordplayer_ibfk_2");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.Recordplayers)
+                    .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("recordplayer_ibfk_1");
             });
 
             modelBuilder.Entity<Role>(entity =>

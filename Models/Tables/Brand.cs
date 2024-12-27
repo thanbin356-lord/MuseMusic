@@ -8,6 +8,7 @@ namespace MuseMusic.Models.Tables
         public Brand()
         {
             Accessories = new HashSet<Accessory>();
+            Recordplayers = new HashSet<Recordplayer>();
         }
 
         public int Id { get; set; }
@@ -16,5 +17,6 @@ namespace MuseMusic.Models.Tables
         public string? Website { get; set; }
 
         public virtual ICollection<Accessory> Accessories { get; set; }
+        public virtual ICollection<Recordplayer> Recordplayers { get; set; }
     }
 }

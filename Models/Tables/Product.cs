@@ -10,6 +10,7 @@ namespace MuseMusic.Models.Tables
             Accessories = new HashSet<Accessory>();
             CartDetails = new HashSet<CartDetail>();
             OrderDetails = new HashSet<OrderDetail>();
+            Recordplayers = new HashSet<Recordplayer>();
             Vinyls = new HashSet<Vinyl>();
         }
 
@@ -24,6 +25,7 @@ namespace MuseMusic.Models.Tables
         public virtual ICollection<Accessory> Accessories { get; set; }
         public virtual ICollection<CartDetail> CartDetails { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<Recordplayer> Recordplayers { get; set; }
         public virtual ICollection<Vinyl> Vinyls { get; set; }
     }
 }

@@ -125,6 +125,14 @@ Create table accessories(
     FOREIGN KEY (brand_id) REFERENCES brand(id) on Delete CASCADE
 );
 
+-- Tao bang phu kien 
+Create table recordplayer(
+	id int auto_increment primary key,
+	product_id int,
+    brand_id int,
+	FOREIGN KEY (product_id) REFERENCES product(id) on Delete CASCADE ,
+    FOREIGN KEY (brand_id) REFERENCES brand(id) on Delete CASCADE
+);
 
 -- Tạo bảng categories
 create table categories_vinyl(
