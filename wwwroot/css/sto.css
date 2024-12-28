@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+.yoru {
+    background: url("/image/image 9.png") ;
+    z-index: -1;
+    background-size: cover; /* Làm cho ảnh fill vừa màn hình */
+    height: 200vh;
+    background-repeat: no-repeat; /* Không lặp ảnh */
+}
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Heading */
+h1 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: left;
+    margin-top: 100px;
+}
+.spark {
+    border-top: 2px solid black; /* Đường kẻ trên */
+            width: 100%; /* Chiều rộng */
+            margin: 30px 0; /* Khoảng cách trên dưới */
+            margin-bottom: 50px;
+}
+
+/* Table */
+.cart-table {
+
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    
+}
+
+.cart-table tr {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    align-items: stretch;
+}
+
+.cart-table td {
+    padding: 10px;
+    
+}
+
+/* Đường kẻ dọc chỉ ngăn giữa cột 1 -> cột 2 và cột 2 -> cột 3 */
+.cart-table td:nth-child(1),
+.cart-table td:nth-child(2) {
+    border-right: 2px solid #000000;
+    height:50px
+}
+
+.cart-table .product-info {
+    display: flex;
+    align-items: center;
+    flex: 2;
+}
+
+.cart-table .product-info img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.cart-table .product-info span {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.5;
+}
+
+.cart-table .product-price {
+    flex: 1;
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+    align-content: center;
+}
+
+.cart-table .product-quantity {
+    display: flex;
+    align-items: center;
+    flex: 1.5;
+    justify-content: center;
+}
+
+.cart-table .product-quantity span {
+    margin-right: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.cart-table .quantity-controls {
+    display: flex;
+    align-items: center;
+    background-color: #343434;
+    border-radius: 30px;
+}
+
+.cart-table .quantity-btn,
+.cart-table .quantity-input {
+    background-color: #343434; /* Màu nền trắng */
+    border: none; /* Bỏ đường viền */
+    border-radius: 30px;
+    font-size: 14px; /* Kích thước chữ */
+    color: #ffffff; /* Màu chữ */
+    width: 30px; /* Chiều rộng giống nhau cho nút và input */
+    height: 30px; /* Chiều cao giống nhau cho nút và input */
+    text-align: center; /* Căn giữa nội dung */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px; /* Tạo góc bo tròn */
+    cursor: pointer; /* Con trỏ chuột dạng tay khi hover */
+}
+
+.cart-table .product-delete {
+    flex: 0.5;
+    text-align: center;
+    color: #000000;
+    cursor: pointer;
+    font-size: 18px;
+    align-content:center;
+}
+
+/* Summary box */
+.summary {
+    display: flex;
+    justify-content: flex-end; /* Đẩy summary-box sang bên phải */
+    margin-bottom: 30px;
+    margin-top: -20px; /* Căn chỉnh cho nó gần bảng */
+    position: relative;
+    top: -60px;
+}
+
+.summary-box {
+    background-color: #F1E8D8;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin-left: 20px;
+    align-self: flex-start; /* Đảm bảo nó cố định đúng trên */
+    height: 300px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: -30px;
+}
+
+.summary-box h2 {
+    font-size: 18px;
+    margin-bottom: 20px;  
+    margin-top: 10px;
+}
+
+.summary-box p {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+.check {
+    border-top: 2px solid black; /* Đường kẻ trên */
+    width: 100%; /* Chiều rộng */
+    margin: 30px 0;
+}
+.checkout-btn {
+    background-color: #60B692;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 44px;    
+    cursor: pointer;
+    width: 50%;
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 60px;
+}
+
+/* Discount box */
+.discount-box {
+    background-color:#F1E8D8;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    width: 600px;
+    height: 290px;
+}
+.discount-box h2 {
+    color: #000;
+font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+.discount-box input {
+    width: calc(70% - 20px);
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 29px;
+    border: 3px solid #000000;
+}
+
+.apply-btn {
+    background-color: #60B692;
+    color: white;
+    border: none;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 44px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 30%;
+    margin-top: 50px;
+    margin-left: 50vh;
+}
+.check2 {
+    border-top: 2px solid black; /* Đường kẻ trên */
+    width: 100%; /* Chiều rộng */
+    margin: 20px 0;
+}

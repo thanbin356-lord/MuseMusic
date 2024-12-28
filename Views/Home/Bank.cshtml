@@ -1,0 +1,34 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<main>
+    <div class="main-content">
+        <div class="profile-header">
+            <img src="/image/mck.png" alt="Profile" class="profile-pic">
+            <div class="profile-text">
+                <h1>RENO</h1>
+                <p>Âm nhạc là tiếng nói của tâm hồn , nơi cảm xúc được vẽ nên bằng âm thanh.</p>
+                <p>Đó là cách tôi kể chuyện, sống thật và kết nối với thế giới.</p>
+            </div>
+        </div>
+
+        <div class="header">
+            <button class="header-button">Phương thức thanh toán</button>
+        </div>
+        <div class="payment-content">
+            <h2>Thẻ thanh toán đã lưu</h2>
+            <p>Quản lý thông tin thanh toán chỉ chi tiết đối với các giao dịch mua một lần. Để quản lý thông tin thanh
+                toán chi tiết đối với gói đăng ký hàng tháng, hãy truy cập vào Quản lý tài khoản.</p>
+
+            <form class="payment-form">
+                <label for="bank-account">Tài khoản ngân hàng</label>
+                <div class="input-group">
+                   <span class="icon"><i class="fas fa-dollar-sign"></i></span>
+                    <input type="text" id="bank-account" name="bank-account" placeholder="NAME" readonly>
+                    <button type="button" class="add-bank-btn">Thêm tài khoản ngân hàng</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</main>

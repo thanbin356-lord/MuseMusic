@@ -56,6 +56,20 @@ public class HomeController : Controller
     {
         return View();
     }
+    public IActionResult Wish()
+    {
+        return View();
+    }
+    public IActionResult Bank()
+    {
+        return View();
+    }
+public IActionResult Store()
+    {
+        return View();
+    }
+
+
 
     public IActionResult MusicEra()
     {

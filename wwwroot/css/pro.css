@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+.user-info {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #ffffff;
+
+  }
+  
+  .profile {
+    text-align: center;
+    background: #EEE;
+    height: 350px;
+    border-radius: 44px;
+  }
+  
+  .profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top:70px;
+  }
+  
+  .delete-button {
+    margin-top: 50px;
+    padding: 10px 20px;
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    border-radius: 33px;
+    cursor: pointer;
+  }
+  
+  .delete-button:hover {
+    background-color: #e04448;
+  }
+  
+  .details {
+    flex-grow: 1;
+    background: #EEE;
+    padding: 40px;
+    border-radius: 44px;
+}
+  
+  
+  .form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .form-group {
+    flex: 1 1 calc(50% - 10px);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  input,
+  select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+  }
+  
+  input[readonly] {
+    background-color: #ffffff;
+    border-radius: 30px;
+  }
+  
+  .purchase-history {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .purchase-history th,
+  .purchase-history td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .purchase-history th {
+    background-color: #f1f1f1;
+  }
+  
+  .total-value {
+    margin-top: 10px;
+    font-weight: bold;
+    text-align: right;
+  }
