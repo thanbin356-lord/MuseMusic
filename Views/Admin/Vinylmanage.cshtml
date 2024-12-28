@@ -1,6 +1,7 @@
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+@model MuseMusic.Controllers.AdminController.VinylViewModel
 <main class="content2">
     <h1>QUẢN LÝ ĐĨA THAN</h1>
     <div class="search-bar2">
@@ -12,26 +13,29 @@ height: 38px;border: 1px solid #000; padding: 10px; margin-left: -2px;">
     <table class="table table-striped">
         <thead>
             <tr class="table-dark">
-                <th>ID</th>
+                <th>DiskId</th>
                 <th>Tên sản phẩm</th>
                 <th>Số lượng</th>
                 <th>Ngày nhập</th>
-                <th>Nghệ sĩ</th>
+                <th>Giá</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td style="text-align: center;"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td style="padding-right: 100px;"></td>
-                <td>
-                    <input type="checkbox">
-                    <button class="butt">...</button>
-                </td>
-            </tr>
+            @foreach (var item in Model.Products)
+            {
+                <tr>
+                    <td>@item.DiskId</td>
+                    <td>@item.ProductName</td>
+                    <td>@item.ProductQuantity</td>
+                    <td>@item.Years</td>
+                    <td>@item.ArtistNames</td>
+                    <td>
+                        <input type="checkbox">
+                        <button class="butt">...</button>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
     <div class="pagination">

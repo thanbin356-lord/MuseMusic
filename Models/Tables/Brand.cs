@@ -9,6 +9,7 @@ namespace MuseMusic.Models.Tables
         {
             Accessories = new HashSet<Accessory>();
             Recordplayers = new HashSet<Recordplayer>();
+            Vinyls = new HashSet<Vinyl>();
         }
 
         public int Id { get; set; }
@@ -18,5 +19,6 @@ namespace MuseMusic.Models.Tables
 
         public virtual ICollection<Accessory> Accessories { get; set; }
         public virtual ICollection<Recordplayer> Recordplayers { get; set; }
+        public virtual ICollection<Vinyl> Vinyls { get; set; }
     }
 }

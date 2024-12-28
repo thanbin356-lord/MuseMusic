@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+.content2 {
+    width: 80%;
+    margin: 20px auto;
+    max-width: 1200px;
+    padding: 20px;
+}
+
+.content2 h1 {
+    width: 100%;
+    justify-content: center;
+    padding: 20px;
+
+    font-size: 32px;
+    font-weight: bolder;
+    animation: fadeInUp 1s ease-in-out;
+
+    text-align: left;
+}
+
+th {
+    color: #FFF;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+td {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    color: #000;
+}
+
+.butt {
+    border: none;
+    padding-left: 20px;
+    margin-right: -15px;
+    background-color: #00000000;
+}
+
+input [type=text] {
+    margin: 20px !important;
+}
+
+.search-bar2 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.god {
+    margin-left: 35rem;
+    width: 150px;
+    height: 37px;
+    background: #FF7171;
+    border: none;
+    color: #FFF;
+    text-align: center;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.deka {
+    width: 150px;
+    height: 37px;
+    background: #5F9DCE;
+    border: none;
+    color: #FFF;
+    text-align: center;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+
+/*Form nút danh sách trang */
+.pagination {
+    display: flex !important;
+    padding-left: 0 !important;
+    margin: 20px 0 !important;
+    justify-content: flex-end !important;
+}
+
+.page-btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 40px;
+    font-size: 16px;
+    color: #000;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    border: none;
+    /* Bỏ viền */
+    border-radius: 0;
+    /* Bỏ bo góc */
+}
+
+.page-btn:hover {
+    background-color: #aff426;
+
+}
+
+.page-btn.active {
+    background-color: #C9C9C9;
+    cursor: default;
+    font-weight: bold;
+}
+
+
+.page-btn.next {
+    font-weight: bold;
+    border: 3px solid;
+}
+
+.pagination span {
+    font-size: 16px;
+    color: #000;
+    margin: 0 5px;
+}
+
+.pagination2 {
+    display: flex !important;
+    padding-left: 0 !important;
+    margin: 20px 0 !important;
+    justify-content: flex-start !important;
+    margin-top: -50px !important;
+}
+
+.pagination2 span {
+    color: #161616;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+.table-dark{
+    width: 100%;
+}
