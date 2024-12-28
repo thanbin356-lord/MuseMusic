@@ -1,0 +1,217 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model MuseMusic.Controllers.HomeController.VinylViewModel
+
+<main>
+    <!-- Product Head -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <div class="col-lg-6 col-12">
+                    <div class="product-thumb">
+                        <img src="/images/product/product.png" class="product-image" alt="">
+                    </div>
+
+                    <div class="product-secondthumb">
+                        <img src="/images/product/product.png" class="product-small" alt="">
+                        <img src="/images/product/product.png" class="product-small" alt="">
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-6 col-12">
+                    <div class="product-info">
+                        <div>
+                            <h2>@Model.SelectedProduct.ProductName</h2>
+
+                            <h3>@Model.SelectedProduct.ProductName</h3>
+
+                            <h4>@Model.SelectedProduct.Price</h4>
+
+                            <h5>Mã sản phẩm: @Model.SelectedProduct.DiskId</h5>
+
+                        </div>
+
+                    </div>
+
+                    <div class="product-cart-thumb">
+
+                        <div class="row">
+                            <div class="col-lg-4 col-12 mt-4 mt-lg-0">
+
+                                <div class="align-items-center">
+                                    <div class="quantity">
+                                        <button class="btn btn-link px-2"
+                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                            <i class="icofont-minus-square"></i>
+                                        </button>
+
+                                        <input id="form1" min="0" name="quantity" value="2" type="number"
+                                            class="form-control form-control-sm" style="width: 50px;" />
+
+                                        <button class="btn btn-link px-2"
+                                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                            <i class="icofont-plus-square"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-2 col-12 mt-4 mt-lg-0">
+
+                                <button class="heart-btn"><i class="icofont-heart-alt"></i></button>
+                            </div>
+
+                            <div class="col-lg-6 col-12 mt-4 mt-lg-0">
+
+
+                                <a href='mycart.html'> <button class="cart-btn">Thêm vào giỏ hàng</button> </a>
+                            </div>
+
+                            <div class="col-lg-12 col-md-6">
+                                <p>@Model.SelectedProduct.ProductDescription</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Infor & API Music Player -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <div class="col-lg-6 col-12">
+
+                    <div class="product-description">
+                        <h2>Mô tả sản phẩm</h2>
+                        <div class="row">
+                            <div class="col-lg-6 col-12">
+                                <h6>Năm sản xuất</h6>
+                                <h6>Thể loại</h6>
+                                <h6>Hãng phát hành</h6>
+                                <h6>Tình trạng đĩa</h6>
+                                <h6>Mã sản phẩm </h6>
+                                <h6>Số lượng</h6>
+
+                            </div>
+                            <div class="col-lg-6 col-12">
+                                <h6>@Model.SelectedProduct.Years</h6>
+                                <h6>Pop</h6>
+                                <h6>Riot Games</h6>
+                                <h6>M</h6>
+                                <h6>@Model.SelectedProduct.DiskId</h6>
+                                <h6>@Model.SelectedProduct.Price</h6>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-12">
+                    <div class="music-player">
+
+                        <div class="music-header">
+
+                            <img src="images/music-player.png" alt="Arcane official playlist">
+
+                            <div class="music-info">
+                                <h4>Arcane official playlist</h4>
+                                <button>Preview</button>
+                            </div>
+                        </div>
+
+                        <div class="controls">
+                            <div class="prev">
+                                <i class="icofont-ui-previous"></i>
+                            </div>
+                            <div class="next">
+                                <i class="icofont-ui-next"></i>
+                            </div>
+                            <div class="play">
+                                <i class="icofont-play-alt-1"></i>
+                            </div>
+                        </div>
+                        <div class="track-time">
+                            <div class="track"></div>
+                            <div class="time">
+                                <div class="total-time">03:20</div>
+                                <div class="last-time">00:12</div>
+                            </div>
+                        </div>
+                        <div class="song-list">
+                            <div class="single-song-list">
+                                <div class="song-list-title">
+                                    <h4>1. Heavy Is The Crowns</h4>
+                                    <h5>Mike Shinoda, Emily Amstrong</h5>
+                                </div>
+                                <h6>01:41</h6>
+                            </div>
+                            <div class="single-song-list">
+                                <div class="song-list-title">
+                                    <h4>2. I Can’t Hear It Now</h4>
+                                    <h5>Freya Riddings</h5>
+                                </div>
+                                <h6>02:34</h6>
+                            </div>
+                            <div class="single-song-list">
+                                <div class="song-list-title">
+                                    <h4>3. Sucker</h4>
+                                    <h5>Marcus Kings</h5>
+                                </div>
+                                <h6>01:21</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!-- Tracklist -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-12">
+                    <div class="track-list">
+                        <h2>Tracklist</h2>
+                        @foreach (var song in Model.SelectedProduct.Tracklist.Split(';'))
+                        {
+                            <h6>@song.Trim()</h6>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- More Similar Product -->
+    <div class="container">
+        <div class="section-title">
+            <h1>SẢN PHẨM KHÁC</h1>
+        </div>
+    </div>
+
+    <div class="product-container">
+        @foreach (var product in Model.Products.Where(p => p.ProductId != Model.SelectedProduct.ProductId))
+        {
+            <div class="product">
+                <a href="/Home/VinylDetails?id=@product.ProductId">
+                    <img src="/images/product/product.png" alt="@product.ProductName">
+                </a>
+                <h2>@product.ProductName</h2>
+                <p>Soken Masayoshi & Various Artists</p>
+                <p class="price">@product.Price</p>
+            </div>
+        }
+    </div>
+</main>

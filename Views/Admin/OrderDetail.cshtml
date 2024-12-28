@@ -1,0 +1,94 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<main class="orderdetail-container">
+    
+    <h2>QUẢN LÝ ĐƠN HÀNG</h2>
+    <div class="buttons">
+            <button class="delete">Xóa Hóa Đơn</button>
+            <button class="print">In Hóa Đơn</button>
+    </div>
+    <h3>Chi tiết hóa đơn:</h3>
+    <div class="line"></div>
+    <div class="customer-info">
+            <p>Họ và tên: <strong>Mai Ngọc Quyến</strong></p>
+            <p>SĐT: <strong>0365531363</strong></p>
+            <p>Địa chỉ: <strong>804 Trần Tất Văn, Thái Sơn, An Lão, Hải Phòng</strong></p>
+    </div>
+    <div class="line"></div>
+    <table class="order-summary">
+        <thead>
+            <tr>
+                <th>Sản phẩm</th>
+                <th>Tên sản phẩm</th>
+                <th>Giá tiền</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="product-img">
+                    <img src="/image/Stray_Kids_-_Giant.png" alt="Album Cover">
+                </td>
+                <td>
+                    <p class="product-title">Japan 2nd Album [GIANT] <br>(Japanese ver. / Regular Edition)</p>
+                    <p class="product-subtitle">Stray Kids</p>
+                </td>
+                <td>1.050.000 đ</td>
+                <td>x2</td>
+                <td>2.100.000 đ</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="line"></div>
+    <h3>Tổng quan đơn hàng:</h3>
+    <div class="total-container">
+        <p class="total">Tổng phụ:</p>
+        <p class="total">3,050,000 đ</p>
+    </div>
+    <div class="total-container">
+        <p class="total">Vận chuyển:</p>
+        <p class="total">22.000 đ</p>
+    </div>
+    <div class="total-container">
+        <p class="total">Phiếu giảm giá:</p>
+        <p class="total">-15.000 đ</p>
+    </div>
+    <div class="total-container">
+        <p class="total-bold">Tổng:</h4>
+        <p class="total">3,057,000 đ</p>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="order-details">
+        <h3>Chi tiết đơn hàng:</h3>
+        <div class="total-container">
+            <p class="total">Số đơn hàng</h4>
+            <p class="total">DIT3M4Y7UN6A</p>
+        </div>
+        <div class="total-container">
+            <p class="total">Ngày đặt hàng</h4>
+            <p class="total">25/11/2024 07:11 AM</p>
+        </div>
+        <div class="total-container">
+            <p class="total">Phương thức thanh toán</h4>
+            <p class="total">Thanh toán qua ngân hàng</p>
+        </div>
+        <div class="total-container">
+            <p class="total">Thời gian thanh toán</h4>
+            <p class="total">27/11/2024 15:36 PM</p>
+        </div>
+        <div class="total-container">
+            <p class="total">Ngày vận chuyển</h4>
+            <p class="total">27/11/2024 15:36 PM</p>
+        </div>
+        <div class="total-container">
+            <p class="total">Ngày giao hàng</h4>
+            <p class="total">27/11/2024 15:36 PM</p>
+        </div>
+    </div>
+    <button class="back-button">Quay lại</button>
+</main>
