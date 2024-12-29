@@ -1,115 +1,165 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 h1 {
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    margin: 20px 0;
-  }
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 20px 0;
+}
 
-  .disk-management {
-    max-width: 1200px;
-    margin: 0 auto;
-    background-color: #ffffff;
-    padding: 20px;
-    margin-top: 50px;
-  }
+.disk-management {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 20px;
+  margin-top: 50px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-  .form-container {
-    display: flex;
-    gap: 20px;
-  }
+.form-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  /* Allow the form to wrap if necessary */
+}
 
-  .product-image {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.product-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 200px;
+}
 
-  .image-placeholder {
-    width: 200px;
-    height: 200px;
-    background-color: #e0e0e0;
-    border: 2px solid #007bff;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.image-placeholder {
+  width: 200px;
+  height: 200px;
+  background-color: #e0e0e0;
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .add-image-btn {
-    background-color: #ffffff;
-    border: 1px solid #007bff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+.add-image-btn {
+  background-color: #ffffff;
+  border: 1px solid #007bff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
 
-  .add-image-btn:hover {
-    background-color: #007bff;
-    color: #ffffff;
-  }
+.add-image-btn:hover {
+  background-color: #007bff;
+  color: #ffffff;
+}
 
-  .product-info {
-    flex: 2;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
+.product-info {
+  flex: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  min-width: 600px;
+}
 
-  .form-group {
-    flex: 1 1 calc(50% - 10px);
-    display: flex;
-    flex-direction: column;
-  }
+.form-group {
+  flex: 1 1 calc(50% - 10px);
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
 
-  label {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
 
-  input, select, textarea {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
+input,
+select,
+textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
 
-  textarea {
-    resize: none;
-  }
+textarea {
+  resize: vertical;
+}
 
-  .additional-info {
-    margin-top: 20px;
-  }
+.additional-info {
+  margin-top: 20px;
+}
 
-  .actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
 
-  .cancel-btn {
-    background-color: #ff4d4f;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+.cancel-btn,
+.confirm-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
 
-  .cancel-btn:hover {
-    background-color: #e04448;
-  }
+.cancel-btn {
+  background-color: #ff4d4f;
+}
 
-  .confirm-btn {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+.cancel-btn:hover {
+  background-color: #e04448;
+}
 
-  .confirm-btn:hover {
-    background-color: #218838;
-  }
+.confirm-btn {
+  background-color: #007bff;
+}
+
+.confirm-btn:hover {
+  background-color: #0056b3;
+}
+
+.select2-container--default .select2-selection--multiple {
+  border-radius: 4px;
+  padding: 2.9px;
+}
+
+.select2-container .select2-selection__choice {
+  background-color: #007bff;
+  color: #000000;
+  border-radius: 4px;
+
+}
+
+.select2-container--default .select2-selection__rendered {
+  padding: 1px;
+}
+
+.select2-container--default .select2-selection__arrow {
+  display: none;
+  /* Hide the default arrow */
+}
+
+.select2-container {
+  width: 100% !important;
+  /* Ensures the select2 container spans the full width of its parent */
+}
+
+.select2-container--default .select2-selection {
+  width: 100% !important;
+  /* Forces the selection box to span the full width */
+}
+.js-example-basic-single{
+  width: 100% !important;
+}

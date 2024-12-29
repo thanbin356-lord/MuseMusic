@@ -67,11 +67,12 @@ public class VinylController : Controller
                                     ProductId = p.Id,
                                     ProductName = p.Name,
                                     ProductDescription = p.Description,
-                                    Price = p.Price.ToString("C") ?? "N/A",
+                                    Price = (decimal)p.Price,
                                     DiskId = v.DiskId,
                                     ProductQuantity = (int)p.Quantity,
                                     Years = (int)v.Years,
                                     Tracklist = v.Tracklist,
+                                    BrandId = b.Id,
                                     BrandName = b.Name,
                                     ArtistIds = db.ArtistVinyls
                                         .Where(av => av.VinylId == v.ProductId)
@@ -91,6 +92,7 @@ public class VinylController : Controller
             {
                 return NotFound(); // Return 404 if no vinyl is found
             }
+
             // Convert List<int?> to List<int>, excluding null values
             var artistIds = vinylDetails.ArtistIds
                 .Where(id => id.HasValue) // Filter out nulls
@@ -112,12 +114,19 @@ public class VinylController : Controller
                 .Select(id => id.Value)  // Unwrap nullable values
                 .ToList();
 
-            // Map the database Artist to the custom Artist class
             var allMoods = db.Moods
                 .Select(a => new VinylController.Mood
                 {
                     Id = a.Id,
                     Name = a.Name
+                })
+                .ToList();
+
+            var allBrands = db.Brands
+                .Select(b => new VinylController.Brand
+                {
+                    Id = b.Id,
+                    Name = b.Name
                 })
                 .ToList();
 
@@ -127,7 +136,6 @@ public class VinylController : Controller
                 .Select(id => id.Value)  // Unwrap nullable values
                 .ToList();
 
-            // Map the database Artist to the custom Artist class
             var allCategories = db.Categories
                 .Select(a => new VinylController.Categories
                 {
@@ -136,6 +144,7 @@ public class VinylController : Controller
                 })
                 .ToList();
 
+            // Ensure SelectedArtistIds is not null
             var viewModel = new VinylViewModel
             {
                 SelectedProduct = new Product
@@ -150,12 +159,14 @@ public class VinylController : Controller
                     Tracklist = vinylDetails.Tracklist,
                     BrandName = vinylDetails.BrandName
                 },
-                AllArtists = allArtists, 
-                SelectedArtistIds = artistIds,AllCategories = allCategories,
-                SelectedCategories = CategoriesIds,
+                AllArtists = allArtists,
+                SelectedArtistIds = artistIds ?? new List<int>(),  // Ensure it's not null
+                AllCategories = allCategories,
+                SelectedCategories = CategoriesIds ?? new List<int>(),
                 AllMoods = allMoods,
-                SelectedMood = moodIds
-                
+                SelectedMood = moodIds ?? new List<int>(),
+                AllBrands = allBrands,
+                SelectedBrandId = vinylDetails.BrandId 
             };
 
             return View("~/Views/Admin/VinylManagement/EditVinyl.cshtml", viewModel);
@@ -163,8 +174,7 @@ public class VinylController : Controller
     }
 
 
-
-    [HttpGet("vinylmanage")]
+    [HttpGet("vinylmanage")] //Hiện thị bảng data Vinyl
     public IActionResult Vinylmanage()
     {
         using (var db = new shopmanagementContext())
@@ -177,7 +187,7 @@ public class VinylController : Controller
                               ProductId = p.Id,
                               ProductName = p.Name,
                               ProductDescription = p.Description,
-                              Price = p.Price.ToString("C") ?? "N/A",
+                              Price = (decimal)p.Price,
                               DiskId = v.DiskId,
                               ProductQuantity = (int)p.Quantity,
                               Years = (int)v.Years,
@@ -219,6 +229,8 @@ public class VinylController : Controller
         }
     }
 
+
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 
     public IActionResult Error()
@@ -240,6 +252,9 @@ public class VinylController : Controller
 
         public List<Categories> AllCategories { get; set; } // All artists for dropdown
         public List<int> SelectedCategories { get; set; }
+        public int SelectedBrandId { get; set; }
+
+        public List<Brand> AllBrands { get; set; }
 
     }
     public class Vinyl
@@ -248,7 +263,6 @@ public class VinylController : Controller
         public string DiskId { get; set; }
         public int? Years { get; set; }
         public string Tracklist { get; set; }
-        public string BrandName { get; set; }
 
         public List<Mood> Moods { get; set; }
         public List<Category> Categories { get; set; }
@@ -262,7 +276,7 @@ public class VinylController : Controller
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
         public int ProductQuantity { get; set; }
-        public string Price { get; set; }
+        public decimal Price { get; set; }
         public int Years { get; set; }
         public string Tracklist { get; set; }
         public string BrandName { get; set; }
@@ -281,6 +295,11 @@ public class VinylController : Controller
         public string Name { get; set; }
     }
     public class Categories
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+    public class Brand
     {
         public int Id { get; set; }
         public string Name { get; set; }

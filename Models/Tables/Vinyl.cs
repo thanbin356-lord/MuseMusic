@@ -18,7 +18,6 @@ namespace MuseMusic.Models.Tables
         public int? Years { get; set; }
         public string? Tracklist { get; set; }
         public int? BrandId { get; set; }
-        public string? BrandName { get; set; }  // Store the brand name directly here
 
         public virtual Brand? Brand { get; set; }
         public virtual Product? Product { get; set; }

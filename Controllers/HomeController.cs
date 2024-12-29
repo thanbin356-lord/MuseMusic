@@ -8,7 +8,8 @@ namespace MuseMusic.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-
+    private readonly shopmanagementContext _shopcontext;
+    
     public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
@@ -97,7 +98,7 @@ public IActionResult Store()
                                 DiskId = v.DiskId,
                                 Tracklist = v.Tracklist,
                                 // Status = v.Status // Assume this field exists to indicate preorder, etc.
-                            }).ToList()
+                            }).ToList()                           
             };
 
             return View(vinylViewModel);
