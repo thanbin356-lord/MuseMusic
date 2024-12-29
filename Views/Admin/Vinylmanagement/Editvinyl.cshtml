@@ -1,0 +1,140 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@model MuseMusic.Controllers.AdminManagement.VinylManagement.VinylController.VinylViewModel
+
+<main class="disk-management">
+    <h1>CHỈNH SỬA ĐĨA THAN</h1>
+    <form method="post" action="/admin/vinylmanagement/editvinyl/@Model.SelectedProduct.ProductId"
+        enctype="multipart/form-data">
+        <div class="form-container">
+            <input type="hidden" name="SelectedProduct.ProductId" value="@Model.SelectedProduct.ProductId" />
+
+            <div class="product-image">
+                <div class="image-placeholder">
+                    <button type="button" class="add-image-btn">+ THÊM ẢNH</button>
+                    <input type="file" id="image-upload" name="ProductImage" style="display: none;" />
+                </div>
+            </div>
+            <div class="product-info">
+                <div class="form-group">
+                    <label for="name">Tên*</label>
+                    <input type="text" id="name" name="ProductName" placeholder="Nhập tên sản phẩm"
+                        value="@Model.SelectedProduct.ProductName" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="artist">Nghệ sĩ*</label>
+                    <select id="artist" name="SelectedArtistIds" class="js-example-basic-multiple-limit"
+                        multiple="multiple" style="width: 300px;">
+                        @foreach (var artist in Model.AllArtists)
+                        {
+                            if (Model.SelectedArtistIds.Contains(artist.Id))
+                            {
+                                <option value="@artist.Id" selected="selected">@artist.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@artist.Id">@artist.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Thể loại*</label>
+                    <input type="text" id="category" name="Category" placeholder="Nhập thể loại"
+                        value="@Model.SelectedProduct.CategoriesName" required />
+                </div>
+                <div class="form-group">
+                    <label for="publisher">Hãng phát hành*</label>
+                    <input type="text" id="publisher" name="Publisher" placeholder="Nhập hãng phát hành"
+                        value="@Model.SelectedProduct.BrandName" required />
+                </div>
+                <div class="form-group">
+                    <label for="release-year">Năm phát hành*</label>
+                    <input type="text" id="release-year" name="ReleaseYear" placeholder="Nhập năm phát hành"
+                        value="@Model.SelectedProduct.Years" required />
+                </div>
+                <div class="form-group">
+                    <label for="condition">Tâm Trạng*</label>
+                    <input type="text" id="condition" name="Condition" placeholder="Nhập tâm trạng"
+                        value="@Model.SelectedProduct.MoodNames" required />
+                </div>
+                <div class="form-group">
+                    <label for="code">Mã đĩa*</label>
+                    <input type="text" id="code" name="DiskId" placeholder="Nhập mã đĩa"
+                        value="@Model.SelectedProduct.DiskId" required />
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Số lượng đĩa*</label>
+                    <select id="quantity" name="Quantity" required>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="price">Giá tiền*</label>
+                    <input type="text" id="price" name="Price" placeholder="Nhập giá tiền"
+                        value="@Model.SelectedProduct.Price" required />
+                </div>
+                <div class="form-group">
+                    <label for="stock">Số lượng sản phẩm*</label>
+                    <input type="text" id="stock" name="Stock" placeholder="Nhập số lượng sản phẩm"
+                        value="@Model.SelectedProduct.ProductQuantity" required />
+                </div>
+            </div>
+        </div>
+        <div class="additional-info">
+            <div class="form-group">
+                <label for="notes">Ghi chú sản phẩm</label>
+                <input type="text" id="notes" name="Notes" placeholder="Nhập ghi chú"
+                    value="@Model.SelectedProduct.ProductDescription"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="track-list">Track List</label>
+                <input type="text" id="track-list" name="TrackList" placeholder="Nhập danh sách bài hát"
+                    value="@Model.SelectedProduct.Tracklist"></textarea>
+            </div>
+        </div>
+        <div class="actions">
+            <button type="button" class="cancel-btn" onclick="window.history.back();">HỦY</button>
+            <button type="submit" class="confirm-btn">LƯU</button>
+        </div>
+    </form>
+</main>
+
+
+<script>
+    // Handle the image upload button
+    document.querySelector(".add-image-btn").addEventListener("click", function () {
+        document.querySelector("#image-upload").click();
+    });
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
+<script>
+    function formatState(state) {
+        if (!state.id) {
+            return state.text;
+        }
+
+        var baseUrl = "/user/pages/images/flags";
+        var $state = $('<span><img class="img-flag" /> <span></span></span>');
+
+        // Use .text() instead of HTML string concatenation to avoid script injection issues
+        $state.find("span").text(state.text);
+        $state.find("img").attr("src", baseUrl + "/" + state.element.value.toLowerCase() + ".png");
+
+        return $state;
+    };
+    $(".js-example-templating").select2({
+        templateSelection: formatState
+    });
+
+    $(".js-example-basic-multiple-limit").select2({
+        maximumSelectionLength: 5
+    });
+</script>

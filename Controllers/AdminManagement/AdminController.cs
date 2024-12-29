@@ -49,50 +49,8 @@ public class AdminController : Controller
     {
         return View();
     }
-    public IActionResult Addvinyl()
-    {
-        return View();
-    }
+    
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-
-    public IActionResult Vinylmanage()
-{
-    using (var db = new shopmanagementContext())
-    {
-        var vinylViewModel = new VinylViewModel
-        {
-            Products = (from v in db.Vinyls
-                        join p in db.Products on v.ProductId equals p.Id
-                        join av in db.ArtistVinyls on v.Id equals av.VinylId
-                        join a in db.Artists on av.ArtistId equals a.Id
-                        group a by new
-                        {
-                            p.Id,
-                            p.Name,
-                            p.Description,
-                            p.Price,
-                            v.DiskId,
-                            v.Tracklist,
-                            v.Years,
-                            p.Quantity
-                        } into vinylGroup
-                        select new Product
-                        {
-                            ProductId = vinylGroup.Key.Id,
-                            ProductName = vinylGroup.Key.Name,
-                            ProductDescription = vinylGroup.Key.Description,
-                            Price = vinylGroup.Key.Price.ToString("C") ?? "N/A",
-                            DiskId = vinylGroup.Key.DiskId,
-                            ProductQuantity = (int)vinylGroup.Key.Quantity,
-                            Years = (int)vinylGroup.Key.Years,
-                            Tracklist = vinylGroup.Key.Tracklist,
-                            // Combine all artist names for this vinyl into a single string
-                            ArtistNames = string.Join(", ", vinylGroup.Select(x => x.Name)) // Join all artist names with commas
-                        }).ToList(),
-        };
-        return View(vinylViewModel);
-    }
-}
 
     public IActionResult RecordPlayer()
     {
@@ -233,23 +191,7 @@ public class AdminController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
-    public partial class VinylViewModel
-    {
-        public List<Product> Products { get; set; }
-        public List<Artist> Artists { get; set; }
-
-    }
-    public class Vinyl
-    {
-        public int Id { get; set; }
-        public string DiskId { get; set; }
-        public int? Years { get; set; }
-        public string Tracklist { get; set; }
-        public string BrandName { get; set; }
-
-        // List of artist names associated with this vinyl
-        public List<string> Artists { get; set; }  // This will hold artist names for the view
-    }
+    
     public partial class RecordPlayerViewModel
     {
         public List<Product> Products { get; set; }
