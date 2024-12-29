@@ -17,7 +17,9 @@ namespace MuseMusic.Models.Tables
         public int? ProductId { get; set; }
         public int? Years { get; set; }
         public string? Tracklist { get; set; }
+        public int? BrandId { get; set; }
 
+        public virtual Brand? Brand { get; set; }
         public virtual Product? Product { get; set; }
         public virtual ICollection<ArtistVinyl> ArtistVinyls { get; set; }
         public virtual ICollection<CategoriesVinyl> CategoriesVinyls { get; set; }

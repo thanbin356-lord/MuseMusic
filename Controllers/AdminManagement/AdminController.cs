@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MuseMusic.Models;
@@ -20,69 +21,37 @@ public class AdminController : Controller
     {
         return View();
     }
-    public IActionResult Vinylmanage(){
-        return View();
-    }
-    public IActionResult Usermanage(){
-        return View();
-    }
-     public IActionResult Ordermanage(){
-        return View();
-    }
-     public IActionResult Blogmanage(){
-        return View();
-    }
-     public IActionResult Phukienmanage(){
-        return View();
-    }
-     public IActionResult Daudiamanage(){
-        return View();
-    }
-       public IActionResult Profile(){
-        return View();
-    }
-     public IActionResult OrderDetail(){
-        return View();
-    }
-        public IActionResult Addvinyl(){
-        return View();
-    }
-      [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-
-    public IActionResult Vinyl()
+    public IActionResult Usermanage()
     {
-        {
-            using (var db = new shopmanagementContext())
-            {
-                // phải xử lý trong cái using 
-                // bước 1 tạo đối tượng 
-                var vinylViewModel = new VinylViewModel();
-                // bước 2 load dữ liệu từ db 
-                var product = (from p in db.Products
-                               join v in db.Vinyls on p.Id equals v.ProductId
-                               select new
-                               {
-                                   Product = p,
-                                   Vinyl = v
-                               }).ToList();
-
-                // bước 3 gắn lại dữ liệu vào đối tượng 
-                vinylViewModel.Products = product.Select(x => new Product
-                {
-                    ProductId = x.Product.Id,
-                    ProductName = x.Product.Name,
-                    ProductDescription = x.Product.Description,
-                    Price = x.Product.Price.ToString("C"),
-                    DiskId = x.Vinyl.DiskId,
-                    Years = (int)x.Vinyl.Years,
-                    Tracklist = x.Vinyl.Tracklist
-                }).ToList();
-
-                // bước 4 return l 
-                return View(vinylViewModel);
-            }
-        }
+        return View();
     }
+    public IActionResult Ordermanage()
+    {
+        return View();
+    }
+    public IActionResult Blogmanage()
+    {
+        return View();
+    }
+    public IActionResult Phukienmanage()
+    {
+        return View();
+    }
+    public IActionResult Daudiamanage()
+    {
+        return View();
+    }
+    public IActionResult Profile()
+    {
+        return View();
+    }
+    public IActionResult OrderDetail()
+    {
+        return View();
+    }
+    
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+
     public IActionResult RecordPlayer()
     {
         {
@@ -222,11 +191,7 @@ public class AdminController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
-    public partial class VinylViewModel
-    {
-        public List<Product> Products { get; set; }
-
-    }
+    
     public partial class RecordPlayerViewModel
     {
         public List<Product> Products { get; set; }
@@ -237,14 +202,17 @@ public class AdminController : Controller
     }
     public class Product
     {
+        public List<Vinyl> Vinyls { get; set; }
         public int ProductId { get; set; }
         public string DiskId { get; set; }
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
+        public int ProductQuantity { get; set; }
         public string Price { get; set; }
         public int Years { get; set; }
         public string Tracklist { get; set; }
         public string BrandName { get; set; }
+        public string ArtistNames{get;set;}
     }
     public class CustomerViewModel
     {

@@ -44,7 +44,7 @@ namespace MuseMusic.Models.Tables
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseMySql("server=localhost;database=shopmanagement;user=root;password=123456;allow user variables=True", Microsoft.EntityFrameworkCore.ServerVersion.Parse("9.1.0-mysql"));
+                optionsBuilder.UseMySql("server=localhost;database=shopmanagement;user=root;password=thuthu121;allow user variables=True", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.40-mysql"));
             }
         }
 
@@ -546,6 +546,8 @@ namespace MuseMusic.Models.Tables
                     .HasPrecision(10, 2)
                     .HasColumnName("price");
 
+                entity.Property(e => e.Quantity).HasColumnName("quantity");
+
                 entity.HasOne(d => d.Adminseller)
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.AdminsellerId)
@@ -595,9 +597,13 @@ namespace MuseMusic.Models.Tables
             {
                 entity.ToTable("vinyl");
 
+                entity.HasIndex(e => e.BrandId, "brand_id");
+
                 entity.HasIndex(e => e.ProductId, "product_id");
 
                 entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.BrandId).HasColumnName("brand_id");
 
                 entity.Property(e => e.DiskId)
                     .HasMaxLength(255)
@@ -610,6 +616,12 @@ namespace MuseMusic.Models.Tables
                     .HasColumnName("tracklist");
 
                 entity.Property(e => e.Years).HasColumnName("years");
+
+                entity.HasOne(d => d.Brand)
+                    .WithMany(p => p.Vinyls)
+                    .HasForeignKey(d => d.BrandId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("vinyl_ibfk_2");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Vinyls)

@@ -20,6 +20,7 @@ namespace MuseMusic.Models.Tables
         public string? Description { get; set; }
         public decimal Price { get; set; }
         public int? AdminsellerId { get; set; }
+        public int? Quantity { get; set; }
 
         public virtual Adminseller? Adminseller { get; set; }
         public virtual ICollection<Accessory> Accessories { get; set; }
