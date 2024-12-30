@@ -9,7 +9,7 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly shopmanagementContext _shopcontext;
-    
+
     public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
@@ -65,12 +65,27 @@ public class HomeController : Controller
     {
         return View();
     }
-public IActionResult Store()
+    public IActionResult Store()
     {
         return View();
     }
 
-
+    public IActionResult Record_Player()
+    {
+        return View();
+    }
+    public IActionResult Accessories()
+    {
+        return View();
+    }
+    public IActionResult AccessoriesDetails()
+    {
+        return View();
+    }
+    public IActionResult RecordPlayer_Details()
+    {
+        return View();
+    }
 
     public IActionResult MusicEra()
     {
@@ -98,7 +113,7 @@ public IActionResult Store()
                                 DiskId = v.DiskId,
                                 Tracklist = v.Tracklist,
                                 // Status = v.Status // Assume this field exists to indicate preorder, etc.
-                            }).ToList()                           
+                            }).ToList()
             };
 
             return View(vinylViewModel);

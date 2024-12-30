@@ -166,7 +166,7 @@ public class VinylController : Controller
                 AllMoods = allMoods,
                 SelectedMood = moodIds ?? new List<int>(),
                 AllBrands = allBrands,
-                SelectedBrandId = vinylDetails.BrandId 
+                SelectedBrandId = vinylDetails.BrandId
             };
 
             return View("~/Views/Admin/VinylManagement/EditVinyl.cshtml", viewModel);
@@ -230,6 +230,75 @@ public class VinylController : Controller
     }
 
 
+    [HttpPost("editvinyl/{id}")]
+    public IActionResult EditVinyl(VinylViewModel model, int id)
+    {
+        if (ModelState.IsValid)
+        {
+            using (var db = new shopmanagementContext())
+            {
+                var vinyl = db.Vinyls
+                    .FirstOrDefault(v => v.ProductId == id);
+
+                if (vinyl == null)
+                {
+                    return NotFound(); // Return 404 if vinyl not found
+                }
+
+                // Update the Vinyl details
+                vinyl.Product.Name = model.SelectedProduct.ProductName;
+                vinyl.DiskId = model.SelectedProduct.DiskId;
+                vinyl.Product.Price = model.SelectedProduct.Price;
+                vinyl.Years = model.SelectedProduct.Years;
+                vinyl.Tracklist = model.SelectedProduct.Tracklist;
+                vinyl.Product.Quantity = model.SelectedProduct.ProductQuantity;
+                vinyl.Product.Description = model.SelectedProduct.ProductDescription;
+
+                // Update relationships (Artists, Categories, Moods, etc.)
+                // Update ArtistVinyl, MoodVinyl, CategoriesVinyl based on the selected ids
+                UpdateVinylRelations(db, vinyl.ProductId, model);
+
+                db.SaveChanges(); // Save the changes to the database
+            }
+
+            return RedirectToAction("Vinylmanage", "Admin");
+        }
+
+        return View(model); // Return the model with validation errors if the form is not valid
+    }
+
+    private void UpdateVinylRelations(shopmanagementContext db, int? productId, VinylViewModel model)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void UpdateVinylRelations(shopmanagementContext db, int vinylId, VinylViewModel model)
+    {
+        // Remove existing relationships
+        db.ArtistVinyls.RemoveRange(db.ArtistVinyls.Where(av => av.VinylId == vinylId));
+        db.MoodVinyls.RemoveRange(db.MoodVinyls.Where(mv => mv.VinylId == vinylId));
+        db.CategoriesVinyls.RemoveRange(db.CategoriesVinyls.Where(cv => cv.VinylId == vinylId));
+
+        // Add new relationships
+        foreach (var artistId in model.SelectedArtistIds)
+        {
+            db.ArtistVinyls.Add(new ArtistVinyl { VinylId = vinylId, ArtistId = artistId });
+        }
+
+        foreach (var moodId in model.SelectedMood)
+        {
+            db.MoodVinyls.Add(new MoodVinyl { VinylId = vinylId, MoodId = moodId });
+        }
+
+        foreach (var categoryId in model.SelectedCategories)
+        {
+            db.CategoriesVinyls.Add(new CategoriesVinyl { VinylId = vinylId, CategoryId = categoryId });
+        }
+    }
+
+
+
+
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 
@@ -263,6 +332,13 @@ public class VinylController : Controller
         public string DiskId { get; set; }
         public int? Years { get; set; }
         public string Tracklist { get; set; }
+
+        public int ProductId { get; set; }
+        public string ProductName { get; set; } // New property
+        public decimal Price { get; set; }
+
+        public int ProductQuantity { get; set; }
+        public string ProductDescription { get; set; }
 
         public List<Mood> Moods { get; set; }
         public List<Category> Categories { get; set; }

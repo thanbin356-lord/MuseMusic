@@ -5,28 +5,23 @@
 
 <main class="disk-management">
     <h1>CHỈNH SỬA ĐĨA THAN</h1>
-    <div class="form-container">
+<div class="form-container">
+    <form method="post" enctype="multipart/form-data" action="/admin/vinylmanage/editvinyl/@Model.SelectedProduct.ProductId">
+        @Html.AntiForgeryToken()
         <input type="hidden" name="SelectedProduct.ProductId" value="@Model.SelectedProduct.ProductId" />
-        @* <div class="product-image">
-            <div class="image-placeholder">
-                <button type="button" class="add-image-btn">+ THÊM ẢNH</button>
-                <input type="file" id="image-upload" name="ProductImage" style="display: none;" />
-            </div>
-        </div> *@
+        <!-- Product Image (Optional) -->
         <div class="product-info">
+            <!-- Form fields for Product Name, Artist, Category, etc. -->
             <div class="form-group">
                 <label for="name">Tên*</label>
                 <input type="text" id="name" name="SelectedProduct.ProductName" placeholder="Nhập tên sản phẩm"
                     value="@Model.SelectedProduct.ProductName" required />
             </div>
-
             <div class="form-group">
                 <label for="artist">Nghệ sĩ*</label>
                 <select id="artist" name="SelectedArtistIds" class="js-example-basic-multiple-limit" multiple="multiple"
                     style="width: 300px;">
-                    @if (Model.AllArtists != null)
-                    {
-                        @foreach (var artist in Model.AllArtists)
+                    @foreach (var artist in Model.AllArtists)
                         {
                             if (Model.SelectedArtistIds.Contains(artist.Id) && Model.SelectedArtistIds != null)
                             {
@@ -37,17 +32,12 @@
                                 <option value="@artist.Id">@artist.Name</option>
                             }
                         }
-                    }
                 </select>
             </div>
-
             <div class="form-group">
                 <label for="category">Thể loại*</label>
-                <select id="category" name="SelectedCategories" class="js-example-basic-multiple-limit"
-                    multiple="multiple" style="width: 300px;">
-                    @if (Model.AllCategories != null)
-                    {
-                        @foreach (var categories in Model.AllCategories)
+                <select id="category" name="SelectedCategories" class="js-example-basic-multiple-limit" multiple="multiple" style="width: 300px;">
+                    @foreach (var categories in Model.AllCategories)
                         {
                             if (Model.SelectedCategories.Contains(categories.Id))
                             {
@@ -58,17 +48,12 @@
                                 <option value="@categories.Id">@categories.Name</option>
                             }
                         }
-                    }
                 </select>
             </div>
-
             <div class="form-group">
-                <label for="publisher">Hãng phát hành*</label>
-                <select id="brand" name="SelectedBrandId" class="js-example-basic-single" style="width: 300px;"
-                    required>
-                    @if (Model.AllBrands != null)
-                    {
-                        @foreach (var brand in Model.AllBrands)
+                <label for="brand">Hãng phát hành*</label>
+                <select id="brand" name="SelectedBrandId" class="js-example-basic-single" style="width: 300px;" required>
+                    @foreach (var brand in Model.AllBrands)
                         {
                             if (Model.SelectedBrandId == brand.Id)
                             {
@@ -79,24 +64,18 @@
                                 <option value="@brand.Id">@brand.Name</option>
                             }
                         }
-                    }
                 </select>
             </div>
-
             <div class="form-group">
                 <label for="release-year">Năm phát hành*</label>
                 <input type="text" id="release-year" name="SelectedProduct.Years" placeholder="Nhập năm phát hành"
                     value="@Model.SelectedProduct.Years" required />
             </div>
-
-
             <div class="form-group">
                 <label for="mood">Thể loại*</label>
                 <select id="mood" name="SelectedMood" class="js-example-basic-multiple-limit" multiple="multiple"
                     style="width: 300px;">
-                    @if (Model.AllMoods != null)
-                    {
-                        @foreach (var mood in Model.AllMoods)
+                    @foreach (var mood in Model.AllMoods)
                         {
                             if (Model.SelectedMood.Contains(mood.Id))
                             {
@@ -107,49 +86,40 @@
                                 <option value="@mood.Id">@mood.Name</option>
                             }
                         }
-                    }
                 </select>
             </div>
-
             <div class="form-group">
                 <label for="code">Mã đĩa*</label>
                 <input type="text" id="code" name="SelectedProduct.DiskId" placeholder="Nhập mã đĩa"
                     value="@Model.SelectedProduct.DiskId" required />
             </div>
-
             <div class="form-group">
                 <label for="price">Giá tiền*</label>
                 <input type="text" id="price" name="SelectedProduct.Price" placeholder="Nhập giá tiền"
-                    value="$@Model.SelectedProduct.Price" required />
+                    value="@Model.SelectedProduct.Price" required />
             </div>
             <div class="form-group">
                 <label for="stock">Số lượng sản phẩm*</label>
-                <input type="text" id="stock" name="SelectedProduct.ProductQuantity"
-                    placeholder="Nhập số lượng sản phẩm" value="@Model.SelectedProduct.ProductQuantity" required />
+                <input type="text" id="stock" name="SelectedProduct.ProductQuantity" placeholder="Nhập số lượng sản phẩm"
+                    value="@Model.SelectedProduct.ProductQuantity" required />
             </div>
         </div>
-    </div>
-    <div class="additional-info">
-        <div class="form-group">
-            <label for="notes">Ghi chú sản phẩm</label>
-            <textarea id="notes" name="SelectedProduct.ProductDescription"
-                placeholder="Nhập ghi chú">@Model.SelectedProduct.ProductDescription</textarea>
+        <div class="additional-info">
+            <div class="form-group">
+                <label for="notes">Ghi chú sản phẩm</label>
+                <textarea id="notes" name="SelectedProduct.ProductDescription" placeholder="Nhập ghi chú">@Model.SelectedProduct.ProductDescription</textarea>
+            </div>
+            <div class="form-group">
+                <label for="track-list">Track List</label>
+                <textarea id="track-list" name="SelectedProduct.Tracklist" placeholder="Nhập danh sách bài hát">@Model.SelectedProduct.Tracklist</textarea>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="track-list">Track List</label>
-            <textarea id="track-list" name="SelectedProduct.Tracklist"
-                placeholder="Nhập danh sách bài hát">@Model.SelectedProduct.Tracklist</textarea>
-        </div>
-    </div>
-
-    <form method="post" enctype="multipart/form-data">
-        @Html.AntiForgeryToken()
-        <button type="cancel" class="cancel-btn" onclick="window.location.href='/admin/vinylmanage'">HỦY</button>
-        <input type="hidden" name="id" value="@Model.SelectedProduct.ProductId" />
-
-        <!-- Include the rest of your form fields, making sure each field is properly bound to the `VinylViewModel` -->
+        <button type="button" class="cancel-btn" onclick="window.location.href='/admin/vinylmanage'">HỦY</button>
         <button type="submit" class="confirm-btn">LƯU</button>
     </form>
+</div>
+
+
 
 </main>
 

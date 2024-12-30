@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
+.section-padding {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.record-img-top{
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+}
+
+.record-title{
+    justify-content: center;
+    text-align: center;
+    display: flex;
+}
+
+.record-title h1{
+    margin-left: 30px;
+    display: flex;
+    border: none;
+    padding-top: 30px;
+    font-family: Inter;
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 38.73px;
+    text-align: center;
+}
+
+/*---------------------------------------
+  TRENDING RECORD PLAYER             
+-----------------------------------------*/
+
+.trend-record{
+    display: flex;
+    width: auto;
+    padding: 20px;
+    background: #F2F4F8;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+
+}
+.trend-record .trendrecord-img{
+    width: auto;
+    transition: all 0.5s ease-out;
+
+}
+
+.trend-record .trendrecord-img:hover{
+  transform: scale(1.05);
+
+}
+
+.trend-record .trendrecord-info{
+    justify-content: center;
+    display: inline-block;
+}
+
+.trend-record .trendrecord-info h3{
+    font-family: Inter;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 48.41px;
+    text-align: left;  
+
+}
+
+.trend-record .trendrecord-info p{
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 24.2px;
+    text-align: left;
+
+}
+
+.trend-record .trend-button{
+    margin-top: 10px;
+    display: flex;
+    gap: 20px;
+}
+
+.trend-record .trend-button .btn{
+    background: #FFE9AD;
+    border: 2px solid #000000;
+    color: #000000;
+    transition: all 0.5s ease-out;
+}
+
+.trend-record .trend-button .btn.secondary{
+    background: #FFFFFF;
+    border: 2px solid #000000;
+    color: #000000;
+    transition: all 0.5s ease-out;
+}
+
+/*---------------------------------------
+  OTHER RECORD PLAYER             
+-----------------------------------------*/
+.record-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  
+  .record-player {
+    text-align: center;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .record-player img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .record-player img:hover {
+    transform: scale(1.05);
+  }
+  
+  .record-player h2 {
+    font-size: 20px;
+    margin: 10px 0 5px 0;
+    font-weight: bold;
+  }
+  
+  .record-player p {
+    font-size: 24px;
+    font-weight: bolder;
+    color: #000000;
+  }
+  
+  .record-player .price {
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: bolder;
+    margin: 10px 0;
+  }
+  
+  .record-player .details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 120px;
+    /* Ensures uniform height for details */
+  }
+  
+  .record-player .buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .record-player .buttons span {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 12px;
+    /* border-radius: none; */
+    font-weight: bold;
+  }
+  
+  .record-player .buttons .preorder {
+    background-color: #FFF9C4;
+    color: #D3A700;
+  }
+
+  .record-player .buttons .status {
+    background-color: #FFCEC4;
+    color: #C7150C;
+
+  }
+  
+  .record-player .buttons .size {
+    background-color: #F2F4F8;
+    color: #676767;
+  }
