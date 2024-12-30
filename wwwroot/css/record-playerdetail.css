@@ -1,0 +1,361 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
+.section-padding {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.record-title{
+    justify-content: center;
+    text-align: center;
+    display: flex;
+}
+
+.record-title h1{
+    margin-left: 30px;
+    display: flex;
+    border: none;
+    padding-top: 30px;
+    font-family: Inter;
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 38.73px;
+    text-align: center;
+}
+
+/*---------------------------------------
+  RECORD PLAYER DETAIL               
+-----------------------------------------*/
+  
+.record-thumb {
+    width: 400px;
+    height: 400px;
+    background: #fff;
+    position: relative;
+    transition: all 0.5s ease-out;
+  }
+  
+  .record-image {
+    width: auto;
+    transition: all 0.5s ease-out;
+  }
+
+  .record-secondthumb {
+    display: flex;
+    background: none;
+    position: relative;
+    transition: all 0.5s ease-out;
+  }
+  
+  .record-small {
+    width: 160px;
+    height: 160px;
+    transition: all 0.5s ease-out;
+    margin: 80px 20px 20px 0;
+  }
+
+  .record-thumb:hover .record-image, .record-secondthumb .record-small:hover {
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.175);
+  }
+  
+
+  .record-info {
+    display: flex;
+    padding: 0 20px 10px 20px;
+  }
+
+  .record-info h2{
+    font-family: "Inter", sans-serif;
+    font-weight: 800;
+  }
+
+  .record-info h3{
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 30px;
+  }
+
+  .record-info h4{
+    font-family: "Inter", sans-serif;
+    font-weight: 800;
+    font-size: 30px;
+  }
+
+  .record-info h5{
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: #676767;
+  }
+
+  .record-info h6{
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 24.2px;
+    text-align: left;
+    
+  }
+.record-recommend{
+    margin: 0 20px 20px 20px;
+    padding: 20px;
+    border: 3px solid #000000;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    display: inline-block;
+
+  }
+.record-recommend h7{
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19.36px;
+    text-align: center;
+  }
+
+ .record-recommend h8{
+    color: #7D7D7D;
+    font-family: Inter;
+    font-size: 32px;
+    font-weight: 300;
+    text-align: left;
+  }
+
+  .record-recommend h9{
+    font-family: Inter;
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 60px;
+    text-align: center;
+  }
+
+  .record-cart-thumb {
+    display: flex;
+    padding: 0 20px;
+    margin-bottom: 20px;
+  }
+
+  .record-cart-thumb .quantity{
+    display: flex;
+    align-items: center;
+    width: max-content;
+    height: 50px;
+    margin-right: 120px;
+    box-shadow: 5px 5px 0px 0px #00000040;
+  }
+  .record-cart-thumb .quantity i{
+    font-size: 30px;
+    color: #BCBCBC;
+  }
+
+  .record-cart-thumb .heart-btn{
+    background: #FFFFFF;
+    font-size: 18px;
+    border: #00000040;
+    width: 50px;
+    height: 50px;
+    border: none;
+    box-shadow: 5px 5px 0px 0px #00000040;
+
+  }
+
+  .record-cart-thumb .cart-btn{
+    height: 50px;
+    width: 100%;
+    background-color: #FFF27E;
+    font-size: 18px;
+    color: #000;
+    font-weight: 800;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 20px;
+    box-shadow: 5px 5px 0px 0px #00000040;
+
+  }
+
+  .record-cart-thumb .cart-btn:hover{
+    transition: all 0.3s ease-out;
+    background-color: #ffe815;
+  }
+
+  .record-underinfo{
+    margin-left: 20px;
+    padding-top: 20px;
+    border-top: 2px solid #000000;
+
+  }
+
+  .record-underinfo h5{
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24.2px;
+    text-align: left;
+    
+  }
+
+  .record-underinfo p{
+    padding-top: 10px;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 24.2px;
+    text-align: left;
+    
+  }
+
+/*---------------------------------------
+  RECORD PLAYER WARNING               
+-----------------------------------------*/
+.player-warn{
+    padding: 30px 60px;
+    background: #F1E8D8;
+    width: 100%;
+    display: inline-block;
+}
+
+.player-warn h4{
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 29.05px;
+    text-align: center;
+    margin-bottom: 30px;
+    
+}
+
+.player-warn h5{
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 24.2px;
+    text-align: left;
+    
+}
+.player-warn span{
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24.2px;
+    text-align: left;
+    
+}
+
+/*---------------------------------------
+  RECORD PLAYER DESCRIPTION               
+-----------------------------------------*/
+
+.record-description{
+    border-top: 1px solid #000000;
+    background-color: #fff;
+}
+
+.record-description h2{
+    font-family: Inter;
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 38.73px;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .record-description p{
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 24.2px;
+    text-align: left;
+    margin-bottom: 30px;
+  }
+
+  /*---------------------------------------
+  OTHER RECORD PLAYER             
+-----------------------------------------*/
+.record-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 30px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  
+  .record-player {
+    text-align: center;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .record-player img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .record-player img:hover {
+    transform: scale(1.05);
+  }
+  
+  .record-player h2 {
+    font-size: 20px;
+    margin: 10px 0 5px 0;
+    font-weight: bold;
+  }
+  
+  .record-player p {
+    font-size: 24px;
+    font-weight: bolder;
+    color: #000000;
+  }
+  
+  .record-player .price {
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: bolder;
+    margin: 10px 0;
+  }
+  
+  .record-player .details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 120px;
+    /* Ensures uniform height for details */
+  }
+  
+  .record-player .buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .record-player .buttons span {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 12px;
+    /* border-radius: none; */
+    font-weight: bold;
+  }
+  
+  .record-player .buttons .preorder {
+    background-color: #FFF9C4;
+    color: #D3A700;
+  }
+
+  .record-player .buttons .status {
+    background-color: #FFCEC4;
+    color: #C7150C;
+
+  }
+  
+  .record-player .buttons .size {
+    background-color: #F2F4F8;
+    color: #676767;
+  }
