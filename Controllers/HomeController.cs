@@ -104,14 +104,21 @@ public class HomeController : Controller
             {
                 Products = (from p in db.Products
                             join v in db.Vinyls on p.Id equals v.ProductId
+                            join img in db.ImageUrls.Where(img => (bool)img.IsPrimary) on p.Id equals img.ProductId
+                              let artistNames = (from av in db.ArtistVinyls
+                                           join a in db.Artists on av.ArtistId equals a.Id
+                                           where av.VinylId == v.Id
+                                           select a.Name).ToList()
                             select new Product
                             {
                                 ProductId = p.Id,
                                 ProductName = p.Name,
+                                ProductImage = img.Url,
                                 ProductDescription = p.Description,
                                 Price = p.Price.ToString("C") ?? "N/A",
                                 DiskId = v.DiskId,
                                 Tracklist = v.Tracklist,
+                                ArtistNames = string.Join(", ",artistNames)
                                 // Status = v.Status // Assume this field exists to indicate preorder, etc.
                             }).ToList()
             };
@@ -182,6 +189,8 @@ public class HomeController : Controller
         public int ProductId { get; set; }
         public string DiskId { get; set; }
         public string ProductName { get; set; }
+        public string ProductImage { get; set; }
+        public string ArtistNames { get; set; }
         public string ProductDescription { get; set; }
         public string Price { get; set; }
         public string Tracklist { get; set; }
