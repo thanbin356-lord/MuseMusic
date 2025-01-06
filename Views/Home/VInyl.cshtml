@@ -10,11 +10,11 @@
             <div class="row align-items-center">
 
                 <div class="vinyl-title">
-                    <h1>ĐĨA THAN</h1>
+                    <a href="#">ĐĨA THAN</a>
 
-                    <h1>ĐẦU ĐĨA</h1>
+                    <a href="#">ĐẦU ĐĨA</a>
 
-                    <h1>PHỤ KIỆN</h1>
+                    <a href="#">PHỤ KIỆN</a>
 
                 </div>
 
@@ -23,9 +23,20 @@
         </div>
     </section>
 
-    <section class="section-padding">
+    <section class="">
         <div class="container">
-            <img class="vinyl-img-top" src="/images/vinyl-header.png">
+            <div class="vinyl-header">
+                <div class="overlay">
+                    <h1>ĐĨA THAN</h1>
+                    <p>Không biết lựa chọn gì? Hãy để Muse giúp bạn!<br>Khám phá thế giới âm nhạc theo:</p>
+                    <nav>
+                        <a href="#">THỂ LOẠI</a>
+                        <a href="#">NGHỆ SĨ</a>
+                        <a href="#">THỜI KÌ</a>
+                        <a href="#">TÂM TRẠNG</a>
+                    </nav>
+                </div>
+  </div>
         </div>
     </section>
 
@@ -111,29 +122,32 @@
 
     <div class="product-container">
     <!--  Product List -->
-    @foreach (var product in Model.Products)
-    {
-            <div class="product">
-                <a href="/Home/VinylDetails?id=@product.ProductId"><img src="@product.ProductImage" alt="@product.ProductName"></a>
-                <h2>@product.ProductName
-                </h2>
-                <p>@product.ArtistNames</p>
-                <p class="price">@product.Price</p>
-                <div class="buttons">
-                    <span class="preorder">PREORDER</span>
-                    <span class="size">M</span>
-                </div>
-            </div>       
-    }
-    <div class="pagination">
+        @foreach (var product in Model.Products)
+        {
+                <div class="product">
+                    <a href="/Home/VinylDetails?id=@product.ProductId"><img src="@product.ProductImage" alt="@product.ProductName"></a>
+                    <h2>@product.ProductName
+                    </h2>
+                    <p>@product.ArtistNames</p>
+                    <p class="price">@product.Price</p>
+                    <div class="buttons">
+                        <span class="preorder">PREORDER</span>
+                        <span class="size">M</span>
+                    </div>
+                </div>       
+        }
+    </div>
+    <div class="container">
+        <div class="pagination">
              <button class="page-btn active">1</button>
-         @* <button class="page-btn">2</button>
+            @* <button class="page-btn">2</button>
     <button class="page-btn">3</button> *@
                 <span>...</span>
-    @* <button class="page-btn">201</button>
+            @* <button class="page-btn">201</button>
     <button class="page-btn">202</button>
     <button class="page-btn">203</button> *@
              <button class="page-btn next">&gt;</button>
-             </div>
     </div>
+    </div>
+    
 </main>
