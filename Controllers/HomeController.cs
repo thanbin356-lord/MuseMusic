@@ -108,6 +108,7 @@ public class HomeController : Controller
                             {
                                 ProductId = p.Id,
                                 ProductName = p.Name,
+                                ProductImage = p.ImageUrl,
                                 ProductDescription = p.Description,
                                 Price = p.Price.ToString("C") ?? "N/A",
                                 DiskId = v.DiskId,
@@ -182,6 +183,7 @@ public class HomeController : Controller
         public int ProductId { get; set; }
         public string DiskId { get; set; }
         public string ProductName { get; set; }
+        public string ProductImage { get; set; }
         public string ProductDescription { get; set; }
         public string Price { get; set; }
         public string Tracklist { get; set; }

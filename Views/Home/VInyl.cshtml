@@ -114,7 +114,7 @@
     @foreach (var product in Model.Products)
     {
             <div class="product">
-                <a href="/Home/VinylDetails?id=@product.ProductId"><img src="/images/product/product.png" alt="@product.ProductName"></a>
+                <a href="/Home/VinylDetails?id=@product.ProductId"><img src="@product.ProductImage" alt="@product.ProductName"></a>
                 <h2>@product.ProductName
                 </h2>
                 <p>Soken Masayoshi & Various Artists</p>
