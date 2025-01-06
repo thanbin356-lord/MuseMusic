@@ -29,6 +29,7 @@ namespace MuseMusic.Models.Tables
         public virtual DbSet<CategoriesVinyl> CategoriesVinyls { get; set; } = null!;
         public virtual DbSet<Category> Categories { get; set; } = null!;
         public virtual DbSet<Customer> Customers { get; set; } = null!;
+        public virtual DbSet<ImageUrl> ImageUrls { get; set; } = null!;
         public virtual DbSet<Mood> Moods { get; set; } = null!;
         public virtual DbSet<MoodVinyl> MoodVinyls { get; set; } = null!;
         public virtual DbSet<Order> Orders { get; set; } = null!;
@@ -44,7 +45,7 @@ namespace MuseMusic.Models.Tables
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseMySql("server=localhost;database=shopmanagement;user=root;password=thuthu121;allow user variables=True", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.40-mysql"));
+                optionsBuilder.UseMySql("server=localhost;database=shopmanagement;user=root;password=123456;allow user variables=True", Microsoft.EntityFrameworkCore.ServerVersion.Parse("9.1.0-mysql"));
             }
         }
 
@@ -374,6 +375,33 @@ namespace MuseMusic.Models.Tables
                     .HasConstraintName("customer_ibfk_1");
             });
 
+            modelBuilder.Entity<ImageUrl>(entity =>
+            {
+                entity.ToTable("image_url");
+
+                entity.HasIndex(e => e.ProductId, "product_id");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.CreatedAt)
+                    .HasColumnType("timestamp")
+                    .HasColumnName("created_at")
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                entity.Property(e => e.IsPrimary).HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.ProductId).HasColumnName("product_id");
+
+                entity.Property(e => e.Url)
+                    .HasMaxLength(255)
+                    .HasColumnName("url");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.ImageUrls)
+                    .HasForeignKey(d => d.ProductId)
+                    .HasConstraintName("image_url_ibfk_1");
+            });
+
             modelBuilder.Entity<Mood>(entity =>
             {
                 entity.ToTable("mood");
@@ -533,10 +561,6 @@ namespace MuseMusic.Models.Tables
                 entity.Property(e => e.Description)
                     .HasColumnType("text")
                     .HasColumnName("description");
-
-                entity.Property(e => e.ImageUrl)
-                    .HasMaxLength(255)
-                    .HasColumnName("image_url");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(255)
