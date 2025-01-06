@@ -1,31 +1,31 @@
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.Cookies;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Configure Authentication
 builder.Services.AddAuthentication(options =>
 {
-    options.DefaultAuthenticateScheme = Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme;
-    
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
 })
 .AddCookie()
 .AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
 {
-    options.ClientId = builder.Configuration.GetSection("Google:ClientId").Value;
-    options.ClientSecret = builder.Configuration.GetSection("Google:ClientSecret").Value;
+    options.ClientId = builder.Configuration["Google:ClientId"];
+    options.ClientSecret = builder.Configuration["Google:ClientSecret"];
 });
 
-// Add services to the container.
+// Add services to the container
 builder.Services.AddControllersWithViews();
-
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    app.UseHsts(); // HSTS for production
 }
 
 app.UseHttpsRedirection();
@@ -33,8 +33,11 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+// Authentication and Authorization Middleware
+app.UseAuthentication(); // Ensure this comes before UseAuthorization
 app.UseAuthorization();
 
+// Endpoint Mapping
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(

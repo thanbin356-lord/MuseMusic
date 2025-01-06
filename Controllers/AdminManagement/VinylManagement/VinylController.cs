@@ -4,6 +4,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MuseMusic.Models;
 using MuseMusic.Models.Tables;
+using System.ComponentModel.DataAnnotations;
 namespace MuseMusic.Controllers.AdminManagement.VinylManagement;
 
 [Route("admin")]
@@ -19,154 +20,204 @@ public class VinylController : Controller
 
     // Render the Add Vinyl form
     [HttpGet("addvinyl")]
-    public IActionResult Addvinyl()
-    {
-        return View("~/Views/Admin/Vinylmanagement/Addvinyl.cshtml");
-    }
-
-    // Handle form submission
-    [HttpPost("addvinyl")]
-    public IActionResult Addvinyl(MuseMusic.Models.Tables.Vinyl vinyl) // Ensure correct Vinyl type
-    {
-        if (ModelState.IsValid) // Ensure the submitted data is valid
-        {
-            try
-            {
-                using (var db = new shopmanagementContext())
-                {
-                    // Save the vinyl record to the database
-                    db.Vinyls.Add(vinyl);
-                    db.SaveChanges();
-
-                    TempData["SuccessMessage"] = "Vinyl record added successfully!";
-                    return RedirectToAction("Vinylmanage");
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Error adding vinyl: {ex.Message}");
-                TempData["ErrorMessage"] = "An error occurred while adding the vinyl record.";
-            }
-        }
-
-        // If validation fails or an error occurs, return to the form
-        return View("~/Views/Admin/Vinylmanagement/Addvinyl.cshtml", vinyl);
-    }
-
-    [HttpGet("editvinyl/{id}")]
-    public IActionResult EditVinyl(int id)
+    public IActionResult AddVinyl()
     {
         using (var db = new shopmanagementContext())
         {
-            var vinylDetails = (from v in db.Vinyls
-                                join p in db.Products on v.ProductId equals p.Id
-                                join b in db.Brands on v.BrandId equals b.Id
-                                where p.Id == id
-                                select new
-                                {
-                                    ProductId = p.Id,
-                                    ProductName = p.Name,
-                                    ProductDescription = p.Description,
-                                    Price = (decimal)p.Price,
-                                    DiskId = v.DiskId,
-                                    ProductQuantity = (int)p.Quantity,
-                                    Years = (int)v.Years,
-                                    Tracklist = v.Tracklist,
-                                    BrandId = b.Id,
-                                    BrandName = b.Name,
-                                    ArtistIds = db.ArtistVinyls
-                                        .Where(av => av.VinylId == v.ProductId)
-                                        .Select(av => av.ArtistId)
-                                        .ToList(),
-                                    MoodIds = db.MoodVinyls
-                                        .Where(av => av.VinylId == v.ProductId)
-                                        .Select(av => av.MoodId)
-                                        .ToList(),
-                                    CategoriesIds = db.CategoriesVinyls
-                                        .Where(av => av.VinylId == v.ProductId)
-                                        .Select(av => av.CategoryId)
-                                        .ToList(),
-                                }).FirstOrDefault();
-
-            if (vinylDetails == null)
-            {
-                return NotFound(); // Return 404 if no vinyl is found
-            }
-
-            // Convert List<int?> to List<int>, excluding null values
-            var artistIds = vinylDetails.ArtistIds
-                .Where(id => id.HasValue) // Filter out nulls
-                .Select(id => id.Value)  // Unwrap nullable values
-                .ToList();
-
-            // Map the database Artist to the custom Artist class
-            var allArtists = db.Artists
-                .Select(a => new VinylController.Artist
-                {
-                    Id = a.Id,
-                    Name = a.Name
-                })
-                .ToList();
-
-            // Convert List<int?> to List<int>, excluding null values
-            var moodIds = vinylDetails.MoodIds
-                .Where(id => id.HasValue) // Filter out nulls
-                .Select(id => id.Value)  // Unwrap nullable values
-                .ToList();
-
             var allMoods = db.Moods
-                .Select(a => new VinylController.Mood
+                .Select(m => new Mood
                 {
-                    Id = a.Id,
-                    Name = a.Name
+                    Id = m.Id,
+                    Name = m.Name
                 })
                 .ToList();
 
             var allBrands = db.Brands
-                .Select(b => new VinylController.Brand
+                .Select(b => new Brand
                 {
                     Id = b.Id,
                     Name = b.Name
                 })
                 .ToList();
 
-            // Convert List<int?> to List<int>, excluding null values
-            var CategoriesIds = vinylDetails.CategoriesIds
-                .Where(id => id.HasValue) // Filter out nulls
-                .Select(id => id.Value)  // Unwrap nullable values
+            var allCategories = db.Categories
+                .Select(c => new Categories
+                {
+                    Id = c.Id,
+                    Name = c.Name
+                })
                 .ToList();
 
-            var allCategories = db.Categories
-                .Select(a => new VinylController.Categories
+            var allArtists = db.Artists
+                .Select(a => new Artist
                 {
                     Id = a.Id,
                     Name = a.Name
                 })
                 .ToList();
 
-            // Ensure SelectedArtistIds is not null
+            // Create a new instance of VinylViewModel to pass to the view
+            var viewModel = new VinylViewModel
+            {
+                AllMoods = allMoods,
+                AllBrands = allBrands,
+                AllCategories = allCategories,
+                AllArtists = allArtists,
+                SelectedProduct = new Product(), // Initialize an empty product for the form
+                SelectedMood = new List<int>(),
+                SelectedCategories = new List<int>(),
+                SelectedArtistIds = new List<int>(),
+                SelectedBrandId = 0 // Default to no brand selected
+            };
+
+            return View("~/Views/Admin/VinylManagement/AddVinyl.cshtml", viewModel);
+        }
+    }
+
+    [HttpPost("addvinyl")]
+    public IActionResult AddVinyl(AddVinylModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            using (var db = new shopmanagementContext())
+            {
+                // Create a new Vinyl entry
+                var newVinyl = new MuseMusic.Models.Tables.Vinyl
+                {
+                    Product = new MuseMusic.Models.Tables.Product
+                    {
+                        Id = model.SelectedProduct.ProductId,
+                        Name = model.SelectedProduct.ProductName,
+                        Description = model.SelectedProduct.ProductDescription,
+                        Price = model.SelectedProduct.Price,
+                        Quantity = model.SelectedProduct.ProductQuantity,
+                    },
+                    Tracklist = model.SelectedProduct.Tracklist,
+                    Years = model.SelectedProduct.Years,
+                    DiskId = model.SelectedProduct.DiskId,
+                    BrandId = model.SelectedBrandId
+                };
+    
+                // Add the associated artists
+                foreach (var artistId in model.SelectedArtistIds)
+                {
+                    var artistVinyl = new ArtistVinyl
+                    {
+                        Vinyl = newVinyl,
+                        ArtistId = artistId
+                    };
+                    newVinyl.ArtistVinyls.Add(artistVinyl);
+                }
+
+                // Add the associated categories
+                foreach (var categoryId in model.SelectedCategories)
+                {
+                    var categoriesVinyl = new CategoriesVinyl
+                    {
+                        Vinyl = newVinyl,
+                        CategoryId = categoryId
+                    };
+                    newVinyl.CategoriesVinyls.Add(categoriesVinyl);
+                }
+
+                // Add the associated moods
+                foreach (var moodId in model.SelectedMood)
+                {
+                    var moodVinyl = new MoodVinyl
+                    {
+                        Vinyl = newVinyl,
+                        MoodId = moodId
+                    };
+                    newVinyl.MoodVinyls.Add(moodVinyl);
+                }
+
+                // Add the new Vinyl to the database
+                db.Vinyls.Add(newVinyl);
+                db.SaveChanges(); // Save changes to the database
+            }
+
+            // Redirect to the Vinyl management page after the new vinyl is added
+            return RedirectToAction("Vinylmanage");
+        }
+        else
+        {
+            // If the form is invalid, log the errors and return the view with validation messages
+            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+            {
+                Console.WriteLine(error.ErrorMessage);
+            }
+
+            // Return to the AddVinyl view with validation errors
+            return View("~/Views/Admin/VinylManagement/AddVinyl.cshtml", model);
+        }
+    }
+
+
+
+
+    [HttpGet("editvinyl/{id}")]
+    public IActionResult EditVinyl(int id)
+    {
+        using (var db = new shopmanagementContext())
+        {
+            // Fetch the Vinyl and related data
+            var vinyl = db.Vinyls
+                .Include(v => v.Product)
+                .Include(v => v.ArtistVinyls)
+                    .ThenInclude(av => av.Artist)
+                .Include(v => v.MoodVinyls)
+                    .ThenInclude(mv => mv.Mood)
+                .Include(v => v.CategoriesVinyls)
+                    .ThenInclude(cv => cv.Category)
+                .FirstOrDefault(v => v.ProductId == id);
+
+            if (vinyl == null)
+            {
+                return NotFound(); // Return 404 if no vinyl is found
+            }
+
+            // Map Vinyl data to the view model
             var viewModel = new VinylViewModel
             {
                 SelectedProduct = new Product
                 {
-                    ProductId = vinylDetails.ProductId,
-                    ProductName = vinylDetails.ProductName,
-                    ProductDescription = vinylDetails.ProductDescription,
-                    Price = vinylDetails.Price,
-                    DiskId = vinylDetails.DiskId,
-                    ProductQuantity = vinylDetails.ProductQuantity,
-                    Years = vinylDetails.Years,
-                    Tracklist = vinylDetails.Tracklist,
-                    BrandName = vinylDetails.BrandName
+                    ProductId = vinyl.Product.Id,
+                    ProductName = vinyl.Product.Name,
+                    ProductDescription = vinyl.Product.Description,
+                    Price = vinyl.Product.Price,
+                    ProductQuantity = vinyl.Product.Quantity ?? 0,
+                    DiskId = vinyl.DiskId,
+                    Years = vinyl.Years ?? 0,
+                    Tracklist = vinyl.Tracklist
                 },
-                AllArtists = allArtists,
-                SelectedArtistIds = artistIds ?? new List<int>(),  // Ensure it's not null
-                AllCategories = allCategories,
-                SelectedCategories = CategoriesIds ?? new List<int>(),
-                AllMoods = allMoods,
-                SelectedMood = moodIds ?? new List<int>(),
-                AllBrands = allBrands,
-                SelectedBrandId = vinylDetails.BrandId
+                AllArtists = db.Artists
+                    .Select(a => new Artist { Id = a.Id, Name = a.Name })
+                    .ToList(),
+                SelectedArtistIds = vinyl.ArtistVinyls
+                    .Select(av => av.ArtistId)
+                    .Where(id => id.HasValue)   // Filter out null values
+                    .Select(id => id.Value)    // Cast to non-nullable int
+                    .ToList(),
+                AllMoods = db.Moods
+                    .Select(m => new Mood { Id = m.Id, Name = m.Name })
+                    .ToList(),
+                SelectedMood = vinyl.MoodVinyls
+                    .Select(mv => mv.MoodId)
+                    .Where(id => id.HasValue)   // Filter out null values
+                    .Select(id => id.Value)    // Cast to non-nullable int
+                    .ToList(),
+                AllCategories = db.Categories
+                    .Select(c => new Categories { Id = c.Id, Name = c.Name })
+                    .ToList(),
+                SelectedCategories = vinyl.CategoriesVinyls
+                    .Select(cv => cv.CategoryId)
+                    .Where(id => id.HasValue)   // Filter out null values
+                    .Select(id => id.Value)    // Cast to non-nullable int
+                    .ToList(),
+                AllBrands = db.Brands
+                    .Select(b => new Brand { Id = b.Id, Name = b.Name })
+                    .ToList(),
+                SelectedBrandId = vinyl.BrandId ?? 0
             };
 
             return View("~/Views/Admin/VinylManagement/EditVinyl.cshtml", viewModel);
@@ -174,70 +225,18 @@ public class VinylController : Controller
     }
 
 
-    [HttpGet("vinylmanage")] //Hiện thị bảng data Vinyl
-    public IActionResult Vinylmanage()
-    {
-        using (var db = new shopmanagementContext())
-        {
-            var vinyls = (from v in db.Vinyls
-                          join p in db.Products on v.ProductId equals p.Id
-                          join b in db.Brands on v.BrandId equals b.Id
-                          select new
-                          {
-                              ProductId = p.Id,
-                              ProductName = p.Name,
-                              ProductDescription = p.Description,
-                              Price = (decimal)p.Price,
-                              DiskId = v.DiskId,
-                              ProductQuantity = (int)p.Quantity,
-                              Years = (int)v.Years,
-                              Tracklist = v.Tracklist,
-                              BrandName = b.Name
-                          }).Distinct().OrderBy(p => p.ProductId).ToList();
-
-            var productList = vinyls.Select(vinyl => new Product
-            {
-                ProductId = vinyl.ProductId,
-                ProductName = vinyl.ProductName,
-                ProductDescription = vinyl.ProductDescription,
-                Price = vinyl.Price,
-                DiskId = vinyl.DiskId,
-                ProductQuantity = vinyl.ProductQuantity,
-                Years = vinyl.Years,
-                Tracklist = vinyl.Tracklist,
-                BrandName = vinyl.BrandName,
-                ArtistNames = string.Join(", ", db.ArtistVinyls
-                    .Where(av => av.VinylId == vinyl.ProductId)
-                    .Select(av => av.Artist.Name)
-                    .ToList()),
-                MoodNames = string.Join(", ", db.MoodVinyls
-                    .Where(mv => mv.VinylId == vinyl.ProductId)
-                    .Select(mv => mv.Mood.Name)
-                    .ToList()),
-                CategoriesName = string.Join(", ", db.CategoriesVinyls
-                    .Where(cv => cv.VinylId == vinyl.ProductId)
-                    .Select(cv => cv.Category.Name)
-                    .ToList())
-            }).ToList();
-
-            var vinylViewModel = new VinylViewModel
-            {
-                Products = productList
-            };
-
-            return View("~/Views/Admin/Vinylmanagement/Vinylmanage.cshtml", vinylViewModel);
-        }
-    }
-
-
     [HttpPost("editvinyl/{id}")]
-    public IActionResult EditVinyl(VinylViewModel model, int id)
+    public IActionResult EditVinyl(EditVinylModel model, int id)
     {
         if (ModelState.IsValid)
         {
             using (var db = new shopmanagementContext())
             {
                 var vinyl = db.Vinyls
+                    .Include(v => v.Product)
+                    .Include(v => v.ArtistVinyls)
+                    .Include(v => v.CategoriesVinyls)
+                    .Include(v => v.MoodVinyls)
                     .FirstOrDefault(v => v.ProductId == id);
 
                 if (vinyl == null)
@@ -253,50 +252,92 @@ public class VinylController : Controller
                 vinyl.Tracklist = model.SelectedProduct.Tracklist;
                 vinyl.Product.Quantity = model.SelectedProduct.ProductQuantity;
                 vinyl.Product.Description = model.SelectedProduct.ProductDescription;
+                vinyl.BrandId = model.SelectedBrandId;
 
-                // Update relationships (Artists, Categories, Moods, etc.)
-                // Update ArtistVinyl, MoodVinyl, CategoriesVinyl based on the selected ids
-                UpdateVinylRelations(db, vinyl.ProductId, model);
+                vinyl.ArtistVinyls.Clear();
+                // Add new ArtistVinyls based on the provided artistIds
+                foreach (var artistId in model.SelectedArtistIds)
+                {
+                    var artistVinyl = new ArtistVinyl
+                    {
+                        VinylId = vinyl.Id,
+                        ArtistId = artistId
+                    };
+                    vinyl.ArtistVinyls.Add(artistVinyl);
+                }
+
+                vinyl.CategoriesVinyls.Clear();
+                foreach (var categoryId in model.SelectedCategories)
+                {
+                    var categoriesVinyl = new CategoriesVinyl
+                    {
+                        VinylId = vinyl.Id,
+                        CategoryId = categoryId
+                    };
+                    vinyl.CategoriesVinyls.Add(categoriesVinyl);
+                }
+
+                vinyl.MoodVinyls.Clear();
+                foreach (var moodIds in model.SelectedMood)
+                {
+                    var moodVinyl = new MoodVinyl
+                    {
+                        VinylId = vinyl.Id,
+                        MoodId = moodIds
+                    };
+                    vinyl.MoodVinyls.Add(moodVinyl);
+                }
 
                 db.SaveChanges(); // Save the changes to the database
             }
 
-            return RedirectToAction("Vinylmanage", "Admin");
+            return RedirectToAction("EditVinyl", new { id = id });
+        }
+        else
+        {
+            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+            {
+                Console.WriteLine(error.ErrorMessage);
+            }
+            return View("~/Views/Admin/Vinylmanagement/editvinyl.cshtml"); // Return the model with validation errors if the form is not valid
         }
 
-        return View(model); // Return the model with validation errors if the form is not valid
     }
 
-    private void UpdateVinylRelations(shopmanagementContext db, int? productId, VinylViewModel model)
+    [HttpGet("vinylmanage")] //Hiện thị bảng data Vinyl
+    public IActionResult Vinylmanage()
     {
-        throw new NotImplementedException();
+        using (var db = new shopmanagementContext())
+        {
+            var vinyls = db.Vinyls
+                .Include(v => v.Product)
+                .Include(v => v.Brand)
+                .Include(v => v.ArtistVinyls)
+                    .ThenInclude(av => av.Artist)
+                .Include(v => v.MoodVinyls)
+                    .ThenInclude(mv => mv.Mood)
+                .Include(v => v.CategoriesVinyls)
+                    .ThenInclude(cv => cv.Category)
+                .ToList();
+
+            var listVinylViewModel = vinyls.Select(v => new ListVinylViewModel
+            {
+                ProductId = v.Product.Id,
+                DiskId = v.DiskId,
+                ProductName = v.Product.Name,
+                ProductDescription = v.Product.Description,
+                ProductQuantity = v.Product.Quantity,
+                Price = v.Product.Price,
+                Years = v.Years,
+                BrandName = v.Brand.Name,
+                MoodNames = string.Join(", ", v.MoodVinyls.Select(mv => mv.Mood.Name)),
+                CategoriesName = string.Join(", ", v.CategoriesVinyls.Select(cv => cv.Category.Name)),
+                ArtistNames = string.Join(", ", v.ArtistVinyls.Select(av => av.Artist.Name))
+            }).ToList();
+
+            return View("~/Views/Admin/Vinylmanagement/Vinylmanage.cshtml", listVinylViewModel);
+        }
     }
-
-    private void UpdateVinylRelations(shopmanagementContext db, int vinylId, VinylViewModel model)
-    {
-        // Remove existing relationships
-        db.ArtistVinyls.RemoveRange(db.ArtistVinyls.Where(av => av.VinylId == vinylId));
-        db.MoodVinyls.RemoveRange(db.MoodVinyls.Where(mv => mv.VinylId == vinylId));
-        db.CategoriesVinyls.RemoveRange(db.CategoriesVinyls.Where(cv => cv.VinylId == vinylId));
-
-        // Add new relationships
-        foreach (var artistId in model.SelectedArtistIds)
-        {
-            db.ArtistVinyls.Add(new ArtistVinyl { VinylId = vinylId, ArtistId = artistId });
-        }
-
-        foreach (var moodId in model.SelectedMood)
-        {
-            db.MoodVinyls.Add(new MoodVinyl { VinylId = vinylId, MoodId = moodId });
-        }
-
-        foreach (var categoryId in model.SelectedCategories)
-        {
-            db.CategoriesVinyls.Add(new CategoriesVinyl { VinylId = vinylId, CategoryId = categoryId });
-        }
-    }
-
-
 
 
 
@@ -309,23 +350,83 @@ public class VinylController : Controller
     public partial class VinylViewModel
     {
         public List<Product> Products { get; set; }
-        public List<Artist> Artists { get; set; }
-        public List<Mood> Moods { get; set; }
-        public List<Category> Categories { get; set; }
+
+        [Required]
         public Product SelectedProduct { get; set; }
         public List<Artist> AllArtists { get; set; } // All artists for dropdown
+
+        [Required]
         public List<int> SelectedArtistIds { get; set; } // IDs of associated artists
 
         public List<Mood> AllMoods { get; set; }
+
+        [Required]
         public List<int> SelectedMood { get; set; }
 
         public List<Categories> AllCategories { get; set; } // All artists for dropdown
+
+        [Required]
         public List<int> SelectedCategories { get; set; }
+
+        [Required]
         public int SelectedBrandId { get; set; }
 
         public List<Brand> AllBrands { get; set; }
 
     }
+
+    public partial class AddVinylModel
+    {
+        [Required]
+        public Product SelectedProduct { get; set; }
+
+        [Required]
+        public List<int> SelectedArtistIds { get; set; } // IDs of associated artists
+
+        [Required]
+        public List<int> SelectedMood { get; set; }
+
+        [Required]
+        public List<int> SelectedCategories { get; set; }
+
+        [Required]
+        public int SelectedBrandId { get; set; }
+    }
+
+    public partial class EditVinylModel
+    {
+        [Required]
+        public Product SelectedProduct { get; set; }
+
+        [Required]
+        public List<int> SelectedArtistIds { get; set; } // IDs of associated artists
+
+        [Required]
+        public List<int> SelectedMood { get; set; }
+
+        [Required]
+        public List<int> SelectedCategories { get; set; }
+
+        [Required]
+        public int SelectedBrandId { get; set; }
+    }
+
+    public partial class ListVinylViewModel
+    {
+        public string DiskId;
+        public int? ProductId;
+        public string ProductName;
+        public string ProductDescription;
+        public int? ProductQuantity;
+        public decimal Price;
+        public int? Years;
+        public string MoodNames;
+        public string CategoriesName;
+        public string ArtistNames;
+        public string BrandName;
+    }
+
+
     public class Vinyl
     {
         public int Id { get; set; }
@@ -343,10 +444,12 @@ public class VinylController : Controller
         public List<Mood> Moods { get; set; }
         public List<Category> Categories { get; set; }
         public List<string> Artists { get; set; }  // This will hold artist names for the view
+        public Product Product { get; set; }
+        public int BrandId { get; internal set; }
     }
     public class Product
     {
-        public List<Vinyl> Vinyls { get; set; }
+        // public List<Vinyl> Vinyls { get; set; }
         public int ProductId { get; set; }
         public string DiskId { get; set; }
         public string ProductName { get; set; }
@@ -355,10 +458,6 @@ public class VinylController : Controller
         public decimal Price { get; set; }
         public int Years { get; set; }
         public string Tracklist { get; set; }
-        public string BrandName { get; set; }
-        public string ArtistNames { get; set; }
-        public string MoodNames { get; set; }
-        public string CategoriesName { get; set; }
     }
     public class Artist
     {
