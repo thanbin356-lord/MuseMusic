@@ -117,7 +117,7 @@
                 <a href="/Home/VinylDetails?id=@product.ProductId"><img src="@product.ProductImage" alt="@product.ProductName"></a>
                 <h2>@product.ProductName
                 </h2>
-                <p>Soken Masayoshi & Various Artists</p>
+                <p>@product.ArtistNames</p>
                 <p class="price">@product.Price</p>
                 <div class="buttons">
                     <span class="preorder">PREORDER</span>
@@ -125,5 +125,15 @@
                 </div>
             </div>       
     }
+    <div class="pagination">
+             <button class="page-btn active">1</button>
+         @* <button class="page-btn">2</button>
+    <button class="page-btn">3</button> *@
+                <span>...</span>
+    @* <button class="page-btn">201</button>
+    <button class="page-btn">202</button>
+    <button class="page-btn">203</button> *@
+             <button class="page-btn next">&gt;</button>
+             </div>
     </div>
 </main>
