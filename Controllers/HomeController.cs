@@ -57,6 +57,11 @@ public class HomeController : Controller
     {
         return View();
     }
+
+        public IActionResult Artist()
+    {
+        return View();
+    }
     public IActionResult Wish()
     {
         return View();
