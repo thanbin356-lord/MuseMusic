@@ -33,7 +33,7 @@ namespace MuseMusic.Models.ManagerModels
         public int SelectedBrandId { get; set; }
     }
 
-    public partial class EditVinylModel
+    public partial class EditRecordPlayerModel
     {
         [Required]
         public Product SelectedProduct { get; set; }
@@ -57,11 +57,12 @@ namespace MuseMusic.Models.ManagerModels
     public class Product
     {
         public int ProductId { get; set; }
-        public string DiskId { get; set; }
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
         public int ProductQuantity { get; set; }
         public decimal Price { get; set; }
+        public string Motor {get;set;}
+        public string Speed {get;set;}
     }
     public class Brand
     {

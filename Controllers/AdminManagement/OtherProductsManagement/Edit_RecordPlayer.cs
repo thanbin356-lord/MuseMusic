@@ -25,24 +25,27 @@ public class Edit_RecordPlayer : Controller
     {
         return View();
     }
+
+
     [HttpGet("editrecordplayer/{id}")]
     public IActionResult EditRecordPlayer(int id)
     {
         using (var db = new shopmanagementContext())
         {
-            // Fetch the Vinyl and related data
+
             var recordplayer = db.Recordplayers
                 .Include(v => v.Product)
+
                 .FirstOrDefault(v => v.ProductId == id);
 
             if (recordplayer == null)
             {
-                return NotFound(); // Return 404 if no vinyl is found
+                return NotFound(); // Return 404 if no recordplayer is found
             }
             var images = db.ImageUrls
                         .Where(img => img.ProductId == recordplayer.Product.Id)
                         .ToList();
-            // Map Vinyl data to the view model
+
             var viewModel = new RecordPlayerViewModel
             {
                 SelectedProduct = new Models.ManagerModels.Product
@@ -51,7 +54,8 @@ public class Edit_RecordPlayer : Controller
                     ProductName = recordplayer.Product.Name,
                     ProductDescription = recordplayer.Product.Description,
                     Price = recordplayer.Product.Price,
-
+                    Motor = recordplayer.Motor,
+                    Speed = recordplayer.Speed,
                     ProductQuantity = recordplayer.Product.Quantity ?? 0,
                 },
                 AllBrands = db.Brands
@@ -66,6 +70,47 @@ public class Edit_RecordPlayer : Controller
             return View("~/Views/Admin/RecordPlayerManagement/EditRecordPlayer.cshtml", viewModel);
         }
     }
+
+    [HttpPost("editrecordplayer/{id}")]
+    public IActionResult EditRecordPlayer(EditRecordPlayerModel model, int id)
+    {
+        if (ModelState.IsValid)
+        {
+            using (var db = new shopmanagementContext())
+            {
+                var recordplayer = db.Recordplayers
+                    .Include(v => v.Product)
+                    .FirstOrDefault(v => v.ProductId == id);
+
+                if (recordplayer == null)
+                {
+                    return NotFound(); // Return 404 if recordplayer not found
+                }
+
+                recordplayer.Product.Name = model.SelectedProduct.ProductName;
+                recordplayer.Product.Price = model.SelectedProduct.Price;
+                recordplayer.Product.Quantity = model.SelectedProduct.ProductQuantity;
+                recordplayer.Product.Description = model.SelectedProduct.ProductDescription;
+                recordplayer.BrandId = model.SelectedBrandId;
+                recordplayer.Motor = model.SelectedProduct.Motor;
+                recordplayer.Speed = model.SelectedProduct.Speed;
+
+                db.SaveChanges(); // Save the changes to the database
+            }
+
+            return RedirectToAction("EditRecordPlayer", new { id = id });
+        }
+        else
+        {
+            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+            {
+                Console.WriteLine(error.ErrorMessage);
+            }
+            return View("~/Views/Admin/RecordPlayerManagement/editrecordplayer.cshtml",model); // Return the model with validation errors if the form is not valid
+        }
+
+    }
+
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
