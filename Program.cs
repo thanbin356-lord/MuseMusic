@@ -40,7 +40,7 @@ app.UseAuthorization();
 // Endpoint Mapping
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapControllerRoute(
+    _ = endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
 });

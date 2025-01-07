@@ -1,7 +1,7 @@
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-@model MuseMusic.Controllers.AdminController.AccessoriesViewModel
+
 <!-- Page Heading -->
 <h1 class="h3 mb-2 text-gray-800">Quan ly Dau Dia</h1>
 <!-- End Page Heading -->
@@ -33,7 +33,7 @@
                 <tfoot>                 
                 </tfoot>
                 <tbody>
-                    @foreach (var item in Model.Products)
+                    @* @foreach (var item in Model.Products)
                     {
                         <tr>
                             <td>@item.ProductName</td>
@@ -55,7 +55,7 @@
                                 </a>
                             </td>
                         </tr>
-                    }
+                    } *@
                 </tbody>
             </table>
         </div>

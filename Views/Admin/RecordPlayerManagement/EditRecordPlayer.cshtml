@@ -1,7 +1,7 @@
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-@model MuseMusic.Controllers.AdminManagement.VinylManagement.VinylController.VinylViewModel
+@model MuseMusic.Models.ManagerModels.RecordPlayerViewModel
 
 <main class="disk-management">
     <h1>CHỈNH SỬA ĐĨA THAN</h1>
@@ -10,7 +10,7 @@
             @Html.AntiForgeryToken()
             <input type="hidden" asp-for="SelectedProduct.ProductId" value="@Model.SelectedProduct.ProductId" />
             <!-- Product Image (Optional) -->
-            <div class="product-image">
+            @* <div class="product-image">
                 <div class="image-placeholder" style="margin-top: 20px;">
                     <h4>Danh sách ảnh sản phẩm</h4>
                     <div class="gallery" style="display: flex; flex-wrap: wrap;">
@@ -23,47 +23,13 @@
                         }
                     </div>
                 </div>
-            </div>
+            </div> *@
             <div class="product-info">
                 <!-- Form fields for Product Name, Artist, Category, etc. -->
                 <div class="form-group">
                     <label for="name">Tên*</label>
                     <input type="text" id="name" asp-for="SelectedProduct.ProductName" placeholder="Nhập tên sản phẩm"
                         value="@Model.SelectedProduct.ProductName" required />
-                </div>
-                <div class="form-group">
-                    <label for="artist">Nghệ sĩ*</label>
-                    <select id="artist" asp-for="SelectedArtistIds" class="js-example-basic-multiple-limit"
-                        multiple="multiple" style="width: 300px;">
-                        @if (Model?.AllArtists != null)
-                        {
-                            @foreach (var artist in Model.AllArtists)
-                            {
-                                <!option value="@artist.Id" @(Model.SelectedArtistIds.Contains(artist.Id) ? "selected" : "")>
-                                    @artist.Name</!option>
-                            }
-                        }
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="category">Thể loại*</label>
-                    <select id="category" asp-for="SelectedCategories" class="js-example-basic-multiple-limit"
-                        multiple="multiple" style="width: 300px;">
-                        @if (Model?.AllCategories != null)
-                        {
-                            @foreach (var categories in Model.AllCategories)
-                            {
-                                if (Model.SelectedCategories.Contains(categories.Id))
-                                {
-                                    <option value="@categories.Id" selected="selected">@categories.Name</option>
-                                }
-                                else
-                                {
-                                    <option value="@categories.Id">@categories.Name</option>
-                                }
-                            }
-                        }
-                    </select>
                 </div>
                 <div class="form-group">
                     <label for="brand">Hãng phát hành*</label>
@@ -86,39 +52,19 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="release-year">Năm phát hành*</label>
-                    <input type="text" id="release-year" asp-for="SelectedProduct.Years"
-                        placeholder="Nhập năm phát hành" value="@Model.SelectedProduct.Years" required />
-                </div>
-                <div class="form-group">
-                    <label for="mood">Tâm trạng*</label>
-                    <select id="mood" asp-for="SelectedMood" class="js-example-basic-multiple-limit" multiple="multiple"
-                        style="width: 300px;">
-                        @if (Model?.AllMoods != null)
-                        {
-                            @foreach (var mood in Model.AllMoods)
-                            {
-                                if (Model.SelectedMood.Contains(mood.Id))
-                                {
-                                    <option value="@mood.Id" selected="selected">@mood.Name</option>
-                                }
-                                else
-                                {
-                                    <option value="@mood.Id">@mood.Name</option>
-                                }
-                            }
-                        }
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="code">Mã đĩa*</label>
-                    <input type="text" id="code" asp-for="SelectedProduct.DiskId" placeholder="Nhập mã đĩa"
-                        value="@Model.SelectedProduct.DiskId" required />
-                </div>
-                <div class="form-group">
                     <label for="price">Giá tiền*</label>
                     <input type="text" id="price" asp-for="SelectedProduct.Price" placeholder="Nhập giá tiền"
                         value="@Model.SelectedProduct.Price" required />
+                </div>
+                <div class="form-group">
+                    <label for="stock">Số lượng sản phẩm*</label>
+                    <input type="text" id="stock" asp-for="SelectedProduct.ProductQuantity"
+                        placeholder="Nhập số lượng sản phẩm" value="@Model.SelectedProduct.ProductQuantity" required />
+                </div>
+                <div class="form-group">
+                    <label for="stock">Số lượng sản phẩm*</label>
+                    <input type="text" id="stock" asp-for="SelectedProduct.ProductQuantity"
+                        placeholder="Nhập số lượng sản phẩm" value="@Model.SelectedProduct.ProductQuantity" required />
                 </div>
                 <div class="form-group">
                     <label for="stock">Số lượng sản phẩm*</label>
@@ -131,11 +77,6 @@
                     <label for="notes">Ghi chú sản phẩm</label>
                     <textarea id="notes" asp-for="SelectedProduct.ProductDescription"
                         placeholder="Nhập ghi chú">@Model.SelectedProduct.ProductDescription</textarea>
-                </div>
-                <div class="form-group">
-                    <label for="track-list">Track List</label>
-                    <textarea id="track-list" asp-for="SelectedProduct.Tracklist"
-                        placeholder="Nhập danh sách bài hát">@Model.SelectedProduct.Tracklist</textarea>
                 </div>
             </div>
             <button type="button" class="cancel-btn" onclick="window.location.href='/admin/vinylmanage'">HỦY</button>

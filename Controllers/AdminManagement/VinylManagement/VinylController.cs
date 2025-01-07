@@ -97,7 +97,7 @@ public class VinylController : Controller
                     DiskId = model.SelectedProduct.DiskId,
                     BrandId = model.SelectedBrandId
                 };
-    
+
                 // Add the associated artists
                 foreach (var artistId in model.SelectedArtistIds)
                 {
@@ -175,7 +175,9 @@ public class VinylController : Controller
             {
                 return NotFound(); // Return 404 if no vinyl is found
             }
-
+            var images = db.ImageUrls
+                        .Where(img => img.ProductId == vinyl.Product.Id)
+                        .ToList();
             // Map Vinyl data to the view model
             var viewModel = new VinylViewModel
             {
@@ -217,7 +219,10 @@ public class VinylController : Controller
                 AllBrands = db.Brands
                     .Select(b => new Brand { Id = b.Id, Name = b.Name })
                     .ToList(),
-                SelectedBrandId = vinyl.BrandId ?? 0
+                SelectedBrandId = vinyl.BrandId ?? 0,
+
+                AllImages = images.Select(img => new ImageUrl { Id = img.Id, Url = img.Url }).ToList(),
+                SelectedImageId = images.Any() ? images.First().Id : 0 // Use the primary image if available
             };
 
             return View("~/Views/Admin/VinylManagement/EditVinyl.cshtml", viewModel);
@@ -372,6 +377,9 @@ public class VinylController : Controller
         public int SelectedBrandId { get; set; }
 
         public List<Brand> AllBrands { get; set; }
+
+        public List<ImageUrl> AllImages { get; set; }
+        public int SelectedImageId { get; set; }
 
     }
 

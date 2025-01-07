@@ -46,7 +46,6 @@ namespace MuseMusic.Models.Tables
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseMySql("server=localhost;database=shopmanagement;user=root;password=thuthu121;allow user variables=True", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.40-mysql"));
-
             }
         }
 
@@ -592,7 +591,15 @@ namespace MuseMusic.Models.Tables
 
                 entity.Property(e => e.BrandId).HasColumnName("brand_id");
 
+                entity.Property(e => e.Motor)
+                    .HasMaxLength(45)
+                    .HasColumnName("motor");
+
                 entity.Property(e => e.ProductId).HasColumnName("product_id");
+
+                entity.Property(e => e.Speed)
+                    .HasMaxLength(45)
+                    .HasColumnName("speed");
 
                 entity.HasOne(d => d.Brand)
                     .WithMany(p => p.Recordplayers)
