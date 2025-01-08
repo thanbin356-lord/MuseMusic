@@ -14,16 +14,201 @@
 
 
     <div class="artists-container">
-        <div class="artist"></div>
-    </div>
-
-    <div class="artists-name-container">
         
         <div class="artists-name-li">
+            
+            <a> <img src="/image/the beatles.png" alt=""> </a>
+            <p>the beatles</p>
+
+        </div>
+        
+        <div class="artists-name-li">
+            
+            <a> <img src="/image/adele.png" alt=""> </a>
+            <p>ADELE</p>
 
         </div>
 
+        <div class="artists-name-li">
+            
+            <a> <img src="/image/taylor swift.png" alt=""> </a>
+            <p>taylor swift</p>
 
+        </div>
+
+        <div class="artists-name-li">
+            
+            <a> <img src="/image/bruno mars.png" alt=""> </a>
+            <p>bruno mars</p>
+
+        </div>
+
+        <div class="artists-name-li">
+            
+            <a> <img src="/image/blackpink.png" alt=""> </a>
+            <p>blackpink</p>
+
+        </div>
+
+        <div class="artists-name-li">
+            
+            <a href="/home/artist_yoasobi">  <img src="/image/yoasobi.png" alt=""> </a>
+            <p>yoasobi</p>
+
+        </div>
+
+        <div class="artists-name-li">
+            
+            <a> <img src="/image/kenshi yonezu.png" alt=""> </a>
+            <p>kenshi yonezu</p>
+
+        </div>
+
+        <div class="artists-name-li">
+            
+            <a href=""> <img src="/image/G-dragon.png" alt=""> </a>
+            <p>quyền chí long</p>
+    </div>
+    
+      </div>
+
+    @* danh sách tên tất cả nghệ sĩ *@
+
+    <div class="artists-name-container" id="listContainer">
+
+        <div class="column">
+      <h2>A</h2>
+      <div class="line"></div>
+      <ul>
+        <li><a href="#">The Alpha</a></li>
+        <li><a href="#">ABBA</a></li>
+        <li><a href="#">Adele</a></li>
+        <li><a href="#">Air Supply</a></li>
+        <li><a href="#">Akiko Yano</a></li>
+        <li><a href="#">Al Di Meola</a></li>
+        <li><a href="#">Andy Williams</a></li>
+        <li><a href="#">Anri</a></li>
+        <li><a href="#">Antonio Carlos Jobim</a></li>
+        <li><a href="#">Arctic Monkeys</a></li>
+        <li><a href="#">Ariana Grande</a></li>
+        <li><a href="#">Art Blakey</a></li>
+        <li><a href="#">Art Farmer</a></li>
+      </ul>
+        </div>
+      @*  *@
+
+     
+    <div class="column">
+      <h2>B</h2>
+      <div class="line"></div>
+      <ul>
+        <li><a href="#">Bachman-Turner Overdrive</a></li>
+        <li><a href="#">Barbara Streisand</a></li>
+        <li><a href="#">Barry Manilow</a></li>
+        <li><a href="#">Bee Gees</a></li>
+        <li><a href="#">Billie Eilish</a></li>
+        <li><a href="#">Billie Holiday</a></li>
+        <li><a href="#">Billy Joel</a></li>
+        <li><a href="#">Bob Marley</a></li>
+        <li><a href="#">Bob Mintzer Bread</a></li>
+        <li><a href="#">Bread and Butter</a></li>
+        <li><a href="#">Bruce Springsteen</a></li>
+        <li><a href="#">Bruno Major The</a></li>
+        <li><a href="#">Beach Boys The</a></li>
+        <li><a href="#">Beatles</a></li>
+      </ul>
+    </div>
+      @*  *@
+
+       <div class="column">
+      <h2>C</h2>
+      <div class="line"></div>
+      <ul>
+        <li><a href="#">Carmen McRae</a></li>
+        <li><a href="#">Carole King</a></li>
+        <li><a href="#">Casiopea Charlie</a></li>
+        <li><a href="#">Parker Cheap Trick</a></li>
+        <li><a href="#">Cher Cheryl Ladd</a></li>
+        <li><a href="#">Chic Chicago</a></li>
+        <li><a href="#">Childish Gambino</a></li>
+        <li><a href="#">Chuck Berry</a></li>
+        <li><a href="#">Cigarettes after Sex</a></li>
+        <li><a href="#">Clairo Count Basie</a></li>
+        <li><a href="#">Creedence Clearwater Revival</a></li>
+        <li><a href="#">The Carpenters</a></li>
+        <li><a href="#">The Crusaders</a></li>
+      </ul>
+        </div>
+@*  *@
+    <div class="column">
+      <h2>D</h2>
+      <div class="line"></div>
+      <ul>
+        <li><a href="#">Phạm Thế Anh</a></li>
+        <li><a href="#">Carole King</a></li>
+        <li><a href="#">B</a></li>
+        <li><a href="#">F</a></li>
+        <li><a href="#">A</a></li>
+        <li><a href="#">Parker Cheap Trick</a></li>
+       
+      </ul>
+        </div>
 
     </div>
+
+<script>
+    // Lấy tất cả danh sách <ul> bên trong thẻ <div> có id "listContainer"
+    const listContainer = document.getElementById("listContainer");
+    const lists = listContainer.getElementsByTagName("ul");
+
+    // Duyệt qua từng danh sách <ul> và sắp xếp các mục <li> trong đó
+    Array.from(lists).forEach(ul => {
+      // Lấy tất cả các mục <li> trong danh sách
+      const items = Array.from(ul.getElementsByTagName("li"));
+
+      // Sắp xếp các mục theo thứ tự bảng chữ cái
+      items.sort((a, b) => a.textContent.localeCompare(b.textContent));
+
+      // Xóa danh sách hiện tại và thêm lại các mục đã sắp xếp
+      ul.innerHTML = ""; // Xóa danh sách ban đầu
+      items.forEach(item => ul.appendChild(item)); // Thêm các mục đã sắp xếp
+    });
+  </script>
+
+ <div class="AboutUs-content2">
+
+<div class="AboutUs-content-container2">
+        <img src="/image/about-us-1.png" alt="">
+        <div class="aboutus-content2">
+            <p>BẠN THÍCH BẮT KỊP XU HƯỚNG</p>
+        <a href="">khám phá đĩa mới</a>
+        </div>
+    </div>
+
+    <div class="AboutUs-content-container2">
+        <img src="/image/about-us-2.png" alt="">
+        <div class="aboutus-content2">
+            <p>BẠN LÀ NGƯỜI CHƠI HỆ FAN RUỘT</p>
+        <a href="">tìm đĩa theo nghệ sĩ</a>
+        </div>
+    </div>
+
+    <div class="AboutUs-content-container2">
+        <img src="/image/about-us-3.png" alt="">
+        <div class="aboutus-content2">
+            <p> ĐAM MÊ DU HÀNH THỜI GIAN</p>
+        <a href="">tìm đĩa theo thời kì</a>
+        </div>
+    </div>
+
+    <div class="AboutUs-content-container2">
+        <img src="/image/about-us-4.png" alt="">
+        <div class="aboutus-content2">
+            <p>BẠN CÓ ỔN KHÔNG?</p>
+        <a href="">tìm đĩa theo tâm trạng</a>
+        </div>
+    </div>
+</div>
+</div>
+
 </main>

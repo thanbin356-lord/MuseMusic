@@ -2,10 +2,132 @@
 margin-top: 60px;
 }
 
+.Artist-page-container h2{
+    display: flex;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 50px auto;
+    }
+
 .Artist-page-topbanner{
     background-image: url('/image/artist-img-top.png');
-background-color: blueviolet;
-width: 100%;
-height: 492px;
+    width: 100%;
+    height: 492px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+   
+     
+}
+
+.top-title{
+    display: flex;
+      
+      align-items: center;
+      flex-direction: column;
+    margin: 30px auto;
+    margin-top: 100px;
+}
+
+.top-title h2{
+    font-size: 32px;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.top-title p{
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin:  0;
 
 }
+
+.artists-container {
+    width: 1150px;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 50px;
+  }
+
+  .artists-name-li{
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ margin: 20px 0;
+  }
+
+  .artists-name-li p{
+    font-size: 16px;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin:  0;
+  }
+
+  .artists-name-li img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .artists-name-li img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  /* danh sách tất cả nghệ sĩ */
+
+  .artists-name-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 6 cột */
+    gap: 20px; /* Khoảng cách giữa các cột */
+    width: 100%;
+    max-width: 1150px;
+    margin: 0 auto;
+  }
+  
+  
+  .column h2 {
+    font-size: 40px;
+    font-weight: 900;
+    margin-bottom: 10px;
+    margin-left: 0;
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .column ul {
+    list-style: none;
+    padding: 0%;
+  }
+  
+  .column ul li {
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+  
+  .column ul li a {
+    text-decoration: none; /* Bỏ gạch chân */
+    color: #000; /* Màu chữ */
+    transition: color 0.3s ease; /* Hiệu ứng hover */
+  }
+  
+  .column ul li a:hover {
+    color: #007BFF; /* Màu chữ khi hover */
+    text-decoration: underline;
+  }
+
+  .column .line{
+    background-color: #000;
+    height: 1px;
+    width: 150px;
+    margin: 0%;
+    margin-bottom: 20px;
+  }

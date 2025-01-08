@@ -4,6 +4,74 @@
 @model MuseMusic.Controllers.AdminManagement.VinylManagement.VinylController.VinylViewModel
 
 <main class="disk-management">
+
+@* upload ảnh *@
+
+<div class="upload-container">
+        <h1>Upload Your Image</h1>
+        <form id="uploadForm">
+            <label for="fileInput" class="custom-file-input">
+                Choose an Image
+                <input type="file" id="fileInput" accept="image/*" multiple hidden>
+            </label>
+            <button type="submit" class="upload-btn">Upload</button>
+        </form>
+        <div class="preview-container" id="previewContainer">
+            <h2>Preview:</h2>
+            <img id="imagePreview" src="#" alt="Your Image" style="display: none;">
+        </div>
+    </div>
+
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const previewContainer = document.getElementById('previewContainer');
+
+        fileInput.addEventListener('change', function (event) {
+            const files = Array.from(event.target.files);
+
+            files.forEach((file, index) => {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    // Tạo một thẻ div bọc ảnh và nút xóa
+                    const wrapper = document.createElement('div');
+                    wrapper.classList.add('image-wrapper');
+
+                    // Tạo thẻ img
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = `Image ${index + 1}`;
+
+                    // Tạo nút xóa
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.classList.add('delete-btn');
+
+                    // Thêm icon từ Font Awesome
+                    const deleteIcon = document.createElement('i');
+                    deleteIcon.classList.add('fa-solid', 'fa-x');
+                    deleteBtn.appendChild(deleteIcon);
+
+                    // Gắn sự kiện xóa cho nút
+                    deleteBtn.addEventListener('click', function () {
+                        wrapper.remove(); // Xóa ảnh hiện tại
+                    });
+
+                    // Thêm img và nút xóa vào div bọc
+                    wrapper.appendChild(img);
+                    wrapper.appendChild(deleteBtn);
+
+                    // Thêm div bọc vào container
+                    previewContainer.appendChild(wrapper);
+                };
+
+                reader.readAsDataURL(file); // Đọc file và tạo URL
+            });
+        });
+    </script>
+
+@* upload ảnh *@
+
     <h1>CHỈNH SỬA ĐĨA THAN</h1>
     <div class="form-container">
         <form method="post" enctype="multipart/form-data" asp-action="EditVinyl">

@@ -58,10 +58,18 @@ public class HomeController : Controller
         return View();
     }
 
+// Artists
         public IActionResult Artist()
     {
         return View();
     }
+
+        public IActionResult Artist_Yoasobi()
+    {
+        return View();
+    }
+
+// Artist    
     public IActionResult Wish()
     {
         return View();

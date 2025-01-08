@@ -1,5 +1,5 @@
 /* need to fix */
-/* @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 .orderdetail-container {
     width: 80%;
     max-width: 1100px;
@@ -24,15 +24,15 @@
     font-weight: bold;
 }
 
-.customer-info, .order-summary, .order-details {
+.orderdetail-container .customer-info, .order-summary, .order-details {
     margin-bottom: 20px;
 }
 
-.customer-info p, .order-summary p {
+.orderdetail-container .customer-info p, .order-summary p {
     margin: 5px 0;
 }
 
-.product {
+.orderdetail-container .product {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -41,7 +41,7 @@
     padding-bottom: 10px;
 }
 
-.product img {
+.orderdetail-container .product img {
     width: 80px;
     height: 80px;
     object-fit: cover;
@@ -49,52 +49,52 @@
     margin-right: 15px;
 }
 
-.product-info {
+.orderdetail-container .product-info {
     flex: 1;
 }
 
-.product-info h4 {
+.orderdetail-container .product-info h4 {
     margin: 0 0 5px;
     font-size: 16px;
 }
 
-.product-info p {
+.orderdetail-container .product-info p {
     margin: 0;
     font-size: 14px;
     color: #555;
 }
 
-.product-price {
+.orderdetail-container .product-price {
     text-align: right;
     min-width: 100px;
 }
-.order-summary {
+.orderdetail-container .order-summary {
     width: 100%;
     margin: 20px 0;
     border-collapse: collapse;
 }
 
-.order-summary th, .order-summary td {
+.orderdetail-container .order-summary th, .order-summary td {
     padding: 10px;
     text-align: center;
 }
 
-.order-summary th {
+.orderdetail-container .order-summary th {
     background-color: #ffffff;
     font-weight: bold;
 }
 
-.product-img img {
+.orderdetail-container .product-img img {
     width: 60px;
     height: 60px;
     object-fit: cover;
 }
 
-.product-title {
+.orderdetail-container .product-title {
     font-weight: bold;
 }
 
-.product-subtitle {
+.orderdetail-container .product-subtitle {
     font-size: 0.9em;
     color: #555;
 }
@@ -105,17 +105,17 @@
     object-fit: cover;
 }
 
-.product-title {
+.orderdetail-container .product-title {
     font-weight: bold;
 }
 
-.product-subtitle {
+.orderdetail-container .product-subtitle {
     font-size: 0.9em;
     color: #555;
 }
 
 
-.total-container {
+.orderdetail-container .total-container {
     display: flex;
     justify-content: space-between; /* Đặt các phần tử cách đều nhau */
     align-items: center; /* Căn giữa theo chiều dọc */
@@ -125,20 +125,20 @@
     margin-top: 10px;
 }
 
-.total {
+.orderdetail-container .total {
     margin: 0; /* Loại bỏ khoảng cách mặc định */
 }
 
-.total-bold {
+.orderdetail-container .total-bold {
     font-weight: bold; /* Làm đậm chữ */
 }
 
-.buttons {
+.orderdetail-container .buttons {
     display: flex;
     justify-content: flex-end;
 }
 
-.buttons button {
+.orderdetail-container .buttons button {
     background-color: #f44336;
     color: white;
     border: none;
@@ -149,15 +149,15 @@
     font-size: 14px;
 }
 
-.buttons button.print {
+.orderdetail-container .buttons button.print {
     background-color: #2196f3;
 }
 
-.buttons button:hover {
+.orderdetail-container .buttons button:hover {
     opacity: 0.9;
 }
 
-.back-button {
+.orderdetail-container .back-button {
     bottom: 20px; /* Cách đáy màn hình 20px */
     left: 20px; /* Cách trái màn hình 20px */
     padding: 10px 20px;
@@ -169,10 +169,10 @@
     cursor: pointer;
 }
 
-.back-button:hover {
+.orderdetail-container .back-button:hover {
     opacity: 0.9; /* Thay đổi màu nền khi hover */
 }
 
-.order-details  {
+.orderdetail-container .order-details  {
     margin-bottom: 30px;
-} */
+} 
