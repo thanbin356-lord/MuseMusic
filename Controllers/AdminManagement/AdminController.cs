@@ -49,7 +49,7 @@ public class AdminController : Controller
     [HttpGet("orderdetail")]
     public IActionResult OrderDetail()
     {
-        return View();
+        return View("~/Views/Admin/Order/OrderDetail.cshtml");
     }
     
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -57,8 +57,7 @@ public class HomeController : Controller
     {
         return View();
     }
-<<<<<<< HEAD
-=======
+
 
 // Artists
         public IActionResult Artist()
@@ -71,8 +70,7 @@ public class HomeController : Controller
         return View();
     }
 
-// Artist    
->>>>>>> main
+
     public IActionResult Wish()
     {
         return View();

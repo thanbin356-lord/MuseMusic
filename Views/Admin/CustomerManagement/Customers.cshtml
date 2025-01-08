@@ -1,0 +1,56 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@model MuseMusic.Models.ManagerModels.CustomerViewModel
+<main class="content2">
+    <h1>QUẢN LÝ ĐẦU ĐĨA</h1>
+    <div class="search-bar2">
+        <input type="text" placeholder="Tìm kiếm..." style="margin: 10px;width: 250px; height: 38px;border: 1px solid #000; padding: 10px; margin-left: -2px;">
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr class="table-dark">
+                <th>ID</th>
+                <th>Tên khách hàng</th>
+                <th>Email</th>
+                <th>Số điện thoại</th>
+                <th>Số lượng đơn</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                @foreach (var item in Model.Customers)
+                {
+                    <tr>
+                        <td>@item.CustomerId</td>
+                        <td>@item.CustomerName</td>
+                        <td>@item.Email</td>
+                        <td>@item.Phone</td>
+                        <td>@item.OrderCount</td>
+                        <td>
+                            <input type="checkbox">
+                            <button class="butt"
+                                onclick="window.location.href='/admin/editaccessories/@item.CustomerId'">Edit</button>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <div class="pagination">
+        <button class="page-btn active">1</button>
+        @* <button class="page-btn">2</button>
+    <button class="page-btn">3</button> *@
+        <span>...</span>
+        @* <button class="page-btn">201</button>
+    <button class="page-btn">202</button>
+    <button class="page-btn">203</button> *@
+        <button class="page-btn next">&gt;</button>
+    </div>
+    <div class="pagination2">
+        <span>HIỂN THỊ:</span>
+        <span class="page-item">01-12</span>
+    </div>
+</main>
