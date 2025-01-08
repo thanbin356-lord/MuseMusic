@@ -82,6 +82,7 @@
 .orderdetail-container .order-summary th {
     background-color: #ffffff;
     font-weight: bold;
+    color: #000000;
 }
 
 .orderdetail-container .product-img img {
