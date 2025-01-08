@@ -57,6 +57,22 @@ public class HomeController : Controller
     {
         return View();
     }
+<<<<<<< HEAD
+=======
+
+// Artists
+        public IActionResult Artist()
+    {
+        return View();
+    }
+
+        public IActionResult Artist_Yoasobi()
+    {
+        return View();
+    }
+
+// Artist    
+>>>>>>> main
     public IActionResult Wish()
     {
         return View();
