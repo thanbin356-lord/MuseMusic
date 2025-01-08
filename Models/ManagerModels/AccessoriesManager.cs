@@ -7,12 +7,12 @@ using MuseMusic.Models.Tables;
 
 namespace MuseMusic.Models.ManagerModels
 {
-     public partial class RecordPlayerViewModel
+    public partial class AccessoriesViewModel
     {
-        public List<ProductRecordPlayer> ProductRecordPlayers { get; set; }
+        public List<ProductAccessories> ProductsAccessories { get; set; }
 
         [Required]
-        public ProductRecordPlayer SelectedRecordPlayer { get; set; }
+        public ProductAccessories SelectedAccessories { get; set; }
 
         [Required]
         public int SelectedBrandId { get; set; }
@@ -24,25 +24,25 @@ namespace MuseMusic.Models.ManagerModels
 
     }
 
-    public partial class AddRecordPlayerModel
+    public partial class AddAccessoriesModel
     {
         [Required]
-        public Product SelectedProduct { get; set; }
+        public ProductAccessories SelectedAccessories { get; set; }
 
         [Required]
         public int SelectedBrandId { get; set; }
     }
 
-    public partial class EditRecordPlayerModel
+    public partial class EditAccessoriesModel
     {
         [Required]
-        public ProductRecordPlayer SelectedRecordPlayer { get; set; }
+        public ProductAccessories SelectedAccessories { get; set; }
 
         [Required]
         public int SelectedBrandId { get; set; }
     }
 
-    public partial class ListRecordPlayerView
+    public partial class ListAcessoriesView
     {
         public string Id;
         public int? ProductId;
@@ -54,19 +54,12 @@ namespace MuseMusic.Models.ManagerModels
         public string BrandName;
     }
 
-    public class ProductRecordPlayer
+    public class ProductAccessories
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
         public int ProductQuantity { get; set; }
         public decimal Price { get; set; }
-        public string Motor {get;set;}
-        public string Speed {get;set;}
-    }
-    public class Brand
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
     }
 }

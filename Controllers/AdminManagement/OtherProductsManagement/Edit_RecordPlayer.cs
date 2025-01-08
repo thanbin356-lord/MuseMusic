@@ -48,7 +48,7 @@ public class Edit_RecordPlayer : Controller
 
             var viewModel = new RecordPlayerViewModel
             {
-                SelectedProduct = new Models.ManagerModels.Product
+                SelectedRecordPlayer = new Models.ManagerModels.ProductRecordPlayer
                 {
                     ProductId = recordplayer.Product.Id,
                     ProductName = recordplayer.Product.Name,
@@ -87,13 +87,13 @@ public class Edit_RecordPlayer : Controller
                     return NotFound(); // Return 404 if recordplayer not found
                 }
 
-                recordplayer.Product.Name = model.SelectedProduct.ProductName;
-                recordplayer.Product.Price = model.SelectedProduct.Price;
-                recordplayer.Product.Quantity = model.SelectedProduct.ProductQuantity;
-                recordplayer.Product.Description = model.SelectedProduct.ProductDescription;
+                recordplayer.Product.Name = model.SelectedRecordPlayer.ProductName;
+                recordplayer.Product.Price = model.SelectedRecordPlayer.Price;
+                recordplayer.Product.Quantity = model.SelectedRecordPlayer.ProductQuantity;
+                recordplayer.Product.Description = model.SelectedRecordPlayer.ProductDescription;
                 recordplayer.BrandId = model.SelectedBrandId;
-                recordplayer.Motor = model.SelectedProduct.Motor;
-                recordplayer.Speed = model.SelectedProduct.Speed;
+                recordplayer.Motor = model.SelectedRecordPlayer.Motor;
+                recordplayer.Speed = model.SelectedRecordPlayer.Speed;
 
                 db.SaveChanges(); // Save the changes to the database
             }

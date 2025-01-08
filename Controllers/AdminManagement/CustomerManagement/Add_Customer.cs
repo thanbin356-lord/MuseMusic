@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace MuseMusic.Controllers.AdminManagement.OtherProductsManagement
+namespace MuseMusic.Controllers.AdminManagement.CustomerManagement
 {
     [Route("[controller]")]
-    public class AddRecordPlayer : Controller
+    public class Add_Customer : Controller
     {
-        private readonly ILogger<AddRecordPlayer> _logger;
+        private readonly ILogger<Add_Customer> _logger;
 
-        public AddRecordPlayer(ILogger<AddRecordPlayer> logger)
+        public Add_Customer(ILogger<Add_Customer> logger)
         {
             _logger = logger;
         }

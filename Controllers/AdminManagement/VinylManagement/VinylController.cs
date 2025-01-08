@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using MuseMusic.Models;
 using MuseMusic.Models.Tables;
 using System.ComponentModel.DataAnnotations;
+using MuseMusic.Models.ManagerModels;
 namespace MuseMusic.Controllers.AdminManagement.VinylManagement;
 
 [Route("admin")]
@@ -25,7 +26,7 @@ public class VinylController : Controller
         using (var db = new shopmanagementContext())
         {
             var allMoods = db.Moods
-                .Select(m => new Mood
+                .Select(m => new MuseMusic.Models.ManagerModels.Mood
                 {
                     Id = m.Id,
                     Name = m.Name
@@ -33,7 +34,7 @@ public class VinylController : Controller
                 .ToList();
 
             var allBrands = db.Brands
-                .Select(b => new Brand
+                .Select(b => new MuseMusic.Models.ManagerModels.Brand
                 {
                     Id = b.Id,
                     Name = b.Name
@@ -41,7 +42,7 @@ public class VinylController : Controller
                 .ToList();
 
             var allCategories = db.Categories
-                .Select(c => new Categories
+                .Select(c => new MuseMusic.Models.ManagerModels.Categories
                 {
                     Id = c.Id,
                     Name = c.Name
@@ -49,7 +50,7 @@ public class VinylController : Controller
                 .ToList();
 
             var allArtists = db.Artists
-                .Select(a => new Artist
+                .Select(a => new MuseMusic.Models.ManagerModels.Artist
                 {
                     Id = a.Id,
                     Name = a.Name
@@ -63,7 +64,7 @@ public class VinylController : Controller
                 AllBrands = allBrands,
                 AllCategories = allCategories,
                 AllArtists = allArtists,
-                SelectedProduct = new Product(), // Initialize an empty product for the form
+                SelectedProduct = new MuseMusic.Models.ManagerModels.Product(), // Initialize an empty product for the form
                 SelectedMood = new List<int>(),
                 SelectedCategories = new List<int>(),
                 SelectedArtistIds = new List<int>(),
@@ -181,7 +182,7 @@ public class VinylController : Controller
             // Map Vinyl data to the view model
             var viewModel = new VinylViewModel
             {
-                SelectedProduct = new Product
+                SelectedProduct = new MuseMusic.Models.ManagerModels.Product
                 {
                     ProductId = vinyl.Product.Id,
                     ProductName = vinyl.Product.Name,
@@ -193,7 +194,7 @@ public class VinylController : Controller
                     Tracklist = vinyl.Tracklist
                 },
                 AllArtists = db.Artists
-                    .Select(a => new Artist { Id = a.Id, Name = a.Name })
+                    .Select(a => new MuseMusic.Models.ManagerModels.Artist { Id = a.Id, Name = a.Name })
                     .ToList(),
                 SelectedArtistIds = vinyl.ArtistVinyls
                     .Select(av => av.ArtistId)
@@ -201,7 +202,7 @@ public class VinylController : Controller
                     .Select(id => id.Value)    // Cast to non-nullable int
                     .ToList(),
                 AllMoods = db.Moods
-                    .Select(m => new Mood { Id = m.Id, Name = m.Name })
+                    .Select(m => new MuseMusic.Models.ManagerModels.Mood { Id = m.Id, Name = m.Name })
                     .ToList(),
                 SelectedMood = vinyl.MoodVinyls
                     .Select(mv => mv.MoodId)
@@ -209,7 +210,7 @@ public class VinylController : Controller
                     .Select(id => id.Value)    // Cast to non-nullable int
                     .ToList(),
                 AllCategories = db.Categories
-                    .Select(c => new Categories { Id = c.Id, Name = c.Name })
+                    .Select(c => new MuseMusic.Models.ManagerModels.Categories { Id = c.Id, Name = c.Name })
                     .ToList(),
                 SelectedCategories = vinyl.CategoriesVinyls
                     .Select(cv => cv.CategoryId)
@@ -217,7 +218,7 @@ public class VinylController : Controller
                     .Select(id => id.Value)    // Cast to non-nullable int
                     .ToList(),
                 AllBrands = db.Brands
-                    .Select(b => new Brand { Id = b.Id, Name = b.Name })
+                    .Select(b => new MuseMusic.Models.ManagerModels.Brand { Id = b.Id, Name = b.Name })
                     .ToList(),
                 SelectedBrandId = vinyl.BrandId ?? 0,
 
@@ -352,139 +353,5 @@ public class VinylController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
-    public partial class VinylViewModel
-    {
-        public List<Product> Products { get; set; }
-
-        [Required]
-        public Product SelectedProduct { get; set; }
-        public List<Artist> AllArtists { get; set; } // All artists for dropdown
-
-        [Required]
-        public List<int> SelectedArtistIds { get; set; } // IDs of associated artists
-
-        public List<Mood> AllMoods { get; set; }
-
-        [Required]
-        public List<int> SelectedMood { get; set; }
-
-        public List<Categories> AllCategories { get; set; } // All artists for dropdown
-
-        [Required]
-        public List<int> SelectedCategories { get; set; }
-
-        [Required]
-        public int SelectedBrandId { get; set; }
-
-        public List<Brand> AllBrands { get; set; }
-
-        public List<ImageUrl> AllImages { get; set; }
-        public int SelectedImageId { get; set; }
-
-    }
-
-    public partial class AddVinylModel
-    {
-        [Required]
-        public Product SelectedProduct { get; set; }
-
-        [Required]
-        public List<int> SelectedArtistIds { get; set; } // IDs of associated artists
-
-        [Required]
-        public List<int> SelectedMood { get; set; }
-
-        [Required]
-        public List<int> SelectedCategories { get; set; }
-
-        [Required]
-        public int SelectedBrandId { get; set; }
-    }
-
-    public partial class EditVinylModel
-    {
-        [Required]
-        public Product SelectedProduct { get; set; }
-
-        [Required]
-        public List<int> SelectedArtistIds { get; set; } // IDs of associated artists
-
-        [Required]
-        public List<int> SelectedMood { get; set; }
-
-        [Required]
-        public List<int> SelectedCategories { get; set; }
-
-        [Required]
-        public int SelectedBrandId { get; set; }
-    }
-
-    public partial class ListVinylViewModel
-    {
-        public string DiskId;
-        public int? ProductId;
-        public string ProductName;
-        public string ProductDescription;
-        public int? ProductQuantity;
-        public decimal Price;
-        public int? Years;
-        public string MoodNames;
-        public string CategoriesName;
-        public string ArtistNames;
-        public string BrandName;
-    }
-
-
-    public class Vinyl
-    {
-        public int Id { get; set; }
-        public string DiskId { get; set; }
-        public int? Years { get; set; }
-        public string Tracklist { get; set; }
-
-        public int ProductId { get; set; }
-        public string ProductName { get; set; } // New property
-        public decimal Price { get; set; }
-
-        public int ProductQuantity { get; set; }
-        public string ProductDescription { get; set; }
-
-        public List<Mood> Moods { get; set; }
-        public List<Category> Categories { get; set; }
-        public List<string> Artists { get; set; }  // This will hold artist names for the view
-        public Product Product { get; set; }
-        public int BrandId { get; internal set; }
-    }
-    public class Product
-    {
-        // public List<Vinyl> Vinyls { get; set; }
-        public int ProductId { get; set; }
-        public string DiskId { get; set; }
-        public string ProductName { get; set; }
-        public string ProductDescription { get; set; }
-        public int ProductQuantity { get; set; }
-        public decimal Price { get; set; }
-        public int Years { get; set; }
-        public string Tracklist { get; set; }
-    }
-    public class Artist
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
-    public class Mood
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
-    public class Categories
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
-    public class Brand
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
+    
 }

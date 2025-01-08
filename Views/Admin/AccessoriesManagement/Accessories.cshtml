@@ -1,63 +1,59 @@
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
-<!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Quan ly Dau Dia</h1>
-<!-- End Page Heading -->
-<!-- DataTales Example -->
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">List Categories</h6>
+@model List<MuseMusic.Models.ManagerModels.ListAcessoriesView>
+<main class="content2">
+    <h1>QUẢN LÝ ĐẦU ĐĨA</h1>
+    <div class="search-bar2">
+        <input type="text" placeholder="Tìm kiếm..." style="margin: 10px;width: 250px;
+height: 38px;border: 1px solid #000; padding: 10px; margin-left: -2px;">
+        <button class="god">Xóa sản phẩm</button>
+        <button class="deka">Thêm sản phẩm</button>
     </div>
-    <div class="card-body">
-        <td>
-            <a href="/admin/createcategory" class="btn btn-primary btn-icon-split">
-                <span class="icon text-white-50">
-                    <i class="fas fa-plus"></i>
-                </span>
-                <span class="text">Add new Category</span>
-            </a>
-        </td>
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
+    <table class="table table-striped">
+        <thead>
+            <tr class="table-dark">
+                <th>ID</th>
+                <th>Tên sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Hãng</th>
+                <th>Giá</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                @foreach (var item in Model)
+                {
                     <tr>
-                        <th>Name</th>
-                        <th>Depcription</th>
-                        <th>Brand</th>
-                        <th>Price</th>
-                        <th>Action</th>
+                        <td>@item.ProductId</td>
+                        <td>@item.ProductName</td>
+                        <td>@item.ProductQuantity</td>
+                        <td>@item.BrandName</td>
+                        <td>@item.Price</td>
+                        <td>
+                            <input type="checkbox">
+                            <button class="butt"
+                                onclick="window.location.href='/admin/editaccessories/@item.ProductId'">Edit</button>
+                        </td>
                     </tr>
-                </thead>
-                <tfoot>                 
-                </tfoot>
-                <tbody>
-                    @* @foreach (var item in Model.Products)
-                    {
-                        <tr>
-                            <td>@item.ProductName</td>
-                            <td>@item.ProductDescription</td>
-                            <td>@item.BrandName</td>
-                            <td>@item.Price</td>
-                            <td>
-                                <a href="/admin/deleteCategory?id=@item.ProductId" class="btn btn-danger btn-icon-split">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-trash"></i>
-                                    </span>
-                                    <span class="text">Delete</span>
-                                </a>
-                                <a href="/admin/updateCategory?id=@item.ProductId" class="btn btn-info btn-icon-split">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-edit"></i>
-                                    </span>
-                                    <span class="text">Edit</span>
-                                </a>
-                            </td>
-                        </tr>
-                    } *@
-                </tbody>
-            </table>
-        </div>
+                }
+            }
+        </tbody>
+    </table>
+    <div class="pagination">
+        <button class="page-btn active">1</button>
+        @* <button class="page-btn">2</button>
+    <button class="page-btn">3</button> *@
+        <span>...</span>
+        @* <button class="page-btn">201</button>
+    <button class="page-btn">202</button>
+    <button class="page-btn">203</button> *@
+        <button class="page-btn next">&gt;</button>
     </div>
-</div>
+    <div class="pagination2">
+        <span>HIỂN THỊ:</span>
+        <span class="page-item">01-12</span>
+    </div>
+</main>
