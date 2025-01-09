@@ -69,7 +69,16 @@ public class HomeController : Controller
         return View();
     }
 
-// Artist    
+
+// Payment
+
+        public IActionResult Payment()
+    {
+        return View();
+    }
+
+
+
     public IActionResult Wish()
     {
         return View();

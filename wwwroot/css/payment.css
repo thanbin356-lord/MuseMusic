@@ -1,0 +1,173 @@
+.payment-container-main{
+    background-image: url(/image/payment-bg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+   
+    background-size: cover;
+    height: 100%;
+}
+
+
+.payment-container{
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 50px 25px;
+}
+
+.payment-container p{
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.payment-container h1{
+    font-size: 24px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0%;
+}
+
+.payment-header{
+    margin-top: 50px;
+}
+
+.bfline{
+    width: 100%;
+    height: 2px;
+    background-color: #9b9b9b;
+}
+
+.payment-form {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Chia thành 3 cột bằng nhau */
+    gap: 20px; /* Khoảng cách giữa các cột */
+}
+
+.form-group {
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-group input {
+    border: 2px solid #4a4a4a;
+    border-radius: 25px;
+    padding: 10px 15px;
+    font-size: 14px;
+    outline: none;
+    width: 100%;
+}
+
+.form-group input:focus {
+    border-color: #333;
+}
+
+/*  */
+
+.payment-method-container {
+    background-color: #f9f4ec;
+    padding: 50px 50px;
+    border-radius: 12px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+    
+    margin-top: 50px;
+}
+
+/* Tiêu đề */
+.title {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Phương thức thanh toán */
+.payment-methods {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    margin: 20px 0;
+}
+
+.payment-methods img {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.payment-methods img:hover{
+    transform: scale(1.1); /* Phóng to 10% */
+}
+
+/* Chi tiết thanh toán */
+.payment-details h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th, table td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    font-weight: bold;
+}
+
+.total-row td {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Ghi chú */
+.notes {
+    margin-bottom: 20px;
+}
+
+.notes label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+/* Nút đặt hàng */
+.submit-button {
+    text-align: right;
+}
+
+button {
+    background-color: #43a047;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #388e3c;
+}
