@@ -8,10 +8,10 @@
     background-repeat: no-repeat; /* Không lặp ảnh */
 }
 /* Container */
-.container {
+.yoru .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding-top: 80px;
 }
 
 /* Heading */
@@ -36,6 +36,8 @@ h1 {
     margin-bottom: 20px;
     
 }
+
+
 
 .cart-table tr {
     display: flex;
@@ -132,13 +134,21 @@ h1 {
 
 }
 
+/*  */
+
+.cart-container-main{
+    display: grid;
+    grid-template-columns: 75% 25%;
+    padding-top: 50px;
+}
+
 /* Summary box */
 .summary {
     display: flex;
     justify-content: flex-end; /* Đẩy summary-box sang bên phải */
     margin-bottom: 30px;
     margin-top: -20px; /* Căn chỉnh cho nó gần bảng */
-    position: relative;
+    
     top: -60px;
 }
 
