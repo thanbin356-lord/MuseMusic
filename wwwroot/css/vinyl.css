@@ -10,7 +10,7 @@
     display: flex;
 }
 
-.vinyl-title a{
+.vinyl-title h1{
     margin-left: 30px;
     display: flex;
     border: none;
@@ -20,66 +20,6 @@
     font-weight: 800;
     line-height: 38.73px;
     text-align: center;
-    color: #000000 !important;
-}
-
-.vinyl-header {
-    position: relative;
-    background-image: url('/images/vinyl-header.png'); /* Đường dẫn tới hình ảnh của bạn */
-    background-size: cover;
-    background-position: center;
-    height: 300px;
-    color: #fff;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  .vinyl-header::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.2); /* Lớp phủ tối với độ trong suốt */
-    z-index: 1;
-}
-  
-  .vinyl-header .overlay {
-    padding: 20px;
-    width: 100%;
-    position: relative;
-    z-index: 2; /* Đặt nội dung lên trên lớp phủ */
-    padding: 20px;
-    width: 100%;
-  }
-  
-  .vinyl-header h1 {
-    font-size: 48px;
-    font-weight: bold;
-    margin: 0;
-    color: #f9e547; /* Màu vàng nhạt */
-  }
-  
-  .vinyl-header p {
-    margin: 10px 0 20px;
-    font-size: 18px;
-    line-height: 1.5;
-  }
-  
-  .vinyl-header nav a {
-    margin: 0 10px;
-    color: #fff;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
-  }
-  
-  .vinyl-header nav a:hover {
-    text-decoration: underline;
   }
 
 /*---------------------------------------
