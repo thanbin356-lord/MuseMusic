@@ -8,7 +8,8 @@
     <section class="section-padding">
         <div class="container">
             <div class="row align-items-center">
-                <input type="hidden" asp-for="SelectedProduct.ProductId" value="@Model.SelectedProduct.ProductId" />
+                <input type="hidden" id="prodid" asp-for="SelectedProduct.ProductId"
+                    value="@Model.SelectedProduct.ProductId" />
                 <div class="col-lg-6 col-12">
                     <div class="product-thumb">
                         <button id="prev" class="btn btn-link"><i class="fa-sharp fa-solid fa-arrow-left"></i></button>
@@ -30,10 +31,10 @@
                 <div class="col-lg-6 col-12">
                     <div class="product-info">
                         <div>
-                            <h2>@Model.SelectedProduct.ProductName</h2>
-                            <h3>@Model.SelectedProduct.ArtistNames</h3>
-                            <h4>@Model.SelectedProduct.Price</h4>
-                            <h5>Mã sản phẩm: @Model.SelectedProduct.DiskId</h5>
+                            <h2 id="prodname">@Model.SelectedProduct.ProductName</h2>
+                            <h3 id="artistname">@string.Join(", ", Model.SelectedArtistNames)</h3>
+                            <h4 id="prodprice">@Model.SelectedProduct.Price</h4>
+                            <h5 id="proddiskid">Mã sản phẩm: @Model.SelectedProduct.DiskId</h5>
                         </div>
 
                     </div>
@@ -50,7 +51,7 @@
                                             <i class="icofont-minus-square"></i>
                                         </button>
 
-                                        <input id="form1" min="0" name="quantity" value="2" type="number"
+                                        <input id="quantity-selection" min="1" name="quantity" value="2" type="number"
                                             class="form-control form-control-sm" style="width: 50px;" />
 
                                         <button class="btn btn-link px-2"
@@ -70,7 +71,7 @@
                             <div class="col-lg-6 col-12 mt-4 mt-lg-0">
 
 
-                                <a href='mycart.html'> <button class="cart-btn">Thêm vào giỏ hàng</button> </a>
+                                <button id="addcart" class="cart-btn">Thêm vào giỏ hàng</button>
                             </div>
 
                             <div class="col-lg-12 col-md-6">
@@ -225,9 +226,8 @@
 
 
 </main>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    // JavaScript to change main image and navigate through thumbnails using arrows
     const thumbnails = document.querySelectorAll('.thumbnail');
     const mainImage = document.getElementById('main-image');
     const prevBtn = document.getElementById('prev');
@@ -235,13 +235,12 @@
     const thumbnailSlider = document.querySelector('.thumbnail-slider');
 
     let currentIndex = 0; // Start at the first thumbnail
-    @*  *@
-        // Function to change the main image based on the clicked thumbnail
-        function changeMainImage(index) {
-            const selectedThumbnail = thumbnails[index];
-            mainImage.src = selectedThumbnail.getAttribute('data-image');
-            let isDragging = false; // Flag to track if the user is dragging
-        }
+    // Function to change the main image based on the clicked thumbnail
+    function changeMainImage(index) {
+        const selectedThumbnail = thumbnails[index];
+        mainImage.src = selectedThumbnail.getAttribute('data-image');
+        let isDragging = false; // Flag to track if the user is dragging
+    }
 
     // Event listeners for thumbnail clicks
     thumbnails.forEach((thumbnail, index) => {
@@ -254,12 +253,12 @@
         });
     });
 
-    @*  *@
-        // Event listener for next button (to go to the next image)
-        nextBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % thumbnails.length; // Loop back to the first image if we reach the end
-            changeMainImage(currentIndex);
-        });
+
+    // Event listener for next button (to go to the next image)
+    nextBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % thumbnails.length; // Loop back to the first image if we reach the end
+        changeMainImage(currentIndex);
+    });
 
     // Event listener for previous button (to go to the previous image)
     prevBtn.addEventListener('click', () => {
@@ -267,10 +266,10 @@
         changeMainImage(currentIndex);
     });
 
-    @* thanh trượt *@
 
-        // Implement mouse drag to scroll through thumbnails
-        let startX;
+
+    // Implement mouse drag to scroll through thumbnails
+    let startX;
     let scrollLeft;
 
     thumbnailSlider.addEventListener('mousedown', (e) => {
@@ -293,5 +292,54 @@
         const x = e.pageX - thumbnailSlider.offsetLeft;
         const walk = (x - startX) * 2; // Scroll faster
         thumbnailSlider.scrollLeft = scrollLeft - walk;
+    });
+
+    function addToCart(item) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        const existingIndex = cart.findIndex(cartItem => cartItem.id === item.id);
+
+        if (existingIndex !== -1) {
+            // SweetAlert thông báo sản phẩm đã có trong giỏ hàng
+            Swal.fire({
+                icon: 'info',
+                title: 'Thông báo',
+                text: 'Sản phẩm này đã có trong giỏ hàng!',
+            });
+        } else {
+            cart.push(item);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Sản phẩm đã được thêm vào giỏ hàng!',
+            });
+        }
+    }
+
+    // Add event listener to the button
+    document.getElementById('addcart').addEventListener('click', () => {
+        // Retrieve values from the DOM
+        const id = document.getElementById('prodid').value;
+        const name = document.getElementById('prodname').textContent;
+        const artist = document.getElementById('artistname').textContent;
+        const price = parseFloat(document.getElementById('prodprice').textContent);
+        const diskid = document.getElementById('proddiskid').value;
+        const quantity = document.getElementById('quantity-selection').value;
+        const imageUrl = document.getElementById('main-image').getAttribute('src');
+
+        // Define the item object
+        const item = {
+            id: id,
+            name: name,
+            artist: artist,
+            price: price,
+            diskid: diskid,
+            quantity: quantity, // Default quantity
+            image: imageUrl,
+        };
+
+        // Add the item to the cart
+        addToCart(item);
     });
 </script>
