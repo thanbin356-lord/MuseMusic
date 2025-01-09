@@ -76,19 +76,11 @@
   }
 
   .form-group-2{
-    display: flex;
     width: 100%;
-gap: 20px;
-  }
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
 
-  .form-group-2-left{
-    flex: 2.1;
-    
-  }
-
-  .form-group-2-right{
-    flex: 1;
- 
   }
 
   /*  */

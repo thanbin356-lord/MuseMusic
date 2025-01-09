@@ -129,6 +129,7 @@ h1 {
     font-size: 18px;
     align-content:center;
     z-index: 1;
+
 }
 
 /* Summary box */
@@ -223,7 +224,7 @@ line-height: normal;
     font-size: 16px;
     width: 30%;
     margin-top: 50px;
-    margin-left: 50vh;
+
 }
 .check2 {
     border-top: 2px solid black; /* Đường kẻ trên */

@@ -6,23 +6,31 @@
 
 @* upload ảnh *@
 
-<div class="upload-container">
-        <h1>Upload Your Image</h1>
+ <div class="upload-container-1">
+        <h1>Upload Multiple Images</h1>
         <form id="uploadForm">
             <label for="fileInput" class="custom-file-input">
-                Choose an Image
+                Choose Images
                 <input type="file" id="fileInput" accept="image/*" multiple hidden>
             </label>
             <button type="submit" class="upload-btn">Upload</button>
         </form>
-        <div class="preview-container" id="previewContainer">
-            <h2>Preview:</h2>
-            <img id="imagePreview" src="#" alt="Your Image" style="display: none;">
-        </div>
+        <div class="preview-container" id="previewContainer"></div>
     </div>
 
+<div class="upload-container">
+        <h1>Upload Your Image</h1>
+        <input type="file" id="upload" accept="image/*">
+        <br><br>
+        <div id="croppieContainer"></div>
+            <img src="" alt="croppedImage" id="croppedImage">
+            <br>
+            <button id="btnCrop">Crop Image</button>
+            <button id="btnRefresh">Crop Another Image</button>
+        
+    </div>
 
-    <script>
+     <script>
         const fileInput = document.getElementById('fileInput');
         const previewContainer = document.getElementById('previewContainer');
 
@@ -67,6 +75,62 @@
                 reader.readAsDataURL(file); // Đọc file và tạo URL
             });
         });
+    </script>
+
+@* kiểu thứ 2 *@
+    <script>
+        // DECLARE VARIABLES
+const upload = document.querySelector("#upload");
+const imgContainer = document.querySelector('#croppieContainer');
+const croppedImage = document.querySelector('#croppedImage');
+const cropButton = document.querySelector('#btnCrop');
+const btnRefresh = document.querySelector('#btnRefresh');
+
+
+// INITIALIZE CROPPIE
+var croppieInstance = new Croppie(imgContainer, {
+    viewport: { width: 200, height: 200, type: 'square' },
+    boundary: { width: 400, height: 400 },
+    enableResize: true
+});
+
+// HANDLE FILE UPLOAD
+upload.addEventListener('change', function (e) {
+    var file = e.target.files[0];
+    var reader = new FileReader();
+    reader.onload = function (event) {
+        croppieInstance.bind({
+            url: event.target.result
+        });
+    };
+    reader.readAsDataURL(file);
+
+    // SHOW PREVIEW AND CROP BUTTON
+    imgContainer.style.display = 'block';
+    cropButton.style.display = 'block';
+});
+
+// HANDLE CROP BUTTON CLICK
+cropButton.addEventListener('click', function () {
+    croppieInstance.result('canvas').then(function (result) {
+        // SHOW CROPPED IMAGE
+        croppedImage.src = result;
+        croppedImage.style.display = 'block';
+
+        // SHOW REFRESH BUTTON
+        btnRefresh.style.display = 'block';
+
+        //HIDE INPUT ELEMENT AND CROPPIE CONTAINER
+        imgContainer.style.display = 'none';
+        upload.style.display = 'none'
+        cropButton.style.display = 'none';
+    });
+});
+
+// HANDLE REFRESH BUTTON CLICK
+btnRefresh.addEventListener('click', function () {
+    location.reload();
+});
     </script>
 
 @* upload ảnh *@
