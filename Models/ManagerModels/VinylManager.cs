@@ -121,6 +121,7 @@ namespace MuseMusic.Models.ManagerModels
         public decimal Price { get; set; }
         public int Years { get; set; }
         public string Tracklist { get; set; }
+        public int SelectedBrandId{get;set;}
     }
     public class Artist
     {

@@ -37,7 +37,7 @@ public class AccessoriesShow : Controller
                 var accessories = db.Accessories
                 // bước 2 load dữ liệu từ db 
             .Include(v => v.Product)
-            .Include(v => v.Brand)
+                .ThenInclude(v => v.Brand)
             .ToList();
 
                 // bước 3 gắn lại dữ liệu vào đối tượng 
@@ -48,7 +48,7 @@ public class AccessoriesShow : Controller
                     ProductQuantity = x.Product.Quantity,
                     ProductDescription = x.Product.Description,
                     Price = x.Product.Price,
-                    BrandName = x.Brand.Name,
+                    BrandName = x.Product.Brand.Name,
                 }).ToList();
 
                 // bước 4 return l 

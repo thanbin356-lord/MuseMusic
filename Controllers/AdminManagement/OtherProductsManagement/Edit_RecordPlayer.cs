@@ -57,11 +57,12 @@ public class Edit_RecordPlayer : Controller
                     Motor = recordplayer.Motor,
                     Speed = recordplayer.Speed,
                     ProductQuantity = recordplayer.Product.Quantity ?? 0,
+                    
                 },
                 AllBrands = db.Brands
                     .Select(b => new MuseMusic.Models.ManagerModels.Brand { Id = b.Id, Name = b.Name })
                     .ToList(),
-                SelectedBrandId = recordplayer.BrandId ?? 0,
+                SelectedBrandId = recordplayer.Product.BrandId ?? 0,
 
                 AllImages = images.Select(img => new ImageUrl { Id = img.Id, Url = img.Url }).ToList(),
                 SelectedImageId = images.Any() ? images.First().Id : 0 // Use the primary image if available
@@ -91,7 +92,7 @@ public class Edit_RecordPlayer : Controller
                 recordplayer.Product.Price = model.SelectedRecordPlayer.Price;
                 recordplayer.Product.Quantity = model.SelectedRecordPlayer.ProductQuantity;
                 recordplayer.Product.Description = model.SelectedRecordPlayer.ProductDescription;
-                recordplayer.BrandId = model.SelectedBrandId;
+                recordplayer.Product.BrandId = model.SelectedBrandId;
                 recordplayer.Motor = model.SelectedRecordPlayer.Motor;
                 recordplayer.Speed = model.SelectedRecordPlayer.Speed;
 

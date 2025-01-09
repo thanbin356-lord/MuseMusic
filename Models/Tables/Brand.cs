@@ -7,9 +7,7 @@ namespace MuseMusic.Models.Tables
     {
         public Brand()
         {
-            Accessories = new HashSet<Accessory>();
-            Recordplayers = new HashSet<Recordplayer>();
-            Vinyls = new HashSet<Vinyl>();
+            Products = new HashSet<Product>();
         }
 
         public int Id { get; set; }
@@ -17,8 +15,6 @@ namespace MuseMusic.Models.Tables
         public string? Description { get; set; }
         public string? Website { get; set; }
 
-        public virtual ICollection<Accessory> Accessories { get; set; }
-        public virtual ICollection<Recordplayer> Recordplayers { get; set; }
-        public virtual ICollection<Vinyl> Vinyls { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

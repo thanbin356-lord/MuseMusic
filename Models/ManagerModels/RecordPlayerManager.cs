@@ -27,7 +27,7 @@ namespace MuseMusic.Models.ManagerModels
     public partial class AddRecordPlayerModel
     {
         [Required]
-        public Product SelectedProduct { get; set; }
+        public ProductRecordPlayer SelectedRecordPlayer { get; set; }
 
         [Required]
         public int SelectedBrandId { get; set; }
@@ -63,6 +63,7 @@ namespace MuseMusic.Models.ManagerModels
         public decimal Price { get; set; }
         public string Motor {get;set;}
         public string Speed {get;set;}
+        public int SelectedBrandId { get; set; }
     }
     public class Brand
     {

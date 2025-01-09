@@ -9,14 +9,14 @@ using Microsoft.Extensions.Logging;
 using MuseMusic.Models.ManagerModels;
 using MuseMusic.Models.Tables;
 
-namespace MuseMusic.Controllers.AdminManagement.CustomerManagement;
+namespace MuseMusic.Controllers.AdminManagement.OrdersManagement;
 
 [Route("admin")]
-public class Edit_Customer : Controller
+public class OrderDetail : Controller
 {
-    private readonly ILogger<Edit_Customer> _logger;
+    private readonly ILogger<OrderDetail> _logger;
 
-    public Edit_Customer(ILogger<Edit_Customer> logger)
+    public OrderDetail(ILogger<OrderDetail> logger)
     {
         _logger = logger;
     }
@@ -25,8 +25,8 @@ public class Edit_Customer : Controller
     {
         return View();
     }
-    [HttpGet("editcustomers/{id}")]
-    public IActionResult EditCustomers(int id)
+    [HttpGet("orderdetail/{id}")]
+    public IActionResult OrderDetails(int id)
     {
         using (var db = new shopmanagementContext())
         {
@@ -34,8 +34,15 @@ public class Edit_Customer : Controller
             var customers = db.Orders
             .Include(o => o.Customer)
                 .ThenInclude(ac => ac.Account)
-
-            .FirstOrDefault(o => o.CustomerId == id);
+            .Include(od => od.OrderDetails)
+                .ThenInclude(p => p.Product)
+                .ThenInclude(v => v.Vinyls)
+                    .ThenInclude(a => a.ArtistVinyls)
+                        .ThenInclude(av => av.Artist)
+            .Include(od => od.OrderDetails)
+                .ThenInclude(p => p.Product)
+                    .ThenInclude(b => b.Brand)
+            .FirstOrDefault(o => o.Id == id);
             if (customers == null)
             {
                 return NotFound(); // Return 404 if no customers is found
@@ -59,17 +66,30 @@ public class Edit_Customer : Controller
                     OrderId = customers.Id,
                     created_at = (DateTime)customers.CreatedAt,
                     total = (decimal)customers.Total,
-                },
+
+
+                    AllProducts = customers.OrderDetails.Select(od => new Models.ManagerModels.ListProduct
+                    {
+                        ProductName = od.Product.Name,
+                        BrandName = od.Product.Brand?.Name,
+                        ArtistNames = od.Product.Vinyls
+                        .SelectMany(v => v.ArtistVinyls)
+                        .Where(av => av.Artist != null)
+                        .Select(av => av.Artist.Name)
+                        .ToList(),
+                        Price = od.Price,  // Price from OrderDetail
+                        Quantity = od.Quantity  // Quantity from OrderDetail
+                    }).ToList()
+                }
                 // AllBrands = db.Brands
                 //     .Select(b => new MuseMusic.Models.ManagerModels.Brand { Id = b.Id, Name = b.Name })
                 //     .ToList(),
                 // SelectedBrandId = customers.BrandId ?? 0,
             };
 
-            return View("~/Views/Admin/CustomerManagement/editcustomers.cshtml", viewModel);
+            return View("~/Views/Admin/Order/OrderDetail.cshtml", viewModel);
         }
     }
-
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

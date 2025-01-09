@@ -61,5 +61,6 @@ namespace MuseMusic.Models.ManagerModels
         public string ProductDescription { get; set; }
         public int ProductQuantity { get; set; }
         public decimal Price { get; set; }
+        public int SelectedBrandId {get;set;}
     }
 }

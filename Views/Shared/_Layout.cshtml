@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/cus.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/sto.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/history.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/wis.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/bank.css" asp-append-version="true" />
@@ -124,7 +125,9 @@
                                 </div> *@
                             <div class="cart-icon-container">
                                 <div class="cart-icon">
-                                    <i class="fas fa-shopping-cart"></i>
+                                    <a href="~/home/store">
+                                        <i class="fas fa-shopping-cart" style="color: white;"></i>
+                                    </a>
                                 </div>
                                 <div class="cart-dropdown">
                                     <p class="text">
@@ -135,13 +138,15 @@
                                     </p>
                                     <div id="cart-items" class="cart-items"></div>
                                     <div class="cart-actions">
-                                        <button class="view-cart">Xem giỏ hàng</button>
+                                        <button onclick="location.href='/home/store'" class="view-cart">Xem giỏ hàng</button>
                                         <button class="checkout">Thanh toán</button>
                                     </div>
                                 </div>
                             </div>
                             <div class="whislist">
-                                <i class="fa-solid fa-heart"></i>
+                                <a href="~/home/wish">
+                                    <i class="fa-solid fa-heart" style="color: white;"></i>
+                                </a>
                             </div>
                         </div>
                     </div>

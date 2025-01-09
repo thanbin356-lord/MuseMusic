@@ -67,13 +67,14 @@ public class VinylView : Controller
             // Fetch the Vinyl and related data
             var vinyl = db.Vinyls
                 .Include(v => v.Product)
+                    .ThenInclude(v => v.Brand)
                 .Include(v => v.ArtistVinyls)
                     .ThenInclude(av => av.Artist)
                 .Include(v => v.MoodVinyls)
                     .ThenInclude(mv => mv.Mood)
                 .Include(v => v.CategoriesVinyls)
                     .ThenInclude(cv => cv.Category)
-                .Include(v => v.Brand)
+
                 .FirstOrDefault(v => v.ProductId == id);
 
 
@@ -106,7 +107,7 @@ public class VinylView : Controller
 
             var primaryImageUrl = imageUrls
                 .FirstOrDefault(i => i.IsPrimary == true)?.Url; // Lấy URL ảnh chính
-            
+
             var allImageUrls = imageUrls
                 .Select(i => i.Url) // Chuyển đổi sang danh sách URL
                 .ToList();
@@ -123,7 +124,7 @@ public class VinylView : Controller
                     DiskId = vinyl.DiskId,
                     Years = vinyl.Years ?? 0,
                     Tracklist = vinyl.Tracklist,
-                    SelectedBrandName = vinyl.Brand?.Name ?? "",
+                    SelectedBrandName = vinyl.Product.Brand?.Name ?? "",
                     PrimaryImageUrl = primaryImageUrl, // Gán URL ảnh chính
                     ImageUrls = allImageUrls // Gán danh sách tất cả URL
                 },

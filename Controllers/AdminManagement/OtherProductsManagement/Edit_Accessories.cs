@@ -53,11 +53,12 @@ public class Edit_Accessories : Controller
                     ProductDescription = accessories.Product.Description,
                     Price = accessories.Product.Price,
                     ProductQuantity = accessories.Product.Quantity ?? 0,
+
                 },
                 AllBrands = db.Brands
                     .Select(b => new MuseMusic.Models.ManagerModels.Brand { Id = b.Id, Name = b.Name })
                     .ToList(),
-                SelectedBrandId = accessories.BrandId ?? 0,
+                SelectedBrandId = accessories.Product.BrandId ?? 0,
 
                 AllImages = images.Select(img => new ImageUrl { Id = img.Id, Url = img.Url }).ToList(),
                 SelectedImageId = images.Any() ? images.First().Id : 0 // Use the primary image if available
@@ -68,7 +69,7 @@ public class Edit_Accessories : Controller
     }
 
     [HttpPost("editaccessories/{id}")]
-    public IActionResult EditAccessories (EditAccessoriesModel model, int id)
+    public IActionResult EditAccessories(EditAccessoriesModel model, int id)
     {
         if (ModelState.IsValid)
         {
@@ -87,7 +88,7 @@ public class Edit_Accessories : Controller
                 accessories.Product.Price = model.SelectedAccessories.Price;
                 accessories.Product.Quantity = model.SelectedAccessories.ProductQuantity;
                 accessories.Product.Description = model.SelectedAccessories.ProductDescription;
-                accessories.BrandId = model.SelectedBrandId;
+                accessories.Product.BrandId = model.SelectedBrandId;
 
                 db.SaveChanges(); // Save the changes to the database
             }

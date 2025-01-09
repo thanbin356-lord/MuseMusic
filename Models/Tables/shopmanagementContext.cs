@@ -45,9 +45,7 @@ namespace MuseMusic.Models.Tables
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-
                 optionsBuilder.UseMySql("server=localhost;database=shopmanagement;user=root;password=thuthu121;allow user variables=True", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.40-mysql"));
-
             }
         }
 
@@ -60,21 +58,11 @@ namespace MuseMusic.Models.Tables
             {
                 entity.ToTable("accessories");
 
-                entity.HasIndex(e => e.BrandId, "brand_id");
-
                 entity.HasIndex(e => e.ProductId, "product_id");
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.BrandId).HasColumnName("brand_id");
-
                 entity.Property(e => e.ProductId).HasColumnName("product_id");
-
-                entity.HasOne(d => d.Brand)
-                    .WithMany(p => p.Accessories)
-                    .HasForeignKey(d => d.BrandId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("accessories_ibfk_2");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Accessories)
@@ -556,9 +544,13 @@ namespace MuseMusic.Models.Tables
 
                 entity.HasIndex(e => e.AdminsellerId, "adminseller_id");
 
+                entity.HasIndex(e => e.BrandId, "product_ibfk_2");
+
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.AdminsellerId).HasColumnName("adminseller_id");
+
+                entity.Property(e => e.BrandId).HasColumnName("brand_id");
 
                 entity.Property(e => e.Description)
                     .HasColumnType("text")
@@ -579,19 +571,21 @@ namespace MuseMusic.Models.Tables
                     .HasForeignKey(d => d.AdminsellerId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("product_ibfk_1");
+
+                entity.HasOne(d => d.Brand)
+                    .WithMany(p => p.Products)
+                    .HasForeignKey(d => d.BrandId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("product_ibfk_2");
             });
 
             modelBuilder.Entity<Recordplayer>(entity =>
             {
                 entity.ToTable("recordplayer");
 
-                entity.HasIndex(e => e.BrandId, "brand_id");
-
                 entity.HasIndex(e => e.ProductId, "product_id");
 
                 entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.BrandId).HasColumnName("brand_id");
 
                 entity.Property(e => e.Motor)
                     .HasMaxLength(45)
@@ -602,12 +596,6 @@ namespace MuseMusic.Models.Tables
                 entity.Property(e => e.Speed)
                     .HasMaxLength(45)
                     .HasColumnName("speed");
-
-                entity.HasOne(d => d.Brand)
-                    .WithMany(p => p.Recordplayers)
-                    .HasForeignKey(d => d.BrandId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("recordplayer_ibfk_2");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Recordplayers)
@@ -631,13 +619,9 @@ namespace MuseMusic.Models.Tables
             {
                 entity.ToTable("vinyl");
 
-                entity.HasIndex(e => e.BrandId, "brand_id");
-
                 entity.HasIndex(e => e.ProductId, "product_id");
 
                 entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.BrandId).HasColumnName("brand_id");
 
                 entity.Property(e => e.DiskId)
                     .HasMaxLength(255)
@@ -650,12 +634,6 @@ namespace MuseMusic.Models.Tables
                     .HasColumnName("tracklist");
 
                 entity.Property(e => e.Years).HasColumnName("years");
-
-                entity.HasOne(d => d.Brand)
-                    .WithMany(p => p.Vinyls)
-                    .HasForeignKey(d => d.BrandId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("vinyl_ibfk_2");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Vinyls)

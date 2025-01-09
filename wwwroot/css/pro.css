@@ -20,8 +20,10 @@
   .profile {
     text-align: center;
     background: #EEE;
-    height: 350px;
+    height: 400px;
     border-radius: 44px;
+    padding: 50px;
+   
   }
   
   .profile-picture {
@@ -29,7 +31,7 @@
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    margin-top:70px;
+    margin-top:40px;
   }
   
   .delete-button {
@@ -71,6 +73,22 @@
     grid-template-columns: repeat(3, 1fr); /* 3 cột bằng nhau */
     width: 100%;
     gap: 20px;
+  }
+
+  .form-group-2{
+    display: flex;
+    width: 100%;
+gap: 20px;
+  }
+
+  .form-group-2-left{
+    flex: 2.1;
+    
+  }
+
+  .form-group-2-right{
+    flex: 1;
+ 
   }
 
   /*  */

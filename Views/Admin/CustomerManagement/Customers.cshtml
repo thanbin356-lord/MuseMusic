@@ -1,7 +1,7 @@
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-@model MuseMusic.Models.ManagerModels.CustomerViewModel
+@model MuseMusic.Models.ManagerModels.OrderViewModel
 <main class="content2">
     <h1>QUẢN LÝ ĐẦU ĐĨA</h1>
     <div class="search-bar2">
@@ -21,7 +21,7 @@
         <tbody>
             @if (Model != null)
             {
-                @foreach (var item in Model.Customers)
+                @foreach (var item in Model.Orders)
                 {
                     <tr>
                         <td>@item.CustomerId</td>
@@ -32,7 +32,7 @@
                         <td>
                             <input type="checkbox">
                             <button class="butt"
-                                onclick="window.location.href='/admin/editaccessories/@item.CustomerId'">Edit</button>
+                                onclick="window.location.href='/admin/editcustomers/@item.CustomerId'">Edit</button>
                         </td>
                     </tr>
                 }
