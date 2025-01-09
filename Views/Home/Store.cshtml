@@ -6,28 +6,29 @@
         <div class="container">
             <h1>Giỏ hàng</h1>
             <div class="spark"></div>
-            
+
             <div class="cart-container-main">
 
                 <div class="cart-table">
 
-                <table class="cart-table">
-                    <tbody>
+                    <table class="cart-table">
+                        <tbody>
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
 
-            </div>
-
-            <div class="summary">
-                <div class="summary-box">
-                    <h2>Tổng tiền hàng</h2>
-                    <div class="check"></div>
-                    <p><span>Tổng tiền</span>
-                    <span id="total-price"></span></p>
-                    <button class="checkout-btn">Thanh toán</button>
                 </div>
-            </div>
+
+                <div class="summary">
+                    <div class="summary-box">
+                        <h2>Tổng tiền hàng</h2>
+                        <div class="check"></div>
+                        <p><span>Tổng tiền</span>
+                            <span id="total-price"></span>
+                        </p>
+                        <button class="checkout-btn">Thanh toán</button>
+                    </div>
+                </div>
 
             </div>
 
@@ -49,7 +50,7 @@
             const row = document.createElement('tr');
             const itemTotalPrice = item.price * item.quantity; // Calculate item total
             totalPrice += itemTotalPrice; // Add to total price
-            
+
 
             row.innerHTML = `
             <td class="product-info">
@@ -76,7 +77,7 @@
         // Update the "Tổng tiền" display
         totalPriceElement.textContent = `${totalPrice.toLocaleString()} đ`;
     }
-    
+
     // Handle quantity update
     function handleQuantityChange(action, productId) {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -130,4 +131,24 @@
             }
         });
     });
+    document.querySelector('.checkout-btn').addEventListener('click', () => {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Gửi dữ liệu giỏ hàng tới server
+    fetch('/Cart/Checkout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(cart),
+    })
+    .then(response => {
+        if (response.ok) {
+            window.location.href = '/Home/Payment'; // Chuyển sang trang Payment
+        } else {
+            alert('Có lỗi xảy ra khi chuyển sang trang thanh toán.');
+        }
+    });
+});
+
 </script>

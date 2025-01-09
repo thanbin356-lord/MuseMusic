@@ -11,15 +11,19 @@ namespace MuseMusic.Models.ViewModels
 {
     public class VinylViewModel
     {
-        public List<Models.ViewModels.Product> Products{ get; set; }
+        public List<Models.ViewModels.Product> Products { get; set; }
         public Product SelectedProduct { get; set; }
-        public List<Artist> AllArtists { get;  set; }
+        public List<Artist> AllArtists { get; set; }
         public List<Mood> AllMoods { get; set; }
         public List<Brand> AllBrands { get; set; }
         public List<string> SelectedArtistNames { get; set; }
         public List<string> SelectedMoodNames { get; set; }
         public List<Category> AllCategories { get; set; }
         public List<string> SelectedCategoryNames { get; set; }
+        public int CurrentPage { get; set; }
+        public int PageSize { get; set; }
+        public int TotalProducts { get; set; }
+        public int TotalPages => (int)Math.Ceiling((double)TotalProducts / PageSize);
 
     }
 
@@ -38,7 +42,7 @@ namespace MuseMusic.Models.ViewModels
         public string CategoriesNames { get; set; }
         public string MoodNames { get; set; }
         public int? ProductQuantity { get; set; }
-        public string SelectedBrandName { get;set; }
+        public string SelectedBrandName { get; set; }
         public List<string> ImageUrls { get; set; }
         public string? PrimaryImageUrl { get; set; }
     }

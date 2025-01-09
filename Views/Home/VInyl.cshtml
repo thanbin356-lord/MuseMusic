@@ -36,7 +36,7 @@
                         <a href="#">TÂM TRẠNG</a>
                     </nav>
                 </div>
-  </div>
+            </div>
         </div>
     </section>
 
@@ -110,8 +110,6 @@
                         <h4>HIỂN THỊ: </h4>
                         <select class="filter-select">
                             <option value="1">01 - 12</option>
-                            <option value="2">12-30</option>
-                            <option value="3">30-40</option>
                         </select>
                     </div>
 
@@ -121,33 +119,48 @@
     </section>
 
     <div class="product-container">
-    <!--  Product List -->
         @foreach (var product in Model.Products)
         {
-                <div class="product">
-                    <a href="/Home/VinylDetails/@product.ProductId"><img src="@product.ProductImage" alt="@product.ProductName"></a>
-                    <h2>@product.ProductName
-                    </h2>
-                    <p>@product.ArtistNames</p>
-                    <p class="price">@product.Price</p>
-                    <div class="buttons">
-                        <span class="preorder">PREORDER</span>
-                        <span class="size">M</span>
-                    </div>
-                </div>       
+            <div class="product">
+                <a href="/Home/VinylDetails/@product.ProductId"><img src="@product.ProductImage"
+                        alt="@product.ProductName"></a>
+                <h2>@product.ProductName</h2>
+                <p>@product.ArtistNames</p>
+                <p class="price">@product.Price</p>
+                <div class="buttons">
+                    <span class="preorder">PREORDER</span>
+                    <span class="size">M</span>
+                </div>
+            </div>
         }
     </div>
+
     <div class="container">
         <div class="pagination">
-             <button class="page-btn active">1</button>
-            @* <button class="page-btn">2</button>
-    <button class="page-btn">3</button> *@
-                <span>...</span>
-            @* <button class="page-btn">201</button>
-    <button class="page-btn">202</button>
-    <button class="page-btn">203</button> *@
-             <button class="page-btn next">&gt;</button>
+            @if (Model.CurrentPage > 1)
+            {
+                <a href="@Url.Action("Vinyl", "Home", new { page = Model.CurrentPage - 1 })" class="page-btn"> &lt; </a>
+            }
+
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                if (i == Model.CurrentPage)
+                {
+                    <span class="page-btn active">@i</span>
+                }
+                else
+                {
+                    <a href="@Url.Action("Vinyl", "Home", new { page = i })" class="page-btn">@i</a>
+                }
+            }
+
+            @if (Model.CurrentPage < Model.TotalPages)
+            {
+                <a href="@Url.Action("Vinyl", "Home", new { page = Model.CurrentPage + 1 })" class="page-btn">&gt;</a>
+
+            }
+        </div>
+
     </div>
-    </div>
-    
+
 </main>

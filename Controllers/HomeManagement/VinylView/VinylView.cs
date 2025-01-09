@@ -28,13 +28,15 @@ public class VinylView : Controller
     }
 
     [HttpGet("vinyl")]
-    public IActionResult Vinyl()
+    public IActionResult Vinyl(int page = 1, int pageSize = 12)
     {
         using (var db = new shopmanagementContext())
         {
-            var vinylViewModel = new VinylViewModel
-            {
-                Products = (from p in db.Products
+            var totalProducts = (from p in db.Products
+                                 join v in db.Vinyls on p.Id equals v.ProductId
+                                 select p).Count();
+
+            var products = (from p in db.Products
                             join v in db.Vinyls on p.Id equals v.ProductId
                             join img in db.ImageUrls.Where(img => (bool)img.IsPrimary) on p.Id equals img.ProductId
                             let artistNames = (from av in db.ArtistVinyls
@@ -51,13 +53,23 @@ public class VinylView : Controller
                                 DiskId = v.DiskId,
                                 Tracklist = v.Tracklist,
                                 ArtistNames = string.Join(", ", artistNames)
-                                // Status = v.Status // Assume this field exists to indicate preorder, etc.
-                            }).ToList()
+                            })
+                            .Skip((page - 1) * pageSize) // Bỏ qua các sản phẩm ở các trang trước
+                            .Take(pageSize) // Lấy số sản phẩm cho trang hiện tại
+                            .ToList();
+
+            var vinylViewModel = new VinylViewModel
+            {
+                Products = products,
+                CurrentPage = page,
+                PageSize = pageSize,
+                TotalProducts = totalProducts
             };
 
             return View("~/Views/Home/Vinyl.cshtml", vinylViewModel);
         }
     }
+
 
     [HttpGet("vinyldetails/{id}")]
     public IActionResult VinylDetails(int id)
