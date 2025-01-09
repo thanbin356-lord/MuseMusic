@@ -1,0 +1,108 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@model MuseMusic.Models.ManagerModels.AccessoriesViewModel
+
+<main class="disk-management">
+    <h1>CHỈNH SỬA ĐĨA THAN</h1>
+    <div class="form-container">
+        <form method="post" enctype="multipart/form-data" asp-action="EditAccessories">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="SelectedAccessories.ProductId" value="@Model.SelectedAccessories.ProductId" />
+            <!-- Product Image (Optional) -->
+            @* <div class="product-image">
+                <div class="image-placeholder" style="margin-top: 20px;">
+                    <h4>Danh sách ảnh sản phẩm</h4>
+                    <div class="gallery" style="display: flex; flex-wrap: wrap;">
+                        @foreach (var image in Model.AllImages)
+                        {
+                            <div class="image-item" style="margin: 10px; text-align: center;">
+                                <img src="@image.Url" alt="Product Image"
+                                    style="max-width: 200px; border: 1px solid #ccc; border-radius: 8px;">
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div> *@
+            <div class="product-info">
+                <!-- Form fields for Product Name, Artist, Category, etc. -->
+                <div class="form-group">
+                    <label for="name">Tên*</label>
+                    <input type="text" id="name" asp-for="SelectedAccessories.ProductName"
+                        placeholder="Nhập tên sản phẩm" value="@Model.SelectedAccessories.ProductName" required />
+                </div>
+                <div class="form-group">
+                    <label for="brand">Hãng phát hành*</label>
+                    <select id="brand" asp-for="SelectedBrandId" class="js-example-basic-single" style="width: 300px;"
+                        required>
+                        @if (Model?.AllBrands != null)
+                        {
+                            @foreach (var brand in Model.AllBrands)
+                            {
+                                <!option value="@brand.Id" @(Model.SelectedBrandId == brand.Id ? "selected" : "")>@brand.Name
+                                </!option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="price">Giá tiền*</label>
+                    <input type="text" id="price" asp-for="SelectedAccessories.Price" placeholder="Nhập giá tiền"
+                        value="@Model.SelectedAccessories.Price" required />
+                </div>
+                <div class="form-group">
+                    <label for="stock">Số lượng sản phẩm*</label>
+                    <input type="text" id="stock" asp-for="SelectedAccessories.ProductQuantity"
+                        placeholder="Nhập số lượng sản phẩm" value="@Model.SelectedAccessories.ProductQuantity"
+                        required />
+                </div>
+            </div>
+            <div class="additional-info">
+                <div class="form-group">
+                    <label for="notes">Ghi chú sản phẩm</label>
+                    <textarea id="notes" asp-for="SelectedAccessories.ProductDescription"
+                        placeholder="Nhập ghi chú">@Model.SelectedAccessories.ProductDescription</textarea>
+                </div>
+            </div>
+            <button type="button" class="cancel-btn" onclick="window.location.href='/admin/vinylmanage'">HỦY</button>
+            <button type="submit" class="confirm-btn">LƯU</button>
+        </form>
+    </div>
+
+</main>
+
+
+<script>
+    // Handle the image upload button
+    document.querySelector(".add-image-btn").addEventListener("click", function () {
+        document.querySelector("#image-upload").click();
+    });
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
+<script>
+    function formatState(state) {
+        if (!state.id) {
+            return state.text;
+        }
+        // Use .text() instead of HTML string concatenation to avoid script injection issues
+        $state.find("span").text(state.text);
+        $state.find("img").attr("src", baseUrl + "/" + state.element.value.toLowerCase() + ".png");
+
+        return $state;
+    };
+    $(".js-example-templating").select2({
+        templateSelection: formatState
+    });
+
+    $(".js-example-basic-multiple-limit").select2({
+        maximumSelectionLength: 5
+    });
+    $('#artist, #category, #mood').on('change', function () {
+        // Trigger select2 to update the selected options before form submit
+        $(this).trigger('change');
+    });
+
+</script>

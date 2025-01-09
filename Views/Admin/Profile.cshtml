@@ -1,12 +1,12 @@
 @{
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+  Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-  <main class="user-info-main">
-    <div class="go-back">
-            <a href="/admin/categories"><i class="fa-solid fa-chevron-left"></i> quản lí khách hàng</a>
-        </div>
+<main class="user-info-main">
+  <div class="go-back">
+    <a href="/admin/categories"><i class="fa-solid fa-chevron-left"></i> quản lí khách hàng</a>
+  </div>
   <div class="user-info">
-    
+
     <div class="profile">
       <img src="/image/user.png" alt="Profile Picture" class="profile-picture">
       <button class="delete-button">Xóa thông tin</button>
@@ -22,36 +22,36 @@
           <input type="email" id="email" value="abcdefghijk@gmail.com" readonly>
         </div>
 
-      <div class="form-group-1">
-        <div class="form-group">
-          <label>Giới tính</label>
-          <input type="text" value="Nam" readonly>
+        <div class="form-group-1">
+          <div class="form-group">
+            <label>Giới tính</label>
+            <input type="text" value="Nam" readonly>
+          </div>
+          <div class="form-group">
+            <label>Quốc tịch</label>
+            <input type="text" value="Việt Nam" readonly>
+          </div>
+          <div class="form-group">
+            <label>Ngày sinh</label>
+            <input type="text" value="DD/MM/YY" readonly>
+          </div>
         </div>
-        <div class="form-group">
-          <label>Quốc tịch</label>
-          <input type="text" value="Việt Nam" readonly>
-        </div>
-        <div class="form-group">
-          <label>Ngày sinh</label>
-          <input type="text" value="DD/MM/YY" readonly>
-        </div>
-       </div>
 
         <div class="form-group-2">
           <label for="address">Địa chỉ</label>
           <input type="address" id="address" value="" readonly>
         </div>
-        
 
-<div class="User-Order-Detail">
 
-  <div class="Order-Number">
-    <p>Số lượng đơn hàng đã mua: </p>
-    <p>5</p>
-  </div>
+        <div class="User-Order-Detail">
 
-  
-</div>
+          <div class="Order-Number">
+            <p>Số lượng đơn hàng đã mua: </p>
+            <p>5</p>
+          </div>
+
+
+        </div>
 
       </div>
       <table class="purchase-history">
@@ -70,7 +70,8 @@
             <td>123456</td>
             <td>1/1/1111</td>
             <td>999.999.999đ</td>
-            <td><button class="butt" onclick="window.location.href='https://www.youtube.com/watch?v=lHP973olRGc'">...</button></td>
+            <td><button class="butt"
+                onclick="window.location.href='https://www.youtube.com/watch?v=lHP973olRGc'">...</button></td>
           </tr>
           <tr>
             <td>2</td>
@@ -106,5 +107,5 @@
         Tổng giá trị: <span>4,999,999,995đ</span>
       </div>
     </div>
-  </div>    
-  </main>
+  </div>
+</main>

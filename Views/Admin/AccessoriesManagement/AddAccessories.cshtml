@@ -1,0 +1,102 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@model MuseMusic.Models.ManagerModels.AccessoriesViewModel
+
+<main class="disk-management">
+    <h1>THÊM ĐĨA THAN</h1>
+    <div class="form-container">
+        <form method="post" asp-action="AddAccessories" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="SelectedAccessories.ProductId"
+                value="@Model.SelectedAccessories.ProductId" />
+
+            <div class="product-info">
+                <div class="form-group">
+                    <label for="name">Tên*</label>
+                    <input type="text" id="name" asp-for="SelectedAccessories.ProductName"
+                        placeholder="Nhập tên sản phẩm" required />
+                </div>
+
+
+                <div class="form-group">
+                    <label for="brand">Hãng phát hành*</label>
+                    <select id="brand" asp-for="SelectedBrandId" class="js-example-basic-single" style="width: 300px;"
+                        required>
+                        @if (Model?.AllBrands != null)
+                        {
+                            @foreach (var brand in Model.AllBrands)
+                            {
+                                <!option value="@brand.Id" @(Model.SelectedBrandId == brand.Id ? "selected" : "")>@brand.Name
+                                </!option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="price">Giá tiền*</label>
+                    <input type="text" id="price" asp-for="SelectedAccessories.Price" placeholder="Nhập giá tiền"
+                        required />
+                </div>
+
+                <div class="form-group">
+                    <label for="stock">Số lượng sản phẩm*</label>
+                    <input type="text" id="stock" asp-for="SelectedAccessories.ProductQuantity"
+                        placeholder="Nhập số lượng sản phẩm" required />
+                </div>
+            </div>
+            <!-- Additional Information -->
+            <div class="additional-info">
+                <div class="form-group">
+                    <label for="notes">Ghi chú sản phẩm</label>
+                    <textarea id="notes" asp-for="SelectedAccessories.ProductDescription"
+                        placeholder="Nhập ghi chú"></textarea>
+                </div>
+
+                <!-- Buttons -->
+                <div class="form-buttons">
+                    <button type="button" class="cancel-btn"
+                        onclick="window.location.href='/admin/vinylmanage'">HỦY</button>
+                    <button type="submit" class="confirm-btn">LƯU</button>
+                </div>
+        </form>
+    </div>
+</main>
+
+<!-- Scripts -->
+
+
+<script>
+    // Handle the image upload button
+    document.querySelector(".add-image-btn").addEventListener("click", function () {
+        document.querySelector("#image-upload").click();
+    });
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
+<script>
+    function formatState(state) {
+        if (!state.id) {
+            return state.text;
+        }
+        // Use .text() instead of HTML string concatenation to avoid script injection issues
+        $state.find("span").text(state.text);
+        $state.find("img").attr("src", baseUrl + "/" + state.element.value.toLowerCase() + ".png");
+
+        return $state;
+    };
+    $(".js-example-templating").select2({
+        templateSelection: formatState
+    });
+
+    $(".js-example-basic-multiple-limit").select2({
+        maximumSelectionLength: 5
+    });
+    $('#artist, #category, #mood').on('change', function () {
+        // Trigger select2 to update the selected options before form submit
+        $(this).trigger('change');
+    });
+
+</script>

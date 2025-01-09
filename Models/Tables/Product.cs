@@ -21,8 +21,10 @@ namespace MuseMusic.Models.Tables
         public decimal Price { get; set; }
         public int? AdminsellerId { get; set; }
         public int? Quantity { get; set; }
+        public int? BrandId { get; set; }
 
         public virtual Adminseller? Adminseller { get; set; }
+        public virtual Brand? Brand { get; set; }
         public virtual ICollection<Accessory> Accessories { get; set; }
         public virtual ICollection<CartDetail> CartDetails { get; set; }
         public virtual ICollection<ImageUrl> ImageUrls { get; set; }

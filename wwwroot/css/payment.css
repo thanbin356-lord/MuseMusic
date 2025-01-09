@@ -78,7 +78,7 @@
 }
 
 /* Tiêu đề */
-.title {
+.payment-title {
     font-size: 20px;
     font-weight: bold;
     text-align: left;
@@ -113,23 +113,23 @@
     color: #333;
 }
 
-table {
+.payment-details table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
 }
 
-table th, table td {
+.payment-details table th, table td {
     text-align: left;
     padding: 8px 10px;
     border-bottom: 1px solid #ddd;
 }
 
-table th {
+.payment-details table th {
     font-weight: bold;
 }
 
-.total-row td {
+.payment-details .total-row td {
     font-weight: bold;
     font-size: 16px;
 }
@@ -145,7 +145,7 @@ table th {
     font-weight: bold;
 }
 
-textarea {
+ textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;

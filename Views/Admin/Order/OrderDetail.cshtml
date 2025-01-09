@@ -1,0 +1,119 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@model MuseMusic.Models.ManagerModels.OrderViewModel
+
+<main class="orderdetail-container">
+
+    <h2>QUẢN LÝ ĐƠN HÀNG</h2>
+    <div class="buttons">
+        <button class="delete">Xóa Hóa Đơn</button>
+        <button class="print">In Hóa Đơn</button>
+    </div>
+
+    <h3>Chi tiết hóa đơn:</h3>
+    <div class="line"></div>
+    <div class="customer-info">
+        <p>Họ và tên: <strong>@Model.SelectedCustomerOrders.CustomerName</strong></p>
+        <p>SĐT: <strong>@Model.SelectedCustomerOrders.Phone</strong></p>
+        <p>Địa chỉ: <strong>@Model.SelectedCustomerOrders.Address</strong></p>
+    </div>
+    <div class="line"></div>
+
+    <table class="order-summary">
+        <thead>
+            <tr>
+                <th>Sản phẩm</th>
+                <th>Tên sản phẩm</th>
+                <th>Nghệ sĩ</th>
+                <th>Hãng</th>
+                <th>Giá tiền</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                @foreach (var vinyl in Model.SelectedCustomerOrders.AllProducts)
+                {
+                <tr>
+                    <td class="product-img">
+                        <img src="/image/Stray_Kids_-_Giant.png" alt="Album Cover">
+                    </td>
+                    <td>@vinyl.ProductName</td>
+                    <td>
+                            @foreach (var artist in vinyl.ArtistNames)
+                            {
+                            <div>@artist</div>
+                            }
+                    </td>
+                    <td>
+                            @vinyl.BrandName
+                    </td>
+                    <td>@vinyl.Price</td>
+                    <td>@vinyl.Quantity</td>
+                    <td>@(vinyl.Price * vinyl.Quantity)</td>
+                </tr>
+                }
+            </tr>
+
+        </tbody>
+    </table>
+
+    <div class="line"></div>
+    <h3>Tổng quan đơn hàng:</h3>
+    <div class="total-container">
+        <p class="total">Tổng phụ:</p>
+        <p class="total">
+            @* Calculate Subtotal (sum of Price * Quantity for all products) *@
+            @Model.SelectedCustomerOrders.AllProducts.Sum(v => v.Price * v.Quantity)$
+        </p>
+    </div>
+    <div class="total-container">
+        <p class="total">Vận chuyển:</p>
+        <p class="total">22$</p>
+    </div>
+    <div class="total-container">
+        <p class="total">Phiếu giảm giá:</p>
+        <p class="total">-15$</p>
+    </div>
+    <div class="total-container">
+        <p class="total-bold">Tổng:</h4>
+        <p class="total">
+                @* Total = Subtotal + Shipping - Discount *@
+                @(Model.SelectedCustomerOrders.AllProducts.Sum(v => v.Price * v.Quantity) + 22 - 15)$
+        </p>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="order-details">
+        <h3>Chi tiết đơn hàng:</h3>
+        <div class="total-container">
+            <p class="total">Số đơn hàng:</p>
+            <p class="total">@Model.SelectedCustomerOrders.OrderId</p>
+        </div>
+        <div class="total-container">
+            <p class="total">Ngày đặt hàng:</p>
+            <p class="total">@Model.SelectedCustomerOrders.created_at.ToString("dd/MM/yyyy HH:mm tt")</p>
+        </div>
+        <div class="total-container">
+            <p class="total">Phương thức thanh toán:</p>
+            <p class="total">Thanh toán qua ngân hàng</p>
+        </div>
+        <div class="total-container">
+            <p class="total">Thời gian thanh toán:</p>
+            <p class="total">27/11/2024 15:36 PM</p>
+        </div>
+        <div class="total-container">
+            <p class="total">Ngày vận chuyển:</p>
+            <p class="total">27/11/2024 15:36 PM</p>
+        </div>
+        <div class="total-container">
+            <p class="total">Ngày giao hàng:</p>
+            <p class="total">27/11/2024 15:36 PM</p>
+        </div>
+    </div>
+
+    <button class="back-button" onclick="location.href='/admin/orders'">Quay lại</button>
+</main>

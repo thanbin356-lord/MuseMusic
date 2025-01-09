@@ -3,15 +3,15 @@
 .yoru {
     background: url("/image/image 9.png") ;
     z-index: -1;
-    background-size: cover; /* Làm cho ảnh fill vừa màn hình */
-    height: 200vh;
+    background-size: auto ;
+    background-position: center; /* Làm cho ảnh fill vừa màn hình */
     background-repeat: no-repeat; /* Không lặp ảnh */
 }
 /* Container */
-.container {
+.yoru .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding-top: 80px;
 }
 
 /* Heading */
@@ -36,6 +36,8 @@ h1 {
     margin-bottom: 20px;
     
 }
+
+
 
 .cart-table tr {
     display: flex;
@@ -106,6 +108,7 @@ h1 {
 
 .cart-table .quantity-btn,
 .cart-table .quantity-input {
+    z-index: 1;
     background-color: #343434; /* Màu nền trắng */
     border: none; /* Bỏ đường viền */
     border-radius: 30px;
@@ -122,13 +125,21 @@ h1 {
 }
 
 .cart-table .product-delete {
-    flex: 0.5;
     text-align: center;
     color: #000000;
     cursor: pointer;
     font-size: 18px;
     align-content:center;
-    
+    z-index: 1;
+
+}
+
+/*  */
+
+.cart-container-main{
+    display: grid;
+    grid-template-columns: 75% 25%;
+    padding-top: 50px;
 }
 
 /* Summary box */
@@ -137,7 +148,7 @@ h1 {
     justify-content: flex-end; /* Đẩy summary-box sang bên phải */
     margin-bottom: 30px;
     margin-top: -20px; /* Căn chỉnh cho nó gần bảng */
-    position: relative;
+    
     top: -60px;
 }
 

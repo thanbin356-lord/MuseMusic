@@ -45,113 +45,14 @@ public class AdminController : Controller
     {
         return View();
     }
+
+    [HttpGet("orderdetail")]
     public IActionResult OrderDetail()
     {
-        return View();
+        return View("~/Views/Admin/Order/OrderDetail.cshtml");
     }
     
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-
-    public IActionResult RecordPlayer()
-    {
-        {
-            using (var db = new shopmanagementContext())
-            {
-                // phải xử lý trong cái using 
-                // bước 1 tạo đối tượng 
-                var recordPlayerViewModel = new RecordPlayerViewModel();
-                // bước 2 load dữ liệu từ db 
-                var product = (from p in db.Products
-                               join r in db.Recordplayers on p.Id equals r.ProductId
-                               join br in db.Brands on r.BrandId equals br.Id
-                               select new
-                               {
-                                   Product = p,
-                                   RecordPlayer = r,
-                                   Brand = br
-                               }).ToList();
-
-                // bước 3 gắn lại dữ liệu vào đối tượng 
-                recordPlayerViewModel.Products = product.Select(x => new Product
-                {
-                    ProductId = x.Product.Id,
-                    ProductName = x.Product.Name,
-                    ProductDescription = x.Product.Description,
-                    Price = x.Product.Price.ToString("C"),
-                    BrandName = x.Brand.Name,
-                }).ToList();
-
-                // bước 4 return l 
-                return View(recordPlayerViewModel);
-            }
-        }
-    }
-    public IActionResult Accessories()
-    {
-        {
-            using (var db = new shopmanagementContext())
-            {
-                // phải xử lý trong cái using 
-                // bước 1 tạo đối tượng 
-                var acessoriesViewModel = new AccessoriesViewModel();
-                // bước 2 load dữ liệu từ db 
-                var product = (from p in db.Products
-                               join asory in db.Accessories on p.Id equals asory.ProductId
-                               join br in db.Brands on asory.BrandId equals br.Id
-                               select new
-                               {
-                                   Product = p,
-                                   Accessory = asory,
-                                   Brand = br
-                               }).ToList();
-
-                // bước 3 gắn lại dữ liệu vào đối tượng 
-                acessoriesViewModel.Products = product.Select(x => new Product
-                {
-                    ProductId = x.Product.Id,
-                    ProductName = x.Product.Name,
-                    ProductDescription = x.Product.Description,
-                    Price = x.Product.Price.ToString("C"),
-                    BrandName = x.Brand.Name,
-                }).ToList();
-
-                // bước 4 return l 
-                return View(acessoriesViewModel);
-            }
-        }
-    }
-
-    public IActionResult Customers()
-    {
-        {
-            using (var db = new shopmanagementContext())
-            {
-                var customerViewModel = new CustomerViewModel();
-
-                // Tách dữ liệu ra để tránh lỗi dịch ngữ cảnh
-                var customers = db.Customers
-                    .Select(c => new
-                    {
-                        Customer = c,
-                        OrderCount = db.Orders.Count(o => o.CustomerId == c.Id)
-                    })
-                    .ToList();
-
-                customerViewModel.Customers = customers.Select(x => new Customer
-                {
-                    CustomerId = x.Customer.Id,
-                    CustomerName = x.Customer.Name,
-                    Email = db.Accounts.FirstOrDefault(a => a.Id == x.Customer.AccountId)?.Email,
-                    Phone = x.Customer.Phone,
-                    Address = x.Customer.Address,
-                    OrderCount = x.OrderCount
-                }).ToList();
-
-                return View(customerViewModel);
-            }
-        }
-    }
-
 
     public IActionResult Orders()
     {
@@ -192,28 +93,11 @@ public class AdminController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
     
-    public partial class RecordPlayerViewModel
-    {
-        public List<Product> Products { get; set; }
-    }
     public partial class AccessoriesViewModel
     {
         public List<Product> Products { get; set; }
     }
-    public class Product
-    {
-        public List<Vinyl> Vinyls { get; set; }
-        public int ProductId { get; set; }
-        public string DiskId { get; set; }
-        public string ProductName { get; set; }
-        public string ProductDescription { get; set; }
-        public int ProductQuantity { get; set; }
-        public string Price { get; set; }
-        public int Years { get; set; }
-        public string Tracklist { get; set; }
-        public string BrandName { get; set; }
-        public string ArtistNames{get;set;}
-    }
+
     public class CustomerViewModel
     {
         public List<Customer> Customers { get; set; }

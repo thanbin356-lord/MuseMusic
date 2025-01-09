@@ -1,8 +1,7 @@
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-@model MuseMusic.Controllers.AdminManagement.VinylManagement.VinylController.VinylViewModel
-
+@model MuseMusic.Models.ManagerModels.VinylViewModel
 <main class="disk-management">
 
 @* upload ảnh *@
@@ -142,6 +141,20 @@ btnRefresh.addEventListener('click', function () {
             @Html.AntiForgeryToken()
             <input type="hidden" asp-for="SelectedProduct.ProductId" value="@Model.SelectedProduct.ProductId" />
             <!-- Product Image (Optional) -->
+            <div class="product-image">
+                <div class="image-placeholder" style="margin-top: 20px;">
+                    <h4>Danh sách ảnh sản phẩm</h4>
+                    <div class="gallery" style="display: flex; flex-wrap: wrap;">
+                        @foreach (var image in Model.AllImages)
+                        {
+                            <div class="image-item" style="margin: 10px; text-align: center;">
+                                <img src="@image.Url" alt="Product Image"
+                                    style="max-width: 200px; border: 1px solid #ccc; border-radius: 8px;">
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
             <div class="product-info">
                 <!-- Form fields for Product Name, Artist, Category, etc. -->
                 <div class="form-group">
