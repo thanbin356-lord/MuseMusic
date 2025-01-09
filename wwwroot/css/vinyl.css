@@ -4,6 +4,12 @@
   padding-bottom: 4rem;
 }
 
+.vinyl-img-top{
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
 .vinyl-title{
     justify-content: center;
     text-align: center;
@@ -20,7 +26,7 @@
     font-weight: 800;
     line-height: 38.73px;
     text-align: center;
-  }
+}
 
 /*---------------------------------------
   FILTER               
