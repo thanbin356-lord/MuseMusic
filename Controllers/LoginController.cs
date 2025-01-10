@@ -83,7 +83,14 @@ public class LoginController : Controller
             // Save the login cookie
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
-            return RedirectToAction("Index", "Home"); // Redirect to homepage after successful login
+            if (roles.Contains("Admin"))
+            {
+                return RedirectToAction("Index", "Admin"); // Chuyển hướng tới trang dành cho admin
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home"); // Chuyển hướng tới trang chủ của khách hàng
+            }
         }
         else
         {
@@ -135,7 +142,7 @@ public class LoginController : Controller
         // Redirect to login page after logging out
         return RedirectToAction("Login", "Login");
     }
-    
+
     [AllowAnonymous]
     public IActionResult AccessDenied()
     {

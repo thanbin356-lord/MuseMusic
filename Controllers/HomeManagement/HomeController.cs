@@ -48,25 +48,24 @@ public class HomeController : Controller
                             .Take(pageSize)
                             .ToList();
             var artists = (from a in db.Artists
-                           join av in db.ArtistVinyls on a.Id equals av.ArtistId
-                           join v in db.Vinyls on av.VinylId equals v.Id
                            select new
                            {
                                ArtistName = a.Name,
                                ArtistImageUrl = a.Artisitmageturl
-                           }).Distinct().Take(4).ToList();
+                           }).Distinct().Take(5).ToList();
 
             ViewBag.Artists = artists;
+
             var categories = (from a in db.Categories
-                           join av in db.CategoriesVinyls on a.Id equals av.CategoryId
-                           join v in db.Vinyls on av.VinylId equals v.Id
-                           select new
-                           {
-                               CategoriesName = a.Name,
-                               CategoriesImageUrl = a.CategoryImage,
-                           }).Distinct().Take(4).ToList();
+                              select new
+                              {
+                                  CategoriesName = a.Name,
+                                  CategoriesImageUrl = a.CategoryImage,
+                              }).Take(7).ToList();
 
+            ViewBag.Categories = categories;
 
+            ViewBag.Categories = categories;
             var vinylViewModel = new MuseMusic.Models.ViewModels.VinylViewModel
             {
                 Products = products,

@@ -59,7 +59,7 @@
         @foreach (var product in Model.Products)
         {
             <div class="product">
-                <a href="#"><img src="@product.ProductImage" alt="@product.ProductName"></a>
+                <a href="/Home/VinylDetails/@product.ProductId"><img src="@product.ProductImage" alt="@product.ProductName"></a>
                 <h2>@product.ProductName</h2>
                 <p>@product.ProductDescription</p>
                 <p class="price">@product.Price</p>
@@ -86,31 +86,24 @@
     <div class="categories">
         <h2>THỂ LOẠI</h2>
         <div class="category-container">
-            <div class="category-item">
-                <a href="#"><img src="image/pop.png" alt="Pop Music"></a>
-                <p>POP</p>
-            </div>
-            <div class="category-item">
-                <a href="#"><img src="image/rock.png" alt="Rap Music"></a>
-                <p>POP</p>
-            </div>
-            <div class="category-item">
-                <a href="#"><img src="image/rockm.png" alt="Rock Music"></a>
-                <p>ROCK</p>
-            </div>
-            <div class="category-item">
-                <a href="#"><img src="image/jazz.png" alt="Jazz Music"></a>
-                <p>JAZZ</p>
-            </div>
-            <div class="category-item">
-                <a href="#"><img src="image/folk.png" alt="Folk Music"></a>
-                <p>FOLK</p>
-            </div>
-            <div class="category-item">
-                <a href="#"><img src="image/electronic.png" alt="Electronic Music"></a>
-                <p>ELECTRONIC</p>
-            </div>
+            @if (ViewBag.categories != null)
+            {
+                foreach (var category in ViewBag.Categories)
+                {
+                    <div class="category-item">
+                        <a href="#"><img src="@category.CategoriesImageUrl" alt="@category.CategoriesName"></a>
+                        <p>@category.CategoriesName</p>
+                    </div>
+                }
+
+            }
         </div>
+        <div class="view-more">
+            <a href="/home/musicgenre">
+                <button>Xem thêm</button>
+            </a>
+        </div>
+
         <h2>Nghệ sĩ</h2>
         <div class="category-container">
             @if (ViewBag.Artists != null)

@@ -11,7 +11,7 @@ namespace MuseMusic.Models.ViewModels
 {
     public class VinylViewModel
     {
-        public List<Models.ViewModels.Product> Products { get; set; }
+        public List<Product> Products { get; set; }
         public Product SelectedProduct { get; set; }
         public List<Artist> AllArtists { get; set; }
         public List<Mood> AllMoods { get; set; }
@@ -20,16 +20,25 @@ namespace MuseMusic.Models.ViewModels
         public List<string> SelectedMoodNames { get; set; }
         public List<Category> AllCategories { get; set; }
         public List<string> SelectedCategoryNames { get; set; }
+        public List<int> SelectedCategoryIds { get; set; } // Thêm thuộc tính này
+        public List<int> SelectedArtistIds { get; set; } // Thêm thuộc tính này
+        public List<int> SelectedMoodIds { get; set; } // Thêm thuộc tính này
+        public List<string> SelectedEraIds { get; set; } // Added property for selected eras
+        public List<string> AllEras { get; set; } // Added property to list all available eras
         public int CurrentPage { get; set; }
         public int PageSize { get; set; }
         public int TotalProducts { get; set; }
         public int TotalPages => (int)Math.Ceiling((double)TotalProducts / PageSize);
 
+        public VinylViewModel()
+        {
+            AllEras = new List<string> { "1980s", "1990s", "2000s", "2010s", "2020s" }; // Predefined list of eras
+        }
     }
+
 
     public class Product
     {
-
         public int ProductId { get; set; }
         public string DiskId { get; set; }
         public string ProductName { get; set; }
@@ -47,5 +56,21 @@ namespace MuseMusic.Models.ViewModels
         public List<string> ImageUrls { get; set; }
         public string? PrimaryImageUrl { get; set; }
         public string ArtistImageUrl { get; set; }
+        public Vinyl Vinyl { get; set; }
     }
+    public class Vinyl
+    {
+        public int VinylId { get; set; }
+        public string DiskId { get; set; }
+        public int ProductId { get; set; }
+
+        // Navigation properties to related entities
+        public List<CategoriesVinyl> CategoriesVinyls { get; set; }
+        public List<ArtistVinyl> ArtistVinyls { get; set; }
+        public List<MoodVinyl> MoodVinyls { get; set; }
+
+
+
+    }
+
 }
