@@ -14,7 +14,6 @@ using MuseMusic.Models.ViewModels;
 namespace MuseMusic.Controllers.HomeManagement.VinylView;
 
 
-[Authorize]
 [Route("home")]
 public class VinylView : Controller
 {

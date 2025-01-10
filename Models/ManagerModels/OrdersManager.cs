@@ -12,7 +12,7 @@ namespace MuseMusic.Models.ManagerModels
         public List<Orders> Orders { get; set; }
 
         public Orders SelectedCustomerOrders { get; set; }
-
+        public List<Orders> AllOrders { get; set; }
     }
     public class Orders
     {

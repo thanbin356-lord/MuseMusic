@@ -14,6 +14,7 @@
 function toggleForms(nextFormId) {
     // Lấy tất cả các form bằng ID
     const loginForm = document.getElementById('login-form');
+    const adminloginForm = document.getElementById('admin-login-form');
     const registerForm = document.getElementById('register-form');
     const register2Form = document.getElementById('register2-form');
     const resetRequestForm = document.getElementById('reset-request-form');
@@ -22,6 +23,7 @@ function toggleForms(nextFormId) {
 
     // Ẩn tất cả các form trước
     loginForm.classList.add('form-hidden');
+    adminloginForm.classList.add('form-hidden');
     registerForm.classList.add('form-hidden');
     register2Form.classList.add('form-hidden');
     resetRequestForm.classList.add('form-hidden');
@@ -31,6 +33,8 @@ function toggleForms(nextFormId) {
     // Hiển thị form tương ứng dựa vào nextFormId
     if (nextFormId === 'login-form') {
         loginForm.classList.remove('form-hidden');
+    } else if (nextFormId == 'admin-login-form') {
+        adminloginForm.classList.remove('form-hidden');
     } else if (nextFormId === 'register-form') {
         registerForm.classList.remove('form-hidden');
     } else if (nextFormId === 'register2-form') {

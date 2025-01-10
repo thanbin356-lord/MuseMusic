@@ -21,6 +21,7 @@ namespace MuseMusic.Models.Tables
         public DateTime? ExpectedStartDate { get; set; }
         public DateTime? ExpectedEndDate { get; set; }
         public decimal? Total { get; set; }
+        public string? VnpayRef { get; set; }
 
         public virtual Adminseller Adminseller { get; set; } = null!;
         public virtual Customer Customer { get; set; } = null!;

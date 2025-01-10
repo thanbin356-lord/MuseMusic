@@ -38,37 +38,36 @@ public class LoginController : Controller
         return View();
     }
 
-
     [HttpPost]
     [AllowAnonymous]
-    public async Task<IActionResult> Login(string email, string password)
+    public async Task<IActionResult> Login(string login, string password)
     {
-        // Find the account by email (you can also use username if that's unique)
+        // Tìm tài khoản bằng email hoặc username
         var account = await _context.Accounts
-            .FirstOrDefaultAsync(a => a.Email == email); // Using email for login (username can be used instead)
+            .FirstOrDefaultAsync(a => a.Email == login || a.Username == login); // Kiểm tra cả email và username
 
         if (account == null)
         {
-            // Account not found
+            // Nếu không tìm thấy tài khoản
             ModelState.AddModelError("", "Invalid login attempt.");
             return View();
         }
 
-        // Attempt to verify the password hash
+        // Kiểm tra mật khẩu
         bool isValidPassword = VerifyPassword(password, account.Password);
 
         if (isValidPassword)
         {
-            // If password is valid, proceed with the normal login process
+            // Nếu mật khẩu hợp lệ, tiếp tục quá trình đăng nhập
             var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Name, account.Email),
+            new Claim(ClaimTypes.Name, account.Email),  // Hoặc sử dụng account.Username
             new Claim(ClaimTypes.NameIdentifier, account.Id.ToString())
         };
 
-            // Add roles if needed
+            // Lấy các vai trò (roles) của người dùng
             var roles = await _context.AccountRoles
-                .Where(ur => ur.Id == account.Id)
+                .Where(ur => ur.AccountId == account.Id) // Chú ý thay đổi điều kiện với bảng account roles
                 .Select(ur => ur.Role.Name)
                 .ToListAsync();
 
@@ -80,28 +79,28 @@ public class LoginController : Controller
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var principal = new ClaimsPrincipal(identity);
 
-            // Save the login cookie
+            // Lưu cookie đăng nhập
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
+            // Chuyển hướng theo vai trò
             if (roles.Contains("Admin"))
             {
-                return RedirectToAction("Index", "Admin"); // Chuyển hướng tới trang dành cho admin
+                return RedirectToAction("Categories", "Admin");
             }
             else
             {
-                return RedirectToAction("Index", "Home"); // Chuyển hướng tới trang chủ của khách hàng
+                return RedirectToAction("Index", "Home");
             }
         }
         else
         {
-            // Password verification failed, check if it needs rehashing
+            // Nếu mật khẩu sai, kiểm tra xem có cần tái mã hóa không
             if (NeedsRehashing(account.Password))
             {
-                // Rehash password and update in the database
+                // Tái mã hóa mật khẩu và cập nhật lại trong cơ sở dữ liệu
                 var newHash = BCrypt.Net.BCrypt.HashPassword(password);
                 account.Password = newHash;
 
-                // Save the updated password hash to the database
                 _context.Update(account);
                 await _context.SaveChangesAsync();
             }

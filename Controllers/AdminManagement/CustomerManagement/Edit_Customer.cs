@@ -31,50 +31,78 @@ public class Edit_Customer : Controller
     {
         using (var db = new shopmanagementContext())
         {
+            // Try to fetch customer orders with related customer and account
+            var orderWithCustomer = db.Orders
+                .Include(o => o.Customer)
+                    .ThenInclude(c => c.Account)
+                .FirstOrDefault(o => o.CustomerId == id);
 
-            var customers = db.Orders
-            .Include(o => o.Customer)
-                .ThenInclude(ac => ac.Account)
-
-            .FirstOrDefault(o => o.CustomerId == id);
-            if (customers == null)
+            if (orderWithCustomer == null)
             {
-                return NotFound(); // Return 404 if no customers is found
+                // If no order exists, attempt to fetch customer directly
+                var customerOnly = db.Customers
+                    .Include(c => c.Account)
+                    .FirstOrDefault(c => c.Id == id);
+
+                if (customerOnly == null)
+                {
+                    return NotFound(); // Return 404 if no customer is found
+                }
+
+                // Create view model with only customer details
+                var customerViewModel = new OrderViewModel
+                {
+                    SelectedCustomerOrders = new Models.ManagerModels.Orders
+                    {
+                        CustomerId = customerOnly.Id,
+                        CustomerName = customerOnly.Name,
+                        Phone = customerOnly.Phone,
+                        Email = customerOnly.Account?.Email,
+                        Address = customerOnly.Address,
+                        OrderCount = 0, // No orders found
+                        OrderId = 0,
+                        created_at = DateTime.MinValue,
+                        total = 0
+                    },
+                    AllOrders = new List<Models.ManagerModels.Orders>() // Empty orders list
+                };
+
+                return View("~/Views/Admin/CustomerManagement/editcustomers.cshtml", customerViewModel);
             }
-            // var images = db.ImageUrls
-            //             .Where(img => img.CustomerId == customers.Customer.Id)
-            //             .ToList()
-            var orderCount = db.Orders
-                       .Where(o => o.CustomerId == id)
-                       .Count();
+
+            // Fetch all orders for the customer
+            var allOrders = db.Orders
+                .Where(o => o.CustomerId == id)
+                .Select(o => new Models.ManagerModels.Orders
+                {
+                    OrderId = o.Id,
+                    created_at = o.CreatedAt ?? DateTime.MinValue,
+                    total = o.Total ?? 0
+                })
+                .ToList();
+
+            // Count orders for the customer
+            var orderCount = allOrders.Count;
+
+            // Populate the view model
             var viewModel = new OrderViewModel
             {
                 SelectedCustomerOrders = new Models.ManagerModels.Orders
                 {
-                    CustomerId = customers.Customer.Id,
-                    CustomerName = customers.Customer.Name,
-                    Phone = customers.Customer.Phone,
-                    Email = customers.Customer.Account.Email,
-                    Address = customers.Customer.Address,
+                    CustomerId = orderWithCustomer.Customer.Id,
+                    CustomerName = orderWithCustomer.Customer.Name,
+                    Phone = orderWithCustomer.Customer.Phone,
+                    Email = orderWithCustomer.Customer.Account?.Email,
+                    Address = orderWithCustomer.Customer.Address,
                     OrderCount = orderCount,
-                    OrderId = customers.Id,
-                    created_at = (DateTime)customers.CreatedAt,
-                    total = (decimal)customers.Total,
+                    OrderId = orderWithCustomer.Id,
+                    created_at = orderWithCustomer.CreatedAt ?? DateTime.MinValue,
+                    total = orderWithCustomer.Total ?? 0
                 },
-                // AllBrands = db.Brands
-                //     .Select(b => new MuseMusic.Models.ManagerModels.Brand { Id = b.Id, Name = b.Name })
-                //     .ToList(),
-                // SelectedBrandId = customers.BrandId ?? 0,
+                AllOrders = allOrders
             };
 
             return View("~/Views/Admin/CustomerManagement/editcustomers.cshtml", viewModel);
         }
-    }
-
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View("Error!");
     }
 }
