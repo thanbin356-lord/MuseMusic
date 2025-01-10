@@ -30,3 +30,4 @@ ehthumbs.db
 
 # Các thư mục và tệp build trên macOS
 .DS_Store
+.fake
