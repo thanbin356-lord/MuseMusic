@@ -2,11 +2,11 @@
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 <main>
-   
-     <video class="video-background" autoplay muted loop>
+
+    <video class="video-background" autoplay muted loop>
         <source src="/image/mix.mp4" type="video/mp4">
     </video>
-   <div class="login-container">
+    <div class="login-container">
         <div class="logo">
             <img src="/image/muselogo.png" alt="Logo Muse">
         </div>
@@ -14,23 +14,24 @@
         <!-- Form đăng nhập -->
         <div id="login-form">
             <h1>Đăng nhập vào Muse</h1>
-            <form>
+            <form method="post" >
                 <label for="email">Email hoặc tên người dùng</label>
-                <input type="email" id="email" placeholder="Email" />
+                <input type="email" id="email" name="email" placeholder="Email" required />
 
                 <label for="password">Mật khẩu</label>
-                <input type="password" id="password" placeholder="Mật khẩu" />
+                <input type="password" id="password" name="password" placeholder="Mật khẩu" required />
 
-                <button type="submit" >Đăng nhập</button>
+                <button type="submit">Đăng nhập</button>
 
-                <a href="#"onclick ="toggleForms('reset-request-form')">Quên mật khẩu?</a>
-                <a href="#" onclick ="toggleForms('register-form')">Chưa có tài khoản? Đăng ký ngay</a>
-                <a href="#"onclick ="toggleForms('admin-login-form')"> Đăng nhập với tư cách Admin</a>
+                <a href="#" onclick="toggleForms('reset-request-form')">Quên mật khẩu?</a>
+                <a href="#" onclick="toggleForms('register-form')">Chưa có tài khoản? Đăng ký ngay</a>
+                <a href="#" onclick="toggleForms('admin-login-form')"> Đăng nhập với tư cách Admin</a>
 
                 <div class="social-login">
-                    <button class="facebook"><img src="/image/facebook-1--media-facebook-social.png" alt="Facebook">Tiếp tục với Facebook</button>
+                    <button class="facebook"><img src="/image/facebook-1--media-facebook-social.png" alt="Facebook">Tiếp
+                        tục với Facebook</button>
                     <button class="google"><img src="/image/google--media-google-social.png" alt="Google">
-                    <a class="i<3u" asp-controller="Login" asp-action="LoginGG"> Tiếp tục với Google</a>
+                        <a class="i<3u" asp-controller="Login" asp-action="LoginGG"> Tiếp tục với Google</a>
                     </button>
                 </div>
             </form>
@@ -42,85 +43,98 @@
             <form>
                 <label for="email">Email hoặc tên người dùng</label>
                 <input type="email" id="email" placeholder="Email" />
-                 <a href="#" onclick="showForm('register2-form')">
-                <button type="submit" onclick="toggleForms('register2-form') ">Đăng ký</button>
+                <a href="#" onclick="showForm('register2-form')">
+                    <button type="submit" onclick="toggleForms('register2-form') ">Đăng ký</button>
                 </a>
                 <a href="#" onclick="toggleForms('login-form')">Đã có tài khoản? Đăng nhập</a>
                 <div class="line"></div>
                 <div class="social-login">
-                    <button class="facebook"><img src="/image/facebook-1--media-facebook-social.png" alt="Facebook">Tiếp tục với Facebook</button>
-                    <button class="google"><img src="/image/google--media-google-social.png" alt="Google">Tiếp tục với Google</button>
+                    <button class="facebook"><img src="/image/facebook-1--media-facebook-social.png" alt="Facebook">Tiếp
+                        tục với Facebook</button>
+                    <button class="google"><img src="/image/google--media-google-social.png" alt="Google">Tiếp tục với
+                        Google</button>
                 </div>
             </form>
         </div>
 
         <!-- Form dang ki 2  -->
         <div id="register2-form" class="form-hidden">
-          <div class="split-line"></div>
-        <form class="login-form">
-            <label for="password">Tạo mật khẩu</label>
-             <input type="email" id="email" placeholder="Mật khẩu mới" />
-             <label for="email">Mật khẩu phải có ít nhất</label>
+            <div class="split-line"></div>
+            <form class="login-form">
+                <label for="password">Tạo mật khẩu</label>
+                <input type="email" id="email" placeholder="Mật khẩu mới" />
+                <label for="email">Mật khẩu phải có ít nhất</label>
                 <ul>
-                      <li>1 chữ cái</li>
-                     <li>1 chữ số or kí tự đặc biệt</li>
-                     <li>10 ký tự</li>
+                    <li>1 chữ cái</li>
+                    <li>1 chữ số or kí tự đặc biệt</li>
+                    <li>10 ký tự</li>
                 </ul>
-                    
-                        <button type="button" onclick="toggleForms('login-form')">Đăng nhập</button>
-                       
-        </form>
-        </div> 
+
+                <button type="button" onclick="toggleForms('login-form')">Đăng nhập</button>
+
+            </form>
+        </div>
 
         <!--Form nhập email-->
-         <div id="reset-request-form" class="form-hidden">
-        <h1>Đặt lại mật khẩu- Quay lại cuộc chơi</h1>
-        <form class="login-form">
-            <label for="email">Nhập địa chỉ email hoặc tên người dùng liên kết với tài khoản Muse của bạn để bọn tao gửi email cho bạn.</label>
+        <div id="reset-request-form" class="form-hidden">
+            <h1>Đặt lại mật khẩu- Quay lại cuộc chơi</h1>
+            <form class="login-form">
+                <label for="email">Nhập địa chỉ email hoặc tên người dùng liên kết với tài khoản Muse của bạn để bọn tao
+                    gửi email cho bạn.</label>
 
-            <label for="password">Nhập email</label>
-             <input type="email" id="email"  />
-            
-           <button type="submit" onclick="toggleForms('email-verification-form')">Tiếp theo</button>
-            
-        </form>
+                <label for="password">Nhập email</label>
+                <input type="email" id="email" />
+
+                <button type="submit" onclick="toggleForms('email-verification-form')">Tiếp theo</button>
+
+            </form>
         </div>
 
         <!--Form nhập mã -->
-          <div id="email-verification-form" class="form-hidden">
-             <h1>Kiểm tra hòm thư của bạn đê!</h1>
-        <form class="login-form">
-            <label for="email">Chúng tôi đã gửi email cho bạn. Hãy làm theo hướng dẫn để truy cập lại tài khoản</label>
+        <div id="email-verification-form" class="form-hidden">
+            <h1>Kiểm tra hòm thư của bạn đê!</h1>
+            <form class="login-form">
+                <label for="email">Chúng tôi đã gửi email cho bạn. Hãy làm theo hướng dẫn để truy cập lại tài
+                    khoản</label>
 
-            <label for="password">Nhập mã</label>
-             <input type="email" id="email" placeholder="Mã PIN" />
-             
-            <button type="submit" onclick="toggleForms('create-password-form')">Tiếp theo</button>
-             
-        </form>
-          </div>
+                <label for="password">Nhập mã</label>
+                <input type="email" id="email" placeholder="Mã PIN" />
+
+                <button type="submit" onclick="toggleForms('create-password-form')">Tiếp theo</button>
+
+            </form>
+        </div>
 
         <!--Form tạo mật khẩu mới -->
-         <div id="create-password-form" class="form-hidden">
-        <h1>Đặt lại mật khẩu-Skrrrrrrrr</h1>
-        <form class="login-form">
-            <label for="email">Chúng tôi đã gửi email cho bạn. Hãy làm theo hướng dẫn để truy cập lại tài khoản</label>
+        <div id="create-password-form" class="form-hidden">
+            <h1>Đặt lại mật khẩu-Skrrrrrrrr</h1>
+            <form class="login-form">
+                <label for="email">Chúng tôi đã gửi email cho bạn. Hãy làm theo hướng dẫn để truy cập lại tài
+                    khoản</label>
 
-            <label for="password">Tạo mật khẩu</label>
-             <input type="email" id="email" placeholder="Mật khẩu" />
-            <label for="email">Mật khẩu phải có ít nhất</label>
-             <ul>
-                     <li>1 chữ cái</li>
-                     <li>1 chữ số or kí tự đặc biệt</li>
+                <label for="password">Tạo mật khẩu</label>
+                <input type="email" id="email" placeholder="Mật khẩu" />
+                <label for="email">Mật khẩu phải có ít nhất</label>
+                <ul>
+                    <li>1 chữ cái</li>
+                    <li>1 chữ số or kí tự đặc biệt</li>
                     <li>10 ký tự</li>
-             </ul>
-            <label for="password">Mật khẩu</label>
+                </ul>
+                <label for="password">Mật khẩu</label>
                 <input type="password" id="password" placeholder="Mật khẩu" />
-            
-            <button type="submit">Đăng nhập"</button>
 
-        </form>
-         </div>
+                <button type="submit">Đăng nhập"</button>
+
+            </form>
+        </div>
 
     </div>
 </main>
+<script>
+    // Function to toggle between forms
+    function toggleForms(formId) {
+        const forms = document.querySelectorAll('.form-hidden');
+        forms.forEach(form => form.classList.add('form-hidden')); // Hide all forms
+        document.getElementById(formId).classList.remove('form-hidden'); // Show the selected form
+    }
+</script>

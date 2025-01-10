@@ -45,7 +45,7 @@ namespace MuseMusic.Models.Tables
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseMySql("server=localhost;database=shopmanagement;user=root;password=thuthu121;allow user variables=True", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.40-mysql"));
+                optionsBuilder.UseMySql("server=localhost;database=shopmanagement;user=root;password=thuthu121", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.40-mysql"));
             }
         }
 
@@ -159,6 +159,10 @@ namespace MuseMusic.Models.Tables
                 entity.ToTable("artist");
 
                 entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Artisitmageturl)
+                    .HasMaxLength(255)
+                    .HasColumnName("artisitmageturl");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(255)
@@ -327,6 +331,10 @@ namespace MuseMusic.Models.Tables
                 entity.ToTable("category");
 
                 entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.CategoryImage)
+                    .HasMaxLength(255)
+                    .HasColumnName("categoryImage");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(255)

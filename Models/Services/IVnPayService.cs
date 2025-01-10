@@ -69,7 +69,7 @@ namespace MuseMusic.Models.Services
                 OrderId = vnp_orderId.ToString(),
                 TransactionId = vnp_TransactionId.ToString(),
                 Token = vnp_SecureHash,
-                VnPayResponseCode = vnp_ResponseCode
+                VnPayResponseCode = vnp_ResponseCode  
             };
         } 
     }

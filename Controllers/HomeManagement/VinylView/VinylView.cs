@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -12,6 +13,8 @@ using MuseMusic.Models.ViewModels;
 
 namespace MuseMusic.Controllers.HomeManagement.VinylView;
 
+
+[Authorize]
 [Route("home")]
 public class VinylView : Controller
 {

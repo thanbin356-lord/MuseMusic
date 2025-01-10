@@ -1,8 +1,14 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@model MuseMusic.Models.ViewModels.VinylViewModel
 <main>
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-info">
+            @ViewBag.Message
+        </div>
+    }
     <div class="banner" id="templatemo_banner_slide">
         <ul style="width: 100%; position: relative; overflow: hidden; left: -100%; height: 543px;">
             <li class="templatemo_banner_slide_01" style="width: 33.3333%; height: 542.688px;">
@@ -50,99 +56,31 @@
     </div>
     <h1>Đĩa đang còn hàng:</h1>
     <div class="product-container">
-        <div class="product">
-            <a href="#"><img src="image/babie.png" alt="All Eyez On Me"></a>
-            <h2>All Eyez On Me [Explicit Content] (4 LP's)</h2>
-            <p>2pac</p>
-            <p class="price">1.115.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-                <span class="size">M</span>
+        @foreach (var product in Model.Products)
+        {
+            <div class="product">
+                <a href="#"><img src="@product.ProductImage" alt="@product.ProductName"></a>
+                <h2>@product.ProductName</h2>
+                <p>@product.ProductDescription</p>
+                <p class="price">@product.Price</p>
+                <div class="buttons">
+                    <span class="preorder">PREORDER</span>
+                    <span class="size">M</span>
+                </div>
             </div>
-        </div>
-
-        <div class="product">
-            <a href="#"><img src="image/disney.png" alt="Enchanted Original Motion Picture Soundtrack"></a>
-            <h2>Enchanted Original Motion Picture Soundtrack (Crystal Clear)</h2>
-            <p>Various</p>
-            <p class="price">899.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-                <span class="size">M</span>
-            </div>
-        </div>
-
-        <div class="product">
-            <a href="#"><img src="image/showm.png" alt="The Greatest Showman Soundtrack"></a>
-            <h2>The Greatest Showman Soundtrack</h2>
-            <p>Various</p>
-            <p class="price">899.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-                <span class="size">M</span>
-            </div>
-        </div>
-
-        <div class="product">
-            <a href="#"><img src="image/arcane.png" alt="Arcane Soundtrack"></a>
-            <h2>Arcane (Soundtrack from the Animated Series)</h2>
-            <p>Various</p>
-            <p class="price">1.115.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-                <span class="size">M</span>
-            </div>
-        </div>
-
-        <div class="product">
-            <a href="#"><img src="image/Bocchi-The-Rock-Song-Album-Kessoku-Band_vinyl_black_720x 1.png"
-                    alt="Kessoku Band"></a>
-            <h2>Kessoku Band (Music from Bocchi The Rock!)</h2>
-            <p>Kessoku Band</p>
-            <p class="price">1.115.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-                <span class="size">M</span>
-            </div>
-        </div>
-
-        <div class="product">
-            <a href="#"><img src="image/Ado_Zanmu_vinyl_black_720x 1.png" alt="Zanmu"></a>
-            <h2>Zanmu (残夢)</h2>
-            <p>Ado</p>
-            <p class="price">1.115.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-                <span class="size">M</span>
-            </div>
-        </div>
-
-        <div class="product">
-            <a href="#"><img src="image/YOASOBI_Idol-12-Inch_vinyl_mint_26ef884f-c494-4485-b68a-a6c94e17d158_720x 1.png"
-                    alt="Idol"></a>
-            <h2>アイドル (Idol)</h2>
-            <p>YOASOBI</p>
-            <p class="price">1.115.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-                <span class="size">M</span>
-            </div>
-        </div>
-
-        <div class="product">
-            <a href="#"><img src="image/power.png" alt="Power"></a>
-            <h2>POWER</h2>
-            <p>Quyền Chí Long</p>
-            <p class="price">999.999.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-                <span class="size">M</span>
-            </div>
-        </div>
+        }
     </div>
+
+    <!-- Xem thêm button: redirect to /home/vinyl -->
     <div class="view-more">
-        <button>Xem thêm</button>
+        @if (Model.TotalProducts > Model.CurrentPage * Model.PageSize)
+        {
+            <a href="/home/vinyl?page=@(Model.CurrentPage + 1)&pageSize=@Model.PageSize">
+                <button>Xem thêm</button>
+            </a>
+        }
     </div>
+
 
 
     <div class="categories">
@@ -175,23 +113,27 @@
         </div>
         <h2>Nghệ sĩ</h2>
         <div class="category-container">
-            <div class="category-item2">
-                <a href="#"><img src="image/gd.png" alt="Pop Music"></a>
-                <p class="ns">Quyền Chí Long</p>
-            </div>
-            <div class="category-item2">
-                <a href="#"><img src="image/elle.png" alt="Rap Music"></a>
-                <p class="ns">JELLE</p>
-            </div>
-            <div class="category-item2">
-                <a href="#"><img src="image/bruno.png" alt="Rock Music"></a>
-                <p class="ns">Bruno Mars</p>
-            </div>
-            <div class="category-item2">
-                <a href="#"><img src="image/taylor.png" alt="Jazz Music"></a>
-                <p class="ns">Taylor Swift</p>
-            </div>
+            @if (ViewBag.Artists != null)
+            {
+                foreach (var artist in ViewBag.Artists)
+                {
+                    <div class="category-item2">
+                        <a href="#"><img src="@artist.ArtistImageUrl" alt="@artist.ArtistName"></a>
+                        <p class="ns">@artist.ArtistName</p>
+                    </div>
+                }
+            }
         </div>
+        <div class="view-more">
+            @if (Model.TotalProducts > Model.CurrentPage * Model.PageSize)
+            {
+                <a href="/home/artist">
+                    <button>Xem thêm</button>
+                </a>
+            }
+        </div>
+
+
         <div class="follow-us">
             <p>Theo dõi Muse tại:</p>
             <div class="social-icons">
@@ -260,4 +202,3 @@
         </div>
     </div>
 </main>
-

@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="~/css/record-playerdetail.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Artist.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Artist_Yoasobi.css" asp-append-version="true" />
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="~/css/payment.css" asp-append-version="true" />
 
@@ -135,7 +135,8 @@
                                     </p>
                                     <div id="cart-items" class="cart-items"></div>
                                     <div class="cart-actions">
-                                        <button onclick="location.href='/home/store'" class="view-cart">Xem giỏ hàng</button>
+                                        <button onclick="location.href='/home/store'" class="view-cart">Xem giỏ
+                                            hàng</button>
                                         <button class="checkout">Thanh toán</button>
                                     </div>
                                 </div>
@@ -232,6 +233,23 @@
     <script src="js/unslider.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
     <script src="js/templatemo_script.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("beforeunload", function (event) {
+            // Send an AJAX request to log out the user when they leave the page
+            fetch('/Login/Logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({}) // Empty body for logout
+            }).then(response => {
+                console.log("User logged out successfully.");
+            }).catch(error => {
+                console.error("Error during logout:", error);
+            });
+        });
+    </script>
+
 </body>
 
 </html>

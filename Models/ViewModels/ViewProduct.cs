@@ -29,6 +29,7 @@ namespace MuseMusic.Models.ViewModels
 
     public class Product
     {
+
         public int ProductId { get; set; }
         public string DiskId { get; set; }
         public string ProductName { get; set; }
@@ -45,5 +46,6 @@ namespace MuseMusic.Models.ViewModels
         public string SelectedBrandName { get; set; }
         public List<string> ImageUrls { get; set; }
         public string? PrimaryImageUrl { get; set; }
+        public string ArtistImageUrl { get; set; }
     }
 }

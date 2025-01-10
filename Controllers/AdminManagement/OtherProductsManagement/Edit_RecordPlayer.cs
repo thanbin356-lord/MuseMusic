@@ -8,9 +8,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MuseMusic.Models.Tables;
 using MuseMusic.Models.ManagerModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MuseMusic.Controllers.AdminManagement.OtherProductsManagement;
-
+[Authorize(Roles = "Admin")]
 [Route("admin")]
 public class Edit_RecordPlayer : Controller
 {

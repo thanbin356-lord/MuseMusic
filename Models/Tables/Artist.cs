@@ -12,6 +12,7 @@ namespace MuseMusic.Models.Tables
 
         public int Id { get; set; }
         public string Name { get; set; } = null!;
+        public string? Artisitmageturl { get; set; }
 
         public virtual ICollection<ArtistVinyl> ArtistVinyls { get; set; }
     }

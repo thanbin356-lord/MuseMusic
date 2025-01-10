@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MuseMusic.Models.ManagerModels;
 using MuseMusic.Models.Tables;
 namespace MuseMusic.Controllers.AdminManagement.OtherProductsManagement;
-
+[Authorize(Roles = "Admin")]
 [Route("admin")]
 public class Edit_Accessories : Controller
 {
