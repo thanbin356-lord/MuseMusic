@@ -1,7 +1,7 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@model MuseMusic.Models.ViewModels.AccessoriesViewModel
 <main>
 
     <!-- Accessory Head -->
@@ -11,13 +11,22 @@
 
                 <div class="col-lg-6 col-12">
                     <div class="accessory-thumb">
-                        <img src="/images/accessory/accessory-thumb.png" class="accessory-image" alt="">
+                        <input type="hidden" id="prodid" value="@Model.SelectedProduct.ProductId" />
+                        <button id="prev" class="btn btn-link"><i class="fa-sharp fa-solid fa-arrow-left"></i></button>
+                        <img id="main-image" src="@Model.SelectedProduct.PrimaryImageUrl" class="product-image"
+                            alt="Main Product Image">
+                        <button id="next" class="btn btn-link"><i class="fa-sharp fa-solid fa-arrow-right"></i></button>
                     </div>
 
                     <div class="accessory-secondthumb">
-                        <img src="/images/accessory/accessory-thumb-2.png" class="accessory-small" alt="">
-                        <img src="/images/accessory/accessory-thumb-3.png" class="accessory-small" alt="">
-                        <img src="/images/accessory/accessory-thumb-4.png" class="accessory-small" alt="">
+                        <div class="thumbnail-slider">
+                            @foreach (var imageUrl in Model.SelectedProduct.ImageUrls)
+                            {
+                                <div class="thumbnail" data-image="@imageUrl">
+                                    <img src="@imageUrl" alt="Product Thumbnail">
+                                </div>
+                            }
+                        </div>
                     </div>
 
                 </div>
@@ -27,13 +36,13 @@
                     <!-- AccessoryPrice & Infor -->
                     <div class="accessory-info">
                         <div>
-                            <h2>Bộ vệ sinh đĩa than 5 in 1 OPULA</h2>
+                            <h2 id="prodname">@Model.SelectedProduct.ProductName</h2>
 
-                            <h3>Phụ kiện</h3>
+                            <h3>@Model.SelectedProduct.SelectedBrandName</h3>
 
-                            <h4>950.000 ₫</h4>
+                            <h4 id="prodprice">@Model.SelectedProduct.Price.ToString("N0") ₫</h4>
 
-                            <h5>Mã sản phẩm: PK0013</h5>
+                            <h5>Mã sản phẩm: @Model.SelectedProduct.ProductId</h5>
 
 
                         </div>
@@ -46,14 +55,14 @@
                         <div class="row">
                             <div class="col-lg-4 col-12">
 
-                                <div class="align-items-center">
+                                 <div class="align-items-center">
                                     <div class="quantity">
                                         <button class="btn btn-link px-2"
                                             onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                                             <i class="icofont-minus-square"></i>
                                         </button>
 
-                                        <input id="form1" min="0" name="quantity" value="2" type="number"
+                                        <input id="quantity-selection" min="1" name="quantity" value="1" type="number"
                                             class="form-control form-control-sm" style="width: 50px;" />
 
                                         <button class="btn btn-link px-2"
@@ -66,7 +75,7 @@
                             </div>
 
                             <div class="col-lg-8 col-12">
-                                <a href=""><button class="cart-btn">Thêm vào giỏ hàng</button></a>
+                                <a href=""><button id="addcart" class="cart-btn">Thêm vào giỏ hàng</button></a>
                             </div>
 
                         </div>
@@ -140,88 +149,94 @@
     <!--  Accessory List -->
 
     <div class="accessory-container">
-        <div class="accessory">
-            <a href=""><img src="/images/accessory/accessory-1.png" alt="Bộ Vệ Sinh 5 trong 1 Vinyl Buddy"></a>
-            <h2>Bộ Vệ Sinh 5 trong 1 Vinyl Buddy</h2>
-            <p>PHỤ KIỆN, VỆ SINH</p>
-            <p class="price">950.000 ₫</p>
-            <div class="buttons">
-
-                <span class="available">CÒN HÀNG</span>
-
+        @foreach (var product in Model.Products)
+        {
+            <div class="accessory">
+                <a href="@Url.Action("AccessoriesDetails", "AccessoriesView", new { id = product.ProductId })">
+                    <img src="@product.PrimaryImageUrl" alt="@product.ProductName">
+                </a>
+                <h2>@product.ProductName</h2>
+                <p>@product.SelectedBrandName</p>
+                <p class="price">@product.Price.ToString("N0") ₫</p>
+                <div class="buttons">
+                    <span class="preorder">PREORDER</span>
+                </div>
             </div>
-        </div>
-
-        <div class="accessory">
-            <a href="#"><img src="/images/accessory/accessory.png" alt="Bộ vệ sinh đĩa than 5 in 1 OPULA"></a>
-            <h2>Bộ vệ sinh đĩa than 5 in 1 OPULA</h2>
-            <p>PHỤ KIỆN, VỆ SINH</p>
-            <p class="price">750.000 ₫</p>
-            <div class="buttons">
-                <span class="available">CÒN HÀNG</span>
-            </div>
-        </div>
-
-        <div class="accessory">
-            <a href="#"><img src="/images/accessory/accessory-2.png" alt="Bộ vệ sinh đĩa than 6 trong 1 MOPIANO"></a>
-            <h2>Bộ vệ sinh đĩa than 6 trong 1 MOPIANO</h2>
-            <p>PHỤ KIỆN, VỆ SINH</p>
-            <p class="price">950.000 ₫</p>
-            <div class="buttons">
-                <span class="available">CÒN HÀNG</span>
-            </div>
-        </div>
-
-        <div class="accessory">
-            <a href="#"><img src="/images/accessory/accessory-3.png" alt="Bộ vệ sinh đĩa than Boundless 5 trong 1"></a>
-            <h2>Bộ vệ sinh đĩa than Boundless 5 trong 1</h2>
-            <p>PHỤ KIỆN, VỆ SINH</p>
-            <p class="price">1.090.000 ₫</p>
-            <div class="buttons">
-                <span class="available">CÒN HÀNG</span>
-            </div>
-        </div>
-
-        <div class="accessory">
-            <a href="#"><img src="/images/accessory/accessory-4.png" alt="Bộ vệ sinh đĩa than Thorens Cleaning Set"></a>
-            <h2>Bộ vệ sinh đĩa than Thorens Cleaning Set</h2>
-            <p>PHỤ KIỆN, VỆ SINH</p>
-            <p class="price">3.800.000 ₫</p>
-            <div class="buttons">
-                <span class="available">CÒN HÀNG</span>
-            </div>
-        </div>
-
-        <div class="accessory">
-            <a href="#"><img src="/images/accessory/accessory-5.png"
-                    alt="Bộ vệ sinh mâm đĩa than Audio-Technica AT6012"></a>
-            <h2>Bộ vệ sinh mâm đĩa than Audio-Technica AT6012</h2>
-            <p>PHỤ KIỆN, VỆ SINH</p>
-            <p class="price">665.000 ₫</p>
-            <div class="buttons">
-                <span class="available">CÒN HÀNG</span>
-            </div>
-        </div>
-
-        <div class="accessory">
-            <a href="#"><img src="/images/accessory/accessory-6.png" alt="Bộ Dung dịch vệ sinh Kim Máy Hát Đĩa than"></a>
-            <h2>Bộ Dung dịch vệ sinh Kim Máy Hát Đĩa than</h2>
-            <p>PHỤ KIỆN, VỆ SINH</p>
-            <p class="price">540.000 ₫</p>
-            <div class="buttons">
-                <span class="available">CÒN HÀNG</span>
-            </div>
-        </div>
-
-        <div class="accessory">
-            <a href="#"><img src="/images/accessory/accessory-7.png" alt="Set 4 đầu kim cho máy hát đĩa than"></a>
-            <h2>Set 4 đầu kim cho máy hát đĩa than</h2>
-            <p>PHỤ KIỆN, VỆ SINH</p>
-            <p class="price">100.000 ₫</p>
-            <div class="buttons">
-                <span class="available">CÒN HÀNG</span>
-            </div>
-        </div>
+        }
     </div>
 
 </main>
+<script>
+    // Hàm thêm sản phẩm vào giỏ hàng
+    function addToCart(item) {
+        // Lấy giỏ hàng từ localStorage, nếu không có thì tạo một giỏ hàng rỗng
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
+        const existingItemIndex = cart.findIndex(cartItem => cartItem.id === item.id);
+
+        if (existingItemIndex === -1) {
+            // Nếu sản phẩm chưa có trong giỏ hàng, thêm vào giỏ hàng
+            cart.push(item);
+            // Lưu lại giỏ hàng vào localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+            return true;
+        } else {
+            // Nếu sản phẩm đã có, trả về false
+            return false;
+        }
+    }
+
+    // Add event listener to the button
+    document.getElementById('addcart').addEventListener('click', async function (event) {
+        // Ngăn chặn hành động mặc định của nút (để tránh refresh trang)
+        event.preventDefault();
+
+        // Vô hiệu hóa nút để ngừng click thêm
+        const addButton = event.target;
+        addButton.disabled = true;
+
+        const id = document.getElementById('prodid').value;
+        const name = document.getElementById('prodname').textContent;
+        const price = parseFloat(document.getElementById('prodprice').textContent);
+        const quantity = document.getElementById('quantity-selection').value;
+        const imageUrl = document.getElementById('main-image').getAttribute('src');
+
+        const item = {
+            id: id,
+            name: name,
+            price: price,
+            quantity: quantity,
+            image: imageUrl,
+        };
+
+        // Kiểm tra và thêm sản phẩm vào giỏ hàng
+        const isAdded = addToCart(item);
+
+        if (isAdded) {
+            // Hiển thị thông báo nếu sản phẩm được thêm vào giỏ hàng
+            await Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Sản phẩm đã được thêm vào giỏ hàng!',
+                timer: 2000,  // Thông báo tồn tại trong 2 giây
+                willClose: () => {
+                    // Kích hoạt lại nút sau khi thông báo đóng
+                    addButton.disabled = false;
+                }
+            });
+        } else {
+            // Hiển thị thông báo nếu sản phẩm đã có trong giỏ hàng
+            await Swal.fire({
+                icon: 'info',
+                title: 'Sản phẩm đã có trong giỏ hàng!',
+                text: 'Bạn đã thêm sản phẩm này vào giỏ hàng trước đó.',
+                timer: 2000,  // Thông báo tồn tại trong 2 giây
+                willClose: () => {
+                    // Kích hoạt lại nút sau khi thông báo đóng
+                    addButton.disabled = false;
+                }
+            });
+        }
+    });
+</script>

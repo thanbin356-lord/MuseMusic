@@ -8,7 +8,7 @@
 
     <div class="upload-container-1">
         <h1>Upload Multiple Images</h1>
-        <form id="uploadForm">
+        <form id="uploadForm" action="" method="post" enctype="multipart/form-data">
             <label for="fileInput" class="custom-file-input">
                 Choose Images
                 <input type="file" id="fileInput" accept="image/*" multiple hidden>
@@ -78,6 +78,42 @@
                 reader.readAsDataURL(file);
             });
         });
+        document.querySelector("#uploadForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const formData = new FormData();
+            const fileInput = document.getElementById('fileInput');
+
+            // Add files to the form data
+            Array.from(fileInput.files).forEach(file => {
+                formData.append("files", file); // Use 'files' because we're uploading multiple images
+            });
+
+            // Send image to the server
+            fetch('/admin/upload-image', {  // This is the backend endpoint we've defined earlier
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.FileUrls) {
+                        // Show uploaded images in the UI
+                        data.FileUrls.forEach(url => {
+                            const img = document.createElement('img');
+                            img.src = url; // Display the uploaded image from the server
+                            img.alt = "Uploaded Image";
+                            document.getElementById('previewContainer').appendChild(img);
+                        });
+                    } else {
+                        alert("Error uploading image.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error uploading image:', error);
+                    alert('Error uploading image.');
+                });
+        });
+
 
         // Hàm xóa ảnh từ server
         function deleteImage(imageId) {

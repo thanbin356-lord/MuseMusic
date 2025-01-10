@@ -51,7 +51,7 @@
                                             <i class="fa-solid fa-caret-left"></i>
                                         </button>
 
-                                        <input id="quantity-selection" min="1" name="quantity" value="2" type="number"
+                                        <input id="quantity-selection" min="1" name="quantity" value="1" type="number"
                                             class="form-control form-control-sm" style="width: 60px;" />
 
                                         <button class="btn btn-link px-2"
@@ -65,7 +65,7 @@
 
                             <div class="col-lg-2 col-12 mt-4 mt-lg-0">
 
-                                <button class="heart-btn"><i class="fa-solid fa-heart heart-icon";"></i></i></button>
+                                <button id="addwish" class="heart-btn"><i class="fa-solid fa-heart heart-icon" ;"></i></i></button>
                             </div>
 
                             <div class="col-lg-6 col-12 mt-4 mt-lg-0">
@@ -203,31 +203,76 @@
         </div>
     </div>
 
-    <div class="product-container">
-        @if (Model.Products != null && Model.Products.Any())
-        {
-            @foreach (var product in Model.Products)
+    <div class="product-container" id="product-container">
+        <div class="product-slider">
+            @if (Model.Products != null && Model.Products.Any())
             {
-                <div class="product">
-                    <a href="/Home/VinylDetails/@product.ProductId">
-                        <img src="/images/product/product.png" alt="">
-                    </a>
-                    <h2>@product.ProductName</h2>
-                    <p></p> <!-- Assuming you have a list of Artist names -->
-                    <p class="price">@product.Price</p>
-                </div>
+                @foreach (var product in Model.Products)
+                {
+                    <div class="product">
+                        <a href="/Home/VinylDetails/@product.ProductId">
+                            <img src="@product.PrimaryImageUrl" alt="@product.ProductName">
+                        </a>
+                        <h2>@product.ProductName</h2>
+                        <p class="price">@product.Price</p>
+                    </div>
+                }
             }
-        }
-        else
-        {
-            <p>No products available.</p> <!-- Handle case when Products is empty or null -->
-        }
+            else
+            {
+                <p>No products available.</p>
+            }
+        </div>
     </div>
+
+    <button class="scroll-button" id="scroll-left">◀</button>
+    <button class="scroll-button" id="scroll-right">▶</button>
 
 
 </main>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
+    @*Trượt sản phẩm khác*@
+        document.addEventListener("DOMContentLoaded", function () {
+            const productContainer = document.getElementById('product-container');
+            const productSlider = document.querySelector('.product-slider');
+            const scrollLeftButton = document.getElementById('scroll-left');
+            const scrollRightButton = document.getElementById('scroll-right');
+            const products = document.querySelectorAll('.product');
+
+            // Ensure that we have products available
+            if (products.length === 0) {
+                console.error("No products found!");
+            }
+
+            const productWidth = products[0]?.offsetWidth || 0; // Get width of each product
+
+            // Check that the product width is properly calculated
+            if (productWidth === 0) {
+                console.error("Product width could not be calculated");
+            }
+
+            let currentIndex = 0; // Start from the first product
+
+            // Scroll Left
+            scrollLeftButton.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    productSlider.style.transform = `translateX(-${currentIndex * productWidth}px)`;
+                }
+            });
+
+            // Scroll Right
+            scrollRightButton.addEventListener('click', () => {
+                if (currentIndex < products.length - 6) { // Prevent going beyond available products
+                    currentIndex++;
+                    productSlider.style.transform = `translateX(-${currentIndex * productWidth}px)`;
+                }
+            });
+        });
+
+
+
     const thumbnails = document.querySelectorAll('.thumbnail');
     const mainImage = document.getElementById('main-image');
     const prevBtn = document.getElementById('prev');
@@ -339,7 +384,48 @@
             image: imageUrl,
         };
 
-        // Add the item to the cart
         addToCart(item);
+    });
+
+    function addToWish(item) {
+        let wish = JSON.parse(localStorage.getItem('wish')) || [];
+
+        const existingIndex = wish.findIndex(wishItem => wishItem.id === item.id);
+
+        if (existingIndex !== -1) {
+            // SweetAlert thông báo sản phẩm đã có trong giỏ hàng
+            Swal.fire({
+                icon: 'info',
+                title: 'Thông báo',
+                text: 'Sản phẩm này đã yêu thích rồiiii!',
+            });
+        } else {
+            wish.push(item);
+            localStorage.setItem('wish', JSON.stringify(wish));
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Sản phẩm đã yêu thích rồiiii!',
+            });
+        }
+    }
+
+    // Add event listener to the button
+    document.getElementById('addwish').addEventListener('click', () => {
+        // Retrieve values from the DOM
+        const id = document.getElementById('prodid').value;
+        const name = document.getElementById('prodname').textContent;
+        const artist = document.getElementById('artistname').textContent;
+        const imageUrl = document.getElementById('main-image').getAttribute('src');
+
+        // Define the item object
+        const item = {
+            id: id,
+            name: name,
+            artist: artist,
+            image: imageUrl,
+        };
+
+        addToWish(item);
     });
 </script>

@@ -1,6 +1,7 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model MuseMusic.Models.ViewModels.AccessoriesViewModel
 <main>
     <!-- Accessory Header -->
 
@@ -24,88 +25,48 @@
     <!--  Accessory List -->
 
     <div class="accessory-container">
-        <div class="accessory">
-            <a href=""><img src="/images/accessory/accessory-1.png" alt="Bộ Vệ Sinh 5 trong 1 Vinyl Buddy"></a>
-            <h2>Bộ Vệ Sinh 5 trong 1 Vinyl Buddy</h2>
-            <p>PHỤ KIỆN, VỆ SINH</p>
-            <p class="price">950.000 ₫</p>
-            <div class="buttons">
+        @foreach (var product in Model.Products)
+        {
+            <div class="accessory">
 
-                <span class="available">CÒN HÀNG</span>
-
+                <a href="/Home/AccessoriesDetails/@product.ProductId"><img src="@product.ProductImage"
+                        alt="@product.ProductName"></a>
+                <h2>@product.ProductName</h2>
+                <p>@product.ArtistNames</p>
+                <p class="price">@product.Price</p>
+                <div class="buttons">
+                    <span class="preorder">PREORDER</span>
+                </div>
             </div>
-        </div>
 
-        <div class="accessory">
-            <a href="#"><img src="/images/accessory/accessory.png" alt="Bộ vệ sinh đĩa than 5 in 1 OPULA"></a>
-            <h2>Bộ vệ sinh đĩa than 5 in 1 OPULA</h2>
-            <p>PHỤ KIỆN, VỆ SINH</p>
-            <p class="price">750.000 ₫</p>
-            <div class="buttons">
-                <span class="available">CÒN HÀNG</span>
-            </div>
-        </div>
-
-        <div class="accessory">
-            <a href="#"><img src="/images/accessory/accessory-2.png" alt="Bộ vệ sinh đĩa than 6 trong 1 MOPIANO"></a>
-            <h2>Bộ vệ sinh đĩa than 6 trong 1 MOPIANO</h2>
-            <p>PHỤ KIỆN, VỆ SINH</p>
-            <p class="price">950.000 ₫</p>
-            <div class="buttons">
-                <span class="available">CÒN HÀNG</span>
-            </div>
-        </div>
-
-        <div class="accessory">
-            <a href="#"><img src="/images/accessory/accessory-3.png" alt="Bộ vệ sinh đĩa than Boundless 5 trong 1"></a>
-            <h2>Bộ vệ sinh đĩa than Boundless 5 trong 1</h2>
-            <p>PHỤ KIỆN, VỆ SINH</p>
-            <p class="price">1.090.000 ₫</p>
-            <div class="buttons">
-                <span class="available">CÒN HÀNG</span>
-            </div>
-        </div>
-
-        <div class="accessory">
-            <a href="#"><img src="/images/accessory/accessory-4.png" alt="Bộ vệ sinh đĩa than Thorens Cleaning Set"></a>
-            <h2>Bộ vệ sinh đĩa than Thorens Cleaning Set</h2>
-            <p>PHỤ KIỆN, VỆ SINH</p>
-            <p class="price">3.800.000 ₫</p>
-            <div class="buttons">
-                <span class="available">CÒN HÀNG</span>
-            </div>
-        </div>
-
-        <div class="accessory">
-            <a href="#"><img src="/images/accessory/accessory-5.png"
-                    alt="Bộ vệ sinh mâm đĩa than Audio-Technica AT6012"></a>
-            <h2>Bộ vệ sinh mâm đĩa than Audio-Technica AT6012</h2>
-            <p>PHỤ KIỆN, VỆ SINH</p>
-            <p class="price">665.000 ₫</p>
-            <div class="buttons">
-                <span class="available">CÒN HÀNG</span>
-            </div>
-        </div>
-
-        <div class="accessory">
-            <a href="#"><img src="/images/accessory/accessory-6.png" alt="Bộ Dung dịch vệ sinh Kim Máy Hát Đĩa than"></a>
-            <h2>Bộ Dung dịch vệ sinh Kim Máy Hát Đĩa than</h2>
-            <p>PHỤ KIỆN, VỆ SINH</p>
-            <p class="price">540.000 ₫</p>
-            <div class="buttons">
-                <span class="available">CÒN HÀNG</span>
-            </div>
-        </div>
-
-        <div class="accessory">
-            <a href="#"><img src="/images/accessory/accessory-7.png" alt="Set 4 đầu kim cho máy hát đĩa than"></a>
-            <h2>Set 4 đầu kim cho máy hát đĩa than</h2>
-            <p>PHỤ KIỆN, VỆ SINH</p>
-            <p class="price">100.000 ₫</p>
-            <div class="buttons">
-                <span class="available">CÒN HÀNG</span>
-            </div>
-        </div>
+        }
     </div>
 
+    <div class="container">
+        <div class="pagination">
+            @if (Model.CurrentPage > 1)
+            {
+                <a href="@Url.Action("RecordPlayer", "RecordPlayerView", new { page = Model.CurrentPage - 1 })"
+                    class="page-btn">&lt;</a>
+            }
+
+            @for (int i = 1; i <= Math.Ceiling((double)Model.TotalProducts / 12); i++)
+            {
+                if (i == Model.CurrentPage)
+                {
+                    <span class="page-btn active">@i</span>
+                }
+                else
+                {
+                    <a href="@Url.Action("RecordPlayer", "RecordPlayerView", new { page = i })" class="page-btn">@i</a>
+                }
+            }
+
+            @if (Model.CurrentPage < Math.Ceiling((double)Model.TotalProducts / 12))
+            {
+                <a href="@Url.Action("RecordPlayer", "RecordPlayerView", new { page = Model.CurrentPage + 1 })"
+                    class="page-btn">&gt;</a>
+            }
+        </div>
+    </div>
 </main>
