@@ -30,67 +30,80 @@
             <label for="address">Địa chỉ</label>
             <input type="text" id="address" value="43 sdsldjflsdj slfjdslfj lsdjfld" readonly>
         </div>
+        <form method="POST">
+            @Html.AntiForgeryToken()
+            <div class="payment">
 
-        <div class="payment">
+                <div class="payment-method-container">
+                    <h1 class="payment-title">PHƯƠNG THỨC THANH TOÁN</h1>
 
-            <div class="payment-method-container">
-                <h1 class="payment-title">PHƯƠNG THỨC THANH TOÁN</h1>
+                    <!-- Phương thức thanh toán -->
+                    <div class="payment-methods">
+                        <a href=""><img src="/image/vnpay-icon.jpg" alt="VnPay"></a>
+                    </div>
 
-                <!-- Phương thức thanh toán -->
-                <div class="payment-methods">
-                    <a href=""><img src="/image/vnpay-icon.jpg" alt="VnPay"></a>
+                    <!-- Chi tiết thanh toán -->
+                    <div class="payment-details">
+                        <h2>Chi tiết thanh toán</h2>
+                        <table>
+                            <tr>
+                                <th>Sản phẩm</th>
+                                <th>Tạm tính</th>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- Ghi chú -->
+                    <div class="notes">
+                        <label for="notes">Ghi chú</label>
+                        <textarea id="notes" rows="4" placeholder="Nhập ghi chú của bạn..."></textarea>
+                    </div>
+
+                    <!-- Nút đặt hàng -->
+                    <div class="submit-button">
+                        <button id="submit-order-button" type="button">Đặt hàng</button>
+                    </div>
                 </div>
 
-                <!-- Chi tiết thanh toán -->
-                <div class="payment-details">
-                    <h2>Chi tiết thanh toán</h2>
-                    <table>
-                        <tr>
-                            <th>Sản phẩm</th>
-                            <th>Tạm tính</th>
-                        </tr>
-                        <tr>
-                            <td>Kenny G - Miracles: The Holiday Album × 1</td>
-                            <td>1.450.000đ</td>
-                        </tr>
-                        <tr>
-                            <td>Tổng phí vận chuyển</td>
-                            <td>300.000đ</td>
-                        </tr>
-                        <tr class="total-row">
-                            <td><strong>Tổng thanh toán</strong></td>
-                            <td><strong>1.749.000đ</strong></td>
-                        </tr>
-                    </table>
-                </div>
-
-                <!-- Ghi chú -->
-                <div class="notes">
-                    <label for="notes">Ghi chú</label>
-                    <textarea id="notes" rows="4" placeholder="Nhập ghi chú của bạn..."></textarea>
-                </div>
-
-                <!-- Nút đặt hàng -->
-                <div class="submit-button">
-                    <button type="button">Đặt hàng</button>
-                </div>
             </div>
-
-        </div>
+        </form>
 
     </div>
 
 </main>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // Lấy dữ liệu từ localStorage
-        const checkoutData = JSON.parse(localStorage.getItem('checkoutData')) || {};
+        const urlParams = new URLSearchParams(window.location.search);
+        const success = urlParams.get('success');
 
-        const { cart, totalPrice } = checkoutData;
+        // If success is true, show an alert
+        if (success) {
+            if (success === 'True') {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: 'Thanh toán thành công',
+                });
+            }
+            else {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Thông báo',
+                    text: 'Thanh toán thất bại!',
+                });
+            }
+        }
+
+        // Lấy dữ liệu từ localStorage
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
         const paymentDetailsTable = document.querySelector('.payment-details table');
 
         if (cart && cart.length > 0) {
+            let totalPrice = 0;
+
+            // Duyệt qua từng sản phẩm trong giỏ hàng
             cart.forEach(item => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
@@ -98,25 +111,69 @@
                 <td>${(item.price * item.quantity).toLocaleString()} đ</td>
             `;
                 paymentDetailsTable.appendChild(row);
+
+                // Cộng tổng giá tiền
+                totalPrice += item.price * item.quantity;
             });
 
-            // Hiển thị tổng tiền và phí vận chuyển (nếu có)
-            const shippingFee = 300000; // Phí vận chuyển cố định
+            // Hiển thị tổng phí vận chuyển và tổng thanh toán
+            const shippingFee = 30000; // Phí vận chuyển cố định
             const totalPayment = totalPrice + shippingFee;
 
-            paymentDetailsTable.innerHTML += `
-            <tr>
-                <td>Tổng phí vận chuyển</td>
-                <td>${shippingFee.toLocaleString()} đ</td>
-            </tr>
-            <tr class="total-row">
-                <td><strong>Tổng thanh toán</strong></td>
-                <td><strong>${totalPayment.toLocaleString()} đ</strong></td>
-            </tr>
+            // Dòng tổng phí vận chuyển
+            const shippingRow = document.createElement('tr');
+            shippingRow.innerHTML = `
+            <td><strong>Tổng phí vận chuyển<strong></td>
+            <td>${shippingFee.toLocaleString()} đ</td>
         `;
-        } else {
-            alert('Không có sản phẩm trong giỏ hàng.');
+            paymentDetailsTable.appendChild(shippingRow);
+
+            // Dòng tổng thanh toán
+            const totalRow = document.createElement('tr');
+            totalRow.classList.add('total-row');
+            totalRow.innerHTML = `
+            <td><strong>Tổng thanh toán</strong></td>
+            <td><strong id="total-price">${totalPayment.toLocaleString()} đ</strong></td>
+        `;
+            paymentDetailsTable.appendChild(totalRow);
         }
     });
 
+    document.getElementById('submit-order-button').addEventListener('click', (event) => {
+        event.preventDefault
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const notes = document.getElementById('notes').value;
+
+        if (cart.length === 0) {
+            return;
+        }
+        const totalPriceString = document.getElementById("total-price").textContent;
+        const cleanedPrice = totalPriceString.replace(/[^\d.-]/g, '');
+        const totalPrice = parseInt(cleanedPrice.replace('.', '').replace(',', ''));
+        console.log(totalPrice);
+        const orderData = {
+            totalPayment: totalPrice,
+            cart: cart.map(item => ({ id: item.id, quantity: item.quantity })),
+            notes: notes,
+        };
+
+        fetch('/home/payment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value,
+            },
+            body: JSON.stringify(orderData),
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    localStorage.removeItem('cart');
+                    window.location.href = data.message;
+                } else {
+                    alert(data.message || 'Có lỗi xảy ra.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    });
 </script>

@@ -487,6 +487,10 @@ namespace MuseMusic.Models.Tables
                     .HasColumnName("updated_at")
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
+                entity.Property(e => e.VnpayRef)
+                    .HasMaxLength(45)
+                    .HasColumnName("vnpay_ref");
+
                 entity.HasOne(d => d.Adminseller)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.AdminsellerId)
