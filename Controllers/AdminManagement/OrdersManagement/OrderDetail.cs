@@ -78,7 +78,7 @@ public class OrderDetail : Controller
                         .Where(av => av.Artist != null)
                         .Select(av => av.Artist.Name)
                         .ToList(),
-                        Price = od.Price,  // Price from OrderDetail
+                        Price = od.Product.Price,  // Price from OrderDetail
                         Quantity = od.Quantity  // Quantity from OrderDetail
                     }).ToList()
                 }

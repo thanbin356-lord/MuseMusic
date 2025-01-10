@@ -30,33 +30,34 @@ public class CustomerShow : Controller
     [HttpGet("customers")]
     public IActionResult Customers()
     {
+        using (var db = new shopmanagementContext())
         {
-            using (var db = new shopmanagementContext())
-            {
-                var customerViewModel = new OrderViewModel();
+            var customerViewModel = new OrderViewModel();
 
-                // Tách dữ liệu ra để tránh lỗi dịch ngữ cảnh
-                var customers = db.Orders
-                .Include(o => o.Customer)
+            // Lấy danh sách khách hàng từ db.Customers
+            var customers = db.Customers
+                .Include(c => c.Account) // Bao gồm thông tin tài khoản
                 .ToList();
-                if (customers == null)
-                {
-                    return NotFound(); // Return 404 if no customers is found
-                }
-                customerViewModel.Orders = customers.Select(x => new MuseMusic.Models.ManagerModels.Orders
-                {
-                    CustomerId = x.Customer.Id,
-                    CustomerName = x.Customer.Name,
-                    Email = db.Accounts.FirstOrDefault(a => a.Id == x.Customer.AccountId)?.Email,
-                    Phone = x.Customer.Phone,
-                    Address = x.Customer.Address,
-                    OrderCount = db.Orders.Count(o => o.CustomerId == x.Customer.Id)
-                }).ToList();
 
-                return View("~/Views/Admin/CustomerManagement/Customers.cshtml", customerViewModel);
+            if (customers == null || !customers.Any())
+            {
+                return NotFound(); // Trả về 404 nếu không có khách hàng nào
             }
+
+            customerViewModel.Orders = customers.Select(customer => new MuseMusic.Models.ManagerModels.Orders
+            {
+                CustomerId = customer.Id,
+                CustomerName = customer.Name,
+                Email = customer.Account?.Email, // Lấy email từ Account liên quan
+                Phone = customer.Phone,
+                Address = customer.Address,
+                OrderCount = db.Orders.Count(o => o.CustomerId == customer.Id) // Đếm số lượng đơn hàng của khách hàng này
+            }).ToList();
+
+            return View("~/Views/Admin/CustomerManagement/Customers.cshtml", customerViewModel);
         }
     }
+
 
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

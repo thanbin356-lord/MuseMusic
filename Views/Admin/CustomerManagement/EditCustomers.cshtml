@@ -77,14 +77,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>@Model.SelectedCustomerOrders.OrderId</td>
-            <td>123456</td>
-            <td>@Model.SelectedCustomerOrders.created_at</td>
-            <td>@Model.SelectedCustomerOrders.total</td>
-            <td><button class="butt" onclick="window.location.href='/admin/orderdetail/@Model.SelectedCustomerOrders.OrderId'">...</button></td>
-          </tr>
+          @for (int i = 0; i < Model.AllOrders.Count; i++)
+          {
+            var order = Model.AllOrders[i];
+            <tr>
+              <td>@(i + 1)</td> <!-- Display row number -->
+              <td>@order.OrderId</td> <!-- Display the actual OrderId -->
+              <td>@order.created_at.ToString("dd/MM/yyyy")</td> <!-- Format the date -->
+              <td>@order.total.ToString("N0") đ</td> <!-- Format the total with thousand separators -->
+              <td>
+                <button class="butt" onclick="window.location.href='/admin/orderdetail/@order.OrderId'">...</button>
+              </td>
+            </tr>
+          }
         </tbody>
+
       </table>
       <div class="total-value">
         Tổng giá trị: <span>4,999,999,995đ</span>

@@ -66,22 +66,18 @@
         <p class="total">Tổng phụ:</p>
         <p class="total">
             @* Calculate Subtotal (sum of Price * Quantity for all products) *@
-            @Model.SelectedCustomerOrders.AllProducts.Sum(v => v.Price * v.Quantity)$
+            @Model.SelectedCustomerOrders.AllProducts.Sum(v => v.Price * v.Quantity)đ
         </p>
     </div>
     <div class="total-container">
         <p class="total">Vận chuyển:</p>
-        <p class="total">22$</p>
-    </div>
-    <div class="total-container">
-        <p class="total">Phiếu giảm giá:</p>
-        <p class="total">-15$</p>
+        <p class="total">30000đ</p>
     </div>
     <div class="total-container">
         <p class="total-bold">Tổng:</h4>
         <p class="total">
                 @* Total = Subtotal + Shipping - Discount *@
-                @(Model.SelectedCustomerOrders.AllProducts.Sum(v => v.Price * v.Quantity) + 22 - 15)$
+                @(Model.SelectedCustomerOrders.AllProducts.Sum(v => v.Price * v.Quantity) + 30000)đ
         </p>
     </div>
 
