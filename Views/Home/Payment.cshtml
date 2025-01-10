@@ -4,81 +4,119 @@
 
 <main class="payment-container-main">
 
-<div class="payment-container">
+    <div class="payment-container">
 
         <div class="payment-header">
-<p>thanh toán</p>
-<div class="bfline"></div>
+            <p>thanh toán</p>
+            <div class="bfline"></div>
 
-    </div>
+        </div>
 
-    <div class="payment-form">
+        <div class="payment-form">
 
-        <div class="form-group">
-          <label for="username">Họ Tên</label>
-          <input type="text" id="username" value="Mai Ngọc Hoàng" readonly>
+            <div class="form-group">
+                <label for="username">Họ Tên</label>
+                <input type="text" id="username" value="Mai Ngọc Hoàng" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Số điện thoại</label>
+                <input type="text" id="phone" value="0563 301 536" readonly>
+            </div>
+
         </div>
 
         <div class="form-group">
-          <label for="phone">Số điện thoại</label>
-          <input type="text" id="phone" value="0563 301 536" readonly>
+            <label for="address">Địa chỉ</label>
+            <input type="text" id="address" value="43 sdsldjflsdj slfjdslfj lsdjfld" readonly>
+        </div>
+
+        <div class="payment">
+
+            <div class="payment-method-container">
+                <h1 class="payment-title">PHƯƠNG THỨC THANH TOÁN</h1>
+
+                <!-- Phương thức thanh toán -->
+                <div class="payment-methods">
+                    <a href=""><img src="/image/vnpay-icon.jpg" alt="VnPay"></a>
+                </div>
+
+                <!-- Chi tiết thanh toán -->
+                <div class="payment-details">
+                    <h2>Chi tiết thanh toán</h2>
+                    <table>
+                        <tr>
+                            <th>Sản phẩm</th>
+                            <th>Tạm tính</th>
+                        </tr>
+                        <tr>
+                            <td>Kenny G - Miracles: The Holiday Album × 1</td>
+                            <td>1.450.000đ</td>
+                        </tr>
+                        <tr>
+                            <td>Tổng phí vận chuyển</td>
+                            <td>300.000đ</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td><strong>Tổng thanh toán</strong></td>
+                            <td><strong>1.749.000đ</strong></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- Ghi chú -->
+                <div class="notes">
+                    <label for="notes">Ghi chú</label>
+                    <textarea id="notes" rows="4" placeholder="Nhập ghi chú của bạn..."></textarea>
+                </div>
+
+                <!-- Nút đặt hàng -->
+                <div class="submit-button">
+                    <button type="button">Đặt hàng</button>
+                </div>
+            </div>
+
         </div>
 
     </div>
-
-     <div class="form-group">
-          <label for="address">Địa chỉ</label>
-          <input type="text" id="address" value="43 sdsldjflsdj slfjdslfj lsdjfld" readonly>
-        </div>
-
-    <div class="payment">
-
-        <div class="payment-method-container">
-        <h1 class="payment-title">PHƯƠNG THỨC THANH TOÁN</h1>
-        
-        <!-- Phương thức thanh toán -->
-        <div class="payment-methods">
-            <a href=""><img src="/image/vnpay-icon.jpg" alt="VnPay"></a>
-        </div>
-        
-        <!-- Chi tiết thanh toán -->
-        <div class="payment-details">
-            <h2>Chi tiết thanh toán</h2>
-            <table>
-                <tr>
-                    <th>Sản phẩm</th>
-                    <th>Tạm tính</th>
-                </tr>
-                <tr>
-                    <td>Kenny G - Miracles: The Holiday Album × 1</td>
-                    <td>1.450.000đ</td>
-                </tr>
-                <tr>
-                    <td>Tổng phí vận chuyển</td>
-                    <td>300.000đ</td>
-                </tr>
-                <tr class="total-row">
-                    <td><strong>Tổng thanh toán</strong></td>
-                    <td><strong>1.749.000đ</strong></td>
-                </tr>
-            </table>
-        </div>
-
-        <!-- Ghi chú -->
-        <div class="notes">
-            <label for="notes">Ghi chú</label>
-            <textarea id="notes" rows="4" placeholder="Nhập ghi chú của bạn..."></textarea>
-        </div>
-
-        <!-- Nút đặt hàng -->
-        <div class="submit-button">
-            <button type="button">Đặt hàng</button>
-        </div>
-    </div>
-
-    </div>
-
-</div>
 
 </main>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Lấy dữ liệu từ localStorage
+        const checkoutData = JSON.parse(localStorage.getItem('checkoutData')) || {};
 
+        const { cart, totalPrice } = checkoutData;
+
+        const paymentDetailsTable = document.querySelector('.payment-details table');
+
+        if (cart && cart.length > 0) {
+            cart.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                <td>${item.name} × ${item.quantity}</td>
+                <td>${(item.price * item.quantity).toLocaleString()} đ</td>
+            `;
+                paymentDetailsTable.appendChild(row);
+            });
+
+            // Hiển thị tổng tiền và phí vận chuyển (nếu có)
+            const shippingFee = 300000; // Phí vận chuyển cố định
+            const totalPayment = totalPrice + shippingFee;
+
+            paymentDetailsTable.innerHTML += `
+            <tr>
+                <td>Tổng phí vận chuyển</td>
+                <td>${shippingFee.toLocaleString()} đ</td>
+            </tr>
+            <tr class="total-row">
+                <td><strong>Tổng thanh toán</strong></td>
+                <td><strong>${totalPayment.toLocaleString()} đ</strong></td>
+            </tr>
+        `;
+        } else {
+            alert('Không có sản phẩm trong giỏ hàng.');
+        }
+    });
+
+</script>

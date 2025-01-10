@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -11,6 +12,9 @@ using MuseMusic.Models.Tables;
 
 namespace MuseMusic.Controllers.AdminManagement.VinylManagement;
 
+
+
+[Authorize(Roles = "Admin")]
 [Route("admin")]
 public class VinylShow : Controller
 {
@@ -25,6 +29,8 @@ public class VinylShow : Controller
     {
         return View();
     }
+
+
     [HttpGet("vinylmanage")] //Hiện thị bảng data Vinyl
     public IActionResult Vinylmanage()
     {

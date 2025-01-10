@@ -180,6 +180,23 @@
     <script src="js/templatemo_script.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("beforeunload", function (event) {
+            // Send an AJAX request to log out the user when they leave the page
+            fetch('/Login/Logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({}) // Empty body for logout
+            }).then(response => {
+                console.log("User logged out successfully.");
+            }).catch(error => {
+                console.error("Error during logout:", error);
+            });
+        });
+    </script>
+
 </body>
 
 </html>

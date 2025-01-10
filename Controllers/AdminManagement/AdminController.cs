@@ -4,8 +4,10 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MuseMusic.Models;
 using MuseMusic.Models.Tables;
+using Microsoft.AspNetCore.Authorization;
 namespace MuseMusic.Controllers;
 
+[Authorize(Roles = "Admin")]
 public class AdminController : Controller
 {
     private readonly ILogger<HomeController> _logger;
@@ -17,6 +19,8 @@ public class AdminController : Controller
     {
         return View();
     }
+
+    
     public IActionResult Categories()
     {
         return View();

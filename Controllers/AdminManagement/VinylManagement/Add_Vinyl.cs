@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -11,20 +12,22 @@ using MuseMusic.Models.Tables;
 
 namespace MuseMusic.Controllers.AdminManagement.VinylManagement;
 
-    [Route("admin")]
-    public class Add_Vinyl : Controller
+
+[Authorize(Roles = "Admin")]
+[Route("admin")]
+public class Add_Vinyl : Controller
+{
+    private readonly ILogger<Add_Vinyl> _logger;
+
+    public Add_Vinyl(ILogger<Add_Vinyl> logger)
     {
-        private readonly ILogger<Add_Vinyl> _logger;
+        _logger = logger;
+    }
 
-        public Add_Vinyl(ILogger<Add_Vinyl> logger)
-        {
-            _logger = logger;
-        }
-
-        public IActionResult Index()
-        {
-            return View();
-        }
+    public IActionResult Index()
+    {
+        return View();
+    }
     [HttpGet("addvinyl")]
     public IActionResult AddVinyl()
     {
@@ -102,7 +105,7 @@ namespace MuseMusic.Controllers.AdminManagement.VinylManagement;
                     Tracklist = model.SelectedProduct.Tracklist,
                     Years = model.SelectedProduct.Years,
                     DiskId = model.SelectedProduct.DiskId,
-                    
+
                 };
 
                 // Add the associated artists
@@ -160,9 +163,9 @@ namespace MuseMusic.Controllers.AdminManagement.VinylManagement;
     }
 
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View("Error!");
-        }
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View("Error!");
     }
+}

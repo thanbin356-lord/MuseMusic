@@ -3,6 +3,8 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MuseMusic.Models;
 using MuseMusic.Models.Tables;
+using MuseMusic.Models.ViewModels;
+using MuseMusic.Models.ManagerModels;
 namespace MuseMusic.Controllers;
 
 public class HomeController : Controller
@@ -15,9 +17,66 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index()
+    public IActionResult Index(int page = 1, int pageSize = 8) // Set default pageSize to 8
     {
-        return View();
+        using (var db = new shopmanagementContext())
+        {
+            var totalProducts = (from p in db.Products
+                                 join v in db.Vinyls on p.Id equals v.ProductId
+                                 select p).Count();
+
+            var products = (from p in db.Products
+                            join v in db.Vinyls on p.Id equals v.ProductId
+                            join img in db.ImageUrls.Where(img => (bool)img.IsPrimary) on p.Id equals img.ProductId
+                            let artistNames = (from av in db.ArtistVinyls
+                                               join a in db.Artists on av.ArtistId equals a.Id
+                                               where av.VinylId == v.Id
+                                               select a.Name).ToList()
+                            select new Models.ViewModels.Product
+                            {
+                                ProductId = p.Id,
+                                ProductName = p.Name,
+                                ProductImage = img.Url,
+                                ProductDescription = p.Description,
+                                Price = p.Price,
+                                DiskId = v.DiskId,
+                                Tracklist = v.Tracklist,
+                                ArtistNames = string.Join(", ", artistNames),
+
+                            })
+                            .Skip((page - 1) * pageSize)
+                            .Take(pageSize)
+                            .ToList();
+            var artists = (from a in db.Artists
+                           select new
+                           {
+                               ArtistName = a.Name,
+                               ArtistImageUrl = a.Artisitmageturl
+                           }).Distinct().Take(5).ToList();
+
+            ViewBag.Artists = artists;
+
+            var categories = (from a in db.Categories
+                              select new
+                              {
+                                  CategoriesName = a.Name,
+                                  CategoriesImageUrl = a.CategoryImage,
+                              }).Take(7).ToList();
+
+            ViewBag.Categories = categories;
+
+            ViewBag.Categories = categories;
+            var vinylViewModel = new MuseMusic.Models.ViewModels.VinylViewModel
+            {
+                Products = products,
+                CurrentPage = page,
+                PageSize = pageSize,
+                TotalProducts = totalProducts
+            };
+
+            ViewBag.Message = TempData["Message"];
+            return View("~/Views/Home/Index.cshtml", vinylViewModel);
+        }
     }
 
     public IActionResult Privacy()
@@ -59,18 +118,18 @@ public class HomeController : Controller
     }
 
 
-// Artists
-        public IActionResult Artist()
+    // Artists
+    public IActionResult Artist()
     {
         return View();
     }
 
-        public IActionResult Artist_Yoasobi()
+    public IActionResult Artist_Yoasobi()
     {
         return View();
     }
 
-        public IActionResult Payment()
+    public IActionResult Payment()
     {
         return View();
     }
@@ -114,8 +173,8 @@ public class HomeController : Controller
     {
         return View();
     }
-    
-    
+
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 .section-padding {
   padding-top: 4rem;
-  padding-bottom: 4rem;
+  padding-bottom: 0rem !important;
 }
-
+.product-container{
+  padding-top: 20px;
+}
 .vinyl-img-top{
     align-items: center;
     justify-content: center;
