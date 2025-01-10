@@ -1,6 +1,7 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model MuseMusic.Models.ViewModels.RecordPlayerViewModel
 <main>
 
     <!-- Record Player Head -->
@@ -10,63 +11,55 @@
 
                 <div class="col-lg-6 col-12">
                     <div class="record-thumb">
-                        <img src="/images/record-player/recordplayer-detail.png" class="record-image" alt="">
+                        <input type="hidden" id="prodid" value="@Model.SelectedProduct.ProductId" />
+                        <button id="prev" class="btn btn-link"><i class="fa-sharp fa-solid fa-arrow-left"></i></button>
+                        <img id="main-image" src="@Model.SelectedProduct.PrimaryImageUrl" class="product-image"
+                            alt="Main Product Image">
+                        <button id="next" class="btn btn-link"><i class="fa-sharp fa-solid fa-arrow-right"></i></button>
                     </div>
 
                     <div class="record-secondthumb">
-                        <img src="/images/record-player/recordplayer-detail.png" class="record-small" alt="">
-                        <img src="/images/record-player/recordplayer-detail-2.png" class="record-small" alt="">
-                        <img src="/images/record-player/recordplayer-detail-3.png" class="record-small" alt="">
+                        <div class="thumbnail-slider">
+                            @foreach (var imageUrl in Model.SelectedProduct.ImageUrls)
+                            {
+                                <div class="thumbnail" data-image="@imageUrl">
+                                    <img src="@imageUrl" alt="Product Thumbnail">
+                                </div>
+                            }
+                        </div>
                     </div>
 
                 </div>
 
                 <div class="col-lg-6 col-12">
 
-                    <!-- Record Player Price & Infor -->
+                    <!-- Record Player Price & Info -->
                     <div class="record-info">
                         <div>
-                            <h2>Audio Technica AT-LP60x</h2>
+                            <h2 id="prodname">@Model.SelectedProduct.ProductName</h2>
 
-                            <h3>Đầu đĩa than</h3>
+                            <h3>@Model.SelectedProduct.SelectedBrandName</h3>
 
-                            <h4>5.850.000 ₫</h4>
+                            <h4 id="prodprice">@Model.SelectedProduct.Price.ToString("N0") ₫</h4>
 
-                            <h5>Mã sản phẩm: AT-LP60</h5>
+                            <h5>Mã sản phẩm: @Model.SelectedProduct.ProductId</h5>
 
                             <h6>Sản phẩm gợi ý:</h6>
-
                         </div>
-
                     </div>
-
                     <!-- Record Player Recommendation -->
 
                     <div class="row">
-                        <!-- Single Record Player Recommendation -->
-                        <div class="col-lg-6 col-12 mt-4 mt-lg-0">
-
-                            <div class="record-recommend">
-
-                                <h7>Bản Bluetooth AT-LP60xBT </h7>
-                                <h8>Đầu đĩa than</h8>
-                                <h9>6.320.000 ₫</h9>
-
+                        @foreach (var product in Model.Products)
+                        {
+                            <div class="col-lg-6 col-12 mt-4 mt-lg-0">
+                                <div class="record-recommend">
+                                    <h7>@product.ProductName</h7>
+                                    <h8>@product.SelectedBrandName</h8>
+                                    <h9>@product.Price.ToString("N0") ₫</h9>
+                                </div>
                             </div>
-                        </div>
-
-                        <!-- Single Record Player Recommendation -->
-                        <div class="col-lg-6 col-12 mt-4 mt-lg-0">
-
-                            <div class="record-recommend">
-
-                                <h7>Bản USB AT-LP60xBT </h7>
-                                <h8>Đầu đĩa than</h8>
-                                <h9>5.580.000 ₫</h9>
-
-                            </div>
-                        </div>
-
+                        }
                     </div>
 
                     <!-- Record Player Add to cart -->
@@ -82,7 +75,7 @@
                                             <i class="icofont-minus-square"></i>
                                         </button>
 
-                                        <input id="form1" min="0" name="quantity" value="2" type="number"
+                                        <input id="quantity-selection" min="1" name="quantity" value="1" type="number"
                                             class="form-control form-control-sm" style="width: 50px;" />
 
                                         <button class="btn btn-link px-2"
@@ -95,7 +88,7 @@
                             </div>
 
                             <div class="col-lg-8 col-12">
-                                <a href=""><button class="cart-btn">Thêm vào giỏ hàng</button></a>
+                                <a href=""><button id="addcart" class="cart-btn">Thêm vào giỏ hàng</button></a>
                             </div>
 
                         </div>
@@ -182,47 +175,93 @@
     <!--  Record Player List -->
 
     <div class="record-container">
-        <div class="record-player">
-            <a href=""><img src="/images/record-player/record-player.png" alt=""></a>
-            <h2>Audio Technica AT-LP60x</h2>
-            <p>Audio Technica</p>
-            <p class="price">5.850.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-
+        @foreach (var product in Model.Products)
+        {
+            <div class="record-player">
+                <a href="@Url.Action("RecordDetails", "RecordPlayerView", new { id = product.ProductId })">
+                    <img src="@product.PrimaryImageUrl" alt="@product.ProductName">
+                </a>
+                <h2>@product.ProductName</h2>
+                <p>@product.SelectedBrandName</p>
+                <p class="price">@product.Price.ToString("N0") ₫</p>
+                <div class="buttons">
+                    <span class="preorder">PREORDER</span>
+                </div>
             </div>
-        </div>
-
-        <div class="record-player">
-            <a href="#"><img src="/images/record-player/record-player-2.png" alt=""></a>
-            <h2>FiiO TT13</h2>
-            <p>FiiO</p>
-            <p class="price">6.500.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-            </div>
-        </div>
-
-        <div class="record-player">
-            <a href="#"><img src="/images/record-player/record-player-3.png" alt="HELP EVER HURT NEVER"></a>
-            <h2>Audio Technica AT-LPW30</h2>
-            <p>Audio Technica</p>
-            <p class="price">5.350.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-            </div>
-        </div>
-
-        <div class="record-player">
-            <a href="#"><img src="/images/record-player/record-player-4.png" alt="Columbia GP-3"></a>
-            <h2>Columbia GP-3</h2>
-            <p>Columbia</p>
-            <p class="price">4.500.000 đ</p>
-            <div class="buttons">
-                <span class="status">HẾT HÀNG</span>
-            </div>
-        </div>
-
+        }
     </div>
-
 </main>
+<script>
+    // Hàm thêm sản phẩm vào giỏ hàng
+    function addToCart(item) {
+        // Lấy giỏ hàng từ localStorage, nếu không có thì tạo một giỏ hàng rỗng
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
+        const existingItemIndex = cart.findIndex(cartItem => cartItem.id === item.id);
+
+        if (existingItemIndex === -1) {
+            // Nếu sản phẩm chưa có trong giỏ hàng, thêm vào giỏ hàng
+            cart.push(item);
+            // Lưu lại giỏ hàng vào localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+            return true;
+        } else {
+            // Nếu sản phẩm đã có, trả về false
+            return false;
+        }
+    }
+
+    // Add event listener to the button
+    document.getElementById('addcart').addEventListener('click', async function (event) {
+        // Ngăn chặn hành động mặc định của nút (để tránh refresh trang)
+        event.preventDefault();
+
+        // Vô hiệu hóa nút để ngừng click thêm
+        const addButton = event.target;
+        addButton.disabled = true;
+
+        const id = document.getElementById('prodid').value;
+        const name = document.getElementById('prodname').textContent;
+        const price = parseFloat(document.getElementById('prodprice').textContent);
+        const quantity = document.getElementById('quantity-selection').value;
+        const imageUrl = document.getElementById('main-image').getAttribute('src');
+
+        const item = {
+            id: id,
+            name: name,
+            price: price,
+            quantity: quantity,
+            image: imageUrl,
+        };
+
+        // Kiểm tra và thêm sản phẩm vào giỏ hàng
+        const isAdded = addToCart(item);
+
+        if (isAdded) {
+            // Hiển thị thông báo nếu sản phẩm được thêm vào giỏ hàng
+            await Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Sản phẩm đã được thêm vào giỏ hàng!',
+                timer: 2000,  // Thông báo tồn tại trong 2 giây
+                willClose: () => {
+                    // Kích hoạt lại nút sau khi thông báo đóng
+                    addButton.disabled = false;
+                }
+            });
+        } else {
+            // Hiển thị thông báo nếu sản phẩm đã có trong giỏ hàng
+            await Swal.fire({
+                icon: 'info',
+                title: 'Sản phẩm đã có trong giỏ hàng!',
+                text: 'Bạn đã thêm sản phẩm này vào giỏ hàng trước đó.',
+                timer: 2000,  // Thông báo tồn tại trong 2 giây
+                willClose: () => {
+                    // Kích hoạt lại nút sau khi thông báo đóng
+                    addButton.disabled = false;
+                }
+            });
+        }
+    });
+</script>

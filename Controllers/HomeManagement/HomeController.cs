@@ -142,18 +142,6 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Record_Player()
-    {
-        return View();
-    }
-    public IActionResult Accessories()
-    {
-        return View();
-    }
-    public IActionResult AccessoriesDetails()
-    {
-        return View();
-    }
     public IActionResult RecordPlayer_Details()
     {
         return View();

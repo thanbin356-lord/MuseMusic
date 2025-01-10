@@ -1,0 +1,107 @@
+/* Ensure custom styles are applied after Bootstrap */
+.user-info-main {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* Go back button */
+.go-back a {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.go-back a i {
+    margin-right: 8px;
+}
+
+/* Profile section */
+.profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-picture {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.delete-button {
+    background-color: #f44336;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: #e53935;
+}
+
+/* Form sections */
+.details .form-group,
+.details .form-group-1 .form-group,
+.details .form-group-2 .form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[readonly] {
+    background-color: #f9f9f9;
+}
+
+/* User order details */
+.User-Order-Detail {
+    margin-top: 30px;
+}
+
+.Order-Number {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* Purchase history table */
+.purchase-history {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+}
+
+.purchase-history th, .purchase-history td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.purchase-history th {
+    background-color: #f7f7f7;
+}
+
+.purchase-history tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Total value section */
+.total-value {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+}

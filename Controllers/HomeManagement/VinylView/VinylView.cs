@@ -156,7 +156,10 @@ public class VinylView : Controller
                 ProductId = p.Id,
                 ProductName = p.Name,
                 Price = p.Price,
-                // Join ArtistVinyls to get Artist names
+                PrimaryImageUrl = db.ImageUrls
+                .Where(i => i.ProductId == p.Id && i.IsPrimary == true) // Check for IsPrimary being true
+                .Select(i => i.Url)
+                .FirstOrDefault(),
                 ArtistNames = p.Vinyls
                     .Select(v => v.ArtistVinyls
                     .Select(av => av.Artist.Name)

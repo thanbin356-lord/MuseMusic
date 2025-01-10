@@ -1,6 +1,7 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model MuseMusic.Models.ViewModels.RecordPlayerViewModel
 <main>
     <!-- Record player Header -->
 
@@ -39,8 +40,8 @@
                                 của người già</p>
                         </div>
                         <div class="trend-button">
-                            <a href="" class="btn">XEM CHI TIẾT</a>
-                            <button class="btn secondary">THÊM VÀO GIỎ</button>
+                            <a href="/Home/RecordPlayer_Details/6" class="btn">XEM CHI TIẾT</a>
+                            
                         </div>
                     </div>
 
@@ -55,8 +56,8 @@
                             <p>Đầu đĩa này dành cho người: <br> • Nghe nhạc quá 180p/ngày <br>• Thích màu xe của Người
                                 Dơi<br>• Cần tìm quà tặng bố vợ/chồng</p>
                             <div class="trend-button">
-                                <a href="" class="btn">XEM CHI TIẾT</a>
-                                <button class="btn secondary">THÊM VÀO GIỎ</button>
+                                <a href="/Home/RecordPlayer_Details/6" class="btn">XEM CHI TIẾT</a>
+                                
                             </div>
                         </div>
 
@@ -86,129 +87,51 @@
     <!--  Record Player List -->
 
     <div class="record-container">
-        <div class="record-player">
-            <a href=""><img src="/images/record-player/record-player.png" alt=""></a>
-            <h2>Audio Technica AT-LP60x</h2>
-            <p>Audio Technica</p>
-            <p class="price">5.850.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
 
+        @foreach (var product in Model.Products)
+        {
+            <div class="record-player">
+
+                <a href="/Home/RecordPlayer_Details/@product.ProductId"><img src="@product.ProductImage"
+                        alt="@product.ProductName"></a>
+                <h2>@product.ProductName</h2>
+                <p>@product.ArtistNames</p>
+                <p class="price">@product.Price</p>
+                <div class="buttons">
+                    <span class="preorder">PREORDER</span>
+                </div>
             </div>
+
+        }
+
+    </div>
+
+    <div class="container">
+        <div class="pagination">
+            @if (Model.CurrentPage > 1)
+            {
+                <a href="@Url.Action("RecordPlayer", "RecordPlayerView", new { page = Model.CurrentPage - 1 })"
+                    class="page-btn">&lt;</a>
+            }
+
+            @for (int i = 1; i <= Math.Ceiling((double)Model.TotalProducts / 12); i++)
+            {
+                if (i == Model.CurrentPage)
+                {
+                    <span class="page-btn active">@i</span>
+                }
+                else
+                {
+                    <a href="@Url.Action("RecordPlayer", "RecordPlayerView", new { page = i })" class="page-btn">@i</a>
+                }
+            }
+
+            @if (Model.CurrentPage < Math.Ceiling((double)Model.TotalProducts / 12))
+            {
+                <a href="@Url.Action("RecordPlayer", "RecordPlayerView", new { page = Model.CurrentPage + 1 })"
+                    class="page-btn">&gt;</a>
+            }
         </div>
-
-        <div class="record-player">
-            <a href=""><img src="/images/record-player/record-player-2.png" alt=""></a>
-            <h2>FiiO TT13</h2>
-            <p>FiiO</p>
-            <p class="price">6.500.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-            </div>
-        </div>
-
-        <div class="record-player">
-            <a href="#"><img src="/images/record-player/record-player-3.png" alt="HELP EVER HURT NEVER"></a>
-            <h2>Audio Technica AT-LPW30</h2>
-            <p>Audio Technica</p>
-            <p class="price">5.350.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-            </div>
-        </div>
-
-        <div class="record-player">
-            <a href="#"><img src="/images/record-player/record-player-4.png" alt="Columbia GP-3"></a>
-            <h2>Columbia GP-3</h2>
-            <p>Columbia</p>
-            <p class="price">4.500.000 đ</p>
-            <div class="buttons">
-                <span class="status">HẾT HÀNG</span>
-            </div>
-        </div>
-
-        <div class="record-player">
-            <a href="#"><img src="/images/record-player/record-player-3.png" alt="HELP EVER HURT NEVER"></a>
-            <h2>Audio Technica AT-LPW30</h2>
-            <p>Audio Technica</p>
-            <p class="price">5.350.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-            </div>
-        </div>
-
-        <div class="record-player">
-            <a href=""><img src="/images/record-player/record-player.png" alt=""></a>
-            <h2>Audio Technica AT-LP60x</h2>
-            <p>Audio Technica</p>
-            <p class="price">5.850.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-
-            </div>
-        </div>
-
-        <div class="record-player">
-            <a href="#"><img src="/images/record-player/record-player-4.png" alt="Columbia GP-3"></a>
-            <h2>Columbia GP-3</h2>
-            <p>Columbia</p>
-            <p class="price">4.500.000 đ</p>
-            <div class="buttons">
-                <span class="status">HẾT HÀNG</span>
-            </div>
-        </div>
-
-        <div class="record-player">
-            <a href="#"><img src="/images/record-player/record-player-4.png" alt="Columbia GP-3"></a>
-            <h2>Columbia GP-3</h2>
-            <p>Columbia</p>
-            <p class="price">4.500.000 đ</p>
-            <div class="buttons">
-                <span class="status">HẾT HÀNG</span>
-            </div>
-        </div>
-
-        <div class="record-player">
-            <a href="#"><img src="/images/record-player/record-player-3.png" alt="HELP EVER HURT NEVER"></a>
-            <h2>Audio Technica AT-LPW30</h2>
-            <p>Audio Technica</p>
-            <p class="price">5.350.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-            </div>
-        </div>
-
-        <div class="record-player">
-            <a href="#"><img src="/images/record-player/record-player-2.png" alt=""></a>
-            <h2>FiiO TT13</h2>
-            <p>FiiO</p>
-            <p class="price">6.500.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-            </div>
-        </div>
-
-        <div class="record-player">
-            <a href="#"><img src="/images/record-player/record-player-3.png" alt="HELP EVER HURT NEVER"></a>
-            <h2>Audio Technica AT-LPW30</h2>
-            <p>Audio Technica</p>
-            <p class="price">5.350.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-            </div>
-        </div>
-
-        <div class="record-player">
-            <a href="#"><img src="/images/record-player/record-player-2.png" alt=""></a>
-            <h2>FiiO TT13</h2>
-            <p>FiiO</p>
-            <p class="price">6.500.000 đ</p>
-            <div class="buttons">
-                <span class="preorder">PREORDER</span>
-            </div>
-        </div>
-
-
     </div>
 
 </main>

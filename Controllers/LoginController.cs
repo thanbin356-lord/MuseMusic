@@ -42,32 +42,32 @@ public class LoginController : Controller
     [AllowAnonymous]
     public async Task<IActionResult> Login(string login, string password)
     {
-        // Tìm tài khoản bằng email hoặc username
+        // Find the account by email or username
         var account = await _context.Accounts
-            .FirstOrDefaultAsync(a => a.Email == login || a.Username == login); // Kiểm tra cả email và username
+            .FirstOrDefaultAsync(a => a.Email == login || a.Username == login); // Check both email and username
 
         if (account == null)
         {
-            // Nếu không tìm thấy tài khoản
+            // If account not found
             ModelState.AddModelError("", "Invalid login attempt.");
             return View();
         }
 
-        // Kiểm tra mật khẩu
+        // Check password validity
         bool isValidPassword = VerifyPassword(password, account.Password);
 
         if (isValidPassword)
         {
-            // Nếu mật khẩu hợp lệ, tiếp tục quá trình đăng nhập
+            // If password is valid, proceed with login
             var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Name, account.Email),  // Hoặc sử dụng account.Username
+            new Claim(ClaimTypes.Name, account.Username),  // Always store the username, even if logged in with email
             new Claim(ClaimTypes.NameIdentifier, account.Id.ToString())
         };
 
-            // Lấy các vai trò (roles) của người dùng
+            // Get user roles
             var roles = await _context.AccountRoles
-                .Where(ur => ur.AccountId == account.Id) // Chú ý thay đổi điều kiện với bảng account roles
+                .Where(ur => ur.AccountId == account.Id)
                 .Select(ur => ur.Role.Name)
                 .ToListAsync();
 
@@ -79,10 +79,10 @@ public class LoginController : Controller
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var principal = new ClaimsPrincipal(identity);
 
-            // Lưu cookie đăng nhập
+            // Sign in the user
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
-            // Chuyển hướng theo vai trò
+            // Redirect based on role
             if (roles.Contains("Admin"))
             {
                 return RedirectToAction("Categories", "Admin");
@@ -94,10 +94,9 @@ public class LoginController : Controller
         }
         else
         {
-            // Nếu mật khẩu sai, kiểm tra xem có cần tái mã hóa không
+            // If password is incorrect, rehash if needed
             if (NeedsRehashing(account.Password))
             {
-                // Tái mã hóa mật khẩu và cập nhật lại trong cơ sở dữ liệu
                 var newHash = BCrypt.Net.BCrypt.HashPassword(password);
                 account.Password = newHash;
 
@@ -109,6 +108,7 @@ public class LoginController : Controller
             return View();
         }
     }
+
 
     public static bool VerifyPassword(string password, string hashedPassword)
     {

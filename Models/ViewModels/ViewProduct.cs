@@ -36,41 +36,67 @@ namespace MuseMusic.Models.ViewModels
         }
     }
 
-
-    public class Product
+    public class RecordPlayerViewModel()
     {
-        public int ProductId { get; set; }
-        public string DiskId { get; set; }
-        public string ProductName { get; set; }
-        public string ProductImage { get; set; }
-        public string ArtistNames { get; set; }
-        public string ProductDescription { get; set; }
-        public decimal Price { get; set; }
-        public string Tracklist { get; set; }
-        public string Status { get; set; } // For preorder or other statuses
-        public int Years { get; set; }
-        public string CategoriesNames { get; set; }
-        public string MoodNames { get; set; }
-        public int? ProductQuantity { get; set; }
-        public string SelectedBrandName { get; set; }
-        public List<string> ImageUrls { get; set; }
-        public string? PrimaryImageUrl { get; set; }
-        public string ArtistImageUrl { get; set; }
-        public Vinyl Vinyl { get; set; }
-    }
-    public class Vinyl
+        public List<Product> Products { get; set; }
+        public Product SelectedProduct { get; set; }
+        public List<Brand> AllBrands { get; set; }
+
+        public int CurrentPage { get; set; }
+        public int PageSize { get; set; }
+        public int TotalProducts { get; set; }
+        public int TotalPages => (int)Math.Ceiling((double)TotalProducts / PageSize);
+
+}
+public class AccessoriesViewModel()
     {
-        public int VinylId { get; set; }
-        public string DiskId { get; set; }
-        public int ProductId { get; set; }
+        public List<Product> Products { get; set; }
+        public Product SelectedProduct { get; set; }
+        public List<Brand> AllBrands { get; set; }
 
-        // Navigation properties to related entities
-        public List<CategoriesVinyl> CategoriesVinyls { get; set; }
-        public List<ArtistVinyl> ArtistVinyls { get; set; }
-        public List<MoodVinyl> MoodVinyls { get; set; }
+        public int CurrentPage { get; set; }
+        public int PageSize { get; set; }
+        public int TotalProducts { get; set; }
+        public int TotalPages => (int)Math.Ceiling((double)TotalProducts / PageSize);
 
+}
+public class Product
+{
+    public int ProductId { get; set; }
+    public string DiskId { get; set; }
+    public string ProductName { get; set; }
+    public string ProductImage { get; set; }
+    public string ArtistNames { get; set; }
+    public string ProductDescription { get; set; }
+    public decimal Price { get; set; }
+    public string Tracklist { get; set; }
+    public string Status { get; set; } // For preorder or other statuses
+    public int Years { get; set; }
+    public string CategoriesNames { get; set; }
+    public string MoodNames { get; set; }
+    public int? ProductQuantity { get; set; }
+    public string SelectedBrandName { get; set; }
+    public List<string> ImageUrls { get; set; }
+    public string? PrimaryImageUrl { get; set; }
+    public string ArtistImageUrl { get; set; }
+    public Vinyl Vinyl { get; set; }
+    public RecordPlayer RecordPlayer { get; set; }
+}
+public class Vinyl
+{
+    public int VinylId { get; set; }
+    public string DiskId { get; set; }
+    public int ProductId { get; set; }
 
+    // Navigation properties to related entities
+    public List<CategoriesVinyl> CategoriesVinyls { get; set; }
+    public List<ArtistVinyl> ArtistVinyls { get; set; }
+    public List<MoodVinyl> MoodVinyls { get; set; }
 
-    }
-
+}
+public class RecordPlayer
+{
+    public string Motor { get; set; }
+    public string Speed { get; set; }
+}
 }
