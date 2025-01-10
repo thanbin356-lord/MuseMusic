@@ -35,6 +35,10 @@ public class VinylView : Controller
     {
         using (var db = new shopmanagementContext())
         {
+            var categories = db.Categories.ToList();
+            var artists = db.Artists.ToList();
+            var moods = db.Moods.ToList();
+
             // Start with an empty query and apply filters only if parameters exist
             var query = from p in db.Products
                         join v in db.Vinyls on p.Id equals v.ProductId
@@ -61,8 +65,14 @@ public class VinylView : Controller
                 query = query.Where(p => p.Vinyl.MoodVinyls.Any(mv => moodIds.Contains((int)mv.MoodId)));
             }
 
-            // Execute the query
+            // Execute the query and fetch the data
             var productsData = query.ToList();
+
+            // Filter eras in memory after data is loaded
+            if (selectedEras != null && selectedEras.Any())
+            {
+                productsData = productsData.Where(p => selectedEras.Contains(GetEra(p.Vinyl.Years ?? 0).ToString())).ToList();
+            }
 
             // Map the result to your view model
             var products = productsData.Select(p => new Models.ViewModels.Product
@@ -90,10 +100,13 @@ public class VinylView : Controller
                 SelectedCategoryIds = categoryIds ?? new List<int>(),
                 SelectedArtistIds = artistIds ?? new List<int>(),
                 SelectedEraIds = selectedEras ?? new List<string>(),
-                SelectedMoodIds = moodIds ?? new List<int>()
+                SelectedMoodIds = moodIds ?? new List<int>(),
+                AllCategories = categories,
+                AllArtists = artists,
+                AllMoods = moods
             };
 
-            return View("~/Views/Home/Vinyl.cshtml", vinylViewModel);
+            return PartialView("~/Views/Home/Vinyl.cshtml", vinylViewModel);
         }
     }
 

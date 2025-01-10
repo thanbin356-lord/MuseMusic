@@ -136,12 +136,10 @@ public class LoginController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Logout()
     {
-        // Sign out the user
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-
-        // Redirect to login page after logging out
-        return RedirectToAction("Login", "Login");
+        return RedirectToAction("Index", "Home");  // Đảm bảo bạn chuyển hướng về trang chủ sau khi đăng xuất
     }
+
 
     [AllowAnonymous]
     public IActionResult AccessDenied()
