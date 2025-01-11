@@ -120,57 +120,56 @@
                 </div>
 
                 <div class="col-lg-6 col-12">
+                    <audio id="audio" src=""></audio>
                     <div class="music-player">
 
                         <div class="music-header">
-
-                            <img src="images/music-player.png" alt="Arcane official playlist">
-
+                            <img src="/image/vyny.png" alt="Arcane official playlist">
                             <div class="music-info">
-                                <h4>Arcane official playlist</h4>
+                                <h4>Official playlist</h4>
                                 <button>Preview</button>
                             </div>
                         </div>
 
                         <div class="controls">
-                            <div class="prev">
-                                <i class="icofont-ui-previous"></i>
-                            </div>
-                            <div class="next">
-                                <i class="icofont-ui-next"></i>
-                            </div>
-                            <div class="play">
-                                <i class="icofont-play-alt-1"></i>
-                            </div>
+                            <button class="play-back" id="play-back" style="background:none;">
+                                <i class="fa-solid fa-backward"></i>
+                            </button>
+                            <button class="play" id="play" style="background:none;">
+                                <i class="play-inner fa-solid fa-play"></i>
+                            </button>
+                            <button class="play-forward" id="play-forward" style="background:none;">
+                                <i class="fa-solid fa-forward"></i>
+                            </button>
                         </div>
                         <div class="track-time">
-                            <div class="track"></div>
-                            <div class="time">
-                                <div class="total-time">03:20</div>
-                                <div class="last-time">00:12</div>
+                            <input type="range" name="range" id="range" value="0">
+                            <div class="timer">
+                                <div class="duration">00:00</div>
+                                <div class="remaining">00:00</div>
                             </div>
                         </div>
                         <div class="song-list">
-                            <div class="single-song-list">
+                            <div class="single-song-list" data-song="0">
                                 <div class="song-list-title">
-                                    <h4>1. Heavy Is The Crowns</h4>
-                                    <h5>Mike Shinoda, Emily Amstrong</h5>
+                                    <h4>Track 1</h4>
+                                    <h5>#</h5>
                                 </div>
-                                <h6>01:41</h6>
+                                <h6><i class="fa-solid fa-music"></i></h6>
                             </div>
-                            <div class="single-song-list">
+                            <div class="single-song-list" data-song="1">
                                 <div class="song-list-title">
-                                    <h4>2. I Can’t Hear It Now</h4>
-                                    <h5>Freya Riddings</h5>
+                                    <h4>Track 2</h4>
+                                    <h5>#</h5>
                                 </div>
-                                <h6>02:34</h6>
+                                <h6><i class="fa-solid fa-music"></i></h6>
                             </div>
-                            <div class="single-song-list">
+                            <div class="single-song-list" data-song="2">
                                 <div class="song-list-title">
-                                    <h4>3. Sucker</h4>
-                                    <h5>Marcus Kings</h5>
+                                    <h4>Track 3</h4>
+                                    <h5>#</h5>
                                 </div>
-                                <h6>01:21</h6>
+                                <h6><i class="fa-solid fa-music"></i></h6>
                             </div>
                         </div>
                     </div>
@@ -230,6 +229,106 @@
 
 
 </main>
+
+<script>
+    // Lấy các phần tử cần thiết
+    const audioElement = document.getElementById("audio");
+    const playButton = document.querySelector(".play");
+    const nextButton = document.querySelector(".play-forward");
+    const prevButton = document.querySelector(".play-back");
+    const playIcon = playButton.querySelector("i");
+    const durationDisplay = document.querySelector(".duration");
+    const remainingDisplay = document.querySelector(".remaining");
+    const rangeSlider = document.getElementById("range");
+
+    let currentTrackIndex = 0; // Bài hát hiện tại
+
+    // Các bài hát trong mảng musicFiles (giả sử đã truyền từ server)
+    const musicFiles = @Html.Raw(Json.Serialize(Model.MusicFiles));
+
+    // Hàm tải bài hát
+    function loadTrack(index) {
+        if (index >= 0 && index < musicFiles.length) {
+            audioElement.src = musicFiles[index];
+            audioElement.load();
+        }
+    }
+
+    // Hàm format thời gian (convert từ giây sang phút:giây)
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = Math.floor(seconds % 60);
+        return `${minutes < 10 ? '0' : ''}${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+    }
+
+    // Hàm cập nhật thời gian
+    function updateTime() {
+        const duration = audioElement.duration;
+        const currentTime = audioElement.currentTime;
+
+        // Cập nhật thời gian đã chơi
+        durationDisplay.textContent = formatTime(duration);
+        // Cập nhật thời gian còn lại
+        remainingDisplay.textContent = formatTime(duration - currentTime);
+        // Cập nhật thanh tiến độ
+        rangeSlider.value = (currentTime / duration) * 100;
+    }
+
+    // Hàm phát bài hát
+    function playTrack() {
+        audioElement.play();
+        playIcon.classList.remove("fa-play");
+        playIcon.classList.add("fa-pause");
+    }
+
+    // Hàm tạm dừng bài hát
+    function pauseTrack() {
+        audioElement.pause();
+        playIcon.classList.remove("fa-pause");
+        playIcon.classList.add("fa-play");
+    }
+
+    // Chuyển bài tiếp theo
+    nextButton.addEventListener("click", () => {
+        currentTrackIndex = (currentTrackIndex + 1) % musicFiles.length;
+        loadTrack(currentTrackIndex);
+        playTrack();
+    });
+
+    // Quay lại bài trước
+    prevButton.addEventListener("click", () => {
+        currentTrackIndex = (currentTrackIndex - 1 + musicFiles.length) % musicFiles.length;
+        loadTrack(currentTrackIndex);
+        playTrack();
+    });
+
+    // Khi bấm nút Play, bài hát sẽ được phát hoặc tạm dừng
+    playButton.addEventListener("click", () => {
+        if (audioElement.paused) {
+            loadTrack(currentTrackIndex); // Tải bài đầu tiên khi nhấn Play
+            playTrack();
+        } else {
+            pauseTrack();
+        }
+    });
+
+    // Sự kiện khi thời gian bài hát thay đổi (khi phát nhạc)
+    audioElement.addEventListener("timeupdate", updateTime);
+
+    // Khi bài hát vừa được tải (sau khi nhấn Play)
+    audioElement.addEventListener("loadeddata", updateTime);
+
+    // Khi thay đổi thanh tiến độ (slider)
+    rangeSlider.addEventListener("input", () => {
+        const duration = audioElement.duration;
+        const newTime = (rangeSlider.value / 100) * duration;
+        audioElement.currentTime = newTime; // Cập nhật thời gian hiện tại của bài hát
+    });
+</script>
+
+
+
+
 
 <script>
     @*Trượt sản phẩm khác*@

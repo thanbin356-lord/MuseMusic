@@ -29,7 +29,7 @@ namespace MuseMusic.Models.ViewModels
         public int PageSize { get; set; }
         public int TotalProducts { get; set; }
         public int TotalPages => (int)Math.Ceiling((double)TotalProducts / PageSize);
-
+         public List<string> MusicFiles { get; set; } 
         public VinylViewModel()
         {
             AllEras = new List<string> { "1980s", "1990s", "2000s", "2010s", "2020s" }; // Predefined list of eras

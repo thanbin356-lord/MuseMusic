@@ -24,8 +24,6 @@ namespace MuseMusic.Models.Tables
         public virtual DbSet<ArtistVinyl> ArtistVinyls { get; set; } = null!;
         public virtual DbSet<Blog> Blogs { get; set; } = null!;
         public virtual DbSet<Brand> Brands { get; set; } = null!;
-        public virtual DbSet<Cart> Carts { get; set; } = null!;
-        public virtual DbSet<CartDetail> CartDetails { get; set; } = null!;
         public virtual DbSet<CategoriesVinyl> CategoriesVinyls { get; set; } = null!;
         public virtual DbSet<Category> Categories { get; set; } = null!;
         public virtual DbSet<Customer> Customers { get; set; } = null!;
@@ -45,7 +43,7 @@ namespace MuseMusic.Models.Tables
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseMySql("server=localhost;database=shopmanagement;user=root;password=thuthu121", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.40-mysql"));
+                optionsBuilder.UseMySql("server=localhost;database=shopmanagement;user=root;password=123456", Microsoft.EntityFrameworkCore.ServerVersion.Parse("9.1.0-mysql"));
             }
         }
 
@@ -239,64 +237,6 @@ namespace MuseMusic.Models.Tables
                 entity.Property(e => e.Website)
                     .HasMaxLength(255)
                     .HasColumnName("website");
-            });
-
-            modelBuilder.Entity<Cart>(entity =>
-            {
-                entity.ToTable("cart");
-
-                entity.HasIndex(e => e.CustomerId, "customer_id");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("timestamp")
-                    .HasColumnName("created_at")
-                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                entity.Property(e => e.CustomerId).HasColumnName("customer_id");
-
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("timestamp")
-                    .ValueGeneratedOnAddOrUpdate()
-                    .HasColumnName("updated_at")
-                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                entity.HasOne(d => d.Customer)
-                    .WithMany(p => p.Carts)
-                    .HasForeignKey(d => d.CustomerId)
-                    .HasConstraintName("cart_ibfk_1");
-            });
-
-            modelBuilder.Entity<CartDetail>(entity =>
-            {
-                entity.ToTable("cart_detail");
-
-                entity.HasIndex(e => e.CartId, "cart_id");
-
-                entity.HasIndex(e => e.ProductId, "product_id");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.CartId).HasColumnName("cart_id");
-
-                entity.Property(e => e.Price)
-                    .HasPrecision(10, 2)
-                    .HasColumnName("price");
-
-                entity.Property(e => e.ProductId).HasColumnName("product_id");
-
-                entity.Property(e => e.Quantity).HasColumnName("quantity");
-
-                entity.HasOne(d => d.Cart)
-                    .WithMany(p => p.CartDetails)
-                    .HasForeignKey(d => d.CartId)
-                    .HasConstraintName("cart_detail_ibfk_1");
-
-                entity.HasOne(d => d.Product)
-                    .WithMany(p => p.CartDetails)
-                    .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("cart_detail_ibfk_2");
             });
 
             modelBuilder.Entity<CategoriesVinyl>(entity =>

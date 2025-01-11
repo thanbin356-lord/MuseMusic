@@ -8,7 +8,6 @@ namespace MuseMusic.Models.Tables
         public Product()
         {
             Accessories = new HashSet<Accessory>();
-            CartDetails = new HashSet<CartDetail>();
             ImageUrls = new HashSet<ImageUrl>();
             OrderDetails = new HashSet<OrderDetail>();
             Recordplayers = new HashSet<Recordplayer>();
@@ -26,7 +25,6 @@ namespace MuseMusic.Models.Tables
         public virtual Adminseller? Adminseller { get; set; }
         public virtual Brand? Brand { get; set; }
         public virtual ICollection<Accessory> Accessories { get; set; }
-        public virtual ICollection<CartDetail> CartDetails { get; set; }
         public virtual ICollection<ImageUrl> ImageUrls { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual ICollection<Recordplayer> Recordplayers { get; set; }

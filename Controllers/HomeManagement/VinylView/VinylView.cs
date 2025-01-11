@@ -156,15 +156,16 @@ public class VinylView : Controller
                 ProductId = p.Id,
                 ProductName = p.Name,
                 Price = p.Price,
-                PrimaryImageUrl = db.ImageUrls
-                .Where(i => i.ProductId == p.Id && i.IsPrimary == true) // Check for IsPrimary being true
-                .Select(i => i.Url)
-                .FirstOrDefault(),
+                // Join ArtistVinyls to get Artist names
                 ArtistNames = p.Vinyls
                     .Select(v => v.ArtistVinyls
                     .Select(av => av.Artist.Name)
                     .FirstOrDefault()) // Get the first artist name associated with the vinyl
-                    .FirstOrDefault()// Assuming you want the first artist name
+                    .FirstOrDefault(),// Assuming you want the first artist name
+                PrimaryImageUrl = db.ImageUrls
+                    .Where(i => i.ProductId == p.Id && i.IsPrimary == true) // So sánh với true
+                    .Select(i => i.Url)
+                    .FirstOrDefault() // Lấy URL của ảnh chính
             }).ToList();
 
             var imageUrls = db.ImageUrls
@@ -177,6 +178,13 @@ public class VinylView : Controller
             var allImageUrls = imageUrls
                 .Select(i => i.Url) // Chuyển đổi sang danh sách URL
                 .ToList();
+
+
+
+            string musicDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "music", id.ToString());
+            var musicFiles = Directory.Exists(musicDirectory)
+                ? Directory.GetFiles(musicDirectory, "*.mp3").Select(Path.GetFileName).ToList()
+                : new List<string>(); // Trả về danh sách rỗng nếu thư mục không tồn tại
 
             var viewModel = new VinylViewModel
             {
@@ -205,13 +213,13 @@ public class VinylView : Controller
                 SelectedCategoryNames = vinyl.CategoriesVinyls
                 .Select(cv => cv.Category.Name)  // Select the category names instead of IDs
                 .ToList(),
-                Products = Products
+                Products = Products,
+                MusicFiles = musicFiles.Select(m => $"/music/{id}/{m}").ToList()
             };
 
             return View("~/Views/Home/VinylDetails.cshtml", viewModel);
         }
     }
-
 
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

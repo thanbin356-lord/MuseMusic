@@ -7,7 +7,6 @@ namespace MuseMusic.Models.Tables
     {
         public Customer()
         {
-            Carts = new HashSet<Cart>();
             Orders = new HashSet<Order>();
         }
 
@@ -19,7 +18,6 @@ namespace MuseMusic.Models.Tables
         public string? Image { get; set; }
 
         public virtual Account Account { get; set; } = null!;
-        public virtual ICollection<Cart> Carts { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
     }
 }
