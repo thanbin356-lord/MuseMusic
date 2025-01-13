@@ -111,19 +111,22 @@ public class PaymentController : Controller
         if (transactionStatus == "00")
         {
             var vnpayRef = HttpContext.Request.Query["vnp_TxnRef"].ToString();
-            Console.WriteLine(vnpayRef);
             using (var db = new shopmanagementContext())
             {
-                var order = db.Orders.Where(o => o.VnpayRef == vnpayRef).FirstOrDefault();
+                var order = db.Orders.FirstOrDefault(o => o.VnpayRef == vnpayRef);
                 if (order == null)
                 {
-                    return NotFound(); // Return 404 if accessories not found
+                    return NotFound(); // Return 404 if order not found
                 }
-                Console.WriteLine(order.Id.ToString());
+
                 order.Status = "Paid";
                 db.SaveChanges();
+
+                // Redirect to payment details page
+                return RedirectToAction("PaymentDetails", "Home", new { id = order.Id, success = true });
             }
         }
-        return RedirectToAction("Payment", "Home", new { success = true });
+        return RedirectToAction("Payment", "Home", new { success = false });
     }
+
 }

@@ -9,7 +9,6 @@
         <div class="payment-header">
             <p>thanh toán</p>
             <div class="bfline"></div>
-
         </div>
 
         <div class="payment-form">
@@ -30,6 +29,7 @@
             <label for="address">Địa chỉ</label>
             <input type="text" id="address" value="43 sdsldjflsdj slfjdslfj lsdjfld" readonly>
         </div>
+
         <form method="POST">
             @Html.AntiForgeryToken()
             <div class="payment">
@@ -71,6 +71,7 @@
     </div>
 
 </main>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -79,18 +80,17 @@
 
         // If success is true, show an alert
         if (success) {
-            if (success === 'True') {
+            if (success === 'true') {
                 Swal.fire({
                     icon: 'success',
                     title: 'Thành công',
-                    text: 'Thanh toán thành công',
+                    text: 'Thanh toán thành công!',
                 });
-            }
-            else {
+            } else if (success === 'false') {
                 Swal.fire({
-                    icon: 'info',
+                    icon: 'error',
                     title: 'Thông báo',
-                    text: 'Thanh toán thất bại!',
+                    text: 'Thanh toán thất bại! Vui lòng thử lại.',
                 });
             }
         }
@@ -123,7 +123,7 @@
             // Dòng tổng phí vận chuyển
             const shippingRow = document.createElement('tr');
             shippingRow.innerHTML = `
-            <td><strong>Tổng phí vận chuyển<strong></td>
+            <td><strong>Tổng phí vận chuyển</strong></td>
             <td>${shippingFee.toLocaleString()} đ</td>
         `;
             paymentDetailsTable.appendChild(shippingRow);
@@ -140,7 +140,7 @@
     });
 
     document.getElementById('submit-order-button').addEventListener('click', (event) => {
-        event.preventDefault
+        event.preventDefault();
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         const notes = document.getElementById('notes').value;
 

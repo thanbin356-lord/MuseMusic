@@ -50,7 +50,8 @@
                                 multiple="multiple" style="width: 250px;">
                                 @foreach (var category in Model.AllCategories)
                                 {
-                                    <!option value="@category.Id" @(Model.SelectedCategoryIds.Contains(category.Id) ? "selected" : "")>
+                                    <!option value="@category.Id" @(Model.SelectedCategoryIds.Contains(category.Id) ?
+                                    "selected" : "")>
                                         @category.Name
                                     </!option>
                                 }
@@ -65,7 +66,8 @@
                                 multiple="multiple" style="width: 250px;">
                                 @foreach (var artist in Model.AllArtists)
                                 {
-                                    <!option value="@artist.Id" @(Model.SelectedArtistIds.Contains(artist.Id) ? "selected" : "")>
+                                    <!option value="@artist.Id" @(Model.SelectedArtistIds.Contains(artist.Id) ? "selected" :
+                                    "")>
                                         @artist.Name
                                     </!option>
                                 }
@@ -78,12 +80,12 @@
                             <h3>THỜI KÌ</h3>
                             <select id="era" name="selectedEras" class="js-example-basic-multiple-limit"
                                 multiple="multiple" style="width: 250px;">
-                               @foreach (var era in new List<dynamic> {
-                                    new { Id = "1980", Name = "1980s" },
-                                    new { Id = "1990", Name = "1990s" },
-                                    new { Id = "2000", Name = "2000s" },
-                                    new { Id = "2010", Name = "2010s" },
-                                    new { Id = "2020", Name = "2020s" }
+                                @foreach (var era in new List<dynamic> {
+                                new { Id = "1980", Name = "1980s" },
+                                new { Id = "1990", Name = "1990s" },
+                                new { Id = "2000", Name = "2000s" },
+                                new { Id = "2010", Name = "2010s" },
+                                new { Id = "2020", Name = "2020s" }
                                 })
                                 {
                                     <!option value="@era.Id" @(Model.SelectedEraIds.Contains(era.Id) ? "selected" : "")>
@@ -169,17 +171,30 @@
         maximumSelectionLength: 5
     });
 
-    $('#category, #artist, #era, #mood').on('change', function () {
-        var selectedCategoryIds = $('#category').val();
-        var selectedArtistIds = $('#artist').val();
-        var selectedEras = $('#era').val();
-        var selectedMoodIds = $('#mood').val();
 
-        // Reload the page with the selected filter values in the query string
-        window.location.href = '@Url.Action("Vinyl", "VinylView")' +
-            '?categoryIds=' + selectedCategoryIds.join(',') +
-            '&artistIds=' + selectedArtistIds.join(',') +
-            '&selectedEras=' + selectedEras.join(',') +
-            '&moodIds=' + selectedMoodIds.join(',');
+    $('#category, #artist, #era, #mood').on('change', function () {
+        var selectedCategoryIds = $('#category').val() || [];
+        var selectedArtistIds = $('#artist').val() || [];
+        var selectedEras = $('#era').val() || [];
+        var selectedMoodIds = $('#mood').val() || [];
+
+        $.ajax({
+            url: '@Url.Action("Vinyl", "VinylView")',
+            type: 'GET',
+            data: {
+                categoryIds: selectedCategoryIds,
+                artistIds: selectedArtistIds,
+                selectedEras: selectedEras,
+                moodIds: selectedMoodIds
+            },
+            success: function (response) {
+                $('.product-container').html($(response).find('.product-container').html());
+                $('.pagination').html($(response).find('.pagination').html());
+            },
+            error: function (xhr, status, error) {
+                console.error('AJAX Error: ' + status + ': ' + error);
+            }
+        });
     });
+
 </script>

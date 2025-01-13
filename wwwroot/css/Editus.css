@@ -112,6 +112,10 @@ input[readonly] {
 .editus-container{
     max-width: 1200px;
     margin: 10px auto;
+    background: url("/image/image 45.png") ;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 .user-info-main{
@@ -128,7 +132,7 @@ input[readonly] {
       padding: 20px;
       max-width: 1200px;
       margin: 0 auto;
-      background-color: #ffffff;
+      background-color: #000000;
   
     }
     
@@ -164,16 +168,15 @@ input[readonly] {
     }
     
     .details {
-    
       flex-grow: 1;
-      background: #EEE;
+      
       padding: 40px;
       border-radius: 44px;
   }
     
     
     .form {
-      display: flex;
+      
       flex-wrap: wrap;
       gap: 10px;
     }
@@ -186,7 +189,7 @@ input[readonly] {
   
     .form-group-1{
       display: grid;
-      grid-template-columns: repeat(3, 1fr); /* 3 cột bằng nhau */
+      grid-template-columns: repeat(3, 1fr); 
       width: 100%;
       gap: 20px;
     }
@@ -225,11 +228,12 @@ input[readonly] {
       font-weight: 600;
     }
   
-    .purchase-history .butt{
+    .editus-container .purchase-history .butt{
       border: none;
       padding: 0%;
       margin: 0%;
       background-color: #00000000;
+      color: #000000;
       font-size: larger;
       font-weight: 600;
     }
@@ -289,4 +293,14 @@ input[readonly] {
       margin-top: 10px;
       font-weight: bold;
       text-align: right;
+    }
+
+    .editus-title{
+      
+      margin: 30px 0;
+  
+    }
+
+    .editus-title img{
+      width: 200px;
     }

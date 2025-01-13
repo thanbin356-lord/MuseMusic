@@ -1,165 +1,99 @@
-    @{
-   Layout = "~/Views/Shared/_Layout.cshtml";
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model MuseMusic.Models.ManagerModels.OrderViewModel
 <main>
-   
     @* ------------------------------------------------------------------------------------------------------------------- *@
     <div class="editus-container">
 
-<div class="details">
-      <div class="form">
-        <div class="form-group">
-          <label for="username">Tên tài khoản</label>
-          <input type="text" id="username" value="Customer User" readonly="">
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" value="customer@example.com" readonly="">
-        </div>
 
-        <div class="form-group-1">
-          <div class="form-group">
-            <label>Giới tính</label>
-            <input type="text" value="Nam" readonly="">
-          </div>
-          <div class="form-group">
-            <label>Quốc tịch</label>
-            <input type="text" value="Việt Nam" readonly="">
-          </div>
-          <div class="form-group">
-            <label>Ngày sinh</label>
-            <input type="text" value="DD/MM/YY" readonly="">
-          </div>
-        </div>
 
-        <div class="form-group-2">
-          <div class="form-group-2-left">
-            <div class="form-group">
-              <label for="address">Địa chỉ</label>
-              <input type="text" id="address" value="456 Customer Lane" readonly="">
+        <div class="details">
+            <div class="editus-title"><img src="/image/Group80.png" alt=""></div>
+
+            <div class="form">
+                <div class="form-group">
+                    <label for="username">Tên tài khoản</label>
+                    <input type="text" id="username" value="@Model.SelectedCustomerOrders.CustomerName" readonly="">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" value="@Model.SelectedCustomerOrders.Email" readonly="">
+                </div>
+
+                <div class="form-group-1">
+                    <div class="form-group">
+                        <label>Giới tính</label>
+                        <input type="text" value="Nam" readonly="">
+                    </div>
+                    <div class="form-group">
+                        <label>Quốc tịch</label>
+                        <input type="text" value="Việt Nam" readonly="">
+                    </div>
+                    <div class="form-group">
+                        <label>Ngày sinh</label>
+                        <input type="text" value="DD/MM/YY" readonly="">
+                    </div>
+                </div>
+
+                <div class="form-group-2">
+                    <div class="form-group-2-left">
+                        <div class="form-group">
+                            <label for="address">Địa chỉ</label>
+                            <input type="text" id="address" value="@Model.SelectedCustomerOrders.Address" readonly="">
+                        </div>
+                    </div>
+
+                    <div class="form-group-2-right">
+                        <div class="form-group">
+                            <label for="phone">Số điện thoại</label>
+                            <input type="text" id="phone" value="9Model.SelectedCustomerOrders.Phone" readonly="">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="User-Order-Detail">
+
+                    <div class="Order-Number">
+                        <p>Số lượng đơn hàng đã mua: </p>
+                        <p>@Model.SelectedCustomerOrders.OrderCount</p>
+                    </div>
+
+
+                </div>
+
             </div>
-          </div>
-
-          <div class="form-group-2-right">
-            <div class="form-group">
-              <label for="phone">Số điện thoại</label>
-              <input type="text" id="phone" value="987654321" readonly="">
+            <table class="purchase-history">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Số hóa đơn</th>
+                        <th>Ngày tạo</th>
+                        <th>Tổng tiền</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.AllOrders.Count; i++)
+                    {
+                        var order = Model.AllOrders[i];
+                        <tr>
+                            <td>@(i + 1)</td> <!-- Display row number -->
+                            <td>@order.OrderId</td> <!-- Display the actual OrderId -->
+                            <td>@order.created_at.ToString("dd/MM/yyyy")</td> <!-- Format the date -->
+                            <td>@order.total.ToString("N0") đ</td> <!-- Format the total with thousand separators -->
+                            <td>
+                                <button class="butt"
+                                    onclick="window.location.href='/home/paymentDetails/@order.OrderId'">...</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="total-value">
+                Tổng giá trị: <span>4,999,999,995đ</span>
             </div>
-          </div>
-
         </div>
-
-        <div class="User-Order-Detail">
-
-          <div class="Order-Number">
-            <p>Số lượng đơn hàng đã mua: </p>
-            <p>9</p>
-          </div>
-
-
-        </div>
-
-      </div>
-      <table class="purchase-history">
-        <thead>
-          <tr>
-            <th>STT</th>
-            <th>Số hóa đơn</th>
-            <th>Ngày tạo</th>
-            <th>Tổng tiền</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-            <tr>
-              <td>1</td> <!-- Display row number -->
-              <td>20</td> <!-- Display the actual OrderId -->
-              <td>11/01/2025</td> <!-- Format the date -->
-              <td>228,000 đ</td> <!-- Format the total with thousand separators -->
-              <td>
-                <button class="butt" onclick="window.location.href='/admin/orderdetail/20'">...</button>
-              </td>
-            </tr>
-            <tr>
-              <td>2</td> <!-- Display row number -->
-              <td>21</td> <!-- Display the actual OrderId -->
-              <td>11/01/2025</td> <!-- Format the date -->
-              <td>624,000 đ</td> <!-- Format the total with thousand separators -->
-              <td>
-                <button class="butt" onclick="window.location.href='/admin/orderdetail/21'">...</button>
-              </td>
-            </tr>
-            <tr>
-              <td>3</td> <!-- Display row number -->
-              <td>22</td> <!-- Display the actual OrderId -->
-              <td>11/01/2025</td> <!-- Format the date -->
-              <td>723,000 đ</td> <!-- Format the total with thousand separators -->
-              <td>
-                <button class="butt" onclick="window.location.href='/admin/orderdetail/22'">...</button>
-              </td>
-            </tr>
-            <tr>
-              <td>4</td> <!-- Display row number -->
-              <td>23</td> <!-- Display the actual OrderId -->
-              <td>11/01/2025</td> <!-- Format the date -->
-              <td>525,000 đ</td> <!-- Format the total with thousand separators -->
-              <td>
-                <button class="butt" onclick="window.location.href='/admin/orderdetail/23'">...</button>
-              </td>
-            </tr>
-            <tr>
-              <td>5</td> <!-- Display row number -->
-              <td>25</td> <!-- Display the actual OrderId -->
-              <td>11/01/2025</td> <!-- Format the date -->
-              <td>228,000 đ</td> <!-- Format the total with thousand separators -->
-              <td>
-                <button class="butt" onclick="window.location.href='/admin/orderdetail/25'">...</button>
-              </td>
-            </tr>
-            <tr>
-              <td>6</td> <!-- Display row number -->
-              <td>27</td> <!-- Display the actual OrderId -->
-              <td>11/01/2025</td> <!-- Format the date -->
-              <td>525,000 đ</td> <!-- Format the total with thousand separators -->
-              <td>
-                <button class="butt" onclick="window.location.href='/admin/orderdetail/27'">...</button>
-              </td>
-            </tr>
-            <tr>
-              <td>7</td> <!-- Display row number -->
-              <td>28</td> <!-- Display the actual OrderId -->
-              <td>11/01/2025</td> <!-- Format the date -->
-              <td>228,000 đ</td> <!-- Format the total with thousand separators -->
-              <td>
-                <button class="butt" onclick="window.location.href='/admin/orderdetail/28'">...</button>
-              </td>
-            </tr>
-            <tr>
-              <td>8</td> <!-- Display row number -->
-              <td>29</td> <!-- Display the actual OrderId -->
-              <td>11/01/2025</td> <!-- Format the date -->
-              <td>129,000 đ</td> <!-- Format the total with thousand separators -->
-              <td>
-                <button class="butt" onclick="window.location.href='/admin/orderdetail/29'">...</button>
-              </td>
-            </tr>
-            <tr>
-              <td>9</td> <!-- Display row number -->
-              <td>30</td> <!-- Display the actual OrderId -->
-              <td>11/01/2025</td> <!-- Format the date -->
-              <td>129,000 đ</td> <!-- Format the total with thousand separators -->
-              <td>
-                <button class="butt" onclick="window.location.href='/admin/orderdetail/30'">...</button>
-              </td>
-            </tr>
-        </tbody>
-
-      </table>
-      <div class="total-value">
-        Tổng giá trị: <span>4,999,999,995đ</span>
-      </div>
-  
-    
     </div>
-    </div>  
 </main>

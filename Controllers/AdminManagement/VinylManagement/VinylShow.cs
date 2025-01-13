@@ -65,6 +65,39 @@ public class VinylShow : Controller
             return View("~/Views/Admin/Vinylmanagement/Vinylmanage.cshtml", listVinylViewModel);
         }
     }
+    [HttpPost("delete-vinyls")]
+    public IActionResult DeleteVinyls([FromBody] List<int> productIds)
+    {
+        if (productIds == null || productIds.Count == 0)
+        {
+            return BadRequest("No products selected for deletion.");
+        }
+
+        try
+        {
+            using (var db = new shopmanagementContext())
+            {
+                var vinylsToDelete = db.Vinyls.Where(v => productIds.Contains(v.Product.Id)).ToList();
+
+                if (vinylsToDelete.Count == 0)
+                {
+                    return NotFound("No matching products found for deletion.");
+                }
+
+                db.Vinyls.RemoveRange(vinylsToDelete);
+                db.SaveChanges();
+            }
+
+            return Ok("Products deleted successfully.");
+        }
+        catch (Exception ex)
+        {
+            // Log the exception
+            Console.WriteLine($"Error deleting vinyls: {ex.Message}");
+            return StatusCode(500, "Internal server error");
+        }
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
