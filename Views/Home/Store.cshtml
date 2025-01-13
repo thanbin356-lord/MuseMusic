@@ -81,7 +81,7 @@
     // Handle quantity update
     function handleQuantityChange(action, productId) {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        console.log('1')
+
         // Find the product in the cart
         const product = cart.find(item => item.id === productId);
 

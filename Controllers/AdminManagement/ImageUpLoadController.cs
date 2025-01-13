@@ -75,7 +75,6 @@ namespace MuseMusic.Controllers.AdminManagement
 
             return Ok(new { FileUrls = fileUrls });
         }
-
         [HttpDelete("delete-image/{id}")]
         public IActionResult DeleteImage(string id)
         {
@@ -87,31 +86,30 @@ namespace MuseMusic.Controllers.AdminManagement
 
             try
             {
-                // Validate the file name
-                id = Path.GetFileName(id); // Prevent directory traversal attacks
+                // Decode the URL-encoded ID
+                id = Uri.UnescapeDataString(id);
                 var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "product", id);
 
-                if (System.IO.File.Exists(imagePath))
+                if (!System.IO.File.Exists(imagePath))
                 {
-                    System.IO.File.Delete(imagePath);
-                    _logger.LogInformation("Image deleted successfully: {ImageId}", id);
-
-                    // If there is a database record associated with the image, handle its deletion here
-                    var imageRecord = _context.ImageUrls.FirstOrDefault(img => img.Url.EndsWith(id));
-                    if (imageRecord != null)
-                    {
-                        _context.ImageUrls.Remove(imageRecord);
-                        _context.SaveChanges();
-                        _logger.LogInformation("Database record for image {ImageId} removed.", id);
-                    }
-
-                    return Ok(new { Message = "Image deleted successfully." });
-                }
-                else
-                {
-                    _logger.LogWarning("Image not found: {ImageId}", id);
+                    _logger.LogWarning("Image not found: {ImagePath}.", imagePath);
                     return NotFound(new { Message = "Image not found." });
                 }
+
+                // Delete the file from the server
+                System.IO.File.Delete(imagePath);
+                _logger.LogInformation("Successfully deleted image file: {ImagePath}", imagePath);
+
+                // Optionally, delete the corresponding database record
+                var imageRecord = _context.ImageUrls.FirstOrDefault(img => img.Url.EndsWith(id));
+                if (imageRecord != null)
+                {
+                    _context.ImageUrls.Remove(imageRecord);
+                    _context.SaveChanges();
+                    _logger.LogInformation("Database record for image {ImageId} removed.", id);
+                }
+
+                return Ok(new { Message = "Image deleted successfully." });
             }
             catch (Exception ex)
             {

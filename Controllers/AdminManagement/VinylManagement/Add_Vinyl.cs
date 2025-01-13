@@ -90,22 +90,26 @@ public class Add_Vinyl : Controller
         {
             using (var db = new shopmanagementContext())
             {
-                // Create a new Vinyl entry
+                // Create a new Product entry
+                var newProduct = new MuseMusic.Models.Tables.Product
+                {
+                    Name = model.SelectedProduct.ProductName,
+                    Description = model.SelectedProduct.ProductDescription,
+                    Price = model.SelectedProduct.Price,
+                    Quantity = model.SelectedProduct.ProductQuantity,
+                    BrandId = model.SelectedBrandId
+                };
+
+                db.Products.Add(newProduct);
+                db.SaveChanges(); // Save Product first to generate ProductId
+
+                // Create a new Vinyl entry linked to the Product
                 var newVinyl = new MuseMusic.Models.Tables.Vinyl
                 {
-                    Product = new MuseMusic.Models.Tables.Product
-                    {
-                        Id = model.SelectedProduct.ProductId,
-                        Name = model.SelectedProduct.ProductName,
-                        Description = model.SelectedProduct.ProductDescription,
-                        Price = model.SelectedProduct.Price,
-                        Quantity = model.SelectedProduct.ProductQuantity,
-                        BrandId = model.SelectedBrandId
-                    },
+                    ProductId = newProduct.Id, // Link to the saved Product
                     Tracklist = model.SelectedProduct.Tracklist,
                     Years = model.SelectedProduct.Years,
-                    DiskId = model.SelectedProduct.DiskId,
-
+                    DiskId = model.SelectedProduct.DiskId
                 };
 
                 // Add the associated artists
@@ -141,9 +145,21 @@ public class Add_Vinyl : Controller
                     newVinyl.MoodVinyls.Add(moodVinyl);
                 }
 
-                // Add the new Vinyl to the database
                 db.Vinyls.Add(newVinyl);
-                db.SaveChanges(); // Save changes to the database
+
+                // Add the associated images
+                if (!string.IsNullOrEmpty(model.SelectedImageUrls))
+                {
+                    var imageUrl = new ImageUrl
+                    {
+                        ProductId = newProduct.Id, // Link to the saved Product
+                        Url = model.SelectedImageUrls
+                    };
+
+                    db.ImageUrls.Add(imageUrl);
+                }
+
+                db.SaveChanges(); // Save all changes to the database
             }
 
             // Redirect to the Vinyl management page after the new vinyl is added

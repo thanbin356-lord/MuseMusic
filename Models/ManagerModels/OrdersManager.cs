@@ -27,9 +27,10 @@ namespace MuseMusic.Models.ManagerModels
         public string Phone { get; set; }
         public string Address { get; set; }
         public int OrderCount { get; set; }
-        
 
         public List<ListProduct> AllProducts { get; set; }
+        public string? Country { get; set; }
+        public DateOnly? Birth { get; set; }
     }
     public class ListProduct
     {

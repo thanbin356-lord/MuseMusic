@@ -59,6 +59,8 @@ public class EditProfile : Controller
                         Phone = customerOnly.Phone,
                         Email = customerOnly.Account?.Email,
                         Address = customerOnly.Address,
+                        Country = customerOnly.Country,
+                        Birth = customerOnly.Datebirth,
                         OrderCount = 0, // No orders found
                         OrderId = 0,
                         created_at = DateTime.MinValue,
@@ -97,7 +99,9 @@ public class EditProfile : Controller
                     OrderCount = orderCount,
                     OrderId = orderWithCustomer.Id,
                     created_at = orderWithCustomer.CreatedAt ?? DateTime.MinValue,
-                    total = orderWithCustomer.Total ?? 0
+                    total = orderWithCustomer.Total ?? 0,
+                    Country = orderWithCustomer.Customer.Country,
+                    Birth = orderWithCustomer.Customer.Datebirth
                 },
                 AllOrders = allOrders
             };

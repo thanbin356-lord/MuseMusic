@@ -347,27 +347,34 @@
             }
         });
 
-        // Xử lý xóa ảnh
         async function handleImageDelete(imageUrl, deleteBtn) {
-            const imageId = imageUrl.split('/').pop(); // Lấy id từ URL
+            const imageId = imageUrl.split('/').pop(); // Extract the ID from URL
 
             if (confirm('Are you sure you want to delete this image?')) {
                 try {
+                    // Attempt to delete the image from the server
                     const response = await fetch(`/admin/delete-image/${imageId}`, { method: 'DELETE' });
-                    if (response.ok) {
-                        deleteBtn.closest('.image-wrapper').remove(); // Xóa ảnh khỏi giao diện frontend
 
-                        // Cập nhật lại giá trị cho selectedImageUrls
-                        updateImageUrls();
-                    } else {
-                        alert('Failed to delete image.');
+                    // Force deletion even if server returns an error (commented-out to allow for future handling)
+                    if (!response.ok) {
+                        console.warn('Failed to delete image from server, but proceeding with frontend deletion.');
                     }
+
+                    // Force delete image from frontend
+                    deleteBtn.closest('.image-wrapper').remove(); // Remove image from UI
+
+                    // Optionally, you can still update any other front-end states if needed
+                    updateImageUrls();
                 } catch (error) {
                     console.error('Error:', error);
-                    alert('Failed to delete image.');
+                    // In case of a network or server failure, still remove image from UI
+                    alert('Failed to delete image from the server. Image will be removed from UI.');
+                    deleteBtn.closest('.image-wrapper').remove(); // Remove image from UI
+                    updateImageUrls();
                 }
             }
         }
+
 
         // Cập nhật giá trị của selectedImageUrls
         function updateImageUrls() {
@@ -377,4 +384,3 @@
         }
     });
 </script>
-
