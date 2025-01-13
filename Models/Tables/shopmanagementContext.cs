@@ -295,6 +295,10 @@ namespace MuseMusic.Models.Tables
                     .HasMaxLength(255)
                     .HasColumnName("address");
 
+                entity.Property(e => e.Country).HasMaxLength(45);
+
+                entity.Property(e => e.Datebirth).HasColumnName("datebirth");
+
                 entity.Property(e => e.Image)
                     .HasMaxLength(255)
                     .HasColumnName("image");

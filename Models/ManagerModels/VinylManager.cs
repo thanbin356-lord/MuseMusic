@@ -56,6 +56,7 @@ namespace MuseMusic.Models.ManagerModels
 
         [Required]
         public int SelectedBrandId { get; set; }
+        public string? SelectedImageUrls { get; set; }
     }
 
     public partial class EditVinylModel

@@ -10,4 +10,9 @@ namespace MuseMusic.Models.ViewModels
         public int Id { get; set; }
         public int Quantity { get; set; }
     }
+    public class PaymentViewModel{
+        public string CustomerName{get;set;}
+        public string Phone{get;set;}
+        public string Address{get;set;}
+    }
 }
