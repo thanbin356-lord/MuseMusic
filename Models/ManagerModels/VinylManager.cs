@@ -35,7 +35,9 @@ namespace MuseMusic.Models.ManagerModels
 
         public List<ImageUrl> AllImages { get; set; }
         public int SelectedImageId { get; set; }
-
+        public List<string> UploadedImageUrls { get; set; }
+        public string ImageUrlsString { get; set; }
+        public string? SelectedImageUrls { get; set; }
     }
 
     public partial class AddVinylModel
@@ -72,6 +74,8 @@ namespace MuseMusic.Models.ManagerModels
 
         [Required]
         public int SelectedBrandId { get; set; }
+
+        public string? SelectedImageUrls { get; set; }
     }
 
     public partial class ListVinylViewModel
@@ -121,7 +125,7 @@ namespace MuseMusic.Models.ManagerModels
         public decimal Price { get; set; }
         public int Years { get; set; }
         public string Tracklist { get; set; }
-        public int SelectedBrandId{get;set;}
+        public int SelectedBrandId { get; set; }
     }
     public class Artist
     {

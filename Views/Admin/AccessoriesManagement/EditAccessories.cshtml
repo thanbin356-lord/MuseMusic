@@ -4,26 +4,11 @@
 @model MuseMusic.Models.ManagerModels.AccessoriesViewModel
 
 <main class="disk-management">
-    <h1>CHỈNH SỬA ĐĨA THAN</h1>
+    <h1>CHỈNH SỬA PHỤ KIỆN</h1>
     <div class="form-container">
         <form method="post" enctype="multipart/form-data" asp-action="EditAccessories">
             @Html.AntiForgeryToken()
             <input type="hidden" asp-for="SelectedAccessories.ProductId" value="@Model.SelectedAccessories.ProductId" />
-            <!-- Product Image (Optional) -->
-            @* <div class="product-image">
-                <div class="image-placeholder" style="margin-top: 20px;">
-                    <h4>Danh sách ảnh sản phẩm</h4>
-                    <div class="gallery" style="display: flex; flex-wrap: wrap;">
-                        @foreach (var image in Model.AllImages)
-                        {
-                            <div class="image-item" style="margin: 10px; text-align: center;">
-                                <img src="@image.Url" alt="Product Image"
-                                    style="max-width: 200px; border: 1px solid #ccc; border-radius: 8px;">
-                            </div>
-                        }
-                    </div>
-                </div>
-            </div> *@
             <div class="product-info">
                 <!-- Form fields for Product Name, Artist, Category, etc. -->
                 <div class="form-group">
@@ -49,13 +34,19 @@
                 <div class="form-group">
                     <label for="price">Giá tiền*</label>
                     <input type="text" id="price" asp-for="SelectedAccessories.Price" placeholder="Nhập giá tiền"
-                        value="@Model.SelectedAccessories.Price" required />
+                        value="@Model.SelectedAccessories.Price" required min="1" />
+                    <small class="error-message" id="price-error" style="color: red; display: none;">
+                        Giá tiền không được âm.
+                    </small>
                 </div>
                 <div class="form-group">
                     <label for="stock">Số lượng sản phẩm*</label>
                     <input type="text" id="stock" asp-for="SelectedAccessories.ProductQuantity"
-                        placeholder="Nhập số lượng sản phẩm" value="@Model.SelectedAccessories.ProductQuantity"
-                        required />
+                        placeholder="Nhập số lượng sản phẩm" value="@Model.SelectedAccessories.ProductQuantity" required
+                        min="0" />
+                    <small class="error-message" id="quanity-error" style="color: red; display: none;">
+                        Số lượng không được âm.
+                    </small>
                 </div>
             </div>
             <div class="additional-info">
@@ -104,5 +95,21 @@
         // Trigger select2 to update the selected options before form submit
         $(this).trigger('change');
     });
+    document.getElementById("price").addEventListener("input", function () {
+        if (this.value < 1) {
+            document.getElementById("price-error").style.display = "block";
+            this.value = ""; // Reset giá trị nếu nhập sai
+        } else {
+            document.getElementById("price-error").style.display = "none";
+        }
+    });
 
+    document.getElementById("stock").addEventListener("input", function () {
+        if (this.value < 0) {
+            document.getElementById("quanity-error").style.display = "block";
+            this.value = ""; // Reset giá trị nếu nhập sai
+        } else {
+            document.getElementById("quanity-error").style.display = "none";
+        }
+    });
 </script>

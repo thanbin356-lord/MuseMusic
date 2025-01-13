@@ -45,7 +45,8 @@ public class ShowOrders : Controller
                 }
                 orderViewModel.Orders = orders.Select(x => new MuseMusic.Models.ManagerModels.Orders
                 {
-                    OrderId = x.Customer.Id,
+                    OrderId = x.Id,
+                    CustomerId = x.Customer.Id,
                     CustomerName = x.Customer.Name,
                     created_at = (DateTime)x.CreatedAt,
                     Status = x.Status,

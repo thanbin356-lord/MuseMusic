@@ -9,7 +9,7 @@
     <form method="post" asp-action="AddVinyl" enctype="multipart/form-data">
       @Html.AntiForgeryToken()
       <input type="hidden" asp-for="SelectedProduct.ProductId" value="@Model.SelectedProduct.ProductId" />
-      
+
       <div class="product-info">
         <div class="form-group">
           <label for="name">Tên*</label>
@@ -61,8 +61,11 @@
 
         <div class="form-group">
           <label for="release-year">Năm phát hành*</label>
-          <input type="text" id="release-year" asp-for="SelectedProduct.Years" placeholder="Nhập năm phát hành"
-            required />
+          <input type="text" id="release-year" asp-for="SelectedProduct.Years" placeholder="Nhập năm phát hành" required
+            min="0" max="@DateTime.Now.Year" />
+          <small class="error-message" id="year-error" style="color: red; display: none;">
+            Năm phát hành không được âm và không được vượt quá năm hiện tại.
+          </small>
         </div>
 
         <div class="form-group">
@@ -86,13 +89,19 @@
 
         <div class="form-group">
           <label for="price">Giá tiền*</label>
-          <input type="text" id="price" asp-for="SelectedProduct.Price" placeholder="Nhập giá tiền" required />
+          <input type="text" id="price" asp-for="SelectedProduct.Price" placeholder="Nhập giá tiền" required min="1" />
+          <small class="error-message" id="price-error" style="color: red; display: none;">
+            Giá tiền không được âm.
+          </small>
         </div>
 
         <div class="form-group">
           <label for="stock">Số lượng sản phẩm*</label>
           <input type="text" id="stock" asp-for="SelectedProduct.ProductQuantity" placeholder="Nhập số lượng sản phẩm"
-            required />
+            required min="0" />
+          <small class="error-message" id="quanity-error" style="color: red; display: none;">
+            số lượng không được âm.
+          </small>
         </div>
       </div>
 
@@ -100,12 +109,12 @@
       <div class="additional-info">
         <div class="form-group">
           <label for="notes">Ghi chú sản phẩm</label>
-          <textarea id="notes" asp-for="SelectedProduct.ProductDescription" placeholder="Nhập ghi chú"></textarea>
+          <textarea id="notes" asp-for="SelectedProduct.ProductDescription" placeholder="Nhập ghi chú" required></textarea>
         </div>
 
         <div class="form-group">
           <label for="track-list">Track List</label>
-          <textarea id="track-list" asp-for="SelectedProduct.Tracklist" placeholder="Nhập danh sách bài hát"></textarea>
+          <textarea id="track-list" asp-for="SelectedProduct.Tracklist" placeholder="Nhập danh sách bài hát" required></textarea>
         </div>
       </div>
 
@@ -152,5 +161,31 @@
     // Trigger select2 to update the selected options before form submit
     $(this).trigger('change');
   });
+  document.getElementById("price").addEventListener("input", function () {
+    if (this.value < 1) {
+      document.getElementById("price-error").style.display = "block";
+      this.value = ""; // Reset giá trị nếu nhập sai
+    } else {
+      document.getElementById("price-error").style.display = "none";
+    }
+  });
 
+  document.getElementById("stock").addEventListener("input", function () {
+    if (this.value < 0) {
+      document.getElementById("quanity-error").style.display = "block";
+      this.value = ""; // Reset giá trị nếu nhập sai
+    } else {
+      document.getElementById("quanity-error").style.display = "none";
+    }
+  });
+
+  document.getElementById("release-year").addEventListener("input", function () {
+    const currentYear = new Date().getFullYear();
+    if (this.value < 0 || this.value > currentYear) {
+      document.getElementById("year-error").style.display = "block";
+      this.value = ""; // Reset giá trị nếu nhập sai
+    } else {
+      document.getElementById("year-error").style.display = "none";
+    }
+  });
 </script>
