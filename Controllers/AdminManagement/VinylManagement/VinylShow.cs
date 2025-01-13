@@ -65,6 +65,7 @@ public class VinylShow : Controller
             return View("~/Views/Admin/Vinylmanagement/Vinylmanage.cshtml", listVinylViewModel);
         }
     }
+  
     [HttpPost("delete-vinyls")]
     public IActionResult DeleteVinyls([FromBody] List<int> productIds)
     {
@@ -88,11 +89,10 @@ public class VinylShow : Controller
                 db.SaveChanges();
             }
 
-            return Ok("Products deleted successfully.");
+            return Ok(new { message = "Products deleted successfully." });
         }
         catch (Exception ex)
         {
-            // Log the exception
             Console.WriteLine($"Error deleting vinyls: {ex.Message}");
             return StatusCode(500, "Internal server error");
         }

@@ -4,12 +4,11 @@
 @model MuseMusic.Models.ManagerModels.AccessoriesViewModel
 
 <main class="disk-management">
-    <h1>THÊM ĐĨA THAN</h1>
+    <h1>THÊM PHỤ KIỆN</h1>
     <div class="form-container">
         <form method="post" asp-action="AddAccessories" enctype="multipart/form-data">
             @Html.AntiForgeryToken()
-            <input type="hidden" asp-for="SelectedAccessories.ProductId"
-                value="@Model.SelectedAccessories.ProductId" />
+            <input type="hidden" asp-for="SelectedAccessories.ProductId" value="@Model.SelectedAccessories.ProductId" />
 
             <div class="product-info">
                 <div class="form-group">
@@ -37,13 +36,19 @@
                 <div class="form-group">
                     <label for="price">Giá tiền*</label>
                     <input type="text" id="price" asp-for="SelectedAccessories.Price" placeholder="Nhập giá tiền"
-                        required />
+                        required min="1" />
+                    <small class="error-message" id="price-error" style="color: red; display: none;">
+                        Giá tiền không được âm.
+                    </small>
                 </div>
 
                 <div class="form-group">
                     <label for="stock">Số lượng sản phẩm*</label>
                     <input type="text" id="stock" asp-for="SelectedAccessories.ProductQuantity"
-                        placeholder="Nhập số lượng sản phẩm" required />
+                        placeholder="Nhập số lượng sản phẩm" required min="0" />
+                    <small class="error-message" id="quanity-error" style="color: red; display: none;">
+                        Số lượng không được âm.
+                    </small>
                 </div>
             </div>
             <!-- Additional Information -->
@@ -98,5 +103,21 @@
         // Trigger select2 to update the selected options before form submit
         $(this).trigger('change');
     });
+    document.getElementById("price").addEventListener("input", function () {
+        if (this.value < 1) {
+            document.getElementById("price-error").style.display = "block";
+            this.value = ""; // Reset giá trị nếu nhập sai
+        } else {
+            document.getElementById("price-error").style.display = "none";
+        }
+    });
 
+    document.getElementById("stock").addEventListener("input", function () {
+        if (this.value < 0) {
+            document.getElementById("quanity-error").style.display = "block";
+            this.value = ""; // Reset giá trị nếu nhập sai
+        } else {
+            document.getElementById("quanity-error").style.display = "none";
+        }
+    });
 </script>

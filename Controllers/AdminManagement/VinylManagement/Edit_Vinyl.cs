@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -111,8 +112,10 @@ public class Edit_Vinyl : Controller
         {
             using (var db = new shopmanagementContext())
             {
+                // Fetch the vinyl and related data
                 var vinyl = db.Vinyls
                     .Include(v => v.Product)
+                        .ThenInclude(v => v.ImageUrls)
                     .Include(v => v.ArtistVinyls)
                     .Include(v => v.CategoriesVinyls)
                     .Include(v => v.MoodVinyls)
@@ -133,8 +136,8 @@ public class Edit_Vinyl : Controller
                 vinyl.Product.Description = model.SelectedProduct.ProductDescription;
                 vinyl.Product.BrandId = model.SelectedBrandId;
 
+                // Update ArtistVinyls
                 vinyl.ArtistVinyls.Clear();
-                // Add new ArtistVinyls based on the provided artistIds
                 foreach (var artistId in model.SelectedArtistIds)
                 {
                     var artistVinyl = new ArtistVinyl
@@ -145,6 +148,7 @@ public class Edit_Vinyl : Controller
                     vinyl.ArtistVinyls.Add(artistVinyl);
                 }
 
+                // Update CategoriesVinyls
                 vinyl.CategoriesVinyls.Clear();
                 foreach (var categoryId in model.SelectedCategories)
                 {
@@ -156,32 +160,48 @@ public class Edit_Vinyl : Controller
                     vinyl.CategoriesVinyls.Add(categoriesVinyl);
                 }
 
+                // Update MoodVinyls
                 vinyl.MoodVinyls.Clear();
-                foreach (var moodIds in model.SelectedMood)
+                foreach (var moodId in model.SelectedMood)
                 {
                     var moodVinyl = new MoodVinyl
                     {
                         VinylId = vinyl.Id,
-                        MoodId = moodIds
+                        MoodId = moodId
                     };
                     vinyl.MoodVinyls.Add(moodVinyl);
                 }
 
-                db.SaveChanges(); // Save the changes to the database
+                // Add the image URL (if provided)
+                if (!string.IsNullOrEmpty(model.SelectedImageUrls))
+                {
+                    var imageUrl = new ImageUrl
+                    {
+                        ProductId = vinyl.Product.Id, // Link to the product
+                        Url = model.SelectedImageUrls
+                    };
+
+                    // Add the new image URL to the ImageUrls table
+                    db.ImageUrls.Add(imageUrl);
+                }
+
+                db.SaveChanges(); // Save changes to the database
             }
 
             return RedirectToAction("EditVinyl", new { id = id });
         }
         else
         {
+            // If validation fails, log errors and return the view with the validation message
             foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
             {
                 Console.WriteLine(error.ErrorMessage);
             }
+
             return View("~/Views/Admin/Vinylmanagement/editvinyl.cshtml"); // Return the model with validation errors if the form is not valid
         }
-
     }
+
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
